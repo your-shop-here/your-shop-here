@@ -5,15 +5,15 @@ It's a hobby project with no direct affiliation to Saleforce, Inc.
 
 # Goals and Design Pricniples
 
-- KISS - keep it simple stupid
+- KISS - keep it simple stupid!
 - 100 Points at Lighthouse
-    - Miminal Javascript, no heavy frameworks
-    - minimal Dom
-    - No JSON ajax
+    - Minimal Javascript, no heavy frameworks
+    - Minimal Dom
+    - No JSON AJAX requests
 - Works with (m)any catalogs without code change
-- Page Designer First design for extensiblity and drag & drop customization
-- Embrace web standards like Javascript, HTML and CSS, minimal propriatrity
-- No build steps
+- Page Designer First design for extensiblity and drag & drop customization (clicks, not code)
+- Embrace web standards like Javascript, HTML and CSS, minimal propriatarity
+- No build steps required - upload and enjoy!
 - Have Fun
 
 ## Frameworks
@@ -39,7 +39,12 @@ Controllers use an optimised SFRA like approach which allows for routes to be ex
 
 ## Partials
 
-_Your Shop Here_ introduces the concept of partials, partials need to export two methods - `createModel` which returns an object containing the view model and `template` which renders the view model to HTML.
+_Your Shop Here_ introduces the concept of partials, partials need to export two methods
+
+1. `createModel` which returns an object containing the view model
+2. `template` which renders the view model to HTML
+
+In the `template` method string templates are used to decorate the data model with HTML which is then directly written to the response stream, thus ISML is no longer required.
 
 Example:
 ```
@@ -59,4 +64,4 @@ Why partials?
 - Works well with Page Designer, but components can be used standalone as well
 
 # TODOs
-- move isactivedatahead to party town
+- move activity tracking for Analytics and Einstein to service worker (using i.e. party town)
