@@ -1528,8 +1528,18 @@
             </attribute-definition>
             <attribute-definition attribute-id="title">
                 <min-length>0</min-length>
-            </attribute-definition>
+            </attribute-definition>  
         </system-attribute-definitions>
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="yshHouseNumber">
+                <display-name xml:lang="x-default">House Number</display-name>
+                <type>string</type>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Standard">
                 <display-name xml:lang="x-default">Standard Address</display-name>
@@ -1541,6 +1551,7 @@
                 <attribute attribute-id="lastName" system="true"/>
                 <attribute attribute-id="suffix" system="true"/>
                 <attribute attribute-id="address1" system="true"/>
+                <attribute attribute-id="yshHouseNumber" system="true" />
                 <attribute attribute-id="address2" system="true"/>
                 <attribute attribute-id="suite" system="true"/>
                 <attribute attribute-id="postBox" system="true"/>

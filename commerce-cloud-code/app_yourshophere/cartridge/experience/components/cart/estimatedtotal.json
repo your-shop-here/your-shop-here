@@ -1,0 +1,15 @@
+{
+    "name": "Estimated Total",
+    "description": "This component shows the estimated total of the cart.",
+    "group": "Cart",
+    "attribute_definition_groups": [
+        {
+            "id": "estiamtedTotal",
+            "name": "Settings",
+            "description": "Estimated Total Settings",
+            "attribute_definitions": [
+            ]
+        }
+    ],
+    "region_definitions": []
+}

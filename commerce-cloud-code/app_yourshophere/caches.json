@@ -27,6 +27,10 @@
         {
             "id": "Layout",
             "expireAfterSeconds": 10000000
+        },
+        {
+            "id": "Form",
+            "expireAfterSeconds": 10000000
         }
     ]
 }

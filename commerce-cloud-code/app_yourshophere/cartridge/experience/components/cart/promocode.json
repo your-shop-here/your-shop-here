@@ -1,0 +1,14 @@
+{
+    "name": "Enter Promo Code",
+    "description": "This component allows users to enter and apply promo codes.",
+    "group": "Cart",
+    "attribute_definition_groups": [
+        {
+            "id": "promoCodeSettings",
+            "name": "Settings",
+            "description": "Promo Code Settings",
+            "attribute_definitions": []
+        }
+    ],
+    "region_definitions": []
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Checkout Page",
+  "description": "Creates a Checkout Page all checkout things",
+  "attribute_definition_groups": [
+    {
+      "id": "checkoutPageSetting",
+      "name": "Checkout Settings",
+      "description": "Checkout Settings",
+      "attribute_definitions": []
+    }
+  ],
+  "region_definitions": [
+    {
+      "id": "header",
+      "name": "Header region",
+      "component_type_exclusions": []
+    },
+    {
+      "id": "main",
+      "name": "Main region",
+      "component_type_exclusions": []
+    },
+    {
+      "id": "footer",
+      "name": "Footer region",
+      "component_type_exclusions": []
+    }
+  ],
+  "supported_aspect_types": ["cart"]
+}

@@ -1,5 +1,5 @@
 // The Error controller doesn't use server.js (express, sfra-style)
-// As it would require special handling there 
+// As it would require special handling there
 // and it should work even if we have a problem there
 
 const system = require('dw/system/System');
@@ -16,27 +16,27 @@ exports.Start = (args) => {
 
     if (system.getInstanceType() !== system.PRODUCTION_SYSTEM) {
         exposedError = {
-            msg: errorText, 
-            reference: errorReference, 
+            msg: errorText,
+            reference: errorReference,
             controllerName: args.ControllerName,
-            startNodeName: args.CurrentStartNodeName
+            startNodeName: args.CurrentStartNodeName,
         };
     } else {
-        exposedError = {msg: `Error Reference ${errorReference}`, reference: errorReference};
-    };
+        exposedError = { msg: `Error Reference ${errorReference}`, reference: errorReference };
+    }
     if (request.httpHeaders.get('x-requested-with') === 'XMLHttpRequest') {
         response.setContentType('application/json');
         response.writer.print(JSON.stringify({
             error: exposedError,
-            message: Resource.msg('subheading.error.general', 'error', null)
+            message: Resource.msg('subheading.error.general', 'translations', null),
         }));
     } else {
         // @todo remove isml
         ISML.renderTemplate('error/error', {
             error: exposedError,
             showError: true,
-            message: Resource.msg('subheading.error.general', 'error', null),
-            lang : require('dw/util/Locale').getLocale(request.getLocale()).getLanguage()
+            message: Resource.msg('subheading.error.general', 'translations', null),
+            lang: require('dw/util/Locale').getLocale(request.getLocale()).getLanguage(),
         });
     }
 };
@@ -44,18 +44,18 @@ exports.Start.public = true;
 
 exports.ErrorCode = () => {
     response.setStatus(500);
-    var errorMessage = 'message.error.' + req.querystring.err;
+    const errorMessage = `message.error.${req.querystring.err}`;
     // @todo remove isml
     ISML.renderTemplate('error/error', {
-        error: {msg: errorMessage},
-        message: Resource.msg(errorMessage, 'error', null)
+        error: { msg: errorMessage },
+        message: Resource.msg(errorMessage, 'translations', null),
     });
 };
 exports.ErrorCode.public = true;
 
 exports.Forbidden = () => {
-    var URLUtils = require('dw/web/URLUtils');
-    var CustomerMgr = require('dw/customer/CustomerMgr');
+    const URLUtils = require('dw/web/URLUtils');
+    const CustomerMgr = require('dw/customer/CustomerMgr');
     Logger.error(`Error forbidden called sid ${session.sessionID} cid ${customer.customerID}`);
     CustomerMgr.logoutCustomer(true);
     response.redirect(URLUtils.url('Home-Show'));

@@ -15,6 +15,14 @@ img {
     shape-margin: 0.75rem;
 }
 
+.grid {
+    display: grid;
+    gap: 1rem; /* Adjust the gap between columns */
+}
+
+.grid.grid75_25 { grid-template-columns: 75% 25%; }
+.grid.grid25_75 { grid-template-columns: 25% 75%; }
+
 /** PLP **/
 
 .refinements ul {
@@ -201,3 +209,41 @@ img {
 .slider-track:has( .slide #slide-2-radio:checked ) { transform: translateX(-100%); }
 .slider-track:has( .slide #slide-3-radio:checked ) { transform: translateX(-200%); }
 /* Add more rules for additional slides if needed */
+
+/** cart **/
+.quantity-form, .quantity-form input[type="number"] {
+    display: flex; /* Enable flexbox for the form */
+    justify-content: center; /* Center the content horizontally */
+    width: 100%; /* Make the form take up the full width of the cell */
+    margin:0;
+}
+
+.quantity-form .quantity-field {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-form input[type="number"] {
+    width: 80px; /* Adjust width as needed */
+}
+
+.quantity-form button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: none;
+}
+
+.cart-error-message {
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #f5c6cb; /* Darker red border */
+    color: #721c24; /* Dark red text */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.cart-error-message p {
+    margin: 0; /* Reset default paragraph margin */
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Checkout Button",
+    "description": "This component shows the checkout button.",
+    "group": "Cart",
+    "attribute_definition_groups": [
+        {
+            "id": "checkout",
+            "name": "Settings",
+            "description": "Chekout Button Settings",
+            "attribute_definitions": [
+            ]
+        }
+    ],
+    "region_definitions": []
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Payment Methods",
+  "group": "Checkout",
+  "attribute_definition_groups": [
+    {
+      "id": "paymentSettings",
+      "name": "Settings",
+      "description": "Payment Method Settings",
+      "attribute_definitions": [
+        {
+          "id": "requiresBillingAddress",
+          "name": "Required Billing Address",
+          "type": "boolean"
+        },
+        {
+          "id": "requiresShippingAddress",
+          "name": "Required Shipping Address",
+          "type": "boolean"
+        },
+        {
+          "id": "requiresShippingMethods",
+          "name": "Required Payment Method",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}

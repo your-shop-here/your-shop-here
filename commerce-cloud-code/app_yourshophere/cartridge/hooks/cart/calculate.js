@@ -70,10 +70,6 @@ exports.calculate = function (basket) {
 
     PromotionMgr.applyDiscounts(basket);
 
-    if(basket.productLineItems[0].getPriceAdjustmentsByPromotionID("myPromotionID2").length == 0){
-        basket.productLineItems[0].createPriceAdjustment("myPromotionID2", new dw.campaign.AmountDiscount(20.00));
-    }
-
     // since we might have bonus product line items, we need to
     // reset product prices
     calculateProductPrices(basket);
@@ -196,6 +192,11 @@ function calculateGiftCertificatePrices (basket) {
 }
 
 exports.calculateShipping = function(basket) {
+    // set default shipping method if none is set
+    if (basket.defaultShipment && !basket.defaultShipment.shippingMethod) {
+        basket.defaultShipment.shippingMethod = ShippingMgr.getDefaultShippingMethod();
+    }
+
     ShippingMgr.applyShippingCost(basket);
     return new Status(Status.OK);
 }

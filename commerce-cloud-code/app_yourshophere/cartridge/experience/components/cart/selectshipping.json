@@ -1,0 +1,14 @@
+{
+    "name": "Shipping Selection",
+    "description": "This component allows users to select a shipping method.",
+    "group": "Cart",
+    "attribute_definition_groups": [
+        {
+            "id": "shippingSelectionSettings",
+            "name": "Settings",
+            "description": "Shipping Selection Settings",
+            "attribute_definitions": []
+        }
+    ],
+    "region_definitions": []
+}

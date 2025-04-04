@@ -1,4 +1,5 @@
 const HookMgr = require('dw/system/HookMgr');
+
 const arrayPrototype = Array.prototype;
 const hasOnResponseHook = HookMgr.hasHook('dw.custom.response.onResponse');
 /**
@@ -15,8 +16,8 @@ function getCurrentLocale(locale, currency) {
             currencyCode: currency.currencyCode,
             defaultFractionDigits: currency.defaultFractionDigits,
             name: currency.name,
-            symbol: currency.symbol
-        }
+            symbol: currency.symbol,
+        },
     };
 }
 
@@ -26,13 +27,13 @@ function getCurrentLocale(locale, currency) {
  * @returns {Object} object containing geo location information
  */
 function getGeolocationObject(request) {
-    var Locale = require('dw/util/Locale');
-    var currentLocale = Locale.getLocale(request.locale);
+    const Locale = require('dw/util/Locale');
+    const currentLocale = Locale.getLocale(request.locale);
 
     return {
         countryCode: request.geolocation ? request.geolocation.countryCode : currentLocale.country,
         latitude: request.geolocation ? request.geolocation.latitude : 90.0000,
-        longitude: request.geolocation ? request.geolocation.longitude : 0.0000
+        longitude: request.geolocation ? request.geolocation.longitude : 0.0000,
     };
 }
 
@@ -42,7 +43,7 @@ function getGeolocationObject(request) {
  * @returns {string|Null} the request body as string
  */
 function getRequestBodyAsString(request) {
-    var result = null;
+    let result = null;
 
     if (request
         && (request.httpMethod === 'POST' || request.httpMethod === 'PUT')
@@ -60,23 +61,23 @@ function getRequestBodyAsString(request) {
  * @returns {Object} object containing pageMetaData information
  */
 function getPageMetaData(pageMetaData) {
-    var pageMetaDataObject = {
+    const pageMetaDataObject = {
         title: pageMetaData.title,
         description: pageMetaData.description,
         keywords: pageMetaData.keywords,
         pageMetaTags: pageMetaData.pageMetaTags,
-        addPageMetaTags: function (pageMetaTags) {
+        addPageMetaTags(pageMetaTags) {
             pageMetaData.addPageMetaTags(pageMetaTags);
         },
-        setTitle: function (title) {
+        setTitle(title) {
             pageMetaData.setTitle(title);
         },
-        setDescription: function (description) {
+        setDescription(description) {
             pageMetaData.setDescription(description);
         },
-        setKeywords: function (keywords) {
+        setKeywords(keywords) {
             pageMetaData.setKeywords(keywords);
-        }
+        },
     };
 
     return pageMetaDataObject;
@@ -97,51 +98,51 @@ function Request(request, customer, session) {
     };
 
     Object.defineProperty(this, 'raw', {
-        get: function () {
+        get() {
             return request;
-        }
+        },
     });
 
     Object.defineProperty(this, 'httpParameterMap', {
-        get: function () {
+        get() {
             return request.httpParameterMap;
-        }
+        },
     });
 
     Object.defineProperty(this, 'body', {
-        get: function () {
+        get() {
             return getRequestBodyAsString(request);
-        }
+        },
     });
 
     Object.defineProperty(this, 'geolocation', {
-        get: function () {
+        get() {
             return getGeolocationObject(request);
-        }
+        },
     });
 
     Object.defineProperty(this, 'locale', {
-        get: function () {
+        get() {
             return getCurrentLocale(request.locale, session.currency);
-        }
+        },
     });
 
     Object.defineProperty(this, 'remoteAddress', {
-        get: function () {
+        get() {
             return request.getHttpRemoteAddress();
-        }
+        },
     });
 
     Object.defineProperty(this, 'referer', {
-        get: function () {
+        get() {
             return request.getHttpReferer();
-        }
+        },
     });
 
     Object.defineProperty(this, 'pageMetaData', {
-        get: function () {
+        get() {
             return getPageMetaData(request.pageMetaData);
-        }
+        },
     });
 }
 
@@ -175,10 +176,10 @@ function Response(response) {
  * @returns {void}
  */
 function appendRenderings(renderings, object) {
-    var hasRendering = false;
+    let hasRendering = false;
 
-    if (renderings.length) {
-        for (var i = renderings.length - 1; i >= 0; i--) {
+    if (!object.force && renderings.length) {
+        for (let i = renderings.length - 1; i >= 0; i--) {
             if (renderings[i].type === 'render') {
                 renderings[i] = object; // eslint-disable-line no-param-reassign
                 hasRendering = true;
@@ -201,9 +202,24 @@ Response.prototype = {
      */
     renderPartial: function renderPartial(name, data) {
         this.view = name;
-        this.viewData = Object.assign(this.viewData, data);
+        this.viewData[name] = data;
 
         appendRenderings(this.renderings, { type: 'render', subType: 'partial', view: name });
+    },
+
+    /**
+     * Stores template name and data for rendering at the later time
+     * @param {string} name - Path to a template
+     * @param {Object} data - Data to be passed to the template
+     * @returns {void}
+     */
+    appendPartial: function renderPartial(name, data) {
+        this.view = name;
+        this.viewData[name] = data;
+
+        appendRenderings(this.renderings, {
+            type: 'render', subType: 'partial', view: name, force: true,
+        });
     },
     /**
      * Stores template name and data for rendering at the later time
@@ -246,9 +262,11 @@ Response.prototype = {
      * @param {dw.util.HashMap} aspectAttributes - (optional) aspect attributes to be passed to the PageMgr
      * @returns {void}
      */
-    page: function (page, data, aspectAttributes) {
+    page(page, data, aspectAttributes) {
         this.viewData = Object.assign(this.viewData, data);
-        appendRenderings(this.renderings, { type: 'render', subType: 'page', page: page, aspectAttributes });
+        appendRenderings(this.renderings, {
+            type: 'render', subType: 'page', page, aspectAttributes,
+        });
     },
     /**
      * Redirects to a given url right away
@@ -270,7 +288,7 @@ Response.prototype = {
      * Get data that was setup for a template
      * @returns {Object} Data for the template
      */
-    getViewData: function () {
+    getViewData() {
         return this.viewData;
     },
     /**
@@ -278,7 +296,7 @@ Response.prototype = {
      * @param {Object} data - Data for template
      * @returns {void}
      */
-    setViewData: function (data) {
+    setViewData(data) {
         this.viewData = Object.assign(this.viewData, data);
     },
     /**
@@ -287,9 +305,9 @@ Response.prototype = {
      * @returns {void}
      */
     log: function log() {
-        var args = Array.prototype.slice.call(arguments);
+        const args = Array.prototype.slice.call(arguments);
 
-        var output = args.map(function (item) {
+        const output = args.map((item) => {
             if (typeof item === 'object' || Array.isArray(item)) {
                 return JSON.stringify(item);
             }
@@ -322,7 +340,7 @@ Response.prototype = {
      * @returns {void}
      */
     print: function print(message) {
-        this.renderings.push({ type: 'print', message: message });
+        this.renderings.push({ type: 'print', message });
     },
 
     /**
@@ -342,7 +360,7 @@ Response.prototype = {
      */
     setHttpHeader: function setHttpHeader(name, value) {
         this.base.setHttpHeader(name, value);
-    }
+    },
 
 };
 
@@ -351,8 +369,8 @@ Response.prototype = {
  * @returns {Object} object containing the querystring of the loaded page
  */
 function getPageMetadata(req) {
-    var pageMetadata = {};
-    var action = request.httpPath.split('/');
+    const pageMetadata = {};
+    const action = request.httpPath.split('/');
 
     pageMetadata.action = action[action.length - 1];
     pageMetadata.queryString = request.httpQueryString;
@@ -384,17 +402,17 @@ Route.prototype = EventEmitter.prototype;
  * @returns {Function} Function to be executed when URL is hit
  */
 Route.prototype.getRoute = function () {
-    var me = this;
+    const me = this;
     return (function (err) {
-        var i = 0;
+        let i = 0;
 
         if (err && err.ErrorText) {
-            var system = require('dw/system/System');
-            var showError = system.getInstanceType() !== system.PRODUCTION_SYSTEM;
+            const system = require('dw/system/System');
+            const showError = system.getInstanceType() !== system.PRODUCTION_SYSTEM;
             me.req.error = {
                 errorText: showError ? err.ErrorText : '',
                 controllerName: showError ? err.ControllerName : '',
-                startNodeName: showError ? err.CurrentStartNodeName || me.name : ''
+                startNodeName: showError ? err.CurrentStartNodeName || me.name : '',
             };
         }
 
@@ -459,7 +477,6 @@ Route.prototype.done = function done(req, res) {
     this.emit('route:Complete', req, res);
 };
 
-
 /**
  * Middleware filter for get requests
  * @param {Object} req - Request object
@@ -471,7 +488,7 @@ function get(req, res, next) {
     if (request.httpMethod === 'GET') {
         next();
     } else if (request.httpMethod === 'OPTIONS') {
-        var Response = require('dw/system/Response');
+        const Response = require('dw/system/Response');
 
         res.setStatusCode(204);
         res.setHttpHeader(Response.ALLOW, 'OPTIONS,GET');
@@ -492,11 +509,9 @@ function get(req, res, next) {
  * @returns {void}
  */
 function post(req, res, next) {
-    if (req.httpMethod === 'POST') {
+    if (request.httpMethod === 'POST') {
         next();
-    } else if (req.httpMethod === 'OPTIONS') {
-        var Response = require('dw/system/Response');
-
+    } else if (request.httpMethod === 'OPTIONS') {
         res.setStatusCode(204);
         res.setHttpHeader(Response.ALLOW, 'OPTIONS,POST');
         res.print('');
@@ -554,13 +569,12 @@ function include(req, res, next) {
 }
 
 const middleware = {
-    get: get,
-    post: post,
-    https: https,
-    http: http,
-    include: include
+    get,
+    post,
+    https,
+    http,
+    include,
 };
-
 
 /**
  * Render an ISML template
@@ -569,12 +583,12 @@ const middleware = {
  * @returns {void}
 */
 function template(view, viewData) {
-    var ISML = require('dw/template/ISML');
+    const ISML = require('dw/template/ISML');
     // create a shallow copy of the data
-    var data = viewData;
-    data.translate = function(key) {
-        return dw.web.Resource.msg(key, 'translations', 'Translation missing: ' + key);
-    }
+    const data = viewData;
+    data.translate = function (key) {
+        return dw.web.Resource.msg(key, 'translations', `Translation missing: ${key}`);
+    };
     data.lang = require('dw/util/Locale').getLocale(request.getLocale()).getLanguage();
     try {
         ISML.renderTemplate(view, data);
@@ -617,12 +631,11 @@ function page(pageID, aspectAttributes, data) {
  */
 function applyRenderings(res) {
     if (res.renderings.length) {
-        res.renderings.forEach(function (element) {
+        res.renderings.forEach((element) => {
             if (element.type === 'render') {
                 switch (element.subType) {
                     case 'partial':
-                        var resp = res;
-                        require('*/cartridge/partials/renderer').render(element.view)(res.viewData.object);
+                        require('*/cartridge/partials/renderer').render(element.view)(res.viewData[element.view] ? res.viewData[element.view].object : {});
                         break;
                     case 'isml':
                         template(element.view, res.viewData);
@@ -643,7 +656,7 @@ function applyRenderings(res) {
             } else if (element.type === 'print') {
                 res.base.writer.print(element.message);
             } else {
-               throw new Error('Cannot render template without name or data');
+                throw new Error('Cannot render template without name or data');
             }
         });
     } else {
@@ -652,9 +665,8 @@ function applyRenderings(res) {
 }
 
 const render = {
-    applyRenderings: applyRenderings
+    applyRenderings,
 };
-
 
 /* eslint-disable */
 

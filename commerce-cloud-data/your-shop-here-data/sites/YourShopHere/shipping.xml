@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shipping xmlns="http://www.demandware.com/xml/impex/shipping/2007-03-31">
-    <shipping-method method-id="standard-shipping" default="false">
+    <shipping-method method-id="standard-shipping" default="true">
         <display-name xml:lang="x-default">Standard</display-name>
         <online-flag>true</online-flag>
         <tax-class-id>standard</tax-class-id>
@@ -10,7 +10,7 @@
         <currency>EUR</currency>
     </shipping-method>
 
-    <shipping-method method-id="express-shipping" default="true">
+    <shipping-method method-id="express-shipping" default="false">
         <display-name xml:lang="x-default">Express</display-name>
         <online-flag>true</online-flag>
         <tax-class-id>standard</tax-class-id>
@@ -19,5 +19,4 @@
         </price-table>
         <currency>EUR</currency>
     </shipping-method>
-
 </shipping>
