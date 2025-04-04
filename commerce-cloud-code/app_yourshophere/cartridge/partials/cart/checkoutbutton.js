@@ -22,7 +22,7 @@ exports.template = model => `
     ${model.disabled ? 'disabled' : ''}
     hx-get="${model.url}"
     hx-trigger="click"
-    hx-target="html"
+    hx-target="body"
     hx-indicator=".progress">
     ${model.title}
 </button>`;
