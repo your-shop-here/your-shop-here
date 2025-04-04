@@ -6,6 +6,8 @@
  * @returns the view model
  */
 exports.createModel = function createImageModel(hit, search, imageFilter, config) {
+    const URLUtils = require('dw/web/URLUtils');
+
     let url;
     if (imageFilter) {
         url = (function getFilteredImages() {
@@ -23,9 +25,14 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
 
     return {
         largeUrl: url,
+        pdpUrl: URLUtils.url('Product-Show', 'pid', hit.productID).toString(),
         name: hit.name,
         width: '300',
     };
 };
 
-exports.template = (model) => `<img loading="lazy" alt="${model.name}" src="${model.largeUrl}?sw=${model.width}" />`;
+exports.template = (model) => `<a href="${model.pdpUrl}">
+    <img loading="lazy"
+        alt="${model.name}"
+        src="${model.largeUrl}?sw=${model.width}" />
+</a>`;
