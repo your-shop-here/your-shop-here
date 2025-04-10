@@ -1,9 +1,14 @@
-
 const name = require('./name');
 const image = require('./image');
 const price = require('./price');
 const swatches = require('./swatches');
+const addToCartButton = require('./addtocartbutton');
 
+/**
+ * Create a model for the product tile
+ * @returns {Object} The model for the product tile
+ * @todo Break out the tile into a separate components
+ */
 exports.createModel = () => {
     const HttpSearchParams = require('api/URLSearchParams');
     const httpParams = new HttpSearchParams(request.httpParameterMap);
@@ -24,12 +29,18 @@ exports.createModel = () => {
         model.name = name.createModel(hit);
         model.image = image.createModel(hit, tileSearch, imageFilter, { imageViewType: componentSettings.imageViewType });
         model.price = price.createModel(hit, tileSearch, httpParams);
-        model.swatches = swatches.createModel(hit, tileSearch, {swatchAttribute: componentSettings.swatchDimension});
+        model.swatches = swatches.createModel(hit, tileSearch, { swatchAttribute: componentSettings.swatchDimension });
+        model.addToCartButton = require('./addtocartbutton').createModel(hit);
     }
 
     return model;
-}
+};
 
+/**
+ * Render the product tile
+ * @param {Object} model - The model for the product tile
+ * @returns {string} The HTML for the product tile
+ */
 exports.template = (model) => `
 <article data-include-url="${request.httpQueryString}">
     <header>${name.template(model.name)}</header>
@@ -38,5 +49,5 @@ exports.template = (model) => `
         ${price.template(model.price)}
         ${swatches.template(model.swatches)}
     </body>
-    <footer><button>Add to cart</button></footer>
+    <footer>${addToCartButton.template(model.addToCartButton)}</footer>
 </article>`;

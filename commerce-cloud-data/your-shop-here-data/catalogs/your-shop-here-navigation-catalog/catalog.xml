@@ -42,6 +42,146 @@
                 <sort-mode>category-position</sort-mode>
                 <cutoff-threshold>5</cutoff-threshold>
             </refinement-definition>
+            <refinement-definition type="attribute" bucket-type="values" attribute-id="yshRefinementColor" system="false">
+                <display-name xml:lang="x-default">Colour</display-name>
+                <display-name xml:lang="fr-FR">Coloris </display-name>
+                <display-name xml:lang="it-IT">Colore</display-name>
+                <display-name xml:lang="ja-JP">色</display-name>
+                <display-name xml:lang="zh-CN">颜色</display-name>
+                <value-set>refinement-category</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <unbucketed-values-mode>show-values</unbucketed-values-mode>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Beige</display-name>
+                        <display-name xml:lang="fr-FR">Beige</display-name>
+                        <display-name xml:lang="it-IT">Beige</display-name>
+                        <display-name xml:lang="ja-JP">ベージュ</display-name>
+                        <display-name xml:lang="zh-CN">米黄色</display-name>
+                        <value-list xml:lang="x-default">beige</value-list>
+                        <presentation-id>beige</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Black</display-name>
+                        <display-name xml:lang="fr-FR">Noir</display-name>
+                        <display-name xml:lang="it-IT">Nero</display-name>
+                        <display-name xml:lang="ja-JP">ブラック</display-name>
+                        <display-name xml:lang="zh-CN">黑色</display-name>
+                        <value-list xml:lang="x-default">black</value-list>
+                        <presentation-id>black</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Blue</display-name>
+                        <display-name xml:lang="fr-FR">Bleu</display-name>
+                        <display-name xml:lang="it-IT">Blu</display-name>
+                        <display-name xml:lang="ja-JP">ブルー</display-name>
+                        <display-name xml:lang="zh-CN">蓝色</display-name>
+                        <value-list xml:lang="x-default">blue</value-list>
+                        <presentation-id>blue</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Navy</display-name>
+                        <display-name xml:lang="fr-FR">Marine</display-name>
+                        <display-name xml:lang="it-IT">Blu marino</display-name>
+                        <display-name xml:lang="ja-JP">ネイビー</display-name>
+                        <display-name xml:lang="zh-CN">海军蓝</display-name>
+                        <value-list xml:lang="x-default">navy</value-list>
+                        <presentation-id>navy</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Brown</display-name>
+                        <display-name xml:lang="fr-FR">Marron</display-name>
+                        <display-name xml:lang="it-IT">Marrone</display-name>
+                        <display-name xml:lang="ja-JP">ブラウン</display-name>
+                        <display-name xml:lang="zh-CN">棕色</display-name>
+                        <value-list xml:lang="x-default">brown</value-list>
+                        <presentation-id>brown</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Green</display-name>
+                        <display-name xml:lang="fr-FR">Vert</display-name>
+                        <display-name xml:lang="it-IT">Verde</display-name>
+                        <display-name xml:lang="ja-JP">グリーン</display-name>
+                        <display-name xml:lang="zh-CN">绿色</display-name>
+                        <value-list xml:lang="x-default">green</value-list>
+                        <presentation-id>green</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Grey</display-name>
+                        <display-name xml:lang="fr-FR">Gris</display-name>
+                        <display-name xml:lang="it-IT">Grigio</display-name>
+                        <display-name xml:lang="ja-JP">グレー</display-name>
+                        <display-name xml:lang="zh-CN">灰色</display-name>
+                        <value-list xml:lang="x-default">grey</value-list>
+                        <presentation-id>grey</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Orange</display-name>
+                        <display-name xml:lang="fr-FR">Orange</display-name>
+                        <display-name xml:lang="it-IT">Arancione</display-name>
+                        <display-name xml:lang="ja-JP">オレンジ</display-name>
+                        <display-name xml:lang="zh-CN">橙色</display-name>
+                        <value-list xml:lang="x-default">orange</value-list>
+                        <presentation-id>orange</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Pink</display-name>
+                        <display-name xml:lang="fr-FR">Rose</display-name>
+                        <display-name xml:lang="it-IT">Rosa</display-name>
+                        <display-name xml:lang="ja-JP">ピンク</display-name>
+                        <display-name xml:lang="zh-CN">粉色</display-name>
+                        <value-list xml:lang="x-default">pink</value-list>
+                        <presentation-id>pink</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Purple</display-name>
+                        <display-name xml:lang="fr-FR">Violet</display-name>
+                        <display-name xml:lang="it-IT">Viola</display-name>
+                        <display-name xml:lang="ja-JP">パープル</display-name>
+                        <display-name xml:lang="zh-CN">紫色</display-name>
+                        <value-list xml:lang="x-default">purple</value-list>
+                        <presentation-id>purple</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Red</display-name>
+                        <display-name xml:lang="fr-FR">Rouge</display-name>
+                        <display-name xml:lang="it-IT">Rosso</display-name>
+                        <display-name xml:lang="ja-JP">レッド</display-name>
+                        <display-name xml:lang="zh-CN">红色</display-name>
+                        <value-list xml:lang="x-default">red</value-list>
+                        <presentation-id>red</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">White</display-name>
+                        <display-name xml:lang="fr-FR">Blanc</display-name>
+                        <display-name xml:lang="it-IT">Bianco</display-name>
+                        <display-name xml:lang="ja-JP">ホワイト</display-name>
+                        <display-name xml:lang="zh-CN">白色</display-name>
+                        <value-list xml:lang="x-default">white</value-list>
+                        <presentation-id>white</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Yellow</display-name>
+                        <display-name xml:lang="fr-FR">Jaune</display-name>
+                        <display-name xml:lang="it-IT">Giallo</display-name>
+                        <display-name xml:lang="ja-JP">イエロー</display-name>
+                        <display-name xml:lang="zh-CN">黄色</display-name>
+                        <value-list xml:lang="x-default">yellow</value-list>
+                        <presentation-id>yellow</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Miscellaneous</display-name>
+                        <display-name xml:lang="fr-FR">Autre</display-name>
+                        <display-name xml:lang="it-IT">Vari</display-name>
+                        <display-name xml:lang="ja-JP">その他</display-name>
+                        <display-name xml:lang="zh-CN">其它</display-name>
+                        <value-list xml:lang="x-default">miscellaneous</value-list>
+                        <presentation-id>miscellaneous</presentation-id>
+                    </attribute-bucket>
+                </bucket-definitions>
+            </refinement-definition>
             <refinement-definition type="price" bucket-type="thresholds">
                 <display-name xml:lang="x-default">Price</display-name>
                 <display-name xml:lang="fr-FR">Prix</display-name>

@@ -4,10 +4,10 @@ header{
 a.pill[role="button"] {
     border-radius: 2rem;
     border-width: 0px;
-    background-color: var(--skin-selectbox-background-color-1);
+    background-color: var(--ysh-secondary);
     color: var(--skin-link-color-1);
     padding: 0, 7rem;
-    box-shadow: 0.3px 0.3px 0.5px color-mix(in srgb, var(--skin-selectbox-background-color-1) 75%, black);
+    box-shadow: 0.3px 0.3px 0.5px color-mix(in srgb, var(--ysh-secondary) 75%, black);
 }
 
 
@@ -145,7 +145,7 @@ nav.mainmenu label.drop-icon,
     color: var(--skin-link-color-1);
     content: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" fill="var(--skin-selectbox-background-color-1)" viewBox="0 0 18 11"><g xmlns="http://www.w3.org/2000/svg" transform="matrix(0 1 -1 0 18 -0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25015 0.682317L10.2117 8.56693C10.4425 8.7977 10.4425 9.18232 10.2117 9.41309L2.25015 17.2977C2.01938 17.5285 1.63477 17.5285 1.404 17.2977L0.557843 16.4515C0.327073 16.2208 0.327073 15.8362 0.557843 15.6054L6.82707 9.41309C7.05784 9.18232 7.05784 8.7977 6.82707 8.56693L0.596304 2.37462C0.365535 2.14386 0.365535 1.75924 0.596304 1.52847L1.44246 0.682317C1.67323 0.490009 2.01938 0.490009 2.25015 0.682317Z" /></g></svg>');
     border: 1px solid var(--skin-link-color-1);
-    background-color: var(--skin-background-color-1);
+    background-color: var(--ysh-background);
     /* @todo how can I set the fill color of an SVG if its not embedded in html?*/
     filter: contrast(0.4) brightness(2) saturate(0.5)
 }
@@ -212,7 +212,7 @@ nav.mainmenu label.drop-icon img,
     }
 
     nav.mainmenu .sub-menu {
-        background-color: var(--skin-background-color-1);
+        background-color: var(--ysh-background);
     }
 
     nav.mainmenu .sub-menu,

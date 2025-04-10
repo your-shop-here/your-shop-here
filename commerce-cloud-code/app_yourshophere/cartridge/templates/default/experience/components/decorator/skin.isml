@@ -5,22 +5,24 @@
 <!-- skin variables -->
 <style>
 :root {
-    --skin-primary-color-1: ${pdict.primaryAccentColor.value};
-    --skin-primary-color-invert-1: ${pdict.primaryAccentColorInvert.value};
-    --skin-background-color-1: ${pdict.mainBackground.value};
+    --ysh-primary: ${pdict.primaryAccentColor.value};
+    --ysh-primary-invert: ${pdict.primaryAccentColorInvert.value};
+    --ysh-secondary: ${pdict.secondaryAccentColor.value};
+    --ysh-secondary-invert: ${pdict.secondaryAccentColorInvert.value};
+    --ysh-background: ${pdict.mainBackground.value};
     --skin-border-color-1: ${pdict.borderColorOne.value};
     --skin-link-color-1: ${pdict.linkColor.value};
     --skin-banner-background-color-1: ${pdict.bannerBackground.value};
     --skin-banner-text-color-1: ${pdict.bannerTextColor.value};
     --skin-menu-color-1-invert: ${pdict.menuTextColor.value};
-    --skin-main-text-color-1: ${pdict.mainTextColor.value};
-    --skin-selectbox-background-color-1: ${pdict.selectBoxBackground.value};
-    --skin-selectbox-text-color-1: ${pdict.selectBoxTextColor.value};
+    --ysh-text-primary: ${pdict.mainTextColor.value};
+    --ysh-selectbox-background-color: ${pdict.selectBoxBackground.value};
+    --ysh-selectbox-text-color: ${pdict.selectBoxTextColor.value};
     --skin-heading-color-1: ${pdict.headingColor.value};
     --skin-heading-color-1-invert: ${pdict.headingColorInvert ? pdict.headingColorInvert.value : 'null'};
     --skin-price-1: ${pdict.priceTextColor.value};
     --skin-header-font: '${pdict.headerfont}';
-    --skin-body-font: '${pdict.bodyfont}';
+    --ysh-font-family: '${pdict.bodyfont}';
     --skin-menu-font: '${pdict.menufont}';
     --primary: #00FF00
 }

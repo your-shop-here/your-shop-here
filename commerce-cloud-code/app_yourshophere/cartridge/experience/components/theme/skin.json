@@ -29,9 +29,29 @@
                     }
                 },
                 {
+                    "id": "secondaryAccentColor",
+                    "name": "Secondary Accent Color", 
+                    "description": "The accent color (--skin-secondary-color-1)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
+                    "id": "secondaryAccentColorInvert",
+                    "name": "Secondary Inverted Color",
+                    "description": "The text color shown on accent color (--skin-secondary-color-invert-1)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
                     "id": "mainBackground",
                     "name": "Main Background",
-                    "description": "Main Background Color (--skin-background-color-1)",
+                    "description": "Main Background Color (--ysh-background)",
                     "type": "custom",
                     "required": false,
                     "editor_definition": {

@@ -547,11 +547,14 @@
   },
   "headingColorInvert" : null,
   "menufont" : "Salesforce Sans",
+  "secondaryAccentColor" : {
+    "value" : "#ccefeb"
+  },
   "mainBackground" : {
     "value" : "#FFFFFF"
   },
   "selectBoxBackground" : {
-    "value" : "#ECF5FD"
+    "value" : "#eeeeee"
   },
   "primaryAccentColorInvert" : {
     "value" : "#FFFFFF"
@@ -560,13 +563,16 @@
     "value" : "#3274CC"
   },
   "primaryAccentColor" : {
-    "value" : "#fb610e"
+    "value" : "#00a1e0"
   },
   "bannerTextColor" : {
     "value" : "#16325c"
   },
   "bannerBackground" : {
-    "value" : "#FFFFFF"
+    "value" : "#5ebbff"
+  },
+  "secondaryAccentColorInvert" : {
+    "value" : "#001970"
   },
   "borderColorOne" : {
     "value" : "#16325c"
