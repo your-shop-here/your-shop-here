@@ -37,7 +37,7 @@ function template(model) {
         ${require('partials').html('global/htmlhead')()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
-    <main>
+    <main class="checkout-page">
         ${model.regions.header.render()}
         ${model.regions.main.render()}
         ${model.regions.footer.render()}
