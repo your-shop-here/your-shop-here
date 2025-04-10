@@ -26,28 +26,32 @@ img {
 /** PLP **/
 
 .refinements ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0;       /* Remove default padding */
-  }
-  
-  .refinements li {
-    list-style: none; /* Remove bullet points */
-    font-size: 0.9em; /* Reduce text size slightly */
-    margin-bottom: 5px;  /* Add spacing between items */
-  }
-  
-  .refinements a { /* Style the link directly */
-    display: block;    /* Make it a block-level element */
-    padding: 8px 12px;   /* Add padding for the box */
-    border: 1px solid #eee; /* Add a subtle border */
-    border-radius: 5px;   /* Add rounded corners */
-    margin-right: 10px;  /* Add margin to the right */ 
-  }
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
 
-  .refinements a:hover { /* Style the link on hover */
-    background-color: #eee; /* Change background color on hover */
+.refinements li {
+    margin-bottom: 0.25rem;
+}
+
+.refinements a {
+    display: block;
+    padding: 0.25rem 0;
+    color: var(--color-text);
     text-decoration: none;
-  }
+}
+
+.refinements a:hover {
+    color: var(--color-primary);
+}
+
+.refinements a.selected {
+    color: var(--color-primary);
+    font-weight: bold;
+}
 
 .product-grid {
     display: grid;
@@ -58,42 +62,50 @@ img {
 .product-grid article {
     display: flex;
     flex-direction: column;
-    /* Use flexbox for easier alignment */
-    padding: 10px; /* Add padding back to the article */
-}
-
-.product-grid article > * {  /* Target direct children of article */
-    width: 100%;                /* Make header, body, footer full width */
+    padding: 10px;
+    position: relative;
 }
 
 .product-grid article header {
     text-align: center;
     font-size: 1.1em;
-    /* Make the name a bit larger */
     margin: 0 0 10px 0;
-    /* Add some space below the header */
-    height: 4.5em;
+    height: 4em;
+    width: 100%;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+.product-grid article header a {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    line-height: 1.4;
+    height: 2.8em;
+    padding: 0 4px;
 }
 
 .product-grid article img {
     width: 100%;
-    /* Image takes full container width */
     height: auto;
+    margin-bottom: 10px;
 }
 
 .product-grid article .price, .product-grid article .strike {
     margin-top: 10px;
-    /* Add space above the price */
     text-align: center;
-    /* Center the price horizontally */
-
 }
 
 .product-grid article .swatches {
-    display: flex;                /* Make swatches a flex container */
-    gap: 5px;                    /* Adjust gap between swatches */
-    margin-top: 10px;             /* Space above swatches */
-    justify-content: center;     /* Center the swatches horizontally */
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    justify-content: center;
 }
 
 .product-grid article .swatches a {  /* Target swatch links */
@@ -246,4 +258,68 @@ img {
 
 .cart-error-message p {
     margin: 0; /* Reset default paragraph margin */
+}
+
+/* Refinements */
+.refinements {
+    margin: 1rem 0;
+}
+
+.refinement-group {
+    margin-bottom: 1.5rem;
+}
+
+.refinement-group h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.refinement-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.refinement-group li {
+    margin-bottom: 0.25rem;
+}
+
+.refinement-group a {
+    display: block;
+    padding: 0.25rem 0;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.refinement-group a:hover {
+    color: var(--color-primary);
+}
+
+.refinement-group a.selected {
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+/* Scrollable refinements */
+.refinement-group.scrollable ul {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.refinement-group.scrollable ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+.refinement-group.scrollable ul::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+.refinement-group.scrollable ul::-webkit-scrollbar-thumb {
+    background: var(--color-muted);
+    border-radius: 3px;
+}
+
+.refinement-group.scrollable ul::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text);
 }

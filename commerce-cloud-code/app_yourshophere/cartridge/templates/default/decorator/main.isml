@@ -1,6 +1,8 @@
 <iscontent type="text/html" charset="UTF-8" compact="true" />
 <isif condition="${pdict.httpParameter.hx === 'main'}">
     <isset name="decorator" value="${'decorator/hx'}" scope="page" />
+<iselseif condition="${pdict.httpParameter.hx && pdict.httpParameter.hx.indexOf('modal') !== -1}">
+    <isset name="decorator" value="${'decorator/hxmodal'}" scope="page" />
 <iselse>
     <isset name="decorator" value="${'decorator/ssr'}" scope="page" />
 </isif>

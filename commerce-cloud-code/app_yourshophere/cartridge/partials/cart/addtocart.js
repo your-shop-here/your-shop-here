@@ -1,3 +1,8 @@
+/**
+ * Create view model for the add to cart dialog
+ * @param {Object} options - The options object containing lineitem and basket information
+ * @returns {Object} The view model containing product details
+ */
 exports.createModel = function createModel(options) {
     const StringUtils = require('dw/util/StringUtils');
     const URLUtils = require('dw/web/URLUtils');
@@ -15,7 +20,12 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
-exports.template = model => `<dialog open>
+/**
+ * Render the add to cart dialog
+ * @param {Object} model - The view model containing product details
+ * @returns {string} The HTML template for the add to cart dialog
+ */
+exports.template = (model) => `<dialog open>
 <article>
     <a href="#close"
         aria-label="Close"
