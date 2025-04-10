@@ -15,6 +15,11 @@ img {
     shape-margin: 0.75rem;
 }
 
+[role=button], button, input[type=button], input[type=reset], input[type=submit] {
+    background-color: var(--skin-primary-color-1);
+    color: var(--skin-main-text-color-1);
+}
+
 .grid {
     display: grid;
     gap: 1rem; /* Adjust the gap between columns */
@@ -25,32 +30,105 @@ img {
 
 /** PLP **/
 
+/* Base refinement styles */
+.refinements {
+    margin: 1rem 0;
+    margin-bottom: 1.5rem;
+}
+
 .refinements ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 200px;
+    max-height: 350px; /* Height for approximately 10 items */
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-muted) var(--color-background);
 }
 
 .refinements li {
     margin-bottom: 0.25rem;
+    list-style-type: none; /* Remove bullet points */
 }
 
 .refinements a {
     display: block;
     padding: 0.25rem 0;
-    color: var(--color-text);
+    color: var(--skin-main-text-color-1);
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .refinements a:hover {
-    color: var(--color-primary);
+    color: var(--skin-main-text-color-2);
 }
 
 .refinements a.selected {
-    color: var(--color-primary);
+    color: var(--skin-main-text-color-2);
     font-weight: bold;
+}
+
+.refinements h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.refinements ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+.refinements ul::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+.refinements ul::-webkit-scrollbar-thumb {
+    background: var(--color-muted);
+    border-radius: 3px;
+}
+
+.refinements ul::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text);
+}
+
+/* Color swatch refinements */
+.refinements a[class*="swatch-yshRefinementColor-"] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.refinements a[class*="swatch-yshRefinementColor-"]::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--color-muted);
+}
+
+/* Color swatch colors */
+.swatch-yshRefinementColor-beige::before { background-color: #F5F5DC; }
+.swatch-yshRefinementColor-black::before { background-color: #000000; }
+.swatch-yshRefinementColor-blue::before { background-color: #0000FF; }
+.swatch-yshRefinementColor-brown::before { background-color: #A52A2A; }
+.swatch-yshRefinementColor-green::before { background-color: #008000; }
+.swatch-yshRefinementColor-grey::before { background-color: #808080; }
+.swatch-yshRefinementColor-orange::before { background-color: #FFA500; }
+.swatch-yshRefinementColor-pink::before { background-color: #FFC0CB; }
+.swatch-yshRefinementColor-purple::before { background-color: #800080; }
+.swatch-yshRefinementColor-red::before { background-color: #FF0000; }
+.swatch-yshRefinementColor-white::before { background-color: #FFFFFF; }
+.swatch-yshRefinementColor-yellow::before { background-color: #FFFF00; }
+.swatch-yshRefinementColor-miscellaneous::before { 
+    background: linear-gradient(45deg, #FF0000, #00FF00, #0000FF);
+    background-size: 200% 200%;
+    animation: gradient 2s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .product-grid {
@@ -260,66 +338,3 @@ img {
     margin: 0; /* Reset default paragraph margin */
 }
 
-/* Refinements */
-.refinements {
-    margin: 1rem 0;
-}
-
-.refinement-group {
-    margin-bottom: 1.5rem;
-}
-
-.refinement-group h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.refinement-group ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.refinement-group li {
-    margin-bottom: 0.25rem;
-}
-
-.refinement-group a {
-    display: block;
-    padding: 0.25rem 0;
-    color: var(--color-text);
-    text-decoration: none;
-}
-
-.refinement-group a:hover {
-    color: var(--color-primary);
-}
-
-.refinement-group a.selected {
-    color: var(--color-primary);
-    font-weight: bold;
-}
-
-/* Scrollable refinements */
-.refinement-group.scrollable ul {
-    max-height: 150px;
-    overflow-y: auto;
-    padding-right: 0.5rem;
-}
-
-.refinement-group.scrollable ul::-webkit-scrollbar {
-    width: 6px;
-}
-
-.refinement-group.scrollable ul::-webkit-scrollbar-track {
-    background: var(--color-background);
-}
-
-.refinement-group.scrollable ul::-webkit-scrollbar-thumb {
-    background: var(--color-muted);
-    border-radius: 3px;
-}
-
-.refinement-group.scrollable ul::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text);
-}

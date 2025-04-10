@@ -7,11 +7,9 @@ function createModel(apiCategory) {
 
     lazyload(model, 'hidden', () => !apiCategory.custom.yshShowInMenu);
     lazyload(model, 'children', () =>
-        apiCategory.onlineSubCategories.toArray(0, 50).map(subCategory => createModel(subCategory))
-    );
+        apiCategory.onlineSubCategories.toArray(0, 50).map((subCategory) => createModel(subCategory)).filter((cat) => !cat.hidden));
     lazyload(model, 'url', () =>
-        dw.web.URLUtils.url('Search-Show', 'cgid', apiCategory.ID)
-    );
+        dw.web.URLUtils.url('Search-Show', 'cgid', apiCategory.ID));
     return model;
 }
 
@@ -22,7 +20,7 @@ function template(model) {
         <ul id="menu-root">
             ${model.children.map((childCategory) => subMenuTemplate(childCategory, 0)).join('')}
         </ul>        
-    `
+    `;
 }
 const maxLevel = 2;
 
@@ -45,12 +43,12 @@ function subMenuTemplate(currentCategory, level) {
                     </label>
                     <input type="checkbox" id="navbar-toggler-${currentCategory.ID}">
                     <ul class="sub-menu">
-                        ${currentCategory.children.map((childCategory) => subMenuTemplate(childCategory, level++)).join('')}
+                        ${currentCategory.children.map((childCategory) => subMenuTemplate(childCategory, level + 1)).join('')}
                     </ul>
                 `) : ''} 
             `) : ''}
         </li>      
-    `
+    `;
 }
 exports.createModel = createModel;
 exports.template = template;
