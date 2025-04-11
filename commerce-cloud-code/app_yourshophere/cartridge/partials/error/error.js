@@ -18,9 +18,9 @@ exports.createModel = (options) => {
         showError,
         lang,
         labels: {
-            heading: Resource.msg('heading.error.general', 'error', null),
-            continueShopping: Resource.msg('button.continue.shopping', 'confirmation', null),
-            inController: Resource.msg('error.in.controller', 'error', null),
+            heading: Resource.msg('heading.error.general', 'translations', null),
+            continueShopping: Resource.msg('button.continue.shopping', 'translations', null),
+            inController: Resource.msg('error.in.controller', 'translations', null),
         },
     };
 };
