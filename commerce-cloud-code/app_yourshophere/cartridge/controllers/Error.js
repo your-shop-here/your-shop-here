@@ -1,12 +1,22 @@
-// The Error controller doesn't use server.js (express, sfra-style)
-// As it would require special handling there
-// and it should work even if we have a problem there
+/**
+ * The Error controller doesn't use server.js (express, sfra-style)
+ * As it would require special handling there
+ * and it should work even if we have a problem there
+ */
 
 const system = require('dw/system/System');
 const Resource = require('dw/web/Resource');
-const ISML = require('dw/template/ISML');
 const Logger = require('api/Logger');
+const partials = require('partials');
 
+/**
+ * This endpoint is called when an error occurs
+ * @name controller/Error-Start
+ * @param {object} args - The arguments passed to the controller
+ * @param {string} args.ErrorText - The error text
+ * @param {string} args.ControllerName - The name of the controller
+ * @param {string} args.CurrentStartNodeName - The name of the current start node
+ */
 exports.Start = (args) => {
     response.setStatus(500);
     const errorReference = require('dw/util/UUIDUtils').createUUID();
@@ -31,8 +41,7 @@ exports.Start = (args) => {
             message: Resource.msg('subheading.error.general', 'translations', null),
         }));
     } else {
-        // @todo remove isml
-        ISML.renderTemplate('error/error', {
+        partials.render('error/error')({
             error: exposedError,
             showError: true,
             message: Resource.msg('subheading.error.general', 'translations', null),
@@ -42,22 +51,41 @@ exports.Start = (args) => {
 };
 exports.Start.public = true;
 
+/**
+ * This endpoint is called when an error occurs
+ * @name controller/Error-ErrorCode
+ */
 exports.ErrorCode = () => {
     response.setStatus(500);
-    const errorMessage = `message.error.${req.querystring.err}`;
-    // @todo remove isml
-    ISML.renderTemplate('error/error', {
+    const errorMessage = `message.error.${request.httpParameterMap.errorCode.stringValue}`;
+    partials.render('error/error')({
         error: { msg: errorMessage },
         message: Resource.msg(errorMessage, 'translations', null),
     });
 };
 exports.ErrorCode.public = true;
 
+/**
+ * This endpoint is called when a forbidden error occurs
+ * @name controller/Error-Forbidden
+ */
 exports.Forbidden = () => {
     const URLUtils = require('dw/web/URLUtils');
     const CustomerMgr = require('dw/customer/CustomerMgr');
-    Logger.error(`Error forbidden called sid ${session.sessionID} cid ${customer.customerID}`);
+    Logger.error(`Error forbidden called sid ${session.sessionID} cid ${customer.ID}`);
     CustomerMgr.logoutCustomer(true);
     response.redirect(URLUtils.url('Home-Show'));
 };
 exports.Forbidden.public = true;
+
+/**
+ * This endpoint is called when the site is offline
+ * @name controller/Error-SiteOffline
+ */
+exports.SiteOffline = () => {
+    response.setStatus(503);
+    partials.render('error/siteoffline')({
+        lang: require('dw/util/Locale').getLocale(request.getLocale()).getLanguage(),
+    });
+};
+exports.SiteOffline.public = true;
