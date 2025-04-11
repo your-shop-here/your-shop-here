@@ -32,6 +32,12 @@ prototype.append = function (name, value) {
   appendTo(this[internalParameterList], name, value);
 };
 
+/**
+ * Filters the search parameters based on the allow list
+ *
+ * @param {Array} allowList - The allow list of parameters, RexEx and string are supported
+ * @returns {URLSearchParams} The filtered URLSearchParams instance
+ */
 prototype.allowList = function (allowList) {
   let newSearchParams = [];
   const parameters = this;

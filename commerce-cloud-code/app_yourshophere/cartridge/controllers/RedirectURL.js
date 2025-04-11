@@ -24,7 +24,7 @@ server.get('Hostname', (req, res, next) => {
     const URLUtils = require('dw/web/URLUtils');
 
     const url = req.querystring.Location.stringValue;
-    const hostRegExp = new RegExp('^https?://' + req.httpHost + '(?=/|$)');
+    const hostRegExp = new RegExp(`^https?://${req.httpHost}(?=/|$)`);
     let location;
 
     if (!url || !hostRegExp.test(url)) {

@@ -1,22 +1,23 @@
-'use strict';
-
 /**
- * @namespace Home
+ * @namespace Search
  */
 const server = require('server');
 
-const PageMgr = require('dw/experience/PageMgr');
-const CatalogMgr = require('dw/catalog/CatalogMgr');
-const Logger = require('api/Logger');
-const HashMap = require('dw/util/HashMap');
-
 const cache = require('*/cartridge/middleware/cache');
 
+/**
+ * @name controller/Search-Show
+ */
 server.get('Show', cache.applyDefaultCache, (req, res, next) => {
+    const PageMgr = require('dw/experience/PageMgr');
+    const CatalogMgr = require('dw/catalog/CatalogMgr');
+    const Logger = require('api/Logger');
+    const HashMap = require('dw/util/HashMap');
+
     const categoryId = request.httpParameterMap.cgid.submitted ? request.httpParameterMap.cgid.stringValue : 'root';
     const category = CatalogMgr.getCategory(categoryId);
     if (!category) {
-        const noCategoryError = `no category ${categoryId} not found`;
+        const noCategoryError = `Category with ID ${categoryId} could not be found, rendering notfound page`;
         Logger.error(noCategoryError);
         res.render('pages/notfound', { reason: noCategoryError });
         return next();
@@ -35,22 +36,27 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
 
         res.page(page.ID, JSON.stringify({ queryString }), aspectAttributes);
     } else {
-        const error = `no page for category ${categoryId} not found`;
+        const error = `Page for category with ID ${categoryId} could not be found, rendering notfound page`;
         Logger.error(error);
         res.render('pages/notfound', { reason: error });
     }
     return next();
 });
 
+/**
+ * @name controller/Search-Grid
+ */
 server.get('Grid', cache.applyInventorySensitiveCache, (req, res, next) => {
     res.renderPartial('plp/grid');
-    next();
+    return next();
 });
 
-
+/**
+ * @name controller/Search-Refinements
+ */
 server.get('Refinements', cache.applyDefaultCache, (req, res, next) => {
     res.renderPartial('plp/refinements');
-    next();
+    return next();
 });
 
 module.exports = server.exports();
