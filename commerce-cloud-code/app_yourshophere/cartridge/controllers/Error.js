@@ -1,6 +1,6 @@
 /**
  * The Error controller doesn't use server.js (express-style, sfra-style)
- * This is to ensure we show proper errors, even when the express-style framework causes an exceptio
+ * This is to ensure we show proper errors, even when the express-style framework faces an error
  */
 
 const system = require('dw/system/System');
