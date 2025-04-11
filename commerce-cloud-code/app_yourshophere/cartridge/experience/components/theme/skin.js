@@ -1,6 +1,8 @@
 const HashSet = require('dw/util/HashSet');
 const partials = require('partials');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+
+// @todo remove the map, have the fonts loader directly plugin might work better
 const fontMap = {
     'Salesforce Sans': 'components/fonts/salesforcesans',
     'Roboto': 'components/fonts/roboto',
