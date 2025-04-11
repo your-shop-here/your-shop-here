@@ -2,6 +2,16 @@
 const server = require('server');
 
 server.get('Show', (req, res, next) => {
+    const BasketMgr = require('dw/order/BasketMgr');
+    const currentBasket = BasketMgr.getCurrentBasket();
+    const URLUtils = require('dw/web/URLUtils');
+
+    // If the basket is empty, redirect to the cart page
+    if (!currentBasket || currentBasket.getAllProductLineItems().empty) {
+        res.redirect(URLUtils.url('Cart-Show'));
+        return next();
+    }
+
     const hxPartial = request.httpParameterMap.hxpartial;
     if (hxPartial.submitted) {
         const options = { object: { forceEdit: request.httpParameterMap.forceEdit.stringValue } };
