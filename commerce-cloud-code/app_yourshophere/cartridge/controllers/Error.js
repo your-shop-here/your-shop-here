@@ -77,15 +77,3 @@ exports.Forbidden = () => {
     response.redirect(URLUtils.url('Home-Show'));
 };
 exports.Forbidden.public = true;
-
-/**
- * This endpoint is called when the site is offline
- * @name controller/Error-SiteOffline
- */
-exports.SiteOffline = () => {
-    response.setStatus(503);
-    partials.render('error/siteoffline')({
-        lang: require('dw/util/Locale').getLocale(request.getLocale()).getLanguage(),
-    });
-};
-exports.SiteOffline.public = true;

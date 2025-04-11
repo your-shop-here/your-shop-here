@@ -1,49 +1,43 @@
-'use strict';
-
-var Template = require('dw/util/Template');
-var PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
-var HashMap = require('dw/util/HashMap');
-var HashSet = require('dw/util/HashSet');
-
-var fontMap = {
+const HashSet = require('dw/util/HashSet');
+const partials = require('partials');
+const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+const fontMap = {
     'Salesforce Sans': 'components/fonts/salesforcesans',
     'Roboto': 'components/fonts/roboto',
     'Nunito Sans': 'components/fonts/nunito',
-}
+};
 
 function getFontAttributes() {
-    var metaDefinition = require('*/cartridge/experience/components/theme/skin.json');
-    var fontGroup = metaDefinition['attribute_definition_groups'].filter(function(element) {return element.id === 'fonts'});  
-    return fontGroup.pop()['attribute_definitions'].map(function(element) {return element.id});
+    const metaDefinition = require('*/cartridge/experience/components/theme/skin.json');
+    const fontGroup = metaDefinition.attribute_definition_groups.filter((element) => element.id === 'fonts');
+    return fontGroup.pop().attribute_definitions.map((element) => element.id);
 }
 
 /**
- * Render logic for theming component.
- * @param {dw.experience.ComponentScriptContext} context The component script context object.
- * @returns {string} The template to be displayed
+ * Component which renders the skin settings
+ * @param {dw.experience.PageScriptContext} context The page script context object.
+ *
+ * @returns {string} The template text
  */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
-        return renderComponent (context)
+        const content = context.content;
+        content.editMode = PageRenderHelper.isInEditMode();
+        const model = {};
+        const fontAttributes = getFontAttributes();
+        const fonts = new HashSet();
+        content.keySet().toArray().forEach((element) => {
+            model[element] = content[element];
+            if (fontAttributes.indexOf(element) > -1 && fontMap[content[element]]) {
+                fonts.add1(fontMap[content[element]]);
+            }
+        });
+        model.fonts = fonts.toArray();
+
+        return partials.html('header/skin')(model);
     } catch (e) {
         const Logger = require('api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
+        return '';
     }
-}
-
-function renderComponent (context) {
-    var content = context.content;
-    content.editMode = PageRenderHelper.isInEditMode();
-    var model = new HashMap();
-    var fontAttributes = getFontAttributes();
-    var fonts = new HashSet()
-    content.keySet().toArray().forEach(function(element) {
-        model[element] = content[element];
-        if (fontAttributes.indexOf(element) > -1 && fontMap[content[element]]) {
-            fonts.add1(fontMap[content[element]]);
-        }  
-    });
-    model.fonts = fonts.toArray();
-
-    return new Template('experience/components/decorator/skin').render(model).text;
 };
