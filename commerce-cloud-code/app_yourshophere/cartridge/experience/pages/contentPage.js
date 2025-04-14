@@ -28,6 +28,7 @@ function renderComponent (context) {
     // automatically register configured regions
     var metaDefinition = require('*/cartridge/experience/pages/contentPage.json');
     model.regions = new RegionModelRegistry(page, metaDefinition);
+    model.regions.main.setClassName('page-content');
 
     // Determine seo meta data.
     // Used in htmlHead.isml via common/layout/page.isml decorator.

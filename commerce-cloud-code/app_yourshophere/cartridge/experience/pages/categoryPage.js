@@ -28,6 +28,7 @@ function renderComponent(context) {
     // automatically register configured regions
     const metaDefinition = require('*/cartridge/experience/pages/categoryPage.json');
     model.regions = new RegionModelRegistry(page, metaDefinition);
+    model.regions.main.setClassName('page-plp');
 
     model.httpParameter = {};
 
