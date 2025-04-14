@@ -1,6 +1,6 @@
 {
-    "name": "Announcement (SFRA Header)",
-    "description": "Site wide announcement (for announcement reagion in SFRA header)",
+    "name": "Announcement",
+    "description": "Site wide announcement (for announcement reagion in header)",
     "group": "theming",
     "attribute_definition_groups": [
         {

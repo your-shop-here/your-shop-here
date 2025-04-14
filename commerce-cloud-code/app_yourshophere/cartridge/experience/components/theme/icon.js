@@ -1,28 +1,21 @@
-'use strict';
-
-var Template = require('dw/util/Template');
-var HashMap = require('dw/util/HashMap');
+const partials = require('partials');
 
 /**
- * Render logic for the storefront.photoTile component.
- * @param {dw.experience.ComponentScriptContext} context The Component script context object.
- * @returns {string} The template to be displayed
+ * Component which renders an icon
+ * @param {dw.experience.PageScriptContext} context The page script context object.
+ *
+ * @returns {string} The template text
  */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
-        return renderComponent (context)
+        return partials.html('header/icon')({
+            image: context.content.image.file,
+            width: context.content.width || '100%',
+            link: context.content.link,
+        });
     } catch (e) {
         const Logger = require('api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
+        return '';
     }
-}
-
-function renderComponent (context) {
-    var model = new HashMap();
-    var content = context.content;
-
-    model.image = content.image.file;
-    model.width = content.width || '100%';
-    model.link = content.link;
-    return new Template('experience/components/decorator/icon').render(model).text;
 };
