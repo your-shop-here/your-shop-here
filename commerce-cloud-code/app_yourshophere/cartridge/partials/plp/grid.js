@@ -24,7 +24,7 @@ exports.createModel = () => {
 };
 
 exports.template = (model) => `
-    <div class="product-grid desktop-cols-${model.desktopColumns} mobile-cols-${model.mobileColumns}">
+    <div class="grid product-grid desktop-cols-${model.desktopColumns} mobile-cols-${model.mobileColumns}">
         ${model.products.map((hit) => templateIncludeHit(hit, model.componentId)).join('')}
     </div>
     ${model.showMoreButton ? templateIncludeMore(model) : ''}

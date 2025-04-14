@@ -237,11 +237,11 @@ select {
     gap: 10px;
 }
 
-.product-grid.desktop-cols-3 {
+.grid.desktop-cols-3 {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.product-grid.desktop-cols-4 {
+.grid.desktop-cols-4 {
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -501,11 +501,11 @@ select {
         gap: 10px;
     }
 
-    .product-grid.mobile-cols-2 {
+    .grid.mobile-cols-2 {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .product-grid.mobile-cols-1 {
+    .grid.mobile-cols-1 {
         grid-template-columns: repeat(1, 1fr);
     }
     .refinements .filter-button {
