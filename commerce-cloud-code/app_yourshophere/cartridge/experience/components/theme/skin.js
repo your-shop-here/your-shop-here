@@ -4,9 +4,9 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 
 // @todo remove the map, have the fonts loader directly plugin might work better
 const fontMap = {
-    'Salesforce Sans': 'components/fonts/salesforcesans',
-    'Roboto': 'components/fonts/roboto',
-    'Nunito Sans': 'components/fonts/nunito',
+    'Salesforce Sans': 'fonts/salesforcesans',
+    'Roboto': 'fonts/roboto',
+    'Nunito Sans': 'fonts/nunito',
 };
 
 function getFontAttributes() {
