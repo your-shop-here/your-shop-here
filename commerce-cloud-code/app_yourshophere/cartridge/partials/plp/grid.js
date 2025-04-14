@@ -8,7 +8,7 @@ exports.createModel = () => {
     const model = {};
     const httpParams = new HttpSearchParams(request.httpParameterMap);
     const componentSettings = require('*/cartridge/utils/ComponentSettings').get(httpParams.get('component'));
-    const search = require('api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension} );
+    const search = require('api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
     search.search();
 
     const componentId = httpParams.get('component');
@@ -18,11 +18,13 @@ exports.createModel = () => {
     model.moreUrlFull = search.nextPageUrl('Search-Show').toString();
     model.moreUrlHx = search.nextPageUrl('Search-Grid');
     model.moreUrlHx = model.moreUrlHx.append('component', componentId);
+    model.desktopColumns = componentSettings.desktopColumns || 3;
+    model.mobileColumns = componentSettings.mobileColumns || 2;
     return model;
 };
 
 exports.template = (model) => `
-    <div class="product-grid">
+    <div class="product-grid desktop-cols-${model.desktopColumns} mobile-cols-${model.mobileColumns}">
         ${model.products.map((hit) => templateIncludeHit(hit, model.componentId)).join('')}
     </div>
     ${model.showMoreButton ? templateIncludeMore(model) : ''}

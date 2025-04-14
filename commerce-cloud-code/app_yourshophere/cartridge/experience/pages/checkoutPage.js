@@ -1,6 +1,4 @@
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
-const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
@@ -20,13 +18,13 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
-    const BasketMgr = require('dw/order/BasketMgr');
     const model = new HashMap();
     const page = context.page;
     const metaDefinition = require('*/cartridge/experience/pages/checkoutPage.json');
     request.custom.model = new HashMap();
     request.custom.model.forceEdit = context.renderParameters && JSON.parse(context.renderParameters).forceEdit;
     model.regions = new RegionModelRegistry(page, metaDefinition);
+    model.regions.main.setClassName('page-checkout');
     return template(model);
 }
 
