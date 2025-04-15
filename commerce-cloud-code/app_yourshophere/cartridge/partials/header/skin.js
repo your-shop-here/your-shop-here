@@ -28,6 +28,13 @@ function createModel(params) {
         editMode: params.editMode || false,
     };
 
+    try {
+        model.fonts = model.fonts.map((fontName) => require(`*/cartridge/partials/header/${fontName}`).getFont());
+    } catch (error) {
+        const Logger = require('dw/system/Logger');
+        Logger.error(`Error loading fonts in skins.js: ${error.message}`);
+    }
+
     return model;
 }
 
@@ -37,62 +44,7 @@ function createModel(params) {
  * @returns {string} The HTML for the skin
  */
 const template = (model) => `
-    ${model.fonts.map((font) => {
-        const URLUtils = require('dw/web/URLUtils');
-        if (font === 'components/fonts/salesforcesans') {
-            return `<style>  
-                @font-face {
-                    font-family: "Salesforce Sans";
-                    src: url("${URLUtils.staticURL('fonts/SalesforceSans-Regular.woff')}" ) format('woff');
-                    unicode-range: U+0000-007F;
-                }
-
-                @font-face {
-                    font-family: "Salesforce Sans"; 
-                    src: url("${URLUtils.staticURL('fonts/SalesforceSans-Bold.woff')}" ) format('woff');
-                    font-weight: bold;
-                    unicode-range: U+0000-007F;
-                }
-
-                @font-face {
-                    font-family: "Salesforce Sans";
-                    src: url("${URLUtils.staticURL('fonts/SalesforceSans-BoldItalic.woff')}" ) format('woff');
-                    font-weight: bold;
-                    font-style: italic;
-                    unicode-range: U+0000-007F;
-                }
-
-                @font-face {
-                    font-family: "Salesforce Sans";
-                    src: url("${URLUtils.staticURL('fonts/SalesforceSans-Italic.woff')}" ) format('woff');
-                    font-style: italic;
-                    unicode-range: U+0000-007F;
-                }
-
-                @font-face {
-                    font-family: "Salesforce Sans";
-                    src: url("${URLUtils.staticURL('fonts/SalesforceSans-LightItalic.woff')}" ) format('woff');
-                    font-weight: lighter;
-                    font-style: italic;
-                    unicode-range: U+0000-007F;
-                }
-
-                @font-face {
-                    font-family: "Salesforce Sans";
-                    src: url("${URLUtils.staticURL('fonts/SalesforceSans-Light.woff')}" ) format('woff');
-                    font-weight: lighter;
-                    unicode-range: U+0000-007F;
-                }
-            </style>`;
-        }
-        if (font === 'components/fonts/roboto') {
-            return '<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">';
-        }
-        if (font === 'components/fonts/nunito') {
-            return '<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;700&display=swap" rel="stylesheet">';
-        }
-        return '';
-    }).join('')}
+    ${model.fonts.join('')}
     <style>
         :root {
             --ysh-primary: ${model.primaryAccentColor};
