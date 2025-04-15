@@ -118,15 +118,19 @@ exports.createModel = () => {
  * @returns {string} HTML string for rendering refinements
  */
 exports.template = (model) => `<div class="refinements">
-    ${model.refinements.map((refinement) => `<div>
-        <h3>${refinement.name}</h3>
-        <ul role="navigation">
-        ${refinement.values.map((value) => `<li><a href="${value.url}"${(value.cssClasses ? ` class="${value.cssClasses}"` : '')}
-                    hx-push-url="${value.url}"
-                    hx-get="${value.hxUrl}"
-                    hx-target="main" hx-indicator=".progress">
-                ${value.name}
-            </a></li>`).join('')}
-        </ul>
+    <button class="filter-button" onclick="this.nextElementSibling.classList.toggle('show')">Filter</button>
+    <div class="filter-content">
+        ${model.refinements.map((refinement) => `<div>
+            <h3>${refinement.name}</h3>
+            <ul role="navigation">
+            ${refinement.values.map((value) => `<li><a href="${value.url}"${(value.cssClasses ? ` class="${value.cssClasses}"` : '')}
+                        hx-push-url="${value.url}"
+                        hx-get="${value.hxUrl}"
+                        hx-target="main" hx-indicator=".progress">
+                    ${value.name}
+                </a></li>`).join('')}
+            </ul>
+        </div>
+        `).join('')}
     </div>
-    `).join('')}</div>`;
+</div>`;

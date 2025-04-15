@@ -6,8 +6,9 @@ function renderComponent(context, modelIn) {
     const component = context.component;
 
     model.regions = PageRenderHelper.getRegionModelRegistry(component);
-    model.style = context.content.style;
-    const regionNames = Array.from(Array(context.content.columns).keys()).map(index => `column${index + 1}`);
+    // @todo: make mobile columns dynamic in the page designer component
+    model.style = `${context.content.style} desktop-cols-${context.content.columns} mobile-cols-1`;
+    const regionNames = Array.from(Array(context.content.columns).keys()).map((index) => `column${index + 1}`);
 
     return `<div class="grid ${(model.style !== '' && model.style != null) ? model.style : ''}" >
         ${regionNames.map(regionName => model.regions[regionName].render()).join('\n')}   

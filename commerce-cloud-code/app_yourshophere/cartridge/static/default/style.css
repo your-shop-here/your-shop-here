@@ -105,9 +105,36 @@ select {
 /** PLP **/
 
 /* Base refinement styles */
+.page-plp .div-left {
+    position: relative;
+}
+
 .refinements {
     margin: var(--ysh-spacing-md) 0;
     margin-bottom: var(--ysh-spacing-lg);
+}
+
+.refinements .filter-button {
+    display: none; /* Hide filter button on desktop */
+    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
+    background-color: var(--ysh-primary);
+    color: var(--ysh-text-light);
+    border-radius: var(--ysh-border-radius-md);
+    cursor: pointer;
+    margin-bottom: var(--ysh-spacing-md);
+}
+
+.refinements .filter-button:hover {
+    background-color: var(--ysh-primary-hover);
+}
+
+.refinements .filter-content {
+    display: block; /* Always show on desktop */
+    position: static; /* Reset position for desktop */
+    background-color: var(--ysh-bg-primary);
+    border: 1px solid var(--ysh-border-color);
+    border-radius: var(--ysh-border-radius-md);
+    padding: var(--ysh-spacing-md);
 }
 
 .refinements ul {
@@ -207,8 +234,15 @@ select {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+}
+
+.grid.desktop-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid.desktop-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .product-grid article {
@@ -457,3 +491,38 @@ select {
     color: var(--ysh-text-primary);
 }
 
+/* Mobile styles */
+@media (max-width: 1024px) {
+    .page-plp .onefourth-wrapper {
+        display: block;
+    }
+
+    .product-grid {
+        gap: 10px;
+    }
+
+    .grid.mobile-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid.mobile-cols-1 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .refinements .filter-button {
+        display: inline-block; /* Show filter button on mobile */
+    }
+
+    .refinements .filter-content {
+        display: none; /* Hide by default on mobile */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: var(--ysh-shadow-md);
+    }
+
+    .refinements .filter-content.show {
+        display: block;
+    }
+}
