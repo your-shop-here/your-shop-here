@@ -6,6 +6,8 @@ const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionMode
 /**
  * Render logic for the storepage.
  *
+ * @todo Refactor to not use ISML
+ *
  * @param {dw.experience.PageScriptContext} context The page script context object.
  *
  * @returns {string} The template text
@@ -21,9 +23,14 @@ exports.render = function render (context) {
     return '';
 };
 
+/**
+ * Renders the product page component
+ * @param {Object} context - The context object
+ * @returns {string} The rendered HTML
+ */
 function renderComponent (context) {
-    var model = new HashMap();
-    var page = context.page;
+    const model = new HashMap();
+    const page = context.page;
     model.page = page;
 
     model.product = context.content.product;

@@ -6,28 +6,11 @@
  */
 exports.createModel = function createModel(options) {
     const StringUtils = require('dw/util/StringUtils');
-    const PromotionMgr = require('dw/campaign/PromotionMgr');
-    const PriceBookMgr = require('dw/catalog/PriceBookMgr');
     const product = options.product.master ? options.product.variants[0] : options.product;
     const priceModel = product.priceModel;
 
-    // find all list prices and use the highest one
-    const listPrices = PriceBookMgr.getSitePriceBooks().toArray()
-        .map((priceBook) => (priceBook.getParentPriceBook() && priceBook.getParentPriceBook().ID))
-        .filter((id) => id !== null)
-        .map((id) => priceModel.getPriceBookPrice(id));
-    listPrices.sort((a, b) => a.value - b.value);
-    const listPrice = listPrices.pop();
-
-    // @todo optimise performance for getActiveCustomerPromotions calls
-    const promotions = PromotionMgr.getActiveCustomerPromotions().getProductPromotions(product);
-    let salesPrice = priceModel.price;
-    if (promotions && promotions.length > 0) {
-        salesPrice = promotions.toArray().reduce((lowestPrice, promo) => {
-            const promoPrice = promo.getPromotionalPrice(product);
-            return !lowestPrice || (promoPrice && promoPrice.value < lowestPrice.value) ? promoPrice : lowestPrice;
-        }, priceModel.price);
-    }
+    const listPrice = getListPrice(priceModel);
+    const salesPrice = getPromotionalPrice(product, priceModel);
 
     const model = {
         price: salesPrice && salesPrice.value < priceModel.price.value
@@ -40,6 +23,42 @@ exports.createModel = function createModel(options) {
 
     return model;
 };
+
+/**
+ * Gets the highest list price from all price book's parent price books
+ * @param {Object} priceModel - The product's price model
+ * @returns {Object} The highest list price
+ */
+function getListPrice(priceModel) {
+    const PriceBookMgr = require('dw/catalog/PriceBookMgr');
+    const listPrices = PriceBookMgr.getSitePriceBooks().toArray()
+        .map((priceBook) => (priceBook.getParentPriceBook() && priceBook.getParentPriceBook().ID))
+        .filter((id) => id !== null)
+        .map((id) => priceModel.getPriceBookPrice(id));
+    listPrices.sort((a, b) => a.value - b.value);
+    return listPrices.pop();
+}
+
+/**
+ * Gets the first active promotional price for a product.
+ *
+ * Note: One could get all active promotional prices for a product, but in case of multiple active promotions,
+ * there is no way to get the correct price in case they stack. Therefore any price is as good as any other and
+ * the first one is returned.
+ *
+ * @param {Object} product - The product object
+ * @param {Object} priceModel - The product's price model
+ * @returns {Object} The first active promotional price
+ */
+function getPromotionalPrice(product, priceModel) {
+    const Promotions = require('*/cartridge/api/Promotions');
+    const promotions = Promotions.getProductPromotions(product);
+    if (promotions && promotions.length > 0) {
+        const promoPrice = promotions[0].getPromotionalPrice(product);
+        return promoPrice || priceModel.price;
+    }
+    return priceModel.price;
+}
 
 /**
  * @description PDP prices template
