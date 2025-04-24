@@ -4,7 +4,7 @@
  * @param {Object} options.product - The product to get promotions for
  * @returns {Object} Model containing an array of promotion messages to display
  */
-exports.createModel = function createModel(options) {
+const createModel = (options) => {
     const Promotions = require('*/cartridge/api/Promotions');
     const promotions = Promotions.getProductPromotions(options.product);
     const model = {
@@ -23,6 +23,11 @@ exports.createModel = function createModel(options) {
  * @param {string} model.promotions[].message - The promotion message to display
  * @returns {string} HTML string containing the promotions list
  */
-exports.template = (model) => `<ul>
+const template = (model) => `<ul>
     ${model.promotions.map((promotion) => `<li>${promotion.message}</li>`).join('\n')}
 </ul>`;
+
+module.exports = {
+    createModel,
+    template,
+};
