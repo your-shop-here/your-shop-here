@@ -6,7 +6,7 @@ function Form(name) {
 
     this.scope.language = Locale.getLocale(request.locale).getLanguage();
 
-    require('*/cartridge/forms/address').forEach((definition) => {
+    require(`*/cartridge/forms/${name}`).forEach((definition) => {
         if (!this.definition) {
             this.definition = definition.fields;
         }
@@ -104,6 +104,24 @@ Form.prototype.getTemp = function () {
     const CacheMgr = require('dw/system/CacheMgr');
     const tempCache = CacheMgr.getCache('Form');
     return tempCache.get(this.name + session.sessionID);
+};
+
+Form.prototype.addFormError = function (error) {
+    const errors = JSON.parse(session.privacy.formErrors || '{}');
+    errors[this.name] = errors[this.name] || [];
+    errors[this.name].push(error);
+    session.privacy.formErrors = JSON.stringify(errors);
+};
+
+Form.prototype.getFormErrors = function () {
+    const errors = JSON.parse(session.privacy.formErrors || '{}');
+    return errors[this.name] || [];
+};
+
+Form.prototype.clearFormErrors = function () {
+    const errors = JSON.parse(session.privacy.formErrors || '{}');
+    delete errors[this.name];
+    session.privacy.formErrors = JSON.stringify(errors);
 };
 
 module.exports = Form;
