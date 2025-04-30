@@ -27,7 +27,7 @@ const template = (model) => `
         <div class="register-form">
             <form action="${model.action}" method="POST" class="registration">
                 ${model.errors.length > 0 ? `
-                    <div class="alert alert-danger">
+                    <div class="error-message register-error">
                         <ul class="mb-0">
                             ${model.errors.map((error) => `<li>${error}</li>`).join('')}
                         </ul>

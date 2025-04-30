@@ -73,33 +73,23 @@ server.post('ProcessLogin', server.middleware.https, (req, res, next) => {
             const Notification = require('api/Notification');
             Notification.sendMessage('accountLocked', {
                 to: email,
-                subject: Resource.msg('subject.account.locked.email', 'login', null),
+                subject: Resource.msg('subject.account.locked.email', 'translations', null),
                 data: {
                     customer: CustomerMgr.getCustomerByLogin(email || '') || null,
                 },
             });
         }
 
-        // @todo redirec to login show and pass error message via session
         res.redirect('Login-Show');
         return next();
     }
 
-    // if (customerLoginResult.authenticatedCustomer) {
-    //     res.setViewData({ authenticatedCustomer: customerLoginResult.authenticatedCustomer });
-    //     res.json({
-    //         success: true,
-    //         redirectUrl: accountHelpers.getLoginRedirectURL(req.querystring.rurl, req.session.privacyCache, false),
-    //     });
-
-    //     req.session.privacyCache.set('args', null);
-    // } else {
-    //     res.json({ error: [Resource.msg('error.message.login.form', 'login', null)] });
-    // }
-
     return next();
 });
 
+/**
+ * @description Process the registration form
+ */
 server.post(
     'ProcessRegistration',
     server.middleware.https,
@@ -123,11 +113,11 @@ server.post(
         // }
 
         if (registrationForm.password !== registrationForm.passwordConfirm) {
-            form.addFormError(Resource.msg('error.message.mismatch.password', 'forms', null));
+            form.addFormError(Resource.msg('error.message.mismatch.password', 'translations', null));
         }
 
         if (!CustomerMgr.isAcceptablePassword(registrationForm.password)) {
-            form.addFormError(Resource.msg('error.message.password.constraints.not.matched', 'forms', null));
+            form.addFormError(Resource.msg('error.message.password.constraints.not.matched', 'translations', null));
         }
 
         // setting variables for the BeforeComplete function
@@ -194,7 +184,7 @@ server.post(
                             serverError = true;
                         } else {
                             registrationData.validForm = false;
-                            registrationData.form.customer.email.error = Resource.msg('error.message.username.invalid', 'forms', null);
+                            registrationData.form.customer.email.error = Resource.msg('error.message.username.invalid', 'translations', null);
                         }
                     }
                 }
@@ -204,7 +194,7 @@ server.post(
 
                 if (serverError) {
                     res.setStatusCode(500);
-                    form.addError('email', Resource.msg('error.message.unable.to.create.account', 'login', null));
+                    form.addError(Resource.msg('error.message.unable.to.create.account', 'translations', null));
                     return next();
                 }
 
@@ -212,13 +202,11 @@ server.post(
                     const Notification = require('api/Notification');
                     Notification.sendMessage('registration', {
                         to: authenticatedCustomer.profile.email,
-                        subject: 'Welcome to Your Shop Here!',
+                        subject: Resource.msg('email.subject.welcome', 'translations', 'Welcome to Your Shop Here!'),
                         data: {
                             customer: authenticatedCustomer.profile,
                         },
                     });
-
-                    res.setViewData({ authenticatedCustomer });
                 }
                 res.redirect(redirectUrl);
                 return next();
@@ -229,6 +217,9 @@ server.post(
     },
 );
 
+/**
+ * @description Logout the customer
+ */
 server.get('Logout', (req, res, next) => {
     const URLUtils = require('dw/web/URLUtils');
     const CustomerMgr = require('dw/customer/CustomerMgr');
@@ -238,6 +229,10 @@ server.get('Logout', (req, res, next) => {
     next();
 });
 
+/**
+ * @description OAuth login endpoint
+ * @todo test and fix
+ */
 server.get('OAuthLogin', server.middleware.https, (req, res, next) => {
     const oauthLoginFlowMgr = require('dw/customer/oauth/OAuthLoginFlowMgr');
     const Resource = require('dw/web/Resource');
@@ -254,7 +249,7 @@ server.get('OAuthLogin', server.middleware.https, (req, res, next) => {
         );
     } else {
         res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'login', null),
+            message: Resource.msg('error.oauth.login.failure', 'translations', null),
         });
 
         return next();
@@ -268,14 +263,14 @@ server.get('OAuthLogin', server.middleware.https, (req, res, next) => {
             res.redirect(result.location);
         } else {
             res.render('/error', {
-                message: Resource.msg('error.oauth.login.failure', 'login', null),
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
             });
 
             return next();
         }
     } else {
         res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'login', null),
+            message: Resource.msg('error.oauth.login.failure', 'translations', null),
         });
 
         return next();
@@ -284,6 +279,10 @@ server.get('OAuthLogin', server.middleware.https, (req, res, next) => {
     return next();
 });
 
+/**
+ * @description OAuth reentry endpoint
+ * @todo test and fix
+ */
 server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
     const URLUtils = require('dw/web/URLUtils');
     const oauthLoginFlowMgr = require('dw/customer/oauth/OAuthLoginFlowMgr');
@@ -304,7 +303,7 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
 
     if (!oauthProviderID) {
         res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'login', null),
+            message: Resource.msg('error.oauth.login.failure', 'translations', null),
         });
 
         return next();
@@ -312,7 +311,7 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
 
     if (!response) {
         res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'login', null),
+            message: Resource.msg('error.oauth.login.failure', 'translations', null),
         });
 
         return next();
@@ -321,7 +320,7 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
     const externalProfile = JSON.parse(response);
     if (!externalProfile) {
         res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'login', null),
+            message: Resource.msg('error.oauth.login.failure', 'translations', null),
         });
 
         return next();
@@ -330,7 +329,7 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
     const userID = externalProfile.id || externalProfile.uid;
     if (!userID) {
         res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'login', null),
+            message: Resource.msg('error.oauth.login.failure', 'translations', null),
         });
 
         return next();
@@ -387,7 +386,7 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
             });
         } else {
             res.render('/error', {
-                message: Resource.msg('error.oauth.login.failure', 'login', null),
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
             });
 
             return next();
