@@ -5,8 +5,9 @@
 const createModel = () => {
     const Form = require('api/Form');
     const form = new Form('login');
+    const formData = form.getTemp();
     return {
-        formFields: form.rows(),
+        formFields: formData ? form.rowValues(formData) : form.rows(),
         action: require('dw/web/URLUtils').url('Login-ProcessLogin'),
         resources: {
             submitButton: require('dw/web/Resource').msg('button.text.loginform', 'translations', 'Login'),
@@ -46,7 +47,8 @@ const template = (model) => `
                         class="custom-control-input"
                         id="${field.fieldId}"
                         name="${field.fieldId}"
-                        ${field.default ? 'checked' : ''}>
+                        ${field.default ? 'checked' : ''}
+                        ${field.value ? `value="${field.value}"` : ''}>
                     <label class="custom-control-label" for="${field.fieldId}">
                         ${field.label}
                     </label>
@@ -66,7 +68,8 @@ const template = (model) => `
                     id="${field.fieldId}"
                     class="form-control"
                     name="${field.fieldId}"
-                    ${field.required ? 'required' : ''}>
+                    ${field.required ? 'required' : ''}
+                    ${field.value ? `value="${field.value}"` : ''}>
         `;
     }).join('')}
                     </div>

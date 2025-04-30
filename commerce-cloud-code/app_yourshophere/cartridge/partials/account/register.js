@@ -6,8 +6,9 @@ const Form = require('api/Form');
  */
 const createModel = () => {
     const form = new Form('register');
+    const formData = form.getTemp();
     return {
-        formFields: form.rows(),
+        formFields: formData ? form.rowValues(formData) : form.rows(),
         action: require('dw/web/URLUtils').url('Login-ProcessRegistration'),
         resources: {
             submitButton: require('dw/web/Resource').msg('button.text.createaccount', 'translations', 'Create Account'),

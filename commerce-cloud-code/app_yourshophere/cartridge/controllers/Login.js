@@ -49,7 +49,7 @@ server.post('ProcessLogin', server.middleware.https, (req, res, next) => {
             };
 
             const errorMessageKey = errorCodes[authenticateCustomerResult.status] || errorCodes.default;
-            const errorMessage = Resource.msg(errorMessageKey, 'login', null);
+            const errorMessage = Resource.msg(errorMessageKey, 'translations', null);
 
             return {
                 error: true,
@@ -80,6 +80,7 @@ server.post('ProcessLogin', server.middleware.https, (req, res, next) => {
             });
         }
 
+        form.temp(request.httpParameterMap);
         res.redirect('Login-Show');
         return next();
     }
