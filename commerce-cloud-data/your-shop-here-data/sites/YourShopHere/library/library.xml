@@ -49,6 +49,18 @@
         <page-attributes/>
     </content>
 
+    <content content-id="0cc08587264515afd2e29b6bb8">
+        <type>component.account.welcomeBack</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "customClass" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="0fff662b8e6366dddec48db08b">
         <type>component.cart.promocode</type>
         <config>{
@@ -464,6 +476,20 @@
         <page-attributes/>
     </content>
 
+    <content content-id="8a7c19b3bb75e679541fa6eac0">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h1&gt;My Account&lt;/h1&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="8b56cc5495cabf1dfe3c6f58b6">
         <type>component.theme.minicart</type>
         <config>{
@@ -659,7 +685,10 @@
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="d429d7b971cc4ab37612d0ac28" type="page.contentPage.main">
+            <content-link content-id="0cc08587264515afd2e29b6bb8" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="8a7c19b3bb75e679541fa6eac0" type="page.contentPage.main">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -875,20 +904,6 @@
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
-    </content>
-
-    <content content-id="d429d7b971cc4ab37612d0ac28">
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "Yes",
-  "richText" : "&lt;p&gt;To be built&lt;/p&gt;",
-  "align" : "center"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
     </content>
 
     <content content-id="d9d3c232223993c10093ad34c7">

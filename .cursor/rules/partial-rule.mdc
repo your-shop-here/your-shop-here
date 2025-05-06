@@ -1,0 +1,6 @@
+---
+description: When being asked about partials, this riule should be used.
+globs: 
+alwaysApply: false
+---
+A partial is a Javascript file in the cartridge/partials folder. A partial has two methods - createModel and template. The template method has the model parameter which is passed automatically, no need to create the model explicitly. Modern Javascript like arrow functions should be used as well as the script API. Do not use SFRA modules that do not exist in the workspace.
