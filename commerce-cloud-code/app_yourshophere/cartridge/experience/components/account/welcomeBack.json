@@ -9,8 +9,9 @@
             "description": "Style settings for the welcome back message",
             "attribute_definitions": [
                 {
-                    "id": "customClass",
-                    "name": "Custom CSS Class",
+                    "id": "welcomeMessage",
+                    "name": "Welcome Message",
+                    "description": "The welcome message to display to the user, you can use the following placeholders: {0} for the first name and {1} for the last name .",
                     "type": "string",
                     "required": false
                 }
