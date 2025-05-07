@@ -1,0 +1,21 @@
+{
+    "name": "Login Form",
+    "description": "A component that displays a login form with social login options",
+    "group": "Account",
+    "attribute_definition_groups": [
+        {
+            "id": "styling",
+            "name": "Styling",
+            "description": "Style settings for the login form",
+            "attribute_definitions": [
+                {
+                    "id": "customClass",
+                    "name": "Custom CSS Class",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 

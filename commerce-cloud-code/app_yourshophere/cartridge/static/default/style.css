@@ -433,7 +433,7 @@ select {
     display: none;
 }
 
-.cart-error-message {
+.error-message, .cart-error-message {
     background-color: #f8d7da; /* Light red background */
     border: 1px solid #f5c6cb; /* Darker red border */
     color: #721c24; /* Dark red text */

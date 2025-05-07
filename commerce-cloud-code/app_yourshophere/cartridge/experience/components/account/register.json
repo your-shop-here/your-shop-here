@@ -1,0 +1,21 @@
+{
+    "name": "Registration Form",
+    "description": "A component that displays a registration form with social signup options",
+    "group": "Account",
+    "attribute_definition_groups": [
+        {
+            "id": "styling",
+            "name": "Styling",
+            "description": "Style settings for the registration form",
+            "attribute_definitions": [
+                {
+                    "id": "customClass",
+                    "name": "Custom CSS Class",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 

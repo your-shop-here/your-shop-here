@@ -11,21 +11,19 @@ let cachedPromotionPlan = null;
  * Gets the active customer promotions with caching
  * @returns {Object} The active customer promotions
  */
-function getActiveCustomerPromotions() {
+const getActiveCustomerPromotions = () => {
     if (!cachedPromotionPlan) {
         cachedPromotionPlan = PromotionMgr.getActiveCustomerPromotions();
     }
     return cachedPromotionPlan;
-}
+};
 
 /**
  * Gets product promotions for a given product
  * @param {Object} product - The product object
  * @returns {Array} Array of product promotions
  */
-function getProductPromotions(product) {
-    return getActiveCustomerPromotions().getProductPromotions(product).toArray();
-}
+const getProductPromotions = (product) => getActiveCustomerPromotions().getProductPromotions(product).toArray();
 
 module.exports = {
     getActiveCustomerPromotions,

@@ -1,7 +1,3 @@
-'use strict';
-
-var URLUtils = require('dw/web/URLUtils');
-
 /**
  * Middleware validating if user logged in
  * @param {Object} req - Request object
@@ -10,13 +6,14 @@ var URLUtils = require('dw/web/URLUtils');
  * @returns {void}
  */
 function validateLoggedIn(req, res, next) {
+    const URLUtils = require('dw/web/URLUtils');
     if (!customer.registered) {
-        res.redirect(URLUtils.url('Login-Show', 'rurl', request.httpURL));
+        session.privacy.loginRedirectUrl = request.httpURL.toString();
+        res.redirect(URLUtils.url('Login-Show'));
     }
     next();
 }
 
 module.exports = {
-    validateLoggedIn: validateLoggedIn,
-    validateLoggedInAjax: validateLoggedInAjax
+    validateLoggedIn,
 };
