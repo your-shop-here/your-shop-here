@@ -1,8 +1,6 @@
 /* global window, document, MutationObserver */
+console.info('Hello');
 
-/**
- * Data Layer implementation for tracking analytics events
- */
 (function () {
     // Create the data layer array if it doesn't exist
     window.dataLayer = window.dataLayer || [];
