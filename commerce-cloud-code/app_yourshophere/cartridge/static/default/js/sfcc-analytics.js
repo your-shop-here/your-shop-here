@@ -47,6 +47,12 @@
 
         const userInfo = getUserInfo();
 
+        window.CQuotient = {
+            clientId: '',
+            siteId: 'zzzz-SiteGenesis',
+            realm: 'zzzz',
+        };
+
         // TODO: Better way to get the realm and  site ID
         const payload = {
             product: {
@@ -64,11 +70,11 @@
 
         console.info('Sending product view event:', payload);
 
-        fetch(`${EINSTEIN_API_ENDPOINT}${window.CQuotient.clientId}/viewProduct`, {
+        fetch(`${EINSTEIN_API_ENDPOINT}${window.CQuotient.siteId}/viewProduct`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
+                'x-cq-client-id': window.CQuotient.clientId,
             },
             body: JSON.stringify(payload),
         })

@@ -81,5 +81,7 @@
 
     <isif condition="${pdict.footer}">
         <isprint value="${pdict.regions.footer.render()}" encoding="off" />
+
+        <script type="text/partytown" src="${URLUtils.staticURL('js/sfcc-analytics.js')}" charset="utf-8"></script>
     </isif>
 </isif>
