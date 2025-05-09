@@ -69,17 +69,21 @@
     </body>
 
     </html>
-    <iselse>
-        <!--- The actual includes used in the storefront --->
-        <isif condition="${pdict.skin}">
-            <isprint value="${pdict.regions.skin.render()}" encoding="off" />
-        </isif>
+<iselse>
+    <!--- The actual includes used in the storefront --->
+    <isif condition="${pdict.skin}">
+        <isprint value="${pdict.regions.skin.render()}" encoding="off" />
+    </isif>
 
-        <isif condition="${pdict.header}">
-            <isprint value="${pdict.regions.header.setTagName('header', false).render()}" encoding="off" />
-        </isif>
+    <isif condition="${pdict.header}">
+        <isprint value="${pdict.regions.header.setTagName('header', false).render()}" encoding="off" />
+    </isif>
 
-        <isif condition="${pdict.footer}">
-            <isprint value="${pdict.regions.footer.render()}" encoding="off" />
-        </isif>
+    <isif condition="${pdict.footer}">
+        <isprint value="${pdict.regions.footer.render()}" encoding="off" />
+        <script type="module">
+        import builderIopartytown from 'https://cdn.jsdelivr.net/npm/@builder.io/partytown@0.10.3/+esm'
+        </script>
+        <script type="text/partytown" src="${URLUtils.staticURL('js/datalayer.js')}" charset="utf-8"></script>
+    </isif>
 </isif>
