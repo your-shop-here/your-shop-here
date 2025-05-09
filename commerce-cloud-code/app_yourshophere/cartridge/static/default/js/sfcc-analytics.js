@@ -1,5 +1,4 @@
 /* global window, document, navigator */
-
 /**
  * SFCC Analytics implementation for tracking events to Einstein Activities API
  */
@@ -105,7 +104,9 @@
         if (window.dataLayer) {
             window.dataLayer.forEach((item) => {
                 if (item.type === 'productView') {
+                if (item.type === 'productView' && !item.processed) {
                     sendProductView(item);
+                    item.processed = true;
                 }
             });
         }
@@ -117,4 +118,8 @@
     } else {
         init();
     }
+
+    setInterval(() => {
+        init();
+    }, 200);
 }());
