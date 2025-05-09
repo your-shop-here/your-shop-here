@@ -81,12 +81,5 @@
 
     <isif condition="${pdict.footer}">
         <isprint value="${pdict.regions.footer.render()}" encoding="off" />
-        <script type="module">
-            import { partytownSnippet } from "${URLUtils.staticURL('js/partytown/integration/index.mjs')}";    
-            window.partytown = {debug: true};
-            const snippetText = partytownSnippet();        
-        </script>
-
-        <script type="text/partytown" src="${URLUtils.staticURL('js/datalayer.js')}" charset="utf-8"></script>
     </isif>
 </isif>
