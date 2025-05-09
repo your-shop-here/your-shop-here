@@ -1,4 +1,9 @@
-'use strict';
+/**
+ * Default cache period in hours. Default is 14 days assuming that most content will be replicated
+ * and thus an invalidation will happen on demand
+ * @type {number}
+ */
+const DEFAULT_CACHE_HOURS = 24 * 14;
 
 /**
  * Applies the default expiration value for the page cache.
@@ -8,7 +13,7 @@
  * @returns {void}
 */
 function applyDefaultCache(req, res, next) {
-    res.cachePeriod = 24; // eslint-disable-line no-param-reassign
+    res.cachePeriod = DEFAULT_CACHE_HOURS; // eslint-disable-line no-param-reassign
     res.cachePeriodUnit = 'hours'; // eslint-disable-line no-param-reassign
     next();
 }
@@ -21,7 +26,7 @@ function applyDefaultCache(req, res, next) {
  * @returns {void}
 */
 function applyPromotionSensitiveCache(req, res, next) {
-    res.cachePeriod = 24; // eslint-disable-line no-param-reassign
+    res.cachePeriod = DEFAULT_CACHE_HOURS; // eslint-disable-line no-param-reassign
     res.cachePeriodUnit = 'hours'; // eslint-disable-line no-param-reassign
     res.personalized = true; // eslint-disable-line no-param-reassign
     next();
@@ -55,8 +60,8 @@ function applyInventorySensitiveCache(req, res, next) {
 }
 
 module.exports = {
-    applyDefaultCache: applyDefaultCache,
-    applyPromotionSensitiveCache: applyPromotionSensitiveCache,
-    applyInventorySensitiveCache: applyInventorySensitiveCache,
-    applyShortPromotionSensitiveCache: applyShortPromotionSensitiveCache
+    applyDefaultCache,
+    applyPromotionSensitiveCache,
+    applyInventorySensitiveCache,
+    applyShortPromotionSensitiveCache,
 };

@@ -12,6 +12,7 @@ const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionMode
  * @returns {string} The template text
  */
 exports.render = function render(context) {
+    require('api/Cache').days(14);
     try {
         return renderComponent(context);
     } catch (e) {
