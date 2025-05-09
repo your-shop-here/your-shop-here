@@ -1,6 +1,4 @@
 /* global window, document, MutationObserver */
-console.info('Hello');
-
 (function () {
     // Create the data layer array if it doesn't exist
     window.dataLayer = window.dataLayer || [];
