@@ -35,7 +35,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
         const queryString = searchParams.toString();
 
         res.setHttpHeader('Access-Control-Allow-Origin', 'https://api.cquotient.com');
-        res.setHttpHeader('Access-Control-Allow-Headers', 'X-Requested-With');
+        res.setHttpHeader('Access-Control-Allow-Headers', 'x-requested-with');
         res.page(page.ID, JSON.stringify({ queryString }), aspectAttributes);
     } else {
         const error = `Page for category with ID ${categoryId} could not be found, rendering notfound page`;
