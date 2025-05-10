@@ -45,11 +45,12 @@
         }
 
         const userInfo = getUserInfo();
+        const realm = window.ysh.einsteinSiteId.split('-')[0];
 
         window.CQuotient = {
-            clientId: '',
-            siteId: 'zzzz-SiteGenesis',
-            realm: 'zzzz',
+            clientId: window.ysh.einsteinApiClient,
+            siteId: window.ysh.einsteinSiteId,
+            realm,
         };
 
         // TODO: Better way to get the realm and  site ID
@@ -103,7 +104,6 @@
         // Process any existing product view events in the data layer
         if (window.dataLayer) {
             window.dataLayer.forEach((item) => {
-                if (item.type === 'productView') {
                 if (item.type === 'productView' && !item.processed) {
                     sendProductView(item);
                     item.processed = true;

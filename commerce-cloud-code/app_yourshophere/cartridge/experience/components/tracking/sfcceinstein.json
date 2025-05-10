@@ -1,6 +1,27 @@
 {
     "name": "SFCC Einstein",
     "group": "Tracking",
-    "attribute_definition_groups": [],
+    "attribute_definition_groups": [
+        {
+            "id": "credentials",
+            "name": "Credentials",
+            "attribute_definitions": [
+                {
+                    "id": "einsteinApiClient",
+                    "name": "Einstein API Client",
+                    "description": "Configure API access in configurator.cquotient.com",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "einsteinSiteId",
+                    "name": "Einstein SiteId",
+                    "description": "Realm + Site in cquotient format - e.g abcd-YourShopHere",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
     "region_definitions": []
 } 
