@@ -11,10 +11,8 @@
     <isset name="isQuickView" value="${false}" scope="page" />
     <isset name="isProductSet" value="${pdict.product.productType === 'set'}" scope="page" />
         
-    <isobject object="${product.raw}" view="detail" />
-        <div class="product-detail product-wrapper" data-pid="${product.id}">
-            <isprint value="${pdict.regions.main.render()}" encoding="off" />
-        </div>
-    </isobject>
+    <div class="product-detail product-wrapper" data-pid="${product.id}">
+        <isprint value="${pdict.regions.main.render()}" encoding="off" />
+    </div>
         
 </isdecorate>

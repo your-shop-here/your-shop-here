@@ -3,10 +3,6 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
-        <content-detail-page-meta-tag-rules>
-            <page-meta-tag-rule rule-id="Page Title"/>
-            <page-meta-tag-rule rule-id="Page Description"/>
-        </content-detail-page-meta-tag-rules>
     </folder>
 
     <content content-id="05367af9feea913e81b7ea36ea">
@@ -88,6 +84,16 @@
 
     <content content-id="151ffc86dd433fd8570b9c4d73">
         <type>component.pdp.productQuantity</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="161bba7f543d5d798ae4dcc86e">
+        <type>component.tracking.sfcceinstein</type>
         <config>{
   "visibility" : [ ]
 }</config>
@@ -295,6 +301,16 @@
         </content-links>
     </content>
 
+    <content content-id="5309f80fa4256718f4a1c75ed8">
+        <type>component.tracking.sfccdatalayer</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5759ae28a7224d25a55f3123fb">
         <type>component.theme.yshHeader</type>
         <config>{
@@ -476,6 +492,24 @@
         <page-attributes/>
     </content>
 
+    <content content-id="85361ceb117a996df9f4f04b21">
+        <type>component.tracking.trackingregion</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="5309f80fa4256718f4a1c75ed8" type="component.tracking.trackingregion.providers">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="161bba7f543d5d798ae4dcc86e" type="component.tracking.trackingregion.providers">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="8a7c19b3bb75e679541fa6eac0">
         <type>component.base.richText</type>
         <config>{
@@ -654,9 +688,12 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="9a8037c36b690794b0e70d9428" type="page.theme.skin">
-                <position>0.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>

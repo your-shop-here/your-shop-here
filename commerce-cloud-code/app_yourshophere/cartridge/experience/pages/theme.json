@@ -5,7 +5,7 @@
       {
         "id":"skin",
         "name":"General Skin Settings",
-        "max_components": 1
+        "max_components": 2
       },
       {
         "id":"header",

@@ -2,7 +2,6 @@
 <html lang="${pdict.lang}" data-theme="light">
 
 <head>
-    <isactivedatahead/>
     <isinclude template="components/layout/htmlhead" />
     <isprint value="${require('*/cartridge/experience/skin.js').renderSkin()}" encoding="off" />
 </head>
@@ -23,6 +22,8 @@
     </div>
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     <isinclude template="components/layout/footer-include"/>
-</body>
+
+<!--- the ${''} input prevents salesforce out of the box tracking --->
+</bo${''}dy>
 
 </html>

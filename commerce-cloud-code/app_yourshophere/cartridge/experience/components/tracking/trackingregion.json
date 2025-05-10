@@ -1,0 +1,12 @@
+{
+    "name": "Tracking Region",
+    "group": "Tracking",
+    "attribute_definition_groups": [],
+    "region_definitions": [
+        {
+          "id":"providers",
+          "name": "Tracking Providers"
+        }
+    ]
+
+} 
