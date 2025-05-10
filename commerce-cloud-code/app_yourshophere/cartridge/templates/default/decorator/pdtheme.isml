@@ -7,7 +7,6 @@
         <isif condition="${pdict.canonicalUrl}">
             <link rel="canonical" href="${pdict.canonicalUrl}" />
         </isif>
-        <isactivedatahead/>
         <isprint value="${pdict.regions.skin.render()}" encoding="off" />
         <isinclude template="components/layout/htmlhead" />
     </head>
@@ -81,7 +80,5 @@
 
     <isif condition="${pdict.footer}">
         <isprint value="${pdict.regions.footer.render()}" encoding="off" />
-
-        <script type="text/partytown" src="${URLUtils.staticURL('js/sfcc-analytics.js')}" charset="utf-8"></script>
     </isif>
 </isif>

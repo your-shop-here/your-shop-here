@@ -92,6 +92,16 @@
         <page-attributes/>
     </content>
 
+    <content content-id="161bba7f543d5d798ae4dcc86e">
+        <type>component.tracking.sfcceinstein</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="1885f33fd36f7b0f3b5e8043a7">
         <type>component.commerce_layouts.column</type>
         <config>{
@@ -312,6 +322,16 @@
         </content-links>
     </content>
 
+    <content content-id="5309f80fa4256718f4a1c75ed8">
+        <type>component.tracking.sfccdatalayer</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5759ae28a7224d25a55f3123fb">
         <type>component.theme.yshHeader</type>
         <config>{
@@ -494,6 +514,24 @@
   </content>
 
 
+    <content content-id="85361ceb117a996df9f4f04b21">
+        <type>component.tracking.trackingregion</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="5309f80fa4256718f4a1c75ed8" type="component.tracking.trackingregion.providers">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="161bba7f543d5d798ae4dcc86e" type="component.tracking.trackingregion.providers">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="8a7c19b3bb75e679541fa6eac0">
         <type>component.base.richText</type>
         <config>{
@@ -675,6 +713,9 @@
                 <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>
