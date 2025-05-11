@@ -1,13 +1,10 @@
-'use strict';
-var CatalogMgr = require('dw/catalog/CatalogMgr');
 
-var server = require('server');
-
-var cache = require('*/cartridge/middleware/cache');
+const server = require('server');
+const cache = require('*/cartridge/middleware/cache');
 
 server.get('CategoryMenu', cache.applyDefaultCache, (req, res, next) => {
-    var rootCategory = dw.catalog.CatalogMgr.getCategory('root');
-    res.renderPartial('global/header/categorymenu', {object: rootCategory});
+    const rootCategory = dw.catalog.CatalogMgr.getCategory('root');
+    res.renderPartial('global/header/categorymenu', { object: rootCategory });
     next();
 });
 

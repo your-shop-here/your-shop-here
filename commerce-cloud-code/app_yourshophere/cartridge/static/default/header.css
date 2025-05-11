@@ -10,6 +10,15 @@ a.pill[role="button"] {
     box-shadow: 0.3px 0.3px 0.5px color-mix(in srgb, var(--skin-selectbox-background-color-1) 75%, black);
 }
 
+a.header-link {
+    color: var(--skin-link-color-1);
+    font-size: 0.8rem;
+    align-self: center;
+}
+
+a.header-link svg {
+    fill: var(--skin-link-color-1);
+}
 
 a.pill[role="button"] svg {
     fill: var(--skin-link-color-1);
@@ -194,7 +203,11 @@ nav.mainmenu label.drop-icon img,
 
     nav.mainmenu li {
         float: left;
-        border-width: 0 1px 0 0;
+        border-width: 0; /* top level defaults to no border */
+    }
+
+    nav.mainmenu li:not(:last-child){
+        border-width: 0 1px 0 0; /* Applies a right border to all except the last */
     }
 
     nav.mainmenu .sub-menu li {

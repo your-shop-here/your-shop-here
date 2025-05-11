@@ -35,16 +35,23 @@
         </content-links>
     </content>
 
-    <content content-id="10d7e9f6188c6ab15c55b7b088">
-        <display-name xml:lang="x-default">Checkout Link @Todo Button / no controller names for short url support</display-name>
-        <type>component.base.richText</type>
+    <content content-id="0c3ab7e5e936a24933566de0ed">
+        <type>component.checkout.ordertotals</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="0cc08587264515afd2e29b6bb8">
+        <type>component.account.welcomeBack</type>
         <config>{
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "inParagraph" : "No",
-  "richText" : "&lt;p&gt;&lt;a href=\"Checkout-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Checkout-Show\"&gt;Go to Checkout&lt;/a&gt;&lt;/p&gt;",
-  "align" : "center"
+  "customClass" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -60,6 +67,21 @@
         <page-attributes/>
     </content>
 
+    <content content-id="10d7e9f6188c6ab15c55b7b088">
+        <display-name xml:lang="x-default">Checkout Link @Todo Button / no controller names for short url support</display-name>
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;p&gt;&lt;a href=\"Checkout-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Checkout-Show\"&gt;Go to Checkout&lt;/a&gt;&lt;/p&gt;",
+  "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="151ffc86dd433fd8570b9c4d73">
         <type>component.pdp.productQuantity</type>
         <config>{
@@ -68,6 +90,40 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="161bba7f543d5d798ae4dcc86e">
+        <type>component.tracking.sfcceinstein</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "einsteinApiClient" : "18f698a0-9546-46f0-8642-784289f4c8e2",
+  "einsteinSiteId" : "zzzz-SiteGenesis"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="1885f33fd36f7b0f3b5e8043a7">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 2,
+  "style" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="2c82c6245e0e667471f17d678a" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="1ec90863720b75944be25d28b8" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="1a1d17c27eafbf4080c837ee13">
@@ -86,11 +142,34 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-
-  "imageDISConfig" : "sw=300",
-  "imageViewType" : "large",
+  "swatchDimension" : "yshColor",
   "category" : null,
-  "swatchDimension" : "yshColor"
+  "imageViewType" : "large",
+  "imageDISConfig" : "sw=300&amp;sh=300"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="1e0da2a3eb415ae490f77de1a9">
+        <type>component.tracking.googletagmanager</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "gtmId" : "GTM-PN7KVTPC "
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="1ec90863720b75944be25d28b8">
+        <type>component.account.login</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "customClass" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -147,6 +226,39 @@
         <page-attributes/>
     </content>
 
+    <content content-id="2c82c6245e0e667471f17d678a">
+        <type>component.account.register</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "customClass" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="3e98f7c67632a9006e8ab9fd0f">
+        <type>component.theme.icon</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "image" : {
+    "path" : "unofficial.svg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    }
+  },
+  "link" : "$url('Page-Show', 'cid', 'homepage')$",
+  "width" : "200px",
+  "height" : "75px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="3f11e590490d2da0efb4764779">
         <type>component.commerce_layouts.3column</type>
         <config>{
@@ -187,27 +299,14 @@
         </content-links>
     </content>
 
-    <content content-id="48f20ff9bf4f2292ea957b9e48">
-        <type>component.commerce_layouts.3column</type>
+    <content content-id="43590b461cc6dff6e2e0558516">
+        <type>component.cart.estimatedtotal</type>
         <config>{
   "visibility" : [ ]
 }</config>
-        <data xml:lang="x-default">{
-  "addStyleClassName" : null
-}</data>
+        <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
-        <content-links>
-            <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.3column.column2">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="6d7879e4dfff6fb5a0ceca030a" type="component.commerce_layouts.3column.column3">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="6e1dd3c4523650fce606c76712" type="component.commerce_layouts.3column.column1">
-                <position>0.0</position>
-            </content-link>
-        </content-links>
     </content>
 
     <content content-id="4bdcb0b7798c93bb16dbb2722c">
@@ -236,6 +335,16 @@
         </content-links>
     </content>
 
+    <content content-id="5309f80fa4256718f4a1c75ed8">
+        <type>component.tracking.sfccdatalayer</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5759ae28a7224d25a55f3123fb">
         <type>component.theme.yshHeader</type>
         <config>{
@@ -251,16 +360,6 @@
         </content-links>
     </content>
 
-    <content content-id="43590b461cc6dff6e2e0558516">
-        <type>component.cart.estimatedtotal</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{ }</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="5cb38775b22e2d739fb66bd111">
         <type>component.pdp.productDescription</type>
         <config>{
@@ -269,7 +368,7 @@
         <data xml:lang="x-default">{
   "shortOrLongDescription" : "Long_Description",
   "divExpandedOrCompress" : false,
-  "descriptionTitle" : null
+  "descriptionTitle" : "Description"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -325,20 +424,6 @@
         <page-attributes/>
     </content>
 
-    <content content-id="6d7879e4dfff6fb5a0ceca030a">
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "No",
-  "richText" : "&lt;p&gt;@Todo add summary&lt;/p&gt;",
-  "align" : "right"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="6de964a319bd71de1899e75800">
         <display-name xml:lang="x-default">Checkout Link @todo replace with nice url</display-name>
         <type>component.base.richText</type>
@@ -349,20 +434,6 @@
   "inParagraph" : "No",
   "richText" : "&lt;p&gt;&lt;a href=\"Checkout-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Checkout-Show\"&gt;Go To Checkout&lt;/a&gt;&lt;/p&gt;",
   "align" : "right"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
-    <content content-id="6e1dd3c4523650fce606c76712">
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "Yes",
-  "richText" : "&lt;p&gt;@todo better layout&lt;/p&gt;",
-  "align" : "left"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -450,6 +521,41 @@
   },
   "width" : "50px",
   "label" : "My Account"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="85361ceb117a996df9f4f04b21">
+        <type>component.tracking.trackingregion</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="5309f80fa4256718f4a1c75ed8" type="component.tracking.trackingregion.providers">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="161bba7f543d5d798ae4dcc86e" type="component.tracking.trackingregion.providers">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="1e0da2a3eb415ae490f77de1a9" type="component.tracking.trackingregion.providers">
+                <position>2.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="8a7c19b3bb75e679541fa6eac0">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h1&gt;My Account&lt;/h1&gt;",
+  "align" : "left"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -547,11 +653,14 @@
   },
   "headingColorInvert" : null,
   "menufont" : "Salesforce Sans",
+  "secondaryAccentColor" : {
+    "value" : "#ccefeb"
+  },
   "mainBackground" : {
     "value" : "#FFFFFF"
   },
   "selectBoxBackground" : {
-    "value" : "#ECF5FD"
+    "value" : "#eeeeee"
   },
   "primaryAccentColorInvert" : {
     "value" : "#FFFFFF"
@@ -560,13 +669,16 @@
     "value" : "#3274CC"
   },
   "primaryAccentColor" : {
-    "value" : "#fb610e"
+    "value" : "#00a1e0"
   },
   "bannerTextColor" : {
     "value" : "#16325c"
   },
   "bannerBackground" : {
-    "value" : "#FFFFFF"
+    "value" : "#5ebbff"
+  },
+  "secondaryAccentColorInvert" : {
+    "value" : "#001970"
   },
   "borderColorOne" : {
     "value" : "#16325c"
@@ -613,9 +725,12 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="9a8037c36b690794b0e70d9428" type="page.theme.skin">
-                <position>0.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -630,6 +745,28 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="account">
+        <display-name xml:lang="x-default">Account</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="0cc08587264515afd2e29b6bb8" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="8a7c19b3bb75e679541fa6eac0" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
     </content>
 
     <content content-id="b1e0a866deb2644859e291f340">
@@ -728,11 +865,11 @@
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="ef80368e81f76c48d092d5a894" type="page.cartPage.main">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="cf2962273062bd908421cbc1b0" type="page.cartPage.main">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="ef80368e81f76c48d092d5a894" type="page.cartPage.main">
+                <position>0.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -791,23 +928,6 @@
         <sitemap-included-flag>false</sitemap-included-flag>
     </content>
 
-    <content content-id="cb032e5e63d9c77579b63a4a78">
-        <type>component.commerce_layouts.3column</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "addStyleClassName" : null
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-        <content-links>
-            <content-link content-id="4bdcb0b7798c93bb16dbb2722c" type="component.commerce_layouts.3column.column2">
-                <position>0.0</position>
-            </content-link>
-        </content-links>
-    </content>
-
     <content content-id="cbfbe6940cf3ef911b2044e7d7">
         <type>component.pdp.productAddToCart</type>
         <config>{
@@ -847,17 +967,11 @@
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="48f20ff9bf4f2292ea957b9e48" type="page.checkoutPage.main">
+            <content-link content-id="e59b140f72ce5ba90eb95e5d62" type="page.checkoutPage.main">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="968e41d315f9df84941680c1a8" type="page.checkoutPage.footer">
                 <position>0.0</position>
-            </content-link>
-            <content-link content-id="cb032e5e63d9c77579b63a4a78" type="page.checkoutPage.main">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="6f3392429cdf5e6a47f3081825" type="page.checkoutPage.main">
-                <position>2.0</position>
             </content-link>
             <content-link content-id="5759ae28a7224d25a55f3123fb" type="page.checkoutPage.header">
                 <position>0.0</position>
@@ -928,6 +1042,33 @@
         <page-attributes/>
     </content>
 
+    <content content-id="e59b140f72ce5ba90eb95e5d62">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 2,
+  "style" : "grid67_33"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="0c3ab7e5e936a24933566de0ed" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="4bdcb0b7798c93bb16dbb2722c" type="component.commerce_layouts.column.column1">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="6f3392429cdf5e6a47f3081825" type="component.commerce_layouts.column.column2">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="e635685949d1d34cb47a305898">
         <type>component.base.richText</type>
         <config>{
@@ -951,22 +1092,22 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
+            <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="f52f16dcfe37bb6f921ab74631" type="component.theme.yshHeader.branding">
+            <content-link content-id="83ace80416deaa3dc3b90872c8" type="component.theme.yshHeader.left">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="bed0ddc5e0fc1ed0b45afdee71" type="component.theme.yshHeader.menu">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="83ace80416deaa3dc3b90872c8" type="component.theme.yshHeader.left">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
+            <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -1012,9 +1153,6 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
                 <position>3.0</position>
             </content-link>
@@ -1027,21 +1165,10 @@
             <content-link content-id="43590b461cc6dff6e2e0558516" type="component.commerce_layouts.column.column2">
                 <position>2.0</position>
             </content-link>
+            <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
         </content-links>
-    </content>
-
-    <content content-id="f52f16dcfe37bb6f921ab74631">
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "No",
-  "richText" : "&lt;p&gt;&lt;a href=\"/on/demandware.store/Sites-YourShopHere-Site/default/Home-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"/on/demandware.store/Sites-YourShopHere-Site/default/Home-Show\"&gt;&lt;img src=\"unofficial.svg?$staticlink$\" alt=\"YourShopHere\"&gt;YourShopHere&lt;/a&gt;&lt;/p&gt;",
-  "align" : "left"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
     </content>
 
     <content content-id="f6ff9d26a14d5a7d12c00895fd">
@@ -1120,6 +1247,25 @@
                 <position>2.0</position>
             </content-link>
             <content-link content-id="20de19be882502737f9cc2e96c" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
+    </content>
+
+    <content content-id="login">
+        <display-name xml:lang="x-default">Login</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="1885f33fd36f7b0f3b5e8043a7" type="page.contentPage.main">
                 <position>0.0</position>
             </content-link>
         </content-links>
