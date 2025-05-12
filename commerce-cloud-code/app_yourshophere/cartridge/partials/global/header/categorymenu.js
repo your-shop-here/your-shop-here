@@ -1,15 +1,13 @@
-const lazyload = require('*/cartridge/utils/lazyload.js')
+const lazyload = require('*/cartridge/utils/lazyload.js');
 
 function createModel(apiCategory) {
-    let model = {
-        apiCategory: apiCategory
+    const model = {
+        apiCategory,
     };
 
     lazyload(model, 'hidden', () => !apiCategory.custom.yshShowInMenu);
-    lazyload(model, 'children', () =>
-        apiCategory.onlineSubCategories.toArray(0, 50).map((subCategory) => createModel(subCategory)).filter((cat) => !cat.hidden));
-    lazyload(model, 'url', () =>
-        dw.web.URLUtils.url('Search-Show', 'cgid', apiCategory.ID));
+    lazyload(model, 'children', () => apiCategory.onlineSubCategories.toArray(0, 50).map((subCategory) => createModel(subCategory)).filter((cat) => !cat.hidden));
+    lazyload(model, 'url', () => dw.web.URLUtils.url('Search-Show', 'cgid', apiCategory.ID));
     return model;
 }
 

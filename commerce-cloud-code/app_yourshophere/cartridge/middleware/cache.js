@@ -15,6 +15,7 @@ const DEFAULT_CACHE_HOURS = 24 * 14;
 function applyDefaultCache(req, res, next) {
     res.cachePeriod = DEFAULT_CACHE_HOURS; // eslint-disable-line no-param-reassign
     res.cachePeriodUnit = 'hours'; // eslint-disable-line no-param-reassign
+    applyToResponse(res);
     next();
 }
 
@@ -29,6 +30,7 @@ function applyPromotionSensitiveCache(req, res, next) {
     res.cachePeriod = DEFAULT_CACHE_HOURS; // eslint-disable-line no-param-reassign
     res.cachePeriodUnit = 'hours'; // eslint-disable-line no-param-reassign
     res.personalized = true; // eslint-disable-line no-param-reassign
+    applyToResponse(res);
     next();
 }
 
@@ -43,6 +45,7 @@ function applyShortPromotionSensitiveCache(req, res, next) {
     res.cachePeriod = 1; // eslint-disable-line no-param-reassign
     res.cachePeriodUnit = 'hours'; // eslint-disable-line no-param-reassign
     res.personalized = true; // eslint-disable-line no-param-reassign
+    applyToResponse(res);
     next();
 }
 
@@ -56,7 +59,19 @@ function applyShortPromotionSensitiveCache(req, res, next) {
 function applyInventorySensitiveCache(req, res, next) {
     res.cachePeriod = 30; // eslint-disable-line no-param-reassign
     res.cachePeriodUnit = 'minutes'; // eslint-disable-line no-param-reassign
+    applyToResponse(res);
     next();
+}
+
+function applyToResponse(res) {
+    const currentTime = new Date();
+    if (res.cachePeriodUnit && res.cachePeriodUnit === 'minutes') {
+        currentTime.setMinutes(currentTime.getMinutes() + res.cachePeriod);
+    } else {
+        // default to hours
+        currentTime.setHours(currentTime.getHours() + res.cachePeriod);
+    }
+    response.setExpires(currentTime);
 }
 
 module.exports = {

@@ -7,6 +7,7 @@ function createModel(params) {
     return {
         image: params.image,
         width: params.width,
+        height: params.height,
         link: params.link,
     };
 }
@@ -18,7 +19,7 @@ function createModel(params) {
  */
 function template(model) {
     if (model.link) {
-        return `<a href="${model.link}"><img src="${model.image.URL}" style="width:${model.width}; margin-left:auto;" alt=""/></a>`;
+        return `<a href="${model.link}"><img src="${model.image.URL}" style="width:${model.width}; height:${model.height}; margin-left:auto;" alt=""/></a>`;
     }
     return `<img src="${model.image.URL}" style="width:${model.width}; margin-left:auto;" alt=""/>`;
 }

@@ -1,3 +1,19 @@
+function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+}
+
+function getCssAspectRatio(sw, sh) {
+    if (sw <= 0 || sh <= 0) {
+        return null; // Or handle error appropriately
+    }
+    // cache this?
+    const commonDivisor = gcd(sw, sh);
+    const simplifiedWidth = sw / commonDivisor;
+    const simplifiedHeight = sh / commonDivisor;
+
+    return `${simplifiedWidth} / ${simplifiedHeight}`;
+}
+
 /**
  * Create view model for a product image
  *
@@ -24,16 +40,27 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
             return undefined;
         }());
     }
-
     if (!url) {
         url = hit.product.getImages(config.imageViewType || 'large')[0].url;
     }
 
+    const disObject = config.imageDISConfig.split('&').reduce((acc, pair) => {
+        const [key, value] = pair.split('=');
+        // Convert value to number if possible, otherwise keep as string
+        acc[key] = Number.isNaN(Number(value)) ? value : Number(value);
+        return acc;
+    }, {});
+
+    let aspectRatio;
+    if (disObject.sw && disObject.sh) {
+        aspectRatio = getCssAspectRatio(disObject.sw, disObject.sh);
+    }
     return {
         largeUrl: url,
         pdpUrl: URLUtils.url('Product-Show', 'pid', hit.object.productID).toString(),
         name: hit.name,
-        width: '300',
+        disParams: config.imageDISConfig,
+        aspectRatio,
     };
 };
 
@@ -43,7 +70,6 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
  * @returns {string} The HTML template for the product tile image
  */
 exports.template = (model) => `<a href="${model.pdpUrl}">
-    <img loading="lazy"
-        alt="${model.name}"
-        src="${model.largeUrl}?sw=${model.width}" />
+   <img loading="lazy" alt="${model.name}" src="${model.largeUrl}?${model.disParams}" style="aspect-ratio: ${model.aspectRatio}" />
 </a>`;
+

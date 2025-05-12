@@ -1056,7 +1056,6 @@ Server.prototype = {
         // Add event handler for rendering out view on completion of the request chain
         route.on('route:Complete', function onRouteCompleteHandler(req, res) {
             // compute cache value and set on response when we have a non-zero number
-            server.applyCache(req, res);
 
             if (res.redirectUrl) {
                 // if there's a pending redirect, break the chain

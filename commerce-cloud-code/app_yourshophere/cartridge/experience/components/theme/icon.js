@@ -11,6 +11,7 @@ exports.render = function render(context) {
         return partials.html('header/icon')({
             image: context.content.image.file,
             width: context.content.width || '100%',
+            height: context.content.height || '100%',
             link: context.content.link,
         });
     } catch (e) {

@@ -27,7 +27,7 @@ exports.createModel = () => {
 
     if (hit) {
         model.name = name.createModel(hit);
-        model.image = image.createModel(hit, tileSearch, imageFilter, { imageViewType: componentSettings.imageViewType });
+        model.image = image.createModel(hit, tileSearch, imageFilter, { imageViewType: componentSettings.imageViewType, imageDISConfig: componentSettings.imageDISConfig });
         model.price = price.createModel(hit, tileSearch, httpParams);
         model.swatches = swatches.createModel(hit, tileSearch, { swatchAttribute: componentSettings.swatchDimension });
         model.addToCartButton = require('./addtocartbutton').createModel(hit);

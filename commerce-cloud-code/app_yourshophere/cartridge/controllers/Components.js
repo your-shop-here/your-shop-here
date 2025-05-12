@@ -1,5 +1,4 @@
 const server = require('server');
-
 const cache = require('*/cartridge/middleware/cache');
 
 /**

@@ -1,4 +1,4 @@
-'use strict';
+
 const HashMap = require('dw/util/HashMap');
 const URLUtils = require('dw/web/URLUtils');
 
@@ -8,19 +8,19 @@ const URLUtils = require('dw/web/URLUtils');
  *
  * @returns {string} The template text
  */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
-        return renderComponent (context)
+        return renderComponent(context);
     } catch (e) {
         const Logger = require('api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
-}
-
-function renderComponent (context) {
-    var model = createViewModel(context);
-    return template(model)
 };
+
+function renderComponent(context) {
+    const model = createViewModel(context);
+    return template(model);
+}
 
 function createViewModel(context) {
     const model = new HashMap();
@@ -36,10 +36,10 @@ function createViewModel(context) {
         applyFilter = false;
     }
 
-    model.menuUrl = URLUtils.url('Components-CategoryMenu', 'align', align, 'applyFilter', applyFilter)
+    model.menuUrl = URLUtils.url('Components-CategoryMenu', 'align', align, 'applyFilter', applyFilter);
     return model;
 }
 
 function template(model) {
-    return `<wainclude url="${model.menuUrl}"/>`
+    return `<wainclude url="${model.menuUrl}"/>`;
 }

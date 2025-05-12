@@ -135,6 +135,8 @@ select {
     border: 1px solid var(--ysh-border-color);
     border-radius: var(--ysh-border-radius-md);
     padding: var(--ysh-spacing-md);
+    margin-top: var(--block-spacing-vertical);
+    margin-right: var(--grid-spacing-horizontal);
 }
 
 .refinements ul {

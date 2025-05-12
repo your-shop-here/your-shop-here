@@ -45,7 +45,7 @@ exports.createModel = (input) => {
  * @returns {string} HTML template string for the miniaccount component
  */
 exports.template = (model) => `
-    <a href="${model.url}" class="pill" role="button">
+    <a href="${model.url}" class="header-link">
         ${model.imageHtml}
         ${model.label}
     </a>`;
