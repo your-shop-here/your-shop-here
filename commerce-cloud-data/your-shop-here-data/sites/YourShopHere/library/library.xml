@@ -316,17 +316,7 @@
             </content-link>
         </content-links>
     </content>
-
-    <content content-id="5309f80fa4256718f4a1c75ed8">
-        <type>component.tracking.sfccdatalayer</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{ }</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
+    
     <content content-id="5759ae28a7224d25a55f3123fb">
         <type>component.theme.yshHeader</type>
         <config>{
