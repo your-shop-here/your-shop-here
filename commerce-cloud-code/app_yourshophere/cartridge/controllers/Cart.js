@@ -36,7 +36,7 @@ server.use('Add', (req, res, next) => {
     const pid = req.httpParameterMap.pid.stringValue;
     const qty = req.httpParameterMap.qty.submitted ? req.httpParameterMap.qty.doubleValue : 1;
     let lineitem;
-    if (pid) {
+    if (pid && ProductMgr.getProduct(pid)) {
         const variationModel = require('*/cartridge/partials/pdp/variationAttributes').getVariationModel(ProductMgr.getProduct(pid));
 
         const product = variationModel.selectedVariant;

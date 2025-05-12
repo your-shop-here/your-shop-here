@@ -11,6 +11,7 @@ exports.getVariationModel = function getVariationModel(product) {
 
 exports.createModel = function createModel(product) {
     const URLUtils = require('dw/web/URLUtils');
+    const params = request.custom.model ? request.custom.model.httpParameter : request.httpParameterMap;
 
     const variationModel = exports.getVariationModel(product);
 
@@ -35,6 +36,7 @@ exports.createModel = function createModel(product) {
                 selectName: `dwvar_${variationModel.master.ID}_${attribute.ID}`,
             };
         })),
+        hxTarget: params.hx || 'main',
     };
 
     return model;
@@ -51,7 +53,7 @@ exports.template = model => `${model.variationAttributes.map(attribute => `
         <label for="va-${attribute.id}">Select ${attribute.name}</label>
         <select name="${attribute.selectName}" id="va-${attribute.id}"
             hx-get="${attribute.url}"
-            hx-target="main"
+            hx-target="${model.hxTarget}"
             hx-include="form[name=pdp-actions]"
             hx-trigger="change"
             hx-indicator=".progress">

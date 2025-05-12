@@ -12,6 +12,7 @@ const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionMode
  * @returns {string} The template text
  */
 exports.render = function render(context) {
+    require('api/Cache').days(14);
     try {
         return renderComponent(context);
     } catch (e) {
@@ -28,6 +29,7 @@ function renderComponent(context) {
     // automatically register configured regions
     const metaDefinition = require('*/cartridge/experience/pages/categoryPage.json');
     model.regions = new RegionModelRegistry(page, metaDefinition);
+    model.regions.main.setClassName('page-plp');
 
     model.httpParameter = {};
 

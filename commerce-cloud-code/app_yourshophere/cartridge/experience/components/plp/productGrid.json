@@ -10,7 +10,7 @@
             "attribute_definitions": [
                 {
                     "id": "category",
-                    "name": "Category",
+                    "name": "Category", 
                     "type": "category",
                     "required": false,
                     "dynamic_lookup": {
@@ -25,7 +25,6 @@
                     "required": false
                 },
                 {
-                
                     "id": "imageDISConfig",
                     "name": "Image Dimensions",
                     "description": "DIS parameters i.e. sw=300&sh=400",
@@ -33,12 +32,27 @@
                     "required": false
                 },
                 {
-                
-                    "id": "swatchDimension",
+                    "id": "swatchDimension", 
                     "name": "Swatch Atttribute",
                     "description": "",
                     "type": "string",
                     "required": false
+                },
+                {
+                    "id": "desktopColumns",
+                    "name": "Number of Columns (Desktop)",
+                    "description": "Number of product columns to display on desktop (default: 3)",
+                    "type": "integer",
+                    "required": false,
+                    "default_value": 3
+                },
+                {
+                    "id": "mobileColumns",
+                    "name": "Number of Columns (Mobile)",
+                    "description": "Number of product columns to display on mobile (default: 2)",
+                    "type": "integer", 
+                    "required": false,
+                    "default_value": 2
                 }
             ]
         }

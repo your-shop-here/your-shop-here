@@ -18,11 +18,18 @@ function getCssAspectRatio(sw, sh) {
  * Create view model for a product image
  *
  * @todo Add responsive images
- * @param {dw.catalog.Product} product
- * @returns the view model
+ * @param {dw.catalog.SearchHit} hit - The search hit containing product information
+ * @param {dw.catalog.ProductSearchModel} search - The search model
+ * @param {Object} imageFilter - Filter configuration for images
+ * @param {string} imageFilter.key - Key for filtering images
+ * @param {string} imageFilter.value - Value to filter images by
+ * @param {Object} config - Configuration object
+ * @param {string} [config.imageViewType=large] - Type of product image view
+ * @returns {Object} The view model containing image URLs and product details
  */
 exports.createModel = function createImageModel(hit, search, imageFilter, config) {
-    const HttpSearchParams = require('api/URLSearchParams');
+    const URLUtils = require('dw/web/URLUtils');
+
     let url;
     if (imageFilter) {
         url = (function getFilteredImages() {
@@ -50,10 +57,19 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
     }
     return {
         largeUrl: url,
+        pdpUrl: URLUtils.url('Product-Show', 'pid', hit.object.productID).toString(),
         name: hit.name,
         disParams: config.imageDISConfig,
         aspectRatio,
     };
 };
 
-exports.template = (model) => `<img loading="lazy" alt="${model.name}" src="${model.largeUrl}?${model.disParams}" style="aspect-ratio: ${model.aspectRatio}" />`;
+/**
+ * Render a product tile image
+ * @param {Object} model - The view model containing image URLs and product image details
+ * @returns {string} The HTML template for the product tile image
+ */
+exports.template = (model) => `<a href="${model.pdpUrl}">
+   <img loading="lazy" alt="${model.name}" src="${model.largeUrl}?${model.disParams}" style="aspect-ratio: ${model.aspectRatio}" />
+</a>`;
+

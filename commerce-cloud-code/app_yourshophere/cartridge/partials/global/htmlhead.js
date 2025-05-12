@@ -1,19 +1,35 @@
 
-const URLUtils = require('dw/web/URLUtils');
+/**
+ * Generates HTML head content for stylesheets
+ * @module htmlhead
+ */
 
-function createModel() {
-    return null;
-}
+/**
+ * Creates a model containing stylesheet URLs
+ * @returns {Object} Model object with array of stylesheet URLs
+ * @property {Array} stylesheetUrls - Array of URLs for stylesheets to include
+ */
+exports.createModel = () => {
+    const URLUtils = require('dw/web/URLUtils');
+    return { stylesheetUrls: [
+        URLUtils.staticURL('pico.min.css'),
+        URLUtils.staticURL('header.css'),
+        URLUtils.staticURL('experience/layouts.css'),
+        URLUtils.staticURL('experience/components/base/moreImageAndText.css'),
+        URLUtils.staticURL('progress.css'),
+        URLUtils.staticURL('style.css'),
+    ] };
+};
 
-const template = () => `
+/**
+ * Generates HTML template string with stylesheet includes, for best performance the stylesheets are inlined into the head tag.
+ * As the header of the page is usually not reloaded (only the docuemnt body), the stylesheets are not reloaded either.
+ *
+ * @param {Object} model - Model object containing stylesheet URLs
+ * @param {Array} model.stylesheetUrls - Array of stylesheet URLs
+ * @returns {string} HTML template string with stylesheet includes
+ */
+exports.template = (model) => `
     <style>
-        <wainclude url="${URLUtils.staticURL('style.css')}"/>
-        <wainclude url="${URLUtils.staticURL('header.css')}" />
-        <wainclude url="${URLUtils.staticURL('experience/layouts.css')}" />
-        <wainclude url="${URLUtils.staticURL('experience/components/base/moreImageAndText.css')}" />
-        <wainclude url="${URLUtils.staticURL('progress.css')}" />
-        <wainclude url="${URLUtils.staticURL('pico.min.css')}" />     
+        ${model.stylesheetUrls.map((url) => `<wainclude url="${url}" />`).join('')}
     </style>`;
-
-exports.createModel = createModel;
-exports.template = template;

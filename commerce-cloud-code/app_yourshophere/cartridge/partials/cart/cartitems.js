@@ -2,6 +2,7 @@ exports.createModel = function createModel(options) {
     const BasketMgr = require('dw/order/BasketMgr');
     const StringUtils = require('dw/util/StringUtils');
     const URLUtils = require('dw/web/URLUtils');
+    const Resource = require('dw/web/Resource');
 
     const basket = BasketMgr.getCurrentBasket();
 
@@ -9,6 +10,16 @@ exports.createModel = function createModel(options) {
         return {
             empty: true,
             items: [],
+            emptyMessage: Resource.msg('cart.empty', 'translations', null),
+            labels: {
+                quantity: Resource.msg('cart.quantity', 'translations', null),
+                product: Resource.msg('cart.product', 'translations', null),
+                price: Resource.msg('cart.price', 'translations', null),
+                actions: Resource.msg('cart.actions', 'translations', null),
+                total: Resource.msg('label.total', 'translations', null),
+                update: Resource.msg('cart.update', 'translations', null),
+                delete: Resource.msg('cart.delete', 'translations', null),
+            },
         };
     }
 
@@ -18,30 +29,43 @@ exports.createModel = function createModel(options) {
             quantity: item.quantityValue,
             text: item.lineItemText,
             price: StringUtils.formatMoney(item.price),
-            images: item.product.getImages(options.settings.imageViewType || 'small').toArray().slice(0, 1).map(image => ({
+            images: item.product.getImages(options.settings.imageViewType || 'small').toArray().slice(0, 1).map((image) => ({
                 url: `${image.url}?${options.settings.imageDISConfig}`,
                 alt: image.alt,
             })),
             pdpUrl: URLUtils.url('Product-Show', 'pid', item.productID).toString(),
             deleteUrl: URLUtils.url('Cart-Delete', 'id', item.UUID).toString(),
-            updateQuantityUrl: URLUtils.url('Cart-UpdateQuantity', 'uuid', item.UUID).toString(), // Add updateQuantityUrl
+            updateQuantityUrl: URLUtils.url('Cart-UpdateQuantity', 'uuid', item.UUID).toString(),
         })),
         merchandiseTotal: StringUtils.formatMoney(basket.adjustedMerchandizeTotalPrice),
         total: StringUtils.formatMoney(basket.totalGrossPrice),
+        labels: {
+            quantity: Resource.msg('cart.quantity', 'translations', null),
+            product: Resource.msg('cart.product', 'translations', null),
+            price: Resource.msg('cart.price', 'translations', null),
+            actions: Resource.msg('cart.actions', 'translations', null),
+            total: Resource.msg('label.total', 'translations', null),
+            update: Resource.msg('cart.update', 'translations', null),
+            delete: Resource.msg('cart.delete', 'translations', null),
+        },
     };
 
     return model;
 };
 
 // @TODO Localise text
-exports.template = (model) => (model.empty ? 'Your cart is empty' : `<table role="grid">
+exports.template = (model) => (model.empty ? `
+    <div class="cart-error-message" role="alert">
+        <p>${model.emptyMessage}</p>
+    </div>
+` : `<table role="grid">
 <thead>
     <tr>
         <th scope="col"></th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Product</th>
-        <th scope="col">Price</th>
-        <th scope="col">Actions</th>
+        <th scope="col">${model.labels.quantity}</th>
+        <th scope="col">${model.labels.product}</th>
+        <th scope="col">${model.labels.price}</th>
+        <th scope="col">${model.labels.actions}</th>
     </tr>
 </thead>
 <tbody>
@@ -52,7 +76,7 @@ ${model.items.map((item) => `<tr>
                 hx-trigger="click"
                 hx-push-url="${item.pdpUrl}"
                 hx-indicator=".progress">
-                    ${item.images.map(image => `<img src="${image.url}" alt="${image.alt}"/>`).join('\n')}
+                    ${item.images.map((image) => `<img src="${image.url}" alt="${image.alt}"/>`).join('\n')}
                 </a></th>
         <td>
             <form action="${item.updateQuantityUrl}" method="post" class="quantity-form">
@@ -62,7 +86,7 @@ ${model.items.map((item) => `<tr>
                 hx-trigger="change"
                 hx-indicator=".progress"
                 hx-include="form">
-                <button type="submit">Update</button>
+                <button type="submit">${model.labels.update}</button>
             </form>
         </td>
         <td><a href="${item.pdpUrl}"
@@ -76,7 +100,7 @@ ${model.items.map((item) => `<tr>
                 hx-get="${item.deleteUrl}&hx=main"
                 hx-target="main"
                 hx-trigger="click"
-                hx-indicator=".progress">Delete</a></td>
+                hx-indicator=".progress">${model.labels.delete}</a></td>
     </tr>`).join('\n')}
 </tbody>
 <tfoot>
@@ -84,7 +108,7 @@ ${model.items.map((item) => `<tr>
         <th scope="col"></th>
         <td scope="col"></td>
         <td scope="col"></td>
-        <td scope="col">Total</td>
+        <td scope="col">${model.labels.total}</td>
         <td scope="col">${model.merchandiseTotal}</td>
     </tr>
 </tfoot>

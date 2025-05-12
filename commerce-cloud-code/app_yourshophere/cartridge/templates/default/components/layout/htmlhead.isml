@@ -18,10 +18,10 @@
 <link rel="manifest" href="${URLUtils.staticURL('manifest.json')}" />
 <!-- it's should be fine to load css inline, we only load it once and then keep using it -->
 <style>
+    <isinclude url="${URLUtils.staticURL('pico.min.css')}" />
     <isinclude url="${URLUtils.staticURL('style.css')}"/>
     <isinclude url="${URLUtils.staticURL('header.css')}" />
     <isinclude url="${URLUtils.staticURL('experience/layouts.css')}" />
     <isinclude url="${URLUtils.staticURL('experience/components/base/moreImageAndText.css')}" />
     <isinclude url="${URLUtils.staticURL('progress.css')}" />
-    <isinclude url="${URLUtils.staticURL('pico.min.css')}" />
 </style>

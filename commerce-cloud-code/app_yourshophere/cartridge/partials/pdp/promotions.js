@@ -1,11 +1,14 @@
-exports.createModel = function createModel(options) {
-    const PromotionMgr = require('dw/campaign/PromotionMgr');
-
-    // @todo cache somewhere as it is expensive
-    const promotionPlan = PromotionMgr.getActiveCustomerPromotions();
-    const promotions = promotionPlan.getProductPromotions(options.product).toArray();
+/**
+ * Creates a model for product promotions display
+ * @param {Object} options - The options object containing product information
+ * @param {Object} options.product - The product to get promotions for
+ * @returns {Object} Model containing an array of promotion messages to display
+ */
+const createModel = (options) => {
+    const Promotions = require('*/cartridge/api/Promotions');
+    const promotions = Promotions.getProductPromotions(options.product);
     const model = {
-        promotions: promotions.map(promotion => ({
+        promotions: promotions.map((promotion) => ({
             message: promotion.getCalloutMsg(),
         })),
     };
@@ -13,6 +16,18 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
-exports.template = model => `<ul>
-    ${model.promotions.map(promotion => `<li>${promotion.message}</li>`).join('\n')}
+/**
+ * Renders the promotions as an HTML unordered list
+ * @param {Object} model - The model containing promotion messages
+ * @param {Array<Object>} model.promotions - Array of promotion objects
+ * @param {string} model.promotions[].message - The promotion message to display
+ * @returns {string} HTML string containing the promotions list
+ */
+const template = (model) => `<ul>
+    ${model.promotions.map((promotion) => `<li>${promotion.message}</li>`).join('\n')}
 </ul>`;
+
+module.exports = {
+    createModel,
+    template,
+};

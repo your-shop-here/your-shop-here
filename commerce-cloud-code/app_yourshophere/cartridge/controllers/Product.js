@@ -1,24 +1,27 @@
 /**
- * @namespace Home
+ * @namespace Product
  */
 const server = require('server');
-
-const Site = require('dw/system/Site');
-const PageMgr = require('dw/experience/PageMgr');
-const ProductMgr = require('dw/catalog/ProductMgr');
-const Logger = require('api/Logger');
-const HashMap = require('dw/util/HashMap');
-
 const cache = require('*/cartridge/middleware/cache');
 const pageMetaData = require('*/cartridge/middleware/pageMetaData');
 
+/**
+ * @name controller/Product-Show
+ */
 server.get('Show', cache.applyDefaultCache, (req, res, next) => {
+    const Site = require('dw/system/Site');
+    const PageMgr = require('dw/experience/PageMgr');
+    const ProductMgr = require('dw/catalog/ProductMgr');
+    const Logger = require('api/Logger');
+    const HashMap = require('dw/util/HashMap');
+
     pageMetaData.setPageMetaTags(req.pageMetaData, Site.current);
     const productId = request.httpParameterMap.pid.submitted ? request.httpParameterMap.pid.stringValue : null;
     const product = productId && ProductMgr.getProduct(productId);
+    let error;
 
     if (!product || !product.online) {
-        let error = `no product ${productId} not found`;
+        error = `Product with ID ${productId} could not be found, rendering notfound page`;
         Logger.error(error);
         res.render('pages/notfound', { reason: error });
         return next();
@@ -45,19 +48,19 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
 
         const HttpSearchParams = require('api/URLSearchParams');
 
-        // @TODO add PDP allowlist (variation attributes, options, pid)
-        const productParams = new HttpSearchParams(request.httpParameterMap);
+        // Filter out any parameters that are not required for the PDP to optimise caching
+        const productParams = (new HttpSearchParams(request.httpParameterMap)).allowList(['pid', /^dwvar_.*|^dwopt_.*/]);
         productParams.sort();
         const queryString = productParams.toString();
 
         res.page(page.ID, JSON.stringify({ queryString }), aspectAttributes);
     } else {
-        let error = `No page for product ${productId} found`;
+        error = `No page for product ${productId} found`;
         Logger.error(error);
         res.render('pages/notfound', { reason: error });
     }
 
-    next();
+    return next();
 }, pageMetaData.computedPageMetaData);
 
 module.exports = server.exports();

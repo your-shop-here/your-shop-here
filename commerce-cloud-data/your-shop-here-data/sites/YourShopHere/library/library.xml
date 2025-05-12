@@ -3,6 +3,10 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
+        <content-detail-page-meta-tag-rules>
+            <page-meta-tag-rule rule-id="Page Title"/>
+            <page-meta-tag-rule rule-id="Page Description"/>
+        </content-detail-page-meta-tag-rules>
     </folder>
 
     <content content-id="05367af9feea913e81b7ea36ea">
@@ -92,19 +96,6 @@
         <page-attributes/>
     </content>
 
-    <content content-id="161bba7f543d5d798ae4dcc86e">
-        <type>component.tracking.sfcceinstein</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "einsteinApiClient" : "18f698a0-9546-46f0-8642-784289f4c8e2",
-  "einsteinSiteId" : "zzzz-SiteGenesis"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="1885f33fd36f7b0f3b5e8043a7">
         <type>component.commerce_layouts.column</type>
         <config>{
@@ -146,18 +137,6 @@
   "category" : null,
   "imageViewType" : "large",
   "imageDISConfig" : "sw=300&amp;sh=300"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
-    <content content-id="1e0da2a3eb415ae490f77de1a9">
-        <type>component.tracking.googletagmanager</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "gtmId" : "GTM-PN7KVTPC "
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -237,6 +216,7 @@
         <online-flag>true</online-flag>
         <page-attributes/>
     </content>
+
 
     <content content-id="3e98f7c67632a9006e8ab9fd0f">
         <type>component.theme.icon</type>
@@ -524,27 +504,6 @@
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
-    </content>
-
-    <content content-id="85361ceb117a996df9f4f04b21">
-        <type>component.tracking.trackingregion</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{ }</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-        <content-links>
-            <content-link content-id="5309f80fa4256718f4a1c75ed8" type="component.tracking.trackingregion.providers">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="161bba7f543d5d798ae4dcc86e" type="component.tracking.trackingregion.providers">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="1e0da2a3eb415ae490f77de1a9" type="component.tracking.trackingregion.providers">
-                <position>2.0</position>
-            </content-link>
-        </content-links>
     </content>
 
     <content content-id="8a7c19b3bb75e679541fa6eac0">
@@ -1104,8 +1063,8 @@
             <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="bed0ddc5e0fc1ed0b45afdee71" type="component.theme.yshHeader.menu">
-                <position>0.0</position>
+            <content-link content-id="83ace80416deaa3dc3b90872c8" type="component.theme.yshHeader.left">
+                <position>1.0</position>
             </content-link>
             <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
