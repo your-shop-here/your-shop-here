@@ -133,9 +133,11 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
+  "desktopColumns" : null,
   "swatchDimension" : "yshColor",
   "category" : null,
   "imageViewType" : "large",
+  "mobileColumns" : null,
   "imageDISConfig" : "sw=300&amp;sh=300"
 }</data>
         <online-flag>true</online-flag>
