@@ -122,14 +122,16 @@ exports.template = (model) => `<div class="refinements">
     <div class="filter-content">
         ${model.refinements.map((refinement) => `<div>
             <h3>${refinement.name}</h3>
-            <ul role="navigation">
-            ${refinement.values.map((value) => `<li><a href="${value.url}"${(value.cssClasses ? ` class="${value.cssClasses}"` : '')}
-                        hx-push-url="${value.url}"
-                        hx-get="${value.hxUrl}"
-                        hx-target="main" hx-indicator=".progress">
-                    ${value.name}
-                </a></li>`).join('')}
-            </ul>
+            <div class="refinement-container">
+                <ul role="navigation">
+                ${refinement.values.map((value) => `<li><a href="${value.url}"${(value.cssClasses ? ` class="${value.cssClasses}"` : '')}
+                            hx-push-url="${value.url}"
+                            hx-get="${value.hxUrl}"
+                            hx-target="main" hx-indicator=".progress">
+                        ${value.name}
+                    </a></li>`).join('')}
+                </ul>
+            </div>
         </div>
         `).join('')}
     </div>
