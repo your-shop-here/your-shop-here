@@ -51,7 +51,7 @@ exports.createModel = () => {
                             url = refinementSearch.urlRelaxCategory('Search-Show');
                             cssClasses.push('selected');
                         } else {
-                            url = refinementSearch.urlRefineCategory('Search-Show', refinementValue.getValue())
+                            url = refinementSearch.urlRefineCategory('Search-Show', refinementValue.getValue());
                         }
                     } else if (refinement.priceRefinement) {
                         if (refinementSearch.isRefinedByPriceRange(refinementValue.getValueFrom(), refinementValue.getValueTo())) {
@@ -61,7 +61,7 @@ exports.createModel = () => {
                             url = refinementSearch.urlRefinePrice('Search-Show', refinementValue.getValueFrom(), refinementValue.getValueTo());
                         }
                     } else if (refinement.promotionRefinement) {
-                        url = refinementSearch.urlRefinePromotion('Search-Show',refinementValue.getValue());
+                        url = refinementSearch.urlRefinePromotion('Search-Show', refinementValue.getValue());
                     } else if (refinement.attributeRefinement) {
                         if (refinementSearch.isRefinedByAttributeValue(refinementValue.getID(), refinementValue.getValue())) {
                             url = refinementSearch.urlRelaxAttributeValue('Search-Show', refinementValue.getID(), refinementValue.getValue());
