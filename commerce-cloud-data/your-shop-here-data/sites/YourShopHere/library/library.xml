@@ -3,10 +3,6 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
-        <content-detail-page-meta-tag-rules>
-            <page-meta-tag-rule rule-id="Page Title"/>
-            <page-meta-tag-rule rule-id="Page Description"/>
-        </content-detail-page-meta-tag-rules>
     </folder>
 
     <content content-id="05367af9feea913e81b7ea36ea">
@@ -219,7 +215,6 @@
         <page-attributes/>
     </content>
 
-
     <content content-id="3e98f7c67632a9006e8ab9fd0f">
         <type>component.theme.icon</type>
         <config>{
@@ -316,7 +311,7 @@
             </content-link>
         </content-links>
     </content>
-    
+
     <content content-id="5759ae28a7224d25a55f3123fb">
         <type>component.theme.yshHeader</type>
         <config>{
@@ -473,30 +468,31 @@
     </content>
 
     <content content-id="83ace80416deaa3dc3b90872c8">
-        <type>component.theme.miniaccount</type>
-        <config>{
-  "visibility" : [ {
-    "schedule" : { },
-    "customer_group_ids" : [ "Registered" ],
-    "campaign_qualifier" : { },
-    "aspect_attribute_qualifiers" : [ ],
-    "locale_ids" : [ ]
-  } ]
+      <type>component.theme.miniaccount</type>
+      <config>{
+"visibility" : [ {
+  "schedule" : { },
+  "customer_group_ids" : [ "Registered" ],
+  "campaign_qualifier" : { },
+  "aspect_attribute_qualifiers" : [ ],
+  "locale_ids" : [ ]
+} ]
 }</config>
-        <data xml:lang="x-default">{
-  "image" : {
-    "path" : "user-icon.svg",
-    "focal_point" : {
-      "x" : 0.5,
-      "y" : 0.5
-    }
-  },
-  "width" : "50px",
-  "label" : "My Account"
+      <data xml:lang="x-default">{
+"image" : {
+  "path" : "user-icon.svg",
+  "focal_point" : {
+    "x" : 0.5,
+    "y" : 0.5
+  }
+},
+"width" : "50px",
+"label" : "My Account"
 }</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
+      <online-flag>true</online-flag>
+      <page-attributes/>
+  </content>
+
 
     <content content-id="8a7c19b3bb75e679541fa6eac0">
         <type>component.base.richText</type>
@@ -679,9 +675,6 @@
                 <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -931,6 +924,19 @@
         <sitemap-included-flag>false</sitemap-included-flag>
     </content>
 
+    <content content-id="d4a67f4bbba836f33ebc995f17">
+        <type>component.theme.categorymenu</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "align" : "center",
+  "applyFilter" : "false"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="d9d3c232223993c10093ad34c7">
         <type>component.base.imageAndText</type>
         <config>{
@@ -1046,19 +1052,16 @@
             <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="83ace80416deaa3dc3b90872c8" type="component.theme.yshHeader.left">
-                <position>1.0</position>
-            </content-link>
             <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
                 <position>1.0</position>
             </content-link>
             <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="83ace80416deaa3dc3b90872c8" type="component.theme.yshHeader.left">
-                <position>1.0</position>
-            </content-link>
             <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
                 <position>0.0</position>
             </content-link>
         </content-links>
