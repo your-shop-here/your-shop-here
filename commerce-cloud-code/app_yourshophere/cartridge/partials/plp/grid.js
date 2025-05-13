@@ -20,11 +20,34 @@ exports.createModel = () => {
     model.moreUrlHx = model.moreUrlHx.append('component', componentId);
     model.desktopColumns = componentSettings.desktopColumns || 3;
     model.mobileColumns = componentSettings.mobileColumns || 2;
+    const analyticsData = {
+        products: search.foundProducts.map((hit) => ({
+            id: hit.object.productID,
+            sku: '',
+            altId: '',
+            altIdType: '',
+        })),
+        sortingRule: [{
+            attribute: (search.getEffectiveSortingRule() && search.getEffectiveSortingRule().ID) || 'best-matches',
+            direction: 'ascending',
+        }],
+        itemRange: {
+            start: search.pagePosition,
+        },
+    };
+    if (search.isCategorySearch()) {
+        analyticsData.type = 'viewCategory';
+        analyticsData.category = search.getCategoryID();
+    } else {
+        analyticsData.type = 'viewSearch';
+        analyticsData.searchText = search.getSearchPhrase();
+    }
+    model.analytics = JSON.stringify(analyticsData);
     return model;
 };
 
 exports.template = (model) => `
-    <div class="grid product-grid desktop-cols-${model.desktopColumns} mobile-cols-${model.mobileColumns}">
+    <div class="grid product-grid desktop-cols-${model.desktopColumns} mobile-cols-${model.mobileColumns}" data-analytics='${model.analytics}'>
         ${model.products.map((hit) => templateIncludeHit(hit, model.componentId)).join('')}
     </div>
     ${model.showMoreButton ? templateIncludeMore(model) : ''}
@@ -42,5 +65,3 @@ function templateIncludeMore(model) {
         </a>
     </div>`;
 }
-
-

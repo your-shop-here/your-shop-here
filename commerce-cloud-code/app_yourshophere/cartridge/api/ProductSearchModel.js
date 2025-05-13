@@ -117,62 +117,38 @@ ProductSearchModel.prototype.nextPageUrl = function nextPageUrl(action) {
     url = this.pagingModel.appendPaging(url, this.pagePosition + this.pageSize);
     return url;
 };
+[
+    'search',
+    'getCategory',
+    'getCategoryID',
+    'getRefinements',
+    'getSearchPhrase',
+    'getSortingRule',
+    'getEffectiveSortingRule',
+    'isRefinedByCategory',
+    'isCategorySearch',
+    'canRelax',
+    'urlRelaxCategory',
+].forEach((method) => {
+    ProductSearchModel.prototype[method] = function () {
+        return this.object[method]();
+    };
+});
 
-ProductSearchModel.prototype.search = function search() {
-    return this.object.search();
-};
-
-ProductSearchModel.prototype.getCategory = function getCategory() {
-    return this.object.getCategory();
-};
-
-ProductSearchModel.prototype.getRefinements = function getRefinements() {
-    return this.object.getRefinements();
-};
-
-ProductSearchModel.prototype.isRefinedByCategory = function isRefinedByCategory() {
-    return this.object.isRefinedByCategory();
-};
-
-ProductSearchModel.prototype.canRelax = function canRelax() {
-    return this.object.canRelax();
-};
-
-ProductSearchModel.prototype.urlRelaxCategory = function urlRelaxCategory() {
-    return this.object.urlRelaxCategory();
-};
-
-ProductSearchModel.prototype.urlRefineCategory = function urlRefineCategory() {
-    return this.object.urlRefineCategory.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.isRefinedByPriceRange = function isRefinedByPriceRange() {
-    return this.object.isRefinedByPriceRange.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.urlRelaxPrice = function urlRelaxPrice() {
-    return this.object.urlRelaxPrice.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.urlRefinePrice = function urlRefinePrice() {
-    return this.object.urlRefinePrice.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.urlRefinePromotion = function urlRefinePromotion() {
-    return this.object.urlRefinePromotion.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.isRefinedByAttributeValue = function isRefinedByAttributeValue() {
-    return this.object.isRefinedByAttributeValue.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.urlRelaxAttributeValue = function urlRelaxAttributeValue() {
-    return this.object.urlRelaxAttributeValue.apply(this.object, arguments);
-};
-
-ProductSearchModel.prototype.urlRefineAttributeValue = function urlRefineAttributeValue() {
-    return this.object.urlRefineAttributeValue.apply(this.object, arguments);
-};
+[
+    'urlRefineCategory',
+    'isRefinedByPriceRange',
+    'urlRelaxPrice',
+    'urlRefinePrice', 
+    'urlRefinePromotion',
+    'isRefinedByAttributeValue',
+    'urlRelaxAttributeValue',
+    'urlRefineAttributeValue',
+].forEach((method) => {
+    ProductSearchModel.prototype[method] = function () {
+        return this.object[method].apply(this.object, arguments);
+    };
+});
 
 ProductSearchModel.prototype.getRepresentedVariationValues = function getRepresentedVariationValues(arg) {
     const argKey = arg.toString();

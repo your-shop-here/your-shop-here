@@ -34,13 +34,14 @@
     }
 
     /**
-     * Send a product view event to Einstein Activities API
-     * @param {Object} data - The product view data
+     * Send an activity event to Einstein Activities API
+     * @param {Object} data - The activity data
+     * @param {string} data.type - The type of activity (e.g., 'productView', 'addToCart')
      * @param {string} data.id - The product ID
      */
-    function sendProductView(data) {
-        if (!data || !data.id) {
-            console.error('Invalid product view data:', data);
+    function sendEinsteinActivity(data) {
+        if (!data || !data.type) {
+            console.error('Invalid activity data:', data);
             return;
         }
 
@@ -53,14 +54,7 @@
             realm,
         };
 
-        // TODO: Better way to get the realm and  site ID
         const payload = {
-            product: {
-                id: data.id,
-                sku: data.sku || '',
-                altId: data.altId || '',
-                altIdType: data.altIdType || '',
-            },
             userId: userInfo.userId,
             cookieId: userInfo.cookieId,
             clientIp: '', // This should be set server-side
@@ -68,44 +62,99 @@
             realm: window.CQuotient.realm,
         };
 
-        console.info('Sending product view event:', payload);
+        if (data.type === 'productView') {
+            payload.product = {
+                id: data.id,
+                sku: data.sku || '',
+                altId: data.altId || '',
+                altIdType: data.altIdType || '',
+            };
+        }
 
-        fetch(`${EINSTEIN_API_ENDPOINT}${window.CQuotient.siteId}/viewProduct`, {
+        // Add additional data for specific event types
+        if (data.type === 'addToCart' || data.type === 'beginCheckout' || data.type === 'searchView' || data.type === 'categoryView') {
+            payload.products = data.products.map((product) => ({
+                id: product.id,
+                sku: product.sku || '',
+                ...(data.altId && { altId: data.altId }),
+                ...(data.altIdType && { altIdType: data.altIdType }),
+                ...(product.quantity && { quantity: product.quantity }),
+                ...(product.price && { price: product.price }),
+            }));
+            if (data.amount) {
+                payload.amount = data.amount;
+            }
+            if (data.searchText) {
+                payload.searchText = data.searchText;
+            }
+            if (data.category) {
+                payload.category = data.category;
+            }
+            if (data.sortingRule) {
+                payload.sortingRule = data.sortingRule;
+            }
+            if (data.itemRange) {
+                payload.itemRange = data.itemRange;
+            }
+        }
+
+        console.info(`${data.type} event:`, payload);
+
+        if (!window.CQuotient.clientId || !window.CQuotient.siteId || !window.CQuotient.realm) {
+            console.error('Client ID, Site ID, or Realm is not set, activity event will not be tracked');
+            return;
+        }
+
+        fetch(`${EINSTEIN_API_ENDPOINT}${window.CQuotient.siteId}/${data.type}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'x-cq-client-id': window.CQuotient.clientId,
             },
             body: JSON.stringify(payload),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((responseData) => {
-                console.debug('Product view tracked successfully:', responseData);
-            })
-            .catch((error) => {
-                console.error('Error tracking product view:', error);
-            });
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }).then((responseData) => {
+            console.debug(`${data.type} tracked successfully:`, responseData);
+        }).catch((error) => {
+            console.error(`Error tracking ${data.type}:`, error);
+        });
     }
 
     /**
      * Initialize the analytics event listeners
      */
     function init() {
-        // Listen for product view events from the data layer
+        // Listen for activity events from the data layer
         window.addEventListener('productView', (event) => {
-            sendProductView(event.detail);
+            sendEinsteinActivity(event.detail);
         });
 
-        // Process any existing product view events in the data layer
+        window.addEventListener('addToCart', (event) => {
+            sendEinsteinActivity(event.detail);
+        });
+
+        window.addEventListener('beginCheckout', (event) => {
+            sendEinsteinActivity(event.detail);
+        });
+
+        window.addEventListener('searchView', (event) => {
+            sendEinsteinActivity(event.detail);
+        });
+
+        window.addEventListener('categoryView', (event) => {
+            sendEinsteinActivity(event.detail);
+        });
+
+        // Process any existing events in the data layer
         if (window.dataLayer) {
             window.dataLayer.forEach((item) => {
-                if (item.type === 'productView' && !item.processed) {
-                    sendProductView(item);
+                const validTypes = ['productView', 'addToCart', 'beginCheckout', 'searchView', 'categoryView'];
+                if (validTypes.find((type) => type === item.type) && !item.processed) {
+                    sendEinsteinActivity(item);
                     item.processed = true;
                 }
             });

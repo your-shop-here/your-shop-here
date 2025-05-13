@@ -21,10 +21,22 @@ function renderComponent(context) {
     const model = new HashMap();
     const page = context.page;
     const metaDefinition = require('*/cartridge/experience/pages/checkoutPage.json');
+    const BasketMgr = require('dw/order/BasketMgr');
+    const basket = BasketMgr.getCurrentBasket();
     request.custom.model = new HashMap();
     request.custom.model.forceEdit = context.renderParameters && JSON.parse(context.renderParameters).forceEdit;
     model.regions = new RegionModelRegistry(page, metaDefinition);
     model.regions.main.setClassName('page-checkout');
+    model.analytics = JSON.stringify({
+        type: 'beginCheckout',
+        products: basket.getAllProductLineItems().toArray().map((item) => ({
+            id: item.productID,
+            sku: '',
+            price: item.price.value,
+            quantity: item.quantityValue,
+        })),
+        amount: basket.totalGrossPrice.value,
+    });
     return template(model);
 }
 
@@ -35,7 +47,7 @@ function template(model) {
         ${require('partials').html('global/htmlhead')()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
-    <main class="checkout-page">
+    <main class="checkout-page" data-analytics='${model.analytics}'>
         ${model.regions.header.render()}
         ${model.regions.main.render()}
         ${model.regions.footer.render()}
