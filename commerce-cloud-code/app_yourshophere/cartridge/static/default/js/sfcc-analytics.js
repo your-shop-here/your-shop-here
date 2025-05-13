@@ -46,20 +46,17 @@
         }
 
         const userInfo = getUserInfo();
-        const realm = window.ysh.einsteinSiteId.split('-')[0];
 
-        window.CQuotient = {
-            clientId: window.ysh.einsteinApiClient,
-            siteId: window.ysh.einsteinSiteId,
-            realm,
-        };
+        const CLIENT_ID = window.ysh.einsteinApiClient;
+        const SITE_ID = window.ysh.einsteinSiteId;
+        const REALM = window.ysh.einsteinSiteId.split('-')[0];
 
         const payload = {
             userId: userInfo.userId,
             cookieId: userInfo.cookieId,
             clientIp: '', // This should be set server-side
             clientUserAgent: navigator.userAgent,
-            realm: window.CQuotient.realm,
+            realm: REALM,
         };
 
         if (data.type === 'productView') {
@@ -72,8 +69,8 @@
         }
 
         // Add additional data for specific event types
-        if (data.type === 'addToCart' || data.type === 'beginCheckout' || data.type === 'searchView' || data.type === 'categoryView') {
-            payload.products = data.products.map((product) => ({
+        if (data.type === 'addToCart' || data.type === 'beginCheckout' || data.type === 'viewSearch' || data.type === 'viewCategory') {
+            payload.products = (data.products || []).map((product) => ({
                 id: product.id,
                 sku: product.sku || '',
                 ...(data.altId && { altId: data.altId }),
@@ -88,7 +85,9 @@
                 payload.searchText = data.searchText;
             }
             if (data.category) {
-                payload.category = data.category;
+                payload.category = {
+                    id: data.category,
+                };
             }
             if (data.sortingRule) {
                 payload.sortingRule = data.sortingRule;
@@ -98,18 +97,18 @@
             }
         }
 
-        console.info(`${data.type} event:`, payload);
+        if (window.ysh.debug) console.info(`${data.type} event:`, payload);
 
-        if (!window.CQuotient.clientId || !window.CQuotient.siteId || !window.CQuotient.realm) {
+        if (!CLIENT_ID || !SITE_ID || !REALM) {
             console.error('Client ID, Site ID, or Realm is not set, activity event will not be tracked');
             return;
         }
 
-        fetch(`${EINSTEIN_API_ENDPOINT}${window.CQuotient.siteId}/${data.type}`, {
+        fetch(`${EINSTEIN_API_ENDPOINT}${SITE_ID}/${data.type}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-cq-client-id': window.CQuotient.clientId,
+                'x-cq-client-id': CLIENT_ID,
             },
             body: JSON.stringify(payload),
         }).then((response) => {
@@ -141,18 +140,18 @@
             sendEinsteinActivity(event.detail);
         });
 
-        window.addEventListener('searchView', (event) => {
+        window.addEventListener('viewSearch', (event) => {
             sendEinsteinActivity(event.detail);
         });
 
-        window.addEventListener('categoryView', (event) => {
+        window.addEventListener('viewCategory', (event) => {
             sendEinsteinActivity(event.detail);
         });
 
         // Process any existing events in the data layer
         if (window.dataLayer) {
             window.dataLayer.forEach((item) => {
-                const validTypes = ['productView', 'addToCart', 'beginCheckout', 'searchView', 'categoryView'];
+                const validTypes = ['productView', 'addToCart', 'beginCheckout', 'viewCategory', 'viewSearch'];
                 if (validTypes.find((type) => type === item.type) && !item.processed) {
                     sendEinsteinActivity(item);
                     item.processed = true;

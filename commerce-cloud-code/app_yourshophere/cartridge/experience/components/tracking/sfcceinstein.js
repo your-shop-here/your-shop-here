@@ -24,12 +24,14 @@ exports.render = function render(context) {
             Logger.error('Einstein API Client is not set, Einstein data collection will not be enabled');
         }
     }
+    const System = require('dw/system/System');
+    model.debug = System.getInstanceType() !== System.PRODUCTION_SYSTEM;
     const einsteinScriptUrl = URLUtils.staticURL('js/sfcc-analytics.js');
 
     return /* html */`${model.editMode ? 'SFCC Einstein' : ''}
             <script type="text/partytown">
                 window.ysh = window.ysh || {};
-                
+                window.ysh.debug = ${model.debug};
                 window.ysh.einsteinApiClient = '${model.einsteinApiClient}';
                 window.ysh.einsteinSiteId = '${model.einsteinSiteId}';
             </script>
