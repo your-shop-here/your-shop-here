@@ -5,6 +5,17 @@
     window.dataLayer = window.dataLayer || [];
 
     /**
+     * Processes a value to ensure it's an array.
+     * If it's already an array, it's returned as is.
+     * If it's a single object, it's wrapped in an array.
+     * @param {any} value - The value to process.
+     * @returns {Array} - The value as an array.
+     */
+    function ensureArray(value) {
+        return Array.isArray(value) ? value : [value];
+    }
+
+    /**
      * Initialize the data layer
      */
     function init() {
@@ -35,13 +46,21 @@
      */
     function processNode(node) {
         // Process the current node
-        if (node.hasAttribute && node.hasAttribute('data-analytics')) {
-            processAnalyticsAttribute(node);
+        if (node.hasAttribute) {
+            if (node.hasAttribute('data-analytics')) {
+                processAnalyticsAttribute(node);
+            }
+            if (node.hasAttribute('data-analytics-contribution')) {
+                processAnalyticsContributionAttribute(node);
+            }
         }
 
         // Process child nodes
-        const children = node.querySelectorAll('[data-analytics]');
-        children.forEach(processAnalyticsAttribute);
+        const analyticsElements = node.querySelectorAll('[data-analytics]');
+        analyticsElements.forEach(processAnalyticsAttribute);
+
+        const contributionElements = node.querySelectorAll('[data-analytics-contribution]');
+        contributionElements.forEach(processAnalyticsContributionAttribute);
     }
 
     /**
@@ -50,14 +69,9 @@
      */
     function processAnalyticsAttribute(element) {
         try {
-            console.info(`loglog ${element.getAttribute('data-analytics')}`);
             const analyticsElement = JSON.parse(element.getAttribute('data-analytics'));
-            let analyticsArray = [];
-            if (Array.isArray(analyticsElement)) {
-                analyticsArray = analyticsElement;
-            } else {
-                analyticsArray.push(analyticsElement);
-            }
+            const analyticsArray = ensureArray(analyticsElement);
+
             analyticsArray.forEach((analyticsData) => {
                 if (analyticsData && analyticsData.type) {
                     // Push the event to the data layer
@@ -65,21 +79,49 @@
                         event: analyticsData.type,
                         ...analyticsData,
                     });
-                } else if (analyticsData && analyticsData.enrichmentTypes) {
-                    // we allow to enrich datalayer events from other elements in the DOM
-                    // we go by the type of the element in the dataLayer to map it in
-                    // enrichable property should be an array, which we push the value on
-                    window.dataLayer.forEach((enrichmentItem) => {
-                        if (analyticsData.enrichmentTypes.includes(enrichmentItem.type)) {
-                            enrichmentItem[analyticsData.enrichmentProperty].push(analyticsData.value);
-                        }
-                    });
                 }
-                // Remove the attribute to prevent duplicate processing
-                element.removeAttribute('data-analytics');
             });
+            // Remove the attribute to prevent duplicate processing
+            element.removeAttribute('data-analytics');
         } catch (error) {
             console.error('Error processing data-analytics attribute:', error);
+        }
+    }
+
+    /**
+     * Process a single element's data-analytics-contribution attribute
+     * @param {Element} element - The element containing the data-analytics-contribution attribute
+     */
+    function processAnalyticsContributionAttribute(element) {
+        try {
+            const contributionConfig = JSON.parse(element.getAttribute('data-analytics-contribution'));
+
+            if (contributionConfig && contributionConfig.contributesTo) {
+                const contributionValues = ensureArray(contributionConfig.value);
+
+                window.dataLayer.forEach((contribution) => {
+                    if (contributionConfig.contributesTo.includes(contribution.type)) {
+                        const property = contributionConfig.contributionOptions.property;
+                        const mode = contributionConfig.contributionOptions.mode;
+
+                        contributionValues.forEach((contributionValue) => {
+                            if (mode === 'array-push') {
+                                if (!Array.isArray(contribution[property])) {
+                                    contribution[property] = [];
+                                }
+
+                                contribution[property].push(contributionValue);
+                            } else if (mode === 'object-assign') {
+                                contribution[property] = { ...contribution[property], ...contributionValue };
+                            }
+                        });
+                    }
+                });
+            }
+            // Remove the attribute to prevent duplicate processing
+            element.removeAttribute('data-analytics-contribution');
+        } catch (error) {
+            console.error('Error processing data-analytics-contribution attribute:', error);
         }
     }
 

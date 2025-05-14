@@ -44,11 +44,11 @@ exports.createModel = function createModel(options) {
                 alt: image.alt,
             })),
             pdpUrl: options.settings.linkProducts !== false ? URLUtils.url('Product-Show', 'pid', item.productID).toString() : null,
-            analytics: JSON.stringify({
-                enrichmentTypes: [
+            analyticsContribution: JSON.stringify({
+                contributesTo: [
                     'beginCheckout',
                 ],
-                enrichmentProperty: 'products',
+                contributionOptions: { property: 'products', mode: 'array-push' },
                 value: {
                     id: item.productID,
                     sku: '',
@@ -98,7 +98,7 @@ exports.template = (model) => (model.empty ? /* html */`
             </tr>
         </thead>
         <tbody>
-        ${model.items.map((item) => `<tr data-analytics='${item.analytics}'>
+        ${model.items.map((item) => `<tr data-analytics-contribution='${item.analyticsContribution}'>
                 <th scope="row">
                     ${item.pdpUrl
         ? `<a href="${item.pdpUrl}"

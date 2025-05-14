@@ -29,6 +29,7 @@ function renderComponent(context) {
     model.regions.main.setClassName('page-checkout');
     model.analytics = JSON.stringify({
         type: 'beginCheckout',
+        // we fill the products from the dom, so we gather the data when we render them
         products: [],
         amount: basket.totalGrossPrice.value,
     });
