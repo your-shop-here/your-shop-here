@@ -486,6 +486,8 @@ Route.prototype.done = function done(req, res) {
  */
 function get(req, res, next) {
     if (request.httpMethod === 'GET') {
+        res.setHttpHeader('Access-Control-Allow-Origin', 'https://api.cquotient.com');
+        res.setHttpHeader('Access-Control-Allow-Headers', 'x-requested-with');
         next();
     } else if (request.httpMethod === 'OPTIONS') {
         const Response = require('dw/system/Response');

@@ -16,6 +16,13 @@ exports.createModel = function createModel(options) {
         price: StringUtils.formatMoney(lineitem.price),
         cartUrl: URLUtils.url('Cart-Show'),
         itemCount: options.basket.productQuantityTotal,
+        analytics: JSON.stringify({
+            type: 'addToCart',
+            id: lineitem.productID,
+            sku: '',
+            price: lineitem.price.value,
+            quantity: lineitem.quantityValue,
+        }),
         resources: {
             close: Resource.msg('addtocart.close', 'translations', null),
             title: Resource.msg('addtocart.title', 'translations', null),
@@ -33,7 +40,7 @@ exports.createModel = function createModel(options) {
  * @returns {string} The HTML template for the add to cart dialog
  */
 exports.template = (model) => `<dialog open>
-<article>
+<article data-analytics='${model.analytics}'>
     <a href="#close"
         aria-label="${model.resources.close}"
         class="close"

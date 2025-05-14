@@ -56,6 +56,22 @@
         <page-attributes/>
     </content>
 
+    <content content-id="0eb0e6da5f33478ab0d9418478">
+        <type>component.order.orderitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "linkProducts" : false,
+  "showOrderNumber" : false,
+  "showSubtotal" : false,
+  "imageViewType" : "small",
+  "imageDISConfig" : "sw=200&amp;sh=200"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="0fff662b8e6366dddec48db08b">
         <type>component.cart.promocode</type>
         <config>{
@@ -83,6 +99,16 @@
 
     <content content-id="151ffc86dd433fd8570b9c4d73">
         <type>component.pdp.productQuantity</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="161bba7f543d5d798ae4dcc86e">
+        <type>component.tracking.sfcceinstein</type>
         <config>{
   "visibility" : [ ]
 }</config>
@@ -311,6 +337,16 @@
         </content-links>
     </content>
 
+    <content content-id="5309f80fa4256718f4a1c75ed8">
+        <type>component.tracking.sfccdatalayer</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5759ae28a7224d25a55f3123fb">
         <type>component.theme.yshHeader</type>
         <config>{
@@ -467,17 +503,17 @@
     </content>
 
     <content content-id="83ace80416deaa3dc3b90872c8">
-      <type>component.theme.miniaccount</type>
-      <config>{
-"visibility" : [ {
-  "schedule" : { },
-  "customer_group_ids" : [ "Registered" ],
-  "campaign_qualifier" : { },
-  "aspect_attribute_qualifiers" : [ ],
-  "locale_ids" : [ ]
-} ]
+        <type>component.theme.miniaccount</type>
+        <config>{
+  "visibility" : [ {
+    "schedule" : { },
+    "customer_group_ids" : [ "Registered" ],
+    "campaign_qualifier" : { },
+    "aspect_attribute_qualifiers" : [ ],
+    "locale_ids" : [ ]
+  } ]
 }</config>
-      <data xml:lang="x-default">{
+        <data xml:lang="x-default">{
 "image" : {
   "path" : "user-icon.svg",
   "focal_point" : {
@@ -488,10 +524,27 @@
 "width" : "50px",
 "label" : "My Account"
 }</data>
-      <online-flag>true</online-flag>
-      <page-attributes/>
-  </content>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
 
+    <content content-id="85361ceb117a996df9f4f04b21">
+        <type>component.tracking.trackingregion</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="5309f80fa4256718f4a1c75ed8" type="component.tracking.trackingregion.providers">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="161bba7f543d5d798ae4dcc86e" type="component.tracking.trackingregion.providers">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+    </content>
 
     <content content-id="8a7c19b3bb75e679541fa6eac0">
         <type>component.base.richText</type>
@@ -674,6 +727,9 @@
                 <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -1011,15 +1067,18 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="0c3ab7e5e936a24933566de0ed" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="4bdcb0b7798c93bb16dbb2722c" type="component.commerce_layouts.column.column1">
                 <position>1.0</position>
             </content-link>
             <content-link content-id="6f3392429cdf5e6a47f3081825" type="component.commerce_layouts.column.column2">
-                <position>1.0</position>
+                <position>2.0</position>
             </content-link>
             <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
                 <position>0.0</position>
             </content-link>
         </content-links>

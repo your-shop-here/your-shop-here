@@ -31,7 +31,7 @@ exports.createModel = function createModel(options) {
 
     const model = {
         empty: false,
-        orderNo: order.orderNo,
+        orderNo: options.settings.showOrderNumber !== false ? order.orderNo : '',
         orderDetailsTitle: options.settings.showOrderNumber !== false
             ? Resource.msgf('order.details', 'translations', null, order.orderNo)
             : '',
@@ -43,10 +43,22 @@ exports.createModel = function createModel(options) {
                 url: `${image.url}?${options.settings.imageDISConfig}`,
                 alt: image.alt,
             })),
-            pdpUrl: URLUtils.url('Product-Show', 'pid', item.productID).toString(),
+            pdpUrl: options.settings.linkProducts !== false ? URLUtils.url('Product-Show', 'pid', item.productID).toString() : null,
+            analyticsContribution: JSON.stringify({
+                contributesTo: [
+                    'beginCheckout',
+                ],
+                contributionOptions: { property: 'products', mode: 'array-push' },
+                value: {
+                    id: item.productID,
+                    sku: '',
+                    price: item.price.value,
+                    quantity: item.quantityValue,
+                },
+            }),
         })),
-        merchandiseTotal: StringUtils.formatMoney(order.adjustedMerchandizeTotalPrice),
-        total: StringUtils.formatMoney(order.totalGrossPrice),
+        merchandiseTotal: options.settings.showSubtotal !== false ? StringUtils.formatMoney(order.adjustedMerchandizeTotalPrice) : null,
+        total: options.settings.showSubtotal !== false ? StringUtils.formatMoney(order.totalGrossPrice) : null,
         labels: {
             quantity: Resource.msg('order.quantity', 'translations', null),
             product: Resource.msg('order.product', 'translations', null),
@@ -86,25 +98,32 @@ exports.template = (model) => (model.empty ? /* html */`
             </tr>
         </thead>
         <tbody>
-        ${model.items.map((item) => `<tr>
-                <th scope="row"><a href="${item.pdpUrl}"
-                        hx-get="${item.pdpUrl}?hx=main"
-                        hx-target="main"
-                        hx-trigger="click"
-                        hx-push-url="${item.pdpUrl}"
-                        hx-indicator=".progress">
-                            ${item.images.map((image) => `<img src="${image.url}" alt="${image.alt}"/>`).join('\n')}
-                        </a></th>
+        ${model.items.map((item) => `<tr data-analytics-contribution='${item.analyticsContribution}'>
+                <th scope="row">
+                    ${item.pdpUrl
+        ? `<a href="${item.pdpUrl}"
+                hx-get="${item.pdpUrl}?hx=main"
+                hx-target="main"
+                hx-trigger="click"
+                hx-push-url="${item.pdpUrl}"
+                hx-indicator=".progress">
+                    ${item.images.map((image) => `<img src="${image.url}" alt="${image.alt}"/>`).join('\n')}
+                </a>`
+        : `${item.images.map((image) => `<img src="${image.url}" alt="${image.alt}"/>`).join('\n')}`}
+                </th>
                 <td>${item.quantity}</td>
-                <td><a href="${item.pdpUrl}"
+                <td>${item.pdpUrl
+        ? `<a href="${item.pdpUrl}"
                         hx-get="${item.pdpUrl}?hx=main"
                         hx-target="main"
                         hx-trigger="click"
                         hx-push-url="${item.pdpUrl}"
-                        hx-indicator=".progress">${item.text}</a></td>
+                        hx-indicator=".progress">${item.text}</a></td>`
+        : `${item.text}`}
                 <td>${item.price}</td>
             </tr>`).join('\n')}
         </tbody>
+        ${model.merchandiseTotal ? `
         <tfoot>
             <tr>
                 <th scope="col"></th>
@@ -112,6 +131,6 @@ exports.template = (model) => (model.empty ? /* html */`
                 <td scope="col">${model.labels.total}</td>
                 <td scope="col">${model.merchandiseTotal}</td>
             </tr>
-        </tfoot>
+        </tfoot>` : ''}
     </table>
 </div>`);

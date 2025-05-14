@@ -43,9 +43,9 @@ function renderComponent (context) {
     } else {
         const parameters = JSON.parse(context.renderParameters);
         model.isInEditMode = false;
-        for (name in parameters) {
+        Object.keys(parameters).forEach((name) => {
             model[name] = parameters[name];
-        }
+        });
     }
     model.CurrentPageMetaData = {};
     // render the page

@@ -31,6 +31,23 @@ exports.createModel = () => {
         model.price = price.createModel(hit, tileSearch, httpParams);
         model.swatches = swatches.createModel(hit, tileSearch, { swatchAttribute: componentSettings.swatchDimension });
         model.addToCartButton = require('./addtocartbutton').createModel(hit);
+        model.analytics = JSON.stringify({
+            type: 'productView',
+            id: hit.object.productID,
+        });
+        model.analyticsContribution = JSON.stringify({
+            contributesTo: [
+                'viewCategory',
+                'viewSearch',
+            ],
+            contributionOptions: { property: 'products', mode: 'array-push' },
+            value: {
+                id: hit.object.productID,
+                sku: '',
+                altId: '',
+                altIdType: '',
+            },
+        });
     }
 
     return model;
@@ -42,7 +59,7 @@ exports.createModel = () => {
  * @returns {string} The HTML for the product tile
  */
 exports.template = (model) => `
-<article data-include-url="${request.httpQueryString}">
+<article data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'>
     <header>${name.template(model.name)}</header>
     <body>
         ${image.template(model.image)}
