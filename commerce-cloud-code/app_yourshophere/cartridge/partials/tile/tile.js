@@ -31,10 +31,23 @@ exports.createModel = () => {
         model.price = price.createModel(hit, tileSearch, httpParams);
         model.swatches = swatches.createModel(hit, tileSearch, { swatchAttribute: componentSettings.swatchDimension });
         model.addToCartButton = require('./addtocartbutton').createModel(hit);
-        model.analytics = JSON.stringify({
+        model.analytics = JSON.stringify([{
             type: 'productView',
             id: hit.object.productID,
-        });
+        }, {
+            enrichmentTypes: [
+                'viewCategory',
+                'viewSearch',
+            ],
+            enrichmentProperty: 'products',
+            value: {
+                id: hit.object.productID,
+                sku: '',
+                altId: '',
+                altIdType: '',
+            },
+        },
+        ]);
     }
 
     return model;

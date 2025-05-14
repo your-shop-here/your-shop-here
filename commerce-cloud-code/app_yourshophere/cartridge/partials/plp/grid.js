@@ -1,7 +1,7 @@
 /**
  * Render search refinements
- * 
- * @returns 
+ *
+ * @returns
  */
 exports.createModel = () => {
     const HttpSearchParams = require('api/URLSearchParams');
@@ -21,12 +21,8 @@ exports.createModel = () => {
     model.desktopColumns = componentSettings.desktopColumns || 3;
     model.mobileColumns = componentSettings.mobileColumns || 2;
     const analyticsData = {
-        products: search.foundProducts.map((hit) => ({
-            id: hit.object.productID,
-            sku: '',
-            altId: '',
-            altIdType: '',
-        })),
+        // the products array will be filled in tile.js, so we leverage the caching of the tiles
+        products: [],
         sortingRule: [{
             attribute: (search.getEffectiveSortingRule() && search.getEffectiveSortingRule().ID) || 'best-matches',
             direction: 'ascending',

@@ -29,12 +29,7 @@ function renderComponent(context) {
     model.regions.main.setClassName('page-checkout');
     model.analytics = JSON.stringify({
         type: 'beginCheckout',
-        products: basket.getAllProductLineItems().toArray().map((item) => ({
-            id: item.productID,
-            sku: '',
-            price: item.price.value,
-            quantity: item.quantityValue,
-        })),
+        products: [],
         amount: basket.totalGrossPrice.value,
     });
     return template(model);

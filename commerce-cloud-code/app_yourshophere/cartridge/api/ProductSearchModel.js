@@ -139,7 +139,7 @@ ProductSearchModel.prototype.nextPageUrl = function nextPageUrl(action) {
     'urlRefineCategory',
     'isRefinedByPriceRange',
     'urlRelaxPrice',
-    'urlRefinePrice', 
+    'urlRefinePrice',
     'urlRefinePromotion',
     'isRefinedByAttributeValue',
     'urlRelaxAttributeValue',
@@ -177,7 +177,7 @@ const urlAllowListBase = [
 
 const urlAllowListPagination = urlAllowListBase.concat([
     'start',
-    'sz'
+    'sz',
 ]);
 
 const urlAllowListAll = urlAllowListPagination.concat(['sort']);

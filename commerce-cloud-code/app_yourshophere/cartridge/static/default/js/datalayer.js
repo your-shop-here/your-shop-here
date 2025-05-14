@@ -50,17 +50,34 @@
      */
     function processAnalyticsAttribute(element) {
         try {
-            const analyticsData = JSON.parse(element.getAttribute('data-analytics'));
-            if (analyticsData && analyticsData.type) {
-                // Push the event to the data layer
-                window.dataLayer.push({
-                    event: analyticsData.type,
-                    ...analyticsData,
-                });
-
+            console.info(`loglog ${element.getAttribute('data-analytics')}`);
+            const analyticsElement = JSON.parse(element.getAttribute('data-analytics'));
+            let analyticsArray = [];
+            if (Array.isArray(analyticsElement)) {
+                analyticsArray = analyticsElement;
+            } else {
+                analyticsArray.push(analyticsElement);
+            }
+            analyticsArray.forEach((analyticsData) => {
+                if (analyticsData && analyticsData.type) {
+                    // Push the event to the data layer
+                    window.dataLayer.push({
+                        event: analyticsData.type,
+                        ...analyticsData,
+                    });
+                } else if (analyticsData && analyticsData.enrichmentTypes) {
+                    // we allow to enrich datalayer events from other elements in the DOM
+                    // we go by the type of the element in the dataLayer to map it in
+                    // enrichable property should be an array, which we push the value on
+                    window.dataLayer.forEach((enrichmentItem) => {
+                        if (analyticsData.enrichmentTypes.includes(enrichmentItem.type)) {
+                            enrichmentItem[analyticsData.enrichmentProperty].push(analyticsData.value);
+                        }
+                    });
+                }
                 // Remove the attribute to prevent duplicate processing
                 element.removeAttribute('data-analytics');
-            }
+            });
         } catch (error) {
             console.error('Error processing data-analytics attribute:', error);
         }

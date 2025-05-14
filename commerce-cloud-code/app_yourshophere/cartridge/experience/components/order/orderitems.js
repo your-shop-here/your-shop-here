@@ -7,8 +7,10 @@
  */
 exports.render = function render(context) {
     const OrderMgr = require('dw/order/OrderMgr');
+    const BasketMgr = require('dw/order/BasketMgr');
+
     return require('*/cartridge/partials/renderer').html('order/orderitems')({
         settings: context.content,
-        order: OrderMgr.getOrder(session.privacy.placeOrderNo),
+        order: session.privacy.placeOrderNo !== 'invalid' ? OrderMgr.getOrder(session.privacy.placeOrderNo) : BasketMgr.getCurrentBasket(),
     });
 };

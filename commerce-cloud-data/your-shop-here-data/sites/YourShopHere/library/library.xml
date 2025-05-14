@@ -56,6 +56,22 @@
         <page-attributes/>
     </content>
 
+    <content content-id="0eb0e6da5f33478ab0d9418478">
+        <type>component.order.orderitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "linkProducts" : false,
+  "showOrderNumber" : false,
+  "showSubtotal" : false,
+  "imageViewType" : "small",
+  "imageDISConfig" : "sw=200&amp;sh=200"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="0fff662b8e6366dddec48db08b">
         <type>component.cart.promocode</type>
         <config>{
@@ -487,17 +503,17 @@
     </content>
 
     <content content-id="83ace80416deaa3dc3b90872c8">
-      <type>component.theme.miniaccount</type>
-      <config>{
-"visibility" : [ {
-  "schedule" : { },
-  "customer_group_ids" : [ "Registered" ],
-  "campaign_qualifier" : { },
-  "aspect_attribute_qualifiers" : [ ],
-  "locale_ids" : [ ]
-} ]
+        <type>component.theme.miniaccount</type>
+        <config>{
+  "visibility" : [ {
+    "schedule" : { },
+    "customer_group_ids" : [ "Registered" ],
+    "campaign_qualifier" : { },
+    "aspect_attribute_qualifiers" : [ ],
+    "locale_ids" : [ ]
+  } ]
 }</config>
-      <data xml:lang="x-default">{
+        <data xml:lang="x-default">{
 "image" : {
   "path" : "user-icon.svg",
   "focal_point" : {
@@ -508,10 +524,9 @@
 "width" : "50px",
 "label" : "My Account"
 }</data>
-      <online-flag>true</online-flag>
-      <page-attributes/>
-  </content>
-
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
 
     <content content-id="85361ceb117a996df9f4f04b21">
         <type>component.tracking.trackingregion</type>
@@ -1052,15 +1067,18 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="0c3ab7e5e936a24933566de0ed" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="4bdcb0b7798c93bb16dbb2722c" type="component.commerce_layouts.column.column1">
                 <position>1.0</position>
             </content-link>
             <content-link content-id="6f3392429cdf5e6a47f3081825" type="component.commerce_layouts.column.column2">
-                <position>1.0</position>
+                <position>2.0</position>
             </content-link>
             <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
                 <position>0.0</position>
             </content-link>
         </content-links>
