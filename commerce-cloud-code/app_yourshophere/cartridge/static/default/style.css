@@ -93,6 +93,10 @@ select {
     color: var(--ysh-selectbox-text-color);
 }
 
+input.search-field {
+    height: calc(1rem * var(--line-height) + .5 * var(--form-element-spacing-vertical) + var(--border-width) * 2);
+}
+
 .grid {
     display: grid;
     gap: 1rem; /* Adjust the gap between columns */

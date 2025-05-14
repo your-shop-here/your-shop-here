@@ -110,7 +110,7 @@ server.post(
 
         // @todo move form validation to form definition
         // if (registrationForm.email.toLowerCase() !== registrationForm.emailConfirm.toLowerCase()) {
-        //     form.addFormError(Resource.msg('error.message.mismatch.email', 'forms', null));
+        //     form.addFormError(Resource.msg('error.message.mismatch.email', 'translations', null));
         // }
 
         if (registrationForm.password !== registrationForm.passwordConfirm) {

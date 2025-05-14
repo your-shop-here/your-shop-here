@@ -24,6 +24,7 @@ exports.render = function render(context) {
 
 function renderComponent (context) {
     const model = new HashMap();
+    const Site = require('dw/system/Site');
     const page = context.page;
     model.page = page;
 
@@ -36,7 +37,7 @@ function renderComponent (context) {
     // Used in htmlHead.isml via common/layout/page.isml decorator.
     model.CurrentPageMetaData = PageRenderHelper.getPageMetaData(page);
     model.CurrentPageMetaData = {};
-    model.CurrentPageMetaData.title = page.pageTitle;
+    model.CurrentPageMetaData.title = page.pageTitle || Site.current.name;
     model.CurrentPageMetaData.description = page.pageDescription;
     model.CurrentPageMetaData.keywords = page.pageKeywords;
 
