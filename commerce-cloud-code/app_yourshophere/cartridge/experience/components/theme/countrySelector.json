@@ -19,5 +19,10 @@
             ]
         }
     ],
-    "region_definitions": []
+    "region_definitions": [
+        {
+            "id": "additionalContent",
+            "name": "Additional Content"
+        }
+    ]
 }
