@@ -1,0 +1,37 @@
+{
+    "name": "Order Product items",
+    "description": "This component shows the items in an order.",
+    "group": "Order",
+    "attribute_definition_groups": [
+        {
+            "id": "orderItems",
+            "name": "Settings",
+            "description": "Order Items Settings",
+            "attribute_definitions": [
+                {
+                    "id": "imageViewType",
+                    "name": "Image View Type",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "imageDISConfig",
+                    "name": "Image Dimensions",
+                    "description": "DIS parameters i.e. sw=300&sh=400",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "showOrderNumber",
+                    "name": "Show Order Number",
+                    "description": "Toggle to show/hide the order number in the title",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 

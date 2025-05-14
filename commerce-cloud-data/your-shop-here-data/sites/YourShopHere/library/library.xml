@@ -51,7 +51,6 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "customClass" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -368,7 +367,7 @@
 }</config>
         <data xml:lang="x-default">{
   "inParagraph" : "No",
-  "richText" : "&lt;h1&gt;Thanks for your purchase&lt;/h1&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;I guess&lt;/p&gt;",
+  "richText" : "&lt;h1&gt;Thank you for your purchase!&lt;/h1&gt;",
   "align" : "center"
 }</data>
         <online-flag>true</online-flag>
@@ -1166,6 +1165,33 @@
         </content-links>
     </content>
 
+    <content content-id="f3b1587aaffe7bb76be9d25a42">
+        <type>component.order.orderitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "imageViewType" : null,
+  "imageDISConfig" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="f52f16dcfe37bb6f921ab74631">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;p&gt;&lt;a href=\"/on/demandware.store/Sites-YourShopHere-Site/default/Home-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"/on/demandware.store/Sites-YourShopHere-Site/default/Home-Show\"&gt;&lt;img src=\"unofficial.svg?$staticlink$\" alt=\"YourShopHere\"&gt;YourShopHere&lt;/a&gt;&lt;/p&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="f6ff9d26a14d5a7d12c00895fd">
         <type>component.theme.miniaccount</type>
         <config>{
@@ -1281,6 +1307,9 @@
         <content-links>
             <content-link content-id="5ed68db607f706611727a7a29d" type="page.contentPage.main">
                 <position>0.0</position>
+            </content-link>
+            <content-link content-id="f3b1587aaffe7bb76be9d25a42" type="page.contentPage.main">
+                <position>1.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
