@@ -93,6 +93,10 @@ select {
     color: var(--ysh-selectbox-text-color);
 }
 
+input.search-field {
+    height: calc(1rem * var(--line-height) + .5 * var(--form-element-spacing-vertical) + var(--border-width) * 2);
+}
+
 .grid {
     display: grid;
     gap: 1rem; /* Adjust the gap between columns */
@@ -558,3 +562,149 @@ select {
         display: block;
     }
 }
+
+/* Country Language Selector */
+.country-language-selector {
+    position: relative;
+    display: inline-block;
+}
+
+.country-language-selector .dropdown {
+    position: relative;
+}
+
+.country-language-selector .btn {
+    display: flex;
+    align-items: center;
+    gap: var(--ysh-spacing-sm);
+    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
+    background-color: transparent;
+    border: 1px solid var(--ysh-border-color);
+    color: var(--ysh-text-primary);
+    font-size: var(--ysh-font-size-sm);
+    cursor: pointer;
+    transition: all var(--ysh-transition-normal) ease;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.country-language-selector .btn:hover {
+    background-color: var(--ysh-bg-secondary);
+    border-color: var(--ysh-border-color-hover);
+}
+
+.country-language-selector .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 320px;
+    margin-top: var(--ysh-spacing-xs);
+    padding: var(--ysh-spacing-xs) 1em;
+    background-color: var(--ysh-bg-primary);
+    border: 1px solid var(--ysh-border-color);
+    border-radius: var(--ysh-border-radius-md);
+    box-shadow: var(--ysh-shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--ysh-transition-normal) ease;
+    z-index: 1000;
+    list-style: none;
+}
+
+.country-language-selector:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.country-language-selector .dropdown-menu li {
+    list-style: none;
+}
+
+.country-language-selector .dropdown-menu h6 {
+    display: inline;
+}
+
+.country-language-selector .country-group {
+    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--ysh-spacing-xs);
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    list-style: none;
+}
+
+.country-language-selector .country-group::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.country-language-selector .country-group:not(:last-child) {
+    border-bottom: 1px solid var(--ysh-border-color);
+}
+
+.country-language-selector .country-header {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ysh-spacing-xs);
+    font-weight: 500;
+    color: var(--ysh-text-secondary);
+    flex-shrink: 0;
+}
+
+.country-language-selector .dropdown-item {
+    display: inline-block;
+    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
+    color: var(--ysh-text-primary);
+    text-decoration: none;
+    transition: background-color var(--ysh-transition-fast) ease;
+    border-radius: var(--ysh-border-radius-sm);
+    font-size: var(--ysh-font-size-sm);
+    white-space: nowrap;
+}
+
+.country-language-selector .dropdown-item:hover {
+    background-color: var(--ysh-bg-secondary);
+}
+
+.country-language-selector .dropdown-item.active {
+    background-color: var(--ysh-bg-secondary);
+    color: var(--ysh-primary);
+    font-weight: 500;
+}
+
+/* Mobile styles */
+@media (max-width: 1024px) {
+    .country-language-selector .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+        border-radius: var(--ysh-border-radius-lg) var(--ysh-border-radius-lg) 0 0;
+        transform: translateY(100%);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .country-language-selector:hover .dropdown-menu {
+        transform: translateY(0);
+    }
+
+    .country-language-selector .country-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--ysh-spacing-xs);
+        white-space: normal;
+    }
+
+    .country-language-selector .country-header {
+        margin-bottom: var(--ysh-spacing-xs);
+    }
+}
+

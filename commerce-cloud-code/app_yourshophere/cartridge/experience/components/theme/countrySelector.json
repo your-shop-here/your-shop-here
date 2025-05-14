@@ -1,0 +1,23 @@
+{
+    "name": "Country Selector",
+    "description": "Displays a dropdown to select country and language",
+    "group": "theming",
+    "attribute_definition_groups": [
+        {
+            "id": "settings",
+            "name": "Settings",
+            "description": "Country selector settings",
+            "attribute_definitions": [
+                {
+                    "id": "showFlag",
+                    "name": "Show Flag",
+                    "description": "Show country flag emoji in selector",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}
