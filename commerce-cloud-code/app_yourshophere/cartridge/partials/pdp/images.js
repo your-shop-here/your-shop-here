@@ -1,8 +1,21 @@
+/**
+ * Creates a model for the PDP images slider
+ *
+ * @param {Object} options - The options object
+ * @param {Object} options.product - The product object
+ * @param {Object} options.settings - The settings object
+ * @param {string} options.settings.viewType - The view type
+ * @param {number} options.settings.imageCount - The number of images to display
+ * @returns {Object} The model object
+ */
 exports.createModel = function createModel(options) {
-    const variationModel = require('./variationAttributes').getVariationModel(options.product);
+    let imageSource = options.product;
+    if (options.product.variant || options.product.master) {
+        imageSource = require('./variationAttributes').getVariationModel(options.product);
+    }
 
     const model = {
-        images: variationModel.getImages(options.settings.viewType).toArray()
+        images: imageSource.getImages(options.settings.viewType).toArray()
             .slice(0, options.settings.imageCount).map((image, index) => ({
                 url: image.url,
                 alt: image.alt,
@@ -12,6 +25,12 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
+/**
+ * Renders the PDP images slider
+ *
+ * @param {Object} model - The model object
+ * @returns {string} The rendered HTML
+ */
 exports.template = model => `
     <div class="image-slider">
         <div class="slider-viewport">

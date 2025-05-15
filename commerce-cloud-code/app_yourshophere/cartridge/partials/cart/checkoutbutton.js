@@ -14,7 +14,7 @@ exports.createModel = function createModel(product) {
     const currentBasket = BasketMgr.getCurrentBasket();
 
     const model = {
-        disabled: currentBasket == null || currentBasket.getTotalGrossPrice().value === 0,
+        disabled: currentBasket == null || !currentBasket.getTotalGrossPrice().available,
         title: Resource.msg('checkout', 'translations', null),
         url: URLUtils.url('Checkout-Show').toString(),
     }; // eslint-disable-line no-undef
