@@ -97,6 +97,19 @@
         <page-attributes/>
     </content>
 
+    <content content-id="0785f27be4aa240f3421d4ed55">
+        <type>component.pdp.bundleorsetproducts</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showAddToCart" : true,
+  "title" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="0c3ab7e5e936a24933566de0ed">
         <type>component.checkout.ordertotals</type>
         <config>{
@@ -381,19 +394,6 @@
         <page-attributes/>
     </content>
 
-    <content content-id="3c77c3a1028b18ef4ec583d928">
-        <type>component.pdp.productImages</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "imageCount" : 4,
-  "viewType" : "large"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="3e98f7c67632a9006e8ab9fd0f">
         <type>component.theme.icon</type>
         <config>{
@@ -491,24 +491,25 @@
         </content-links>
     </content>
 
-    <content content-id="4fa807029d413ccaaf69b70e98">
-        <type>component.pdp.bundleorsetproducts</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "title" : null
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="5309f80fa4256718f4a1c75ed8">
         <type>component.tracking.sfccdatalayer</type>
         <config>{
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="55210987f91643aff4898ac426">
+        <type>component.pdp.productImages</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "imageCount" : 2,
+  "viewType" : "large"
+}</data>
         <online-flag>true</online-flag>
         <page-attributes/>
     </content>
@@ -742,18 +743,28 @@
         <page-attributes/>
     </content>
 
-    <content content-id="7ec790ecf4d4413b356d023005">
-        <type>component.pdp.productDescription</type>
+    <content content-id="80b8b8416c27193c9ba3feb19d">
+        <type>component.commerce_layouts.column</type>
         <config>{
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "shortOrLongDescription" : "Long_Description",
-  "divExpandedOrCompress" : false,
-  "descriptionTitle" : null
+  "columns" : 2,
+  "style" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+        <content-links>
+            <content-link content-id="55210987f91643aff4898ac426" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="0785f27be4aa240f3421d4ed55" type="component.commerce_layouts.column.column2">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="83ace80416deaa3dc3b90872c8">
@@ -1292,11 +1303,11 @@
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="17a7499d6649a03709ce906b49" type="page.productPage.main">
+            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="f9142916ba6d826d7dca5fa0ce" type="page.productPage.main">
-                <position>2.0</position>
+            <content-link content-id="f1119c433af0b5988b599bb481" type="page.productPage.main">
+                <position>0.0</position>
             </content-link>
         </content-links>
         <content-object-assignments>
@@ -1626,6 +1637,20 @@
         </content-links>
     </content>
 
+    <content content-id="f1119c433af0b5988b599bb481">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h2&gt;Look Book&lt;/h2&gt;",
+  "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="f3b1587aaffe7bb76be9d25a42">
         <type>component.order.orderitems</type>
         <config>{
@@ -1677,29 +1702,6 @@
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
-    </content>
-
-    <content content-id="f9142916ba6d826d7dca5fa0ce">
-        <type>component.commerce_layouts.onefourth</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "addStyleClassName" : null
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-        <content-links>
-            <content-link content-id="4fa807029d413ccaaf69b70e98" type="component.commerce_layouts.onefourth.column2">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="3c77c3a1028b18ef4ec583d928" type="component.commerce_layouts.onefourth.column1">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="7ec790ecf4d4413b356d023005" type="component.commerce_layouts.onefourth.column1">
-                <position>1.0</position>
-            </content-link>
-        </content-links>
     </content>
 
     <content content-id="ff17812b4051fc249cb7965304">
