@@ -25,7 +25,8 @@ exports.createModel = function createModel(options) {
             price: formatMoney(containedProduct.priceModel.price),
             quantity: product.bundle ? product.getBundledProductQuantity(containedProduct).value : 1,
             image: containedProduct.getImages('medium')[0].url,
-            addToCartButton: partials.html('pdp/addtocartbutton')(containedProduct),
+            addToCartButton: options.settings.showAddToCart ? partials.html('pdp/addtocartbutton')(containedProduct) : '',
+
         }));
     }
 
@@ -46,7 +47,7 @@ exports.template = (model) => {
     return `
         ${model.title ? `<h2 class="bundle-title">${model.title}</h2>` : ''}
         <div class="bundle-products">
-            ${model.items.map(item => `
+            ${model.items.map((item) => `
                 <div class="bundle-product">
                     <div class="bundle-product-image">
                         <img src="${item.image}" alt="${item.name}">
