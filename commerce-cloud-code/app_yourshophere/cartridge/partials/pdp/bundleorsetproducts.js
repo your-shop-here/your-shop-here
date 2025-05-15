@@ -25,7 +25,7 @@ exports.createModel = function createModel(options) {
             price: formatMoney(containedProduct.priceModel.price),
             quantity: product.bundle ? product.getBundledProductQuantity(containedProduct).value : 1,
             image: containedProduct.getImages('medium')[0].url,
-            addToCartButton: partials.html('pdp/addtocartbutton')(containedProduct),
+            addToCartButton: options.settings.showAddToCart ? partials.html('pdp/addtocartbutton')(containedProduct) : '',
         }));
     }
 

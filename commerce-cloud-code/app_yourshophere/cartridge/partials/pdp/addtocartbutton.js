@@ -1,23 +1,30 @@
+/**
+ * Creates a model for the Product add to cart button
+ *
+ * @param {Object} product - The product object
+ * @returns {Object} The model object
+ */
 exports.createModel = function createModel(product) {
     const Resource = require('dw/web/Resource');
     const URLUtils = require('dw/web/URLUtils');
 
     const model = {
         id: product.ID,
-        disabled: false,
+        disabled: !product.priceModel.price.available,
         title: Resource.msg('add_to_bag', 'translations', null),
         url: URLUtils.url('Cart-Add', 'pid', product.ID, 'hx', 'cart-modal'),
-    }; // eslint-disable-line no-undef
+    };
 
-    // @todo use template function
     return model;
 };
 
 /**
- * Renders a Product add to cart modal
+ * Renders a Product add to cart button
  *
+ * @param {Object} model - The model object
+ * @returns {string} The rendered HTML
  */
-exports.template = model => `
+exports.template = (model) => /* html */ `
     <button class="add-to-cart btn btn-primary"
         data-pid="${model.id}"
         ${model.disabled ? 'disabled' : ''}

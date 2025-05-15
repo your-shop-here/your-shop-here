@@ -59,7 +59,6 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
-// @TODO Localise text
 exports.template = (model) => (model.empty ? /* html */ `
     <div class="cart-error-message" role="alert">
         <p>${model.emptyMessage}</p>

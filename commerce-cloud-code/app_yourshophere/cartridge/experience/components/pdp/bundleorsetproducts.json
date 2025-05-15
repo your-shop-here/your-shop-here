@@ -14,6 +14,12 @@
                     "description": "Title for the bundle or set products section",
                     "type": "string",
                     "required": false
+                },
+                {
+                    "id": "showAddToCart",
+                    "name": "Show Add to Cart",
+                    "description": "Display add to cart button for individual items",
+                    "type": "boolean"
                 }
             ]
         }
