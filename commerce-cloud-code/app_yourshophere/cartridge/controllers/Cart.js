@@ -1,4 +1,3 @@
-'use strict';
 
 const server = require('server');
 const Logger = require('dw/system/Logger').getLogger('Cart');
@@ -36,10 +35,13 @@ server.use('Add', (req, res, next) => {
     const pid = req.httpParameterMap.pid.stringValue;
     const qty = req.httpParameterMap.qty.submitted ? req.httpParameterMap.qty.doubleValue : 1;
     let lineitem;
-    if (pid && ProductMgr.getProduct(pid)) {
-        const variationModel = require('*/cartridge/partials/pdp/variationAttributes').getVariationModel(ProductMgr.getProduct(pid));
 
-        const product = variationModel.selectedVariant;
+    let product = pid && ProductMgr.getProduct(pid);
+    if (pid && product) {
+        const variationModel = require('*/cartridge/partials/pdp/variationAttributes').getVariationModel(ProductMgr.getProduct(pid));
+        if (variationModel.selectedVariant) {
+            product = variationModel.selectedVariant;
+        }
 
         lineitem = basket.getProductLineItems(product.ID).toArray().pop();
         Transaction.wrap(() => {
@@ -205,13 +207,13 @@ server.post('AddCoupon', server.middleware.https, (req, res, next) => {
     const redirectUrl = request.httpParameterMap.hx.submitted ? URLUtils.url('Cart-Show', 'hx', request.httpParameterMap.hx.stringValue || '') : URLUtils.url('Cart-Show');
 
     if (!currentBasket) {
-        res.redirect(redirectUrl.append('error','error.basket.empty'));
+        res.redirect(redirectUrl.append('error', 'error.basket.empty'));
         Logger.info('No basket found');
         return next();
     }
 
     if (!couponCode) {
-        res.redirect(redirectUrl.append('error','error.couponcode.missing'));
+        res.redirect(redirectUrl.append('error', 'error.couponcode.missing'));
         Logger.info('No coupon code provided');
         return next();
     }
@@ -222,7 +224,7 @@ server.post('AddCoupon', server.middleware.https, (req, res, next) => {
         });
     } catch (e) {
         if (e.errorCode === CouponStatusCodes.COUPON_CODE_ALREADY_IN_BASKET) {
-            res.redirect(redirectUrl.append('error','error.couponcode.alreadyinbasket'));
+            res.redirect(redirectUrl.append('error', 'error.couponcode.alreadyinbasket'));
             Logger.info('Coupon code already in basket');
             return next();
         }
@@ -244,7 +246,7 @@ server.get('RemoveCoupon', server.middleware.https, (req, res, next) => {
     const redirectUrl = request.httpParameterMap.hx.submitted ? URLUtils.url('Cart-Show', 'hx', request.httpParameterMap.hx.stringValue || '') : URLUtils.url('Cart-Show');
 
     if (currentBasket.couponLineItems.length <= index) {
-        res.redirect(redirectUrl.append('error','error.coupon.invalidindex'));
+        res.redirect(redirectUrl.append('error', 'error.coupon.invalidindex'));
         Logger.info('Invalid coupon index');
         return next();
     }
@@ -254,7 +256,7 @@ server.get('RemoveCoupon', server.middleware.https, (req, res, next) => {
             currentBasket.removeCouponLineItem(currentBasket.couponLineItems[index]);
         });
     } catch (e) {
-        redirectUrl.append('error','error.coupon.removefailed');
+        redirectUrl.append('error', 'error.coupon.removefailed');
         Logger.info('Failed to remove coupon');
     }
 
