@@ -319,6 +319,12 @@ input.search-field {
     margin-bottom: 10px;
 }
 
+.overBleed {
+    width: 120%;
+    margin-bottom:  -30%;
+    margin-left: -5%;
+}
+
 .product-grid article .price, .product-grid article .strike {
     margin-top: 10px;
     text-align: center;

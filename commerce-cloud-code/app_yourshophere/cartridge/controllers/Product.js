@@ -17,7 +17,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
 
     pageMetaData.setPageMetaTags(req.pageMetaData, Site.current);
     const productId = request.httpParameterMap.pid.submitted ? request.httpParameterMap.pid.stringValue : null;
-    const product = productId && ProductMgr.getProduct(productId);
+    let product = productId && ProductMgr.getProduct(productId);
     let error;
 
     if (!product || !product.online) {
@@ -29,6 +29,22 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
 
     let page = PageMgr.getPageByProduct(product, true, 'product');
     const master = product.variant ? product.masterProduct : product;
+    const variationGroup = product.variationGroup;
+    const variationMap = new HashMap();
+
+    // determine wether ariation selection is complete and render selected variant if it is
+    if (master || variationGroup) {
+        const subMap = request.httpParameterMap.getParameterMap(`dwvar_${productId}_`);
+        subMap.getParameterNames().toArray().forEach((variationAttribeId) => {
+            const variationAttributeValue = subMap.get(variationAttribeId).stringValue;
+            variationMap.put(variationAttribeId, variationAttributeValue);
+        });
+        const variants = product.variationModel.getVariants(variationMap).toArray();
+        if (variants.length === 1) {
+            product = variants.pop();
+        }
+    }
+
     if (!(page && page.isVisible())) {
         let category = master.primaryCategory;
         if (!category) {

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="ysh-nto-sets-and-bundles-cat">
+    <header>
+        <image-settings>
+            <internal-location base-path="/"/>
+            <view-types>
+                <view-type>large</view-type>
+                <view-type>medium</view-type>
+                <view-type>small</view-type>
+                <view-type>swatch</view-type>
+                <view-type>hi-res</view-type>
+            </view-types>
+            <variation-attribute-id>yshColor</variation-attribute-id>
+            <alt-pattern>${productname}</alt-pattern>
+            <title-pattern>${productname}</title-pattern>
+        </image-settings>
+    </header>
+
+    <category category-id="root">
+        <display-name xml:lang="x-default">Sets and Bundles Catalog</display-name>
+        <online-flag>true</online-flag>
+        <template/>
+        <page-attributes/>
+    </category>
+
+    <product product-id="nutrition-bundle-one">
+        <ean/>
+        <upc/>
+        <unit/>
+        <unit-quantity>0</unit-quantity>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <display-name xml:lang="x-default">Tasting Starter Pack</display-name>
+        <short-description xml:lang="x-default">Try all our flavours with this tasting pack&#13;
+- Tarte Cherry&#13;
+- Chai&#13;
+- Green Tea</short-description>
+        <long-description xml:lang="x-default">Try all our flavours with this tasting pack&#13;
+- Tarte Cherry&#13;
+- Chai&#13;
+- Green Tea</long-description>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>true</searchable-flag>
+        <images>
+            <image-group view-type="hi-res">
+                <image path="bundle-1.jpg"/>
+            </image-group>
+            <image-group view-type="large">
+                <image path="bundle-1.jpg"/>
+            </image-group>
+            <image-group view-type="medium">
+                <image path="bundle-1.jpg"/>
+            </image-group>
+            <image-group view-type="small">
+                <image path="bundle-1.jpg"/>
+            </image-group>
+            <image-group view-type="swatch">
+                <image path="bundle-1.jpg"/>
+            </image-group>
+        </images>
+        <page-attributes/>
+        <bundled-products>
+            <bundled-product product-id="6010020-6">
+                <quantity>1</quantity>
+            </bundled-product>
+            <bundled-product product-id="6010023-6">
+                <quantity>1</quantity>
+            </bundled-product>
+            <bundled-product product-id="6010024-6">
+                <quantity>1</quantity>
+            </bundled-product>
+        </bundled-products>
+        <classification-category catalog-id="ysh-nto-navigation-catalog">nutrition-drinks</classification-category>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="outdoor-set-women-one">
+        <ean/>
+        <upc/>
+        <unit/>
+        <unit-quantity>0</unit-quantity>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <display-name xml:lang="x-default">Fishing Set Women One</display-name>
+        <short-description xml:lang="x-default">Our recommendation for a successful fishing trip, stay dry and relax</short-description>
+        <long-description xml:lang="x-default">Our recommendation for a successful fishing trip, stay dry and relax</long-description>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>true</searchable-flag>
+        <images>
+            <image-group view-type="hi-res">
+                <image path="set-1.jpg"/>
+            </image-group>
+            <image-group view-type="large">
+                <image path="set-1.jpg"/>
+            </image-group>
+            <image-group view-type="medium">
+                <image path="set-1.jpg"/>
+            </image-group>
+            <image-group view-type="small">
+                <image path="set-1.jpg"/>
+            </image-group>
+            <image-group view-type="swatch">
+                <image path="set-1.jpg"/>
+            </image-group>
+        </images>
+        <page-attributes/>
+        <product-set-products>
+            <product-set-product product-id="2040261AFZAD7"/>
+            <product-set-product product-id="2020489AC8AD4"/>
+            <product-set-product product-id="2010268AC8AD4"/>
+            <product-set-product product-id="2030619APYAD4"/>
+            <product-set-product product-id="2050453ADYAC9"/>
+        </product-set-products>
+        <classification-category catalog-id="ysh-nto-navigation-catalog">women</classification-category>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+</catalog>

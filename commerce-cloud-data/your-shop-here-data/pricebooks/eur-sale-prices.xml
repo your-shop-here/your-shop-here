@@ -493,11 +493,6 @@
                 <amount quantity="1">129.60</amount>
             </price-table>
 
-            <price-table product-id="22956726">
-
-                <price-info>Buy more, pay less!</price-info>
-            </price-table>
-
             <price-table product-id="25599642">
                 <amount quantity="1">7.20</amount>
                 <amount quantity="3">8.00</amount>
@@ -13994,6 +13989,7 @@
             <price-table product-id="883360544397">
                 <amount quantity="1">100.80</amount>
             </price-table>
+
         </price-tables>
     </pricebook>
 </pricebooks>

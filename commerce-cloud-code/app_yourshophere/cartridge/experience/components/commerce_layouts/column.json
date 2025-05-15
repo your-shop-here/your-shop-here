@@ -13,6 +13,7 @@
                     "description": "the number of columns (up to 4)",
                     "type": "enum",
                     "values": [
+                      1,
                       2,
                       3,
                       4
