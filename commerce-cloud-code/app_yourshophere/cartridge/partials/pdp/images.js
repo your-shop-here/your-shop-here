@@ -10,7 +10,7 @@
  */
 exports.createModel = function createModel(options) {
     let imageSource = options.product;
-    if (options.product.variant || options.product.master) {
+    if (options.product.variant || options.product.master || options.product.variationGroup) {
         imageSource = require('./variationAttributes').getVariationModel(options.product);
     }
 
