@@ -37,7 +37,7 @@ server.use('Add', (req, res, next) => {
     let lineitem;
 
     let product = pid && ProductMgr.getProduct(pid);
-    if (product) {
+    if (pid && product) {
         const variationModel = require('*/cartridge/partials/pdp/variationAttributes').getVariationModel(ProductMgr.getProduct(pid));
         if (variationModel.selectedVariant) {
             product = variationModel.selectedVariant;

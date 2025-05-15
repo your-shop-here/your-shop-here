@@ -3,6 +3,6 @@ module.exports = function addLazyProperty(object, name, callback) {
         get: function () {
             return callback.apply(object, [object]);
         },
-        configurable: true
+        configurable: true,
     });
-}
+};

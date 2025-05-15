@@ -32,6 +32,7 @@ function renderComponent (context) {
     const metaDefinition = require('*/cartridge/experience/pages/cartPage.json');
 
     model.regions = new RegionModelRegistry(page, metaDefinition);
+    model.regions.main.setClassName('page-cart');
 
     // Determine seo meta data.
     // Used in htmlHead.isml via common/layout/page.isml decorator.

@@ -1,0 +1,22 @@
+{
+    "name": "Welcome Back Message",
+    "description": "A component that displays a personalized welcome back message to the authenticated user.",
+    "group": "Account",
+    "attribute_definition_groups": [
+        {
+            "id": "styling",
+            "name": "Styling",
+            "description": "Style settings for the welcome back message",
+            "attribute_definitions": [
+                {
+                    "id": "welcomeMessage",
+                    "name": "Welcome Message",
+                    "description": "The welcome message to display to the user, you can use the following placeholders: {0} for the first name and {1} for the last name .",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 

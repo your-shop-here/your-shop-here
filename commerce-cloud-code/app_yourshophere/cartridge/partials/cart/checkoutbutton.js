@@ -1,3 +1,12 @@
+
+/**
+ * Creates a model object containing checkout button information
+ * @param {Object} product - The product object (unused in this function)
+ * @returns {Object} Model containing checkout button information
+ * @property {boolean} disabled - Whether the checkout button is disabled
+ * @property {string} title - The title of the checkout button
+ * @property {string} url - The URL of the checkout page
+ */
 exports.createModel = function createModel(product) {
     const Resource = require('dw/web/Resource');
     const URLUtils = require('dw/web/URLUtils');
@@ -14,15 +23,18 @@ exports.createModel = function createModel(product) {
 };
 
 /**
- * Renders a Product add to cart modal
+ * Renders a checkout button
  *
+ * @param {Object} model - The model object containing checkout button information
+ * @returns {string} The HTML template for the checkout button
  */
 exports.template = model => `
 <button class="checkout btn btn-primary"
     ${model.disabled ? 'disabled' : ''}
     hx-get="${model.url}"
+    hx-push-url="${model.url}"
     hx-trigger="click"
-    hx-target="html"
+    hx-target="body"
     hx-indicator=".progress">
     ${model.title}
 </button>`;

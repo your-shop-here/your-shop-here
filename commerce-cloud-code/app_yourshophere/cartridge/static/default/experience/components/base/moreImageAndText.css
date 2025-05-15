@@ -113,7 +113,7 @@ span.image-below {
 }
 
 .fg-bgcolor a {
-    color: var(--skin-background-color-1);
+    color: var(--ysh-background);
 }
 
 .fg-interation a {

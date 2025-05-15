@@ -1,3 +1,10 @@
+
+/**
+ * Gets the variation model for the product
+ *
+ * @param {Object} product The product object
+ * @returns {Object} The variation model for the product
+ */
 exports.getVariationModel = function getVariationModel(product) {
     const HttpSearchParams = require('api/URLSearchParams');
 
@@ -9,8 +16,16 @@ exports.getVariationModel = function getVariationModel(product) {
     return variationModel;
 };
 
+/**
+ * Creates a model for the variation attributes
+ *
+ * @param {Object} product The product object
+ * @returns {Object} The model for the variation attributes
+ */
 exports.createModel = function createModel(product) {
     const URLUtils = require('dw/web/URLUtils');
+    const Resource = require('dw/web/Resource');
+    const params = request.custom.model ? request.custom.model.httpParameter : request.httpParameterMap;
 
     const variationModel = exports.getVariationModel(product);
 
@@ -33,8 +48,10 @@ exports.createModel = function createModel(product) {
                 })),
                 url: URLUtils.url('Product-Show', 'pid', variationModel.master.ID, 'hx', 'main'),
                 selectName: `dwvar_${variationModel.master.ID}_${attribute.ID}`,
+                message: Resource.msgf('pdp.variation.select', 'translations', null, attribute.displayName),
             };
         })),
+        hxTarget: params.hx || 'main',
     };
 
     return model;
@@ -43,15 +60,15 @@ exports.createModel = function createModel(product) {
 /**
  * Renders a Product Description Component
  *
- * @param {dw.experience.ComponentScriptContext} context The component context
+ * @param {Object} model The model for the variation attributes
  * @returns {string} The template to be displayed
  */
-exports.template = model => `${model.variationAttributes.map(attribute => `
+exports.template = (model) => `${model.variationAttributes.map((attribute) => `
     <div>
-        <label for="va-${attribute.id}">Select ${attribute.name}</label>
+        <label for="va-${attribute.id}">${attribute.message}</label>
         <select name="${attribute.selectName}" id="va-${attribute.id}"
             hx-get="${attribute.url}"
-            hx-target="main"
+            hx-target="${model.hxTarget}"
             hx-include="form[name=pdp-actions]"
             hx-trigger="change"
             hx-indicator=".progress">

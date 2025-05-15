@@ -26,6 +26,12 @@
           "name": "Width",
           "type": "string",
           "required": false
+        },
+        {
+          "id": "height",
+          "name": "Height",
+          "type": "string",
+          "required": false
         }
       ]
     }

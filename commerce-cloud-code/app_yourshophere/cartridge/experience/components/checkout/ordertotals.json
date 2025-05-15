@@ -1,0 +1,8 @@
+{
+    "name": "Order Totals",
+    "description": "Displays order totals including subtotal, shipping, and total",
+    "group": "Checkout",
+    "attribute_definition_groups": [],
+    "region_definitions": []
+
+} 

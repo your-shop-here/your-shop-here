@@ -7,7 +7,6 @@
         <isif condition="${pdict.canonicalUrl}">
             <link rel="canonical" href="${pdict.canonicalUrl}" />
         </isif>
-        <isactivedatahead/>
         <isprint value="${pdict.regions.skin.render()}" encoding="off" />
         <isinclude template="components/layout/htmlhead" />
     </head>
@@ -69,17 +68,17 @@
     </body>
 
     </html>
-    <iselse>
-        <!--- The actual includes used in the storefront --->
-        <isif condition="${pdict.skin}">
-            <isprint value="${pdict.regions.skin.render()}" encoding="off" />
-        </isif>
+<iselse>
+    <!--- The actual includes used in the storefront --->
+    <isif condition="${pdict.skin}">
+        <isprint value="${pdict.regions.skin.render()}" encoding="off" />
+    </isif>
 
-        <isif condition="${pdict.header}">
-            <isprint value="${pdict.regions.header.setTagName('header', false).render()}" encoding="off" />
-        </isif>
+    <isif condition="${pdict.header}">
+        <isprint value="${pdict.regions.header.setTagName('header', false).render()}" encoding="off" />
+    </isif>
 
-        <isif condition="${pdict.footer}">
-            <isprint value="${pdict.regions.footer.render()}" encoding="off" />
-        </isif>
+    <isif condition="${pdict.footer}">
+        <isprint value="${pdict.regions.footer.render()}" encoding="off" />
+    </isif>
 </isif>

@@ -1,6 +1,4 @@
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
-const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
@@ -20,13 +18,21 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
-    const BasketMgr = require('dw/order/BasketMgr');
     const model = new HashMap();
     const page = context.page;
     const metaDefinition = require('*/cartridge/experience/pages/checkoutPage.json');
+    const BasketMgr = require('dw/order/BasketMgr');
+    const basket = BasketMgr.getCurrentBasket();
     request.custom.model = new HashMap();
     request.custom.model.forceEdit = context.renderParameters && JSON.parse(context.renderParameters).forceEdit;
     model.regions = new RegionModelRegistry(page, metaDefinition);
+    model.regions.main.setClassName('page-checkout');
+    model.analytics = JSON.stringify({
+        type: 'beginCheckout',
+        // we fill the products from the dom, so we gather the data when we render them
+        products: [],
+        amount: basket.totalGrossPrice.value,
+    });
     return template(model);
 }
 
@@ -37,7 +43,7 @@ function template(model) {
         ${require('partials').html('global/htmlhead')()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
-    <main>
+    <main class="checkout-page" data-analytics='${model.analytics}'>
         ${model.regions.header.render()}
         ${model.regions.main.render()}
         ${model.regions.footer.render()}

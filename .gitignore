@@ -8,7 +8,7 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Salesforce Commerce Cloud
-dw.json
+dw*.json
 sandbox_details.txt
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
@@ -137,5 +137,4 @@ dist
 **/.DS_Store
 
 .vscode
-dw.json
 your-shop-here-data.zip

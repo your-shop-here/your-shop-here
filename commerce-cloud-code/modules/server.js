@@ -486,6 +486,8 @@ Route.prototype.done = function done(req, res) {
  */
 function get(req, res, next) {
     if (request.httpMethod === 'GET') {
+        res.setHttpHeader('Access-Control-Allow-Origin', 'https://api.cquotient.com');
+        res.setHttpHeader('Access-Control-Allow-Headers', 'x-requested-with');
         next();
     } else if (request.httpMethod === 'OPTIONS') {
         const Response = require('dw/system/Response');
@@ -1056,7 +1058,6 @@ Server.prototype = {
         // Add event handler for rendering out view on completion of the request chain
         route.on('route:Complete', function onRouteCompleteHandler(req, res) {
             // compute cache value and set on response when we have a non-zero number
-            server.applyCache(req, res);
 
             if (res.redirectUrl) {
                 // if there's a pending redirect, break the chain

@@ -1,4 +1,4 @@
-<a href="${URLUtils.url('Cart-Show')}" class="pill" role="button">
+<a href="${URLUtils.url('Cart-Show')}" class="header-link">
     <isprint value="${pdict.imageHtml}" encoding="off">
     <isinclude url="${URLUtils.url('Components-MiniCart')}">
 </a>
