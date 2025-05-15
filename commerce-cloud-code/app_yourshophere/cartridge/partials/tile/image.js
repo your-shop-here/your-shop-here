@@ -1,19 +1,3 @@
-function gcd(a, b) {
-    return b === 0 ? a : gcd(b, a % b);
-}
-
-function getCssAspectRatio(sw, sh) {
-    if (sw <= 0 || sh <= 0) {
-        return null; // Or handle error appropriately
-    }
-    // cache this?
-    const commonDivisor = gcd(sw, sh);
-    const simplifiedWidth = sw / commonDivisor;
-    const simplifiedHeight = sh / commonDivisor;
-
-    return `${simplifiedWidth} / ${simplifiedHeight}`;
-}
-
 /**
  * Calculates the greatest common divisor (GCD) of two non-negative integers using the Euclidean algorithm.
  *
@@ -69,14 +53,14 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
     if (imageFilter) {
         url = (function getFilteredImages() {
             const foundColor = search.getRepresentedVariationValues(imageFilter.key).filter((color) => color.value === imageFilter.value).pop();
-            if (foundColor) {
+            if (foundColor && foundColor.getImage(config.imageViewType || 'large', 0)) {
                 return foundColor.getImage(config.imageViewType || 'large', 0).url;
             }
             return undefined;
         }());
     }
-    if (!url) {
-        url = hit.product.getImages(config.imageViewType || 'large')[0].url;
+    if (!url && hit.object.product.getImage(config.imageViewType || 'large', 0)) {
+        url = hit.object.product.getImage(config.imageViewType || 'large', 0).url;
     }
 
     const disObject = config.imageDISConfig.split('&').reduce((acc, pair) => {
