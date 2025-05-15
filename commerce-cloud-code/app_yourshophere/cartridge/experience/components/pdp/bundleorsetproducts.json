@@ -1,0 +1,28 @@
+{
+    "name": "Bundle or Set Products",
+    "description": "Displays the contents of a product bundle or set",
+    "group": "pdp",
+    "attribute_definition_groups": [
+        {
+            "id": "bundleOrSetSettings",
+            "name": "Settings",
+            "description": "Display settings for bundle or set products",
+            "attribute_definitions": [
+                {
+                    "id": "title",
+                    "name": "Section Title",
+                    "description": "Title for the bundle or set products section",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "showAddToCart",
+                    "name": "Show Add to Cart",
+                    "description": "Display add to cart button for individual items",
+                    "type": "boolean"
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 

@@ -36,6 +36,12 @@ exports.createModel = function createModel(options) {
             pdpUrl: URLUtils.url('Product-Show', 'pid', item.productID).toString(),
             deleteUrl: URLUtils.url('Cart-Delete', 'id', item.UUID).toString(),
             updateQuantityUrl: URLUtils.url('Cart-UpdateQuantity', 'uuid', item.UUID).toString(),
+            bundledItems: item.bundledProductLineItems.toArray().map((bundledProduct) => ({
+                quantity: bundledProduct.quantityValue,
+                text: bundledProduct.lineItemText,
+                price: StringUtils.formatMoney(bundledProduct.price),
+                pdpUrl: URLUtils.url('Product-Show', 'pid', bundledProduct.productID).toString(),
+            })),
         })),
         merchandiseTotal: StringUtils.formatMoney(basket.adjustedMerchandizeTotalPrice),
         total: StringUtils.formatMoney(basket.totalGrossPrice),
@@ -53,12 +59,11 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
-// @TODO Localise text
-exports.template = (model) => (model.empty ? `
+exports.template = (model) => (model.empty ? /* html */ `
     <div class="cart-error-message" role="alert">
         <p>${model.emptyMessage}</p>
     </div>
-` : `<table role="grid">
+` : /* html */ `<table role="grid">
 <thead>
     <tr>
         <th scope="col"></th>
@@ -69,7 +74,7 @@ exports.template = (model) => (model.empty ? `
     </tr>
 </thead>
 <tbody>
-${model.items.map((item) => `<tr>
+${model.items.map((item) => /* html */ `<tr>
         <th scope="row"><a href="${item.pdpUrl}"
                 hx-get="${item.pdpUrl}?hx=main"
                 hx-target="main"
@@ -94,7 +99,9 @@ ${model.items.map((item) => `<tr>
                 hx-target="main"
                 hx-trigger="click"
                 hx-push-url="${item.pdpUrl}"
-                hx-indicator=".progress">${item.text}</a></td>
+                hx-indicator=".progress">${item.text}</a>${item.bundledItems.length > 0
+        ? `<div class="bundled-items-header">Includes:</div><div class="bundled-items">${item.bundledItems.map(
+            (bundledItem) => `<div>${bundledItem.text}</div>`).join('\n')}</div>` : ''}</td>
         <td>${item.price}</td>
         <td><a href="${item.deleteUrl}" class="close"
                 hx-get="${item.deleteUrl}&hx=main"

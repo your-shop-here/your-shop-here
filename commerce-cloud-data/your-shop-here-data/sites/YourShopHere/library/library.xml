@@ -3,6 +3,10 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
+        <content-detail-page-meta-tag-rules>
+            <page-meta-tag-rule rule-id="Page Title"/>
+            <page-meta-tag-rule rule-id="Page Description"/>
+        </content-detail-page-meta-tag-rules>
     </folder>
 
     <content content-id="05367af9feea913e81b7ea36ea">
@@ -337,6 +341,18 @@
         </content-links>
     </content>
 
+    <content content-id="4eed8ef31c0602757053a04614">
+        <type>component.theme.countrySelector</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showFlag" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5309f80fa4256718f4a1c75ed8">
         <type>component.tracking.sfccdatalayer</type>
         <config>{
@@ -492,12 +508,37 @@
         </content-links>
     </content>
 
+    <content content-id="7950fd3913af930271ed1194e4">
+        <type>component.theme.countrySelector</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showFlag" : true
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="7988e6593a84de8ba781125aeb">
         <type>component.cart.selectshipping</type>
         <config>{
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="83341c8cae6800b9a3b9628697">
+        <type>component.pdp.bundleorsetproducts</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showAddToCart" : true,
+  "title" : "Products included"
+}</data>
         <online-flag>true</online-flag>
         <page-attributes/>
     </content>
@@ -723,13 +764,13 @@
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <content-links>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
+                <position>0.0</position>
+            </content-link>
             <content-link content-id="9a8037c36b690794b0e70d9428" type="page.theme.skin">
                 <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -890,10 +931,13 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="5cb38775b22e2d739fb66bd111" type="page.productPage.main">
-                <position>2.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="05367af9feea913e81b7ea36ea" type="page.productPage.main">
-                <position>1.0</position>
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="83341c8cae6800b9a3b9628697" type="page.productPage.main">
+                <position>2.0</position>
             </content-link>
         </content-links>
         <content-object-assignments>
@@ -1075,10 +1119,10 @@
             <content-link content-id="6f3392429cdf5e6a47f3081825" type="component.commerce_layouts.column.column2">
                 <position>2.0</position>
             </content-link>
-            <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
+            <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
+            <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -1110,17 +1154,20 @@
             <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
                 <position>0.0</position>
             </content-link>
+            <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
+                <position>0.0</position>
+            </content-link>
             <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
                 <position>1.0</position>
             </content-link>
             <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
-                <position>0.0</position>
+            <content-link content-id="4eed8ef31c0602757053a04614" type="component.theme.yshHeader.left">
+                <position>1.0</position>
             </content-link>
         </content-links>
     </content>

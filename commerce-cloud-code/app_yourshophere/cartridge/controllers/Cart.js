@@ -6,7 +6,6 @@ server.use('Show', (req, res, next) => {
     const BasketMgr = require('dw/order/BasketMgr');
     const HookMgr = require('dw/system/HookMgr');
     const Transaction = require('dw/system/Transaction');
-    const ShippingMgr = require('dw/order/ShippingMgr');
     const HttpSearchParams = require('api/URLSearchParams');
     const basket = BasketMgr.getCurrentOrNewBasket();
 
@@ -15,10 +14,13 @@ server.use('Show', (req, res, next) => {
     });
 
     const productParams = new HttpSearchParams(request.httpParameterMap);
+    if (!basket.getTotalGrossPrice().available) {
+        productParams.append('error', 'error.basket.invalid');
+    }
     productParams.sort();
     const queryString = productParams.toString();
 
-    res.page('cart', JSON.stringify({ queryString }));
+    res.page('cart', { queryString });
     next();
 });
 

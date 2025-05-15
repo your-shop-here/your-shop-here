@@ -10,14 +10,15 @@ const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionMode
  *
  * @returns {string} The template text
  */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
         return renderComponent(context);
     } catch (e) {
         const Logger = require('api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
     }
-}
+    return '';
+};
 
 function renderComponent (context) {
     const BasketMgr = require('dw/order/BasketMgr');
