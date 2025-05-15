@@ -32,7 +32,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     const variationGroup = product.variationGroup;
     const variationMap = new HashMap();
 
-    // determine wether ariation selection is complete and render selected variant if it is
+    // determine wether variation selection is complete and render selected variant if it is
     if (master || variationGroup) {
         const subMap = request.httpParameterMap.getParameterMap(`dwvar_${productId}_`);
         subMap.getParameterNames().toArray().forEach((variationAttribeId) => {
