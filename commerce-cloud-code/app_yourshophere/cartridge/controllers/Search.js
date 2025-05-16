@@ -59,4 +59,12 @@ server.get('Refinements', cache.applyDefaultCache, (req, res, next) => {
     return next();
 });
 
+/**
+ * @name controller/Search-Suggestions
+ */
+server.get('Suggestions', cache.applyDefaultCache, (req, res, next) => {
+    res.renderPartial('header/suggestions');
+    return next();
+});
+
 module.exports = server.exports();
