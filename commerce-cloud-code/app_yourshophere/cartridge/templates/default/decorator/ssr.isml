@@ -6,7 +6,7 @@
     <isprint value="${require('*/cartridge/experience/skin.js').renderSkin()}" encoding="off" />
 </head>
 
-<body>
+<body class="flairstripes">
     <div class="progress">&nbsp;</div>
 
     <div class="container">

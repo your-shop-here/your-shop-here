@@ -17,6 +17,7 @@ exports.render = (id) => ((params) => {
  */
 exports.html = (id) => (
     (params) => {
+        // eslint-disable-next-line import/no-dynamic-require
         const partial = require(`*/cartridge/partials/${id}`);
         let model;
         let markup = '';
@@ -25,13 +26,18 @@ exports.html = (id) => (
         try {
             model = partial.createModel(params);
         } catch (e) {
-            Logger.error(`Model creation for partial '${id}' failed. Reason: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
+            Logger.error(`Model creation for partial '${id}' failed. Reason: ${e.message} at '${e.fileName}:${e.lineNumber}'
+                ${request.httpPath} ${request.httpQueryString}    
+            `);
         }
 
         try {
             markup = partial.template(model);
         } catch (e) {
-            Logger.error(`Template rendering for partial '${id}' failed. Reason: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
+            Logger.error(`
+                Template rendering for partial '${id}' failed. Reason: ${e.message} at '${e.fileName}:${e.lineNumber}'
+                    ${request.httpPath} ${request.httpQueryString}
+                `);
         }
         return markup;
     }

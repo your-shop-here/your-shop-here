@@ -493,6 +493,18 @@
                 <amount quantity="1">180.00</amount>
             </price-table>
 
+            <price-table product-id="2040007">
+                <amount quantity="1">26.50</amount>
+            </price-table>
+
+            <price-table product-id="2040023">
+                <amount quantity="1">24.50</amount>
+            </price-table>
+
+            <price-table product-id="2040034">
+                <amount quantity="1">24.50</amount>
+            </price-table>
+
             <price-table product-id="22956726">
                 <amount quantity="1">45.00</amount>
                 <amount quantity="2">30.00</amount>
@@ -503,6 +515,42 @@
             <price-table product-id="25599642">
                 <amount quantity="1">10.00</amount>
                 <amount quantity="3">8.00</amount>
+            </price-table>
+
+            <price-table product-id="4080100">
+                <amount quantity="1">111.20</amount>
+            </price-table>
+
+            <price-table product-id="503200">
+                <amount quantity="1">140.00</amount>
+            </price-table>
+
+            <price-table product-id="503300">
+                <amount quantity="1">480.00</amount>
+            </price-table>
+
+            <price-table product-id="503400">
+                <amount quantity="1">200.00</amount>
+            </price-table>
+
+            <price-table product-id="503500">
+                <amount quantity="1">200.00</amount>
+            </price-table>
+
+            <price-table product-id="503600">
+                <amount quantity="1">210.00</amount>
+            </price-table>
+
+            <price-table product-id="503700">
+                <amount quantity="1">245.00</amount>
+            </price-table>
+
+            <price-table product-id="503800">
+                <amount quantity="1">540.00</amount>
+            </price-table>
+
+            <price-table product-id="503900">
+                <amount quantity="1">423.00</amount>
             </price-table>
 
             <price-table product-id="609717695938">
