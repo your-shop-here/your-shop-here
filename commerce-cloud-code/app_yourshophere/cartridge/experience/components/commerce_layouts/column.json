@@ -9,7 +9,7 @@
             "attribute_definitions": [
                 {
                     "id": "columns",
-                    "name": "Columns",
+                    "name": "Desktop Columns",
                     "description": "the number of columns (up to 4)",
                     "type": "enum",
                     "values": [
@@ -19,6 +19,20 @@
                       4
                     ],
                     "required": true
+                },
+                {
+                    "id": "mobileColumns",
+                    "name": "Mobile Columns",
+                    "description": "the number of columns (up to 4)",
+                    "type": "enum",
+                    "values": [
+                      1,
+                      2,
+                      3,
+                      4
+                    ],
+                    "default_value": 1,
+                    "required": false
                 },
                 {
                     "id": "style",

@@ -316,6 +316,13 @@ input.search-field {
 .grid.desktop-cols-4 {
     grid-template-columns: repeat(4, 1fr);
 }
+.grid.one-third-two-third {
+    grid-template-columns: 33% 67%;
+}
+
+.grid.two-third-one-third {
+    grid-template-columns: 67% 33%;
+}
 
 .product-grid article {
     display: flex;
@@ -600,13 +607,22 @@ input.search-field {
         gap: 10px;
     }
 
+    .grid.mobile-cols-1 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
     .grid.mobile-cols-2 {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .grid.mobile-cols-1 {
-        grid-template-columns: repeat(1, 1fr);
+    .grid.mobile-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
     }
+
+    .grid.mobile-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
     .refinements .filter-button {
         display: inline-block; /* Show filter button on mobile */
     }

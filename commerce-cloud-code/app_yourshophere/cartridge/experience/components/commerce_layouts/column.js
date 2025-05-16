@@ -6,12 +6,11 @@ function renderComponent(context, modelIn) {
     const component = context.component;
 
     model.regions = PageRenderHelper.getRegionModelRegistry(component);
-    // @todo: make mobile columns dynamic in the page designer component
-    model.style = `${context.content.style} desktop-cols-${context.content.columns} mobile-cols-1`;
+    model.style = `${context.content.style} desktop-cols-${context.content.columns} mobile-cols-${context.content.mobileColumns || '1'}" `;
     const regionNames = Array.from(Array(context.content.columns).keys()).map((index) => `column${index + 1}`);
 
     return `<div class="grid ${(model.style !== '' && model.style != null) ? model.style : ''}" >
-        ${regionNames.map(regionName => model.regions[regionName].render()).join('\n')}   
+        ${regionNames.map((regionName) => model.regions[regionName].render()).join('\n')}   
     </div>`;
 }
 
@@ -28,7 +27,7 @@ exports.render = function render(context, modelIn) {
     } catch (e) {
         const Logger = require('api/Logger');
 
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
     return '';
 };
