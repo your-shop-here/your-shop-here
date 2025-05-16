@@ -30,7 +30,7 @@ a.pill[role="button"] svg {
     align-items: center;
 }
 
-.take-row > div{
+.take-row > div, .take-row .experience-component {
     display: flex;
     flex-direction: row;
     padding: 0 .3em;

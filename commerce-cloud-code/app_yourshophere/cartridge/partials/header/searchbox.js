@@ -9,7 +9,6 @@ function createModel(params) {
     const model = {
         placeholderText: params.placeholderText || 'Search',
         accesssibilityLabel: params.accesssibilityLabel || 'Enter keyword or Item No',
-        checked: request.httpParameterMap.q.submitted,
     };
     return model;
 }
