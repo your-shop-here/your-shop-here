@@ -11,7 +11,7 @@
         <isinclude template="components/layout/htmlhead" />
     </head>
 
-    <body data-action="${pdict.action}" data-querystring="${pdict.queryString}">
+    <body class="flairstripes" data-action="${pdict.action}" data-querystring="${pdict.queryString}">
         ${dw.system.HookMgr.callHook('app.template.beforeHeader', 'beforeHeader') || ''}
         <div class="container">
             <header>

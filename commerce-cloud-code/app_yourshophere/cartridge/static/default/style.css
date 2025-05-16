@@ -67,6 +67,47 @@ body {
     background-color: var(--ysh-background);
 }
 
+body.flairstripes {
+
+    /* For the stripes */
+    position: relative;
+    /* IMPORTANT: Adjusted padding-bottom to accommodate stripes and clearance.
+       The stripes themselves will have a visual height of 22px (4 stripes * 4px + 3 gaps * 2px).
+       With 20px clearance below them, we need at least 42px padding.
+       If padding-bottom remains 20px, the stripes will likely be clipped or overlap content.
+    */
+    padding-bottom: 42px;
+    background-repeat: no-repeat;
+
+    /* Staggered colorful lines: Orange, Yellow, Red, Blue
+       Orange is the longest and visually highest in the stripe group.
+       Blue is the shortest and visually lowest in the stripe group. */
+    background-image:
+    linear-gradient(to right, #E03F00 0%, #E03F00 100%), /* Deep Red/Russet */
+    linear-gradient(to right, #f39c12 0%, #f39c12 100%), /* Warm Orange */
+    linear-gradient(to right, #f1c40f 0%, #f1c40f 100%); /* Warm Yellow/Gold */
+
+    /* Sizes: Height of each stripe is 4px.
+       Widths are 50% of the body's width, progressively shorter from Orange to Blue.
+       They will extend from the right edge towards the middle. */
+    background-size:
+        50% 4px,                                 /* Orange: longest */
+        calc(50% - 30px) 4px,                    /* Yellow: 30px shorter than Orange */
+        calc(50% - 60px) 4px;                   /* Red: 60px shorter than Orange */
+
+    /* Positions:
+       X-Position: All stripes are aligned to the right edge of the body.
+       Y-Position: Defines the BOTTOM of each stripe from the body's bottom edge.
+       - Blue (shortest) is lowest, its bottom 20px from body bottom (this provides the clearance).
+       - Orange (longest) is highest, its bottom 38px from body bottom.
+       Each stripe is 4px tall, with a 2px vertical gap between them. */
+    background-position:
+        right 0px bottom 38px,  /* Orange: Topmost in the group */
+        right 0px bottom 32px,  /* Yellow */
+        right 0px bottom 26px,  /* Red */
+        right 0px bottom 20px;  /* Blue: Bottommost in the group, 20px clear from body bottom */
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -319,10 +360,13 @@ input.search-field {
     margin-bottom: 10px;
 }
 
-.overBleed {
+.overBleedWidth {
     width: 120%;
-    margin-bottom:  -30%;
     margin-left: -10%;
+}
+
+.spillIntoContent {
+    margin-bottom:  -30%;
 }
 
 .product-grid article .price, .product-grid article .strike {

@@ -5,6 +5,80 @@
         <page-attributes/>
     </folder>
 
+    <folder folder-id="cart-and-checkout">
+        <display-name xml:lang="x-default">Cart and Checkout</display-name>
+        <description xml:lang="x-default">Carries all purchase journey related dynamic pages.</description>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+    <folder folder-id="editorial-pages">
+        <display-name xml:lang="x-default">Editorial Pages</display-name>
+        <description xml:lang="x-default">Holds any editorial pages, which do not relate to dynamic shop areas such as my account or checkout or are assigned to the product discovery journey</description>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+    <folder folder-id="my-account-pages">
+        <display-name xml:lang="x-default">My Account Pages</display-name>
+        <description xml:lang="x-default">My account related pages.</description>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+    <folder folder-id="product-details-pages">
+        <display-name xml:lang="x-default">Product Details Pages</display-name>
+        <description xml:lang="x-default">Carries all product detail pages</description>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+    <folder folder-id="pdps-for-product-type">
+        <display-name xml:lang="x-default">PDPs for Prodct Types</display-name>
+        <description xml:lang="x-default">The products are assigned to specific classification-like categories, that will determine the PD Page to show. For product sets, YSH chose that way to create a page that is optimized for a set - i.e. often found as a look in fashion shops</description>
+        <online-flag>false</online-flag>
+        <parent>product-details-pages</parent>
+        <page-attributes/>
+    </folder>
+
+    <folder folder-id="product-listing-pages">
+        <display-name xml:lang="x-default">Product Listing Pages</display-name>
+        <description xml:lang="x-default">Carries all product listing pages</description>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+    <folder folder-id="theming-related">
+        <display-name xml:lang="x-default">Theming Pages</display-name>
+        <description xml:lang="x-default">Pages related to themes and general page elements visible accross multiple pages</description>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+    <content content-id="039da4d70fc46ab5f8bd2bd539">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth spillIntoContent"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="4cdd5274eef0ff5ab4313c182b" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="048a874c1f18924a2d826276c9">
         <type>component.base.imageAndText</type>
         <config>{
@@ -74,7 +148,7 @@
         <data xml:lang="x-default">{
   "ITCLink" : null,
   "ITCText" : null,
-  "textHAlign" : "left",
+  "textHAlign" : "center",
   "image" : {
     "path" : "outdoor-header.jpg",
     "focal_point" : {
@@ -86,8 +160,8 @@
       "width" : 960
     }
   },
-  "textVAlign" : null,
-  "heading" : "&lt;p&gt;&lt;strong&gt;Adventure Awaits&lt;/strong&gt;&lt;/p&gt;",
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;&lt;strong&gt;unofficial-outdoor - the adventure awaits&lt;/strong&gt;&lt;/p&gt;",
   "textContrast" : "Drop Shadow",
   "alt" : "The Adventure Awaits - unofficial-outdoor.com",
   "textBackground" : null,
@@ -147,6 +221,33 @@
         <page-attributes/>
     </content>
 
+    <content content-id="0f14040ac238a89af27779e89a">
+        <type>component.plp.productGrid</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "desktopColumns" : null,
+  "swatchDimension" : "yshColor",
+  "category" : null,
+  "imageViewType" : "large",
+  "mobileColumns" : null,
+  "imageDISConfig" : "sw=256&amp;sh=256"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="0f82bce52247b6eb2ac9a20ca1">
+        <type>component.plp.refinements</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="0fff662b8e6366dddec48db08b">
         <type>component.cart.promocode</type>
         <config>{
@@ -201,6 +302,26 @@
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="143bd8a1f26e58fbb81ce3db84">
+        <type>component.commerce_layouts.onefourth</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="332b857b40a3143a4bf0f05cbb" type="component.commerce_layouts.onefourth.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="0f82bce52247b6eb2ac9a20ca1" type="component.commerce_layouts.onefourth.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="151ffc86dd433fd8570b9c4d73">
@@ -337,6 +458,26 @@
         <page-attributes/>
     </content>
 
+    <content content-id="26f4078abcc3964a6263011c90">
+        <type>component.commerce_layouts.onefourth</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="2e9c7e75216d445b49cfd31f19" type="component.commerce_layouts.onefourth.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="40b6cbb7ac5347ffa7847dcd26" type="component.commerce_layouts.onefourth.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="29028524366cd390a02bca8ea4">
         <type>component.plp.refinements</type>
         <config>{
@@ -345,6 +486,24 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="2b684f122275e3f24788141410">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth spillIntoContent"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ac79a7034bce7c2265440d9260" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="2c07d3fe6aa299212a8b2ffac3">
@@ -394,6 +553,116 @@
         <page-attributes/>
     </content>
 
+    <content content-id="2e9c7e75216d445b49cfd31f19">
+        <type>component.plp.productGrid</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "desktopColumns" : null,
+  "swatchDimension" : "yshColor",
+  "category" : null,
+  "imageViewType" : "large",
+  "mobileColumns" : null,
+  "imageDISConfig" : "sw=256&amp;sh=256"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="332b857b40a3143a4bf0f05cbb">
+        <type>component.plp.productGrid</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "desktopColumns" : null,
+  "swatchDimension" : "yshColor",
+  "category" : null,
+  "imageViewType" : "large",
+  "mobileColumns" : null,
+  "imageDISConfig" : "sw=256&amp;sh=256"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="36bd0e3bd33a63de73aa4acf21">
+        <type>component.commerce_layouts.onefourth</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="6053a76368121dd6ff4b98f38f" type="component.commerce_layouts.onefourth.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="a9c61cf6ff5201b3f4931e3405" type="component.commerce_layouts.onefourth.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="36dcd94791c30beb1472a79455">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth spillIntoContent"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="e04e4a517ef3e6ec34670af4be" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="3b19fe1e698eda489321cb7bd4">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth spillIntoContent"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ff2706fb14bcc4419aabf84f0a" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="3e22593366f6377512e69461ac">
+        <type>component.commerce_layouts.onefourth</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="f55d770d1f04386f1781800b2f" type="component.commerce_layouts.onefourth.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="b0e5bd821118c37771be310a62" type="component.commerce_layouts.onefourth.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="3e98f7c67632a9006e8ab9fd0f">
         <type>component.theme.icon</type>
         <config>{
@@ -436,6 +705,16 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="40b6cbb7ac5347ffa7847dcd26">
+        <type>component.plp.refinements</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="42227982c0963637babc04a0d3">
@@ -491,6 +770,37 @@
         </content-links>
     </content>
 
+    <content content-id="4cdd5274eef0ff5ab4313c182b">
+        <type>component.base.imageAndText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "ITCLink" : null,
+  "ITCText" : null,
+  "textHAlign" : null,
+  "image" : {
+    "path" : "outdoor-gear.jpg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    },
+    "meta_data" : {
+      "height" : 750,
+      "width" : 1356
+    }
+  },
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;Outdoor gear that keeps you safe&lt;/p&gt;",
+  "textContrast" : "Drop Shadow",
+  "alt" : "Outdoor gear that keeps you safe",
+  "textBackground" : null,
+  "textColor" : "Page Background"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5309f80fa4256718f4a1c75ed8">
         <type>component.tracking.sfccdatalayer</type>
         <config>{
@@ -523,10 +833,20 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="8cc81bfb6f10e66d1362f40b77" type="component.theme.yshHeader.branding">
+            <content-link content-id="7ab72f3ae1af87bef85d1ef5fa" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="5818714db19311620846c923a1">
+        <type>component.plp.refinements</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="58b88675dd8980fe9673c3db01">
@@ -562,6 +882,23 @@
   "inParagraph" : "No",
   "richText" : "&lt;h1&gt;Thank you for your purchase!&lt;/h1&gt;",
   "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="6053a76368121dd6ff4b98f38f">
+        <type>component.plp.productGrid</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "desktopColumns" : null,
+  "swatchDimension" : "yshColor",
+  "category" : null,
+  "imageViewType" : "large",
+  "mobileColumns" : null,
+  "imageDISConfig" : "sw=256&amp;sh=256"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -743,6 +1080,27 @@
         <page-attributes/>
     </content>
 
+    <content content-id="7ab72f3ae1af87bef85d1ef5fa">
+        <type>component.theme.icon</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "image" : {
+    "path" : "unofficial.svg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    }
+  },
+  "link" : "/s/YourShopHere/",
+  "width" : "200px",
+  "height" : "75px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="80b8b8416c27193c9ba3feb19d">
         <type>component.commerce_layouts.column</type>
         <config>{
@@ -844,20 +1202,6 @@
         <page-attributes/>
     </content>
 
-    <content content-id="8cc81bfb6f10e66d1362f40b77">
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "Yes",
-  "richText" : "&lt;p&gt;&lt;img src=\"unofficial.svg?$staticlink$\"&gt;Your Shop Here Checkout&lt;/p&gt;",
-  "align" : "center"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="947a195a00af6dff22a672e911">
         <type>component.pdp.productMainAttributes</type>
         <config>{
@@ -866,6 +1210,26 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="963e82fbe3add5751f5ca08c67">
+        <type>component.commerce_layouts.onefourth</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="f0c96d6fcada71b2cc5fb37029" type="component.commerce_layouts.onefourth.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="a7806336c29b9852425d66352f" type="component.commerce_layouts.onefourth.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="968e41d315f9df84941680c1a8">
@@ -966,6 +1330,24 @@
         <page-attributes/>
     </content>
 
+    <content content-id="9dce5d1f2733f1da58a925bce6">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth spillIntoContent"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="db58222b9c7d4ae946b4dc6b97" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="9f00d597e7680010fa069af96c">
         <type>component.base.imageAndText</type>
         <config>{
@@ -987,9 +1369,9 @@
     }
   },
   "textVAlign" : "top",
-  "heading" : "&lt;p&gt;For any occasion&lt;/p&gt;",
+  "heading" : "&lt;p&gt;Womens outdoor apparel - suits any occasion&lt;/p&gt;",
   "textContrast" : "Drop Shadow",
-  "alt" : null,
+  "alt" : "Womens outdoor apparel - suits any occasion",
   "textBackground" : null,
   "textColor" : "Page Background"
 }</data>
@@ -1009,6 +1391,7 @@
 
     <content content-id="_main-theme">
         <display-name xml:lang="x-default">_main-theme</display-name>
+        <description xml:lang="x-default">The page decorator shared accross all pages but checkout. It carries the theme settings such as font and color, the header and the footer. The ID must be unchanged for your-shop-here to work</description>
         <type>page.theme</type>
         <config>{
   "visibility" : [ ]
@@ -1018,6 +1401,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="theming-related"/>
+        </folder-links>
         <content-links>
             <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
@@ -1028,8 +1414,12 @@
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
                 <position>0.0</position>
             </content-link>
+            <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
+                <position>0.0</position>
+            </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="a050fc64bf1fa69c0eb8d0126c">
@@ -1073,6 +1463,57 @@
         <page-attributes/>
     </content>
 
+    <content content-id="a7806336c29b9852425d66352f">
+        <type>component.plp.refinements</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="a9c61cf6ff5201b3f4931e3405">
+        <type>component.plp.refinements</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ac79a7034bce7c2265440d9260">
+        <type>component.base.imageAndText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "ITCLink" : null,
+  "ITCText" : null,
+  "textHAlign" : null,
+  "image" : {
+    "path" : "outdoor-kids-photoby-janay-peters-unsplash.jpg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    },
+    "meta_data" : {
+      "height" : 904,
+      "width" : 1356
+    }
+  },
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;Kids outdoor clothing - survives any stroll&lt;/p&gt;",
+  "textContrast" : "Drop Shadow",
+  "alt" : "Kids outdoor clothing - survives any stroll",
+  "textBackground" : null,
+  "textColor" : "Page Background"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="account">
         <display-name xml:lang="x-default">Account</display-name>
         <type>page.contentPage</type>
@@ -1084,6 +1525,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="my-account-pages"/>
+        </folder-links>
         <content-links>
             <content-link content-id="0cc08587264515afd2e29b6bb8" type="page.contentPage.main">
                 <position>1.0</position>
@@ -1093,6 +1537,17 @@
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="b0e5bd821118c37771be310a62">
+        <type>component.plp.refinements</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="b1e0a866deb2644859e291f340">
@@ -1101,6 +1556,55 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="bc427d9b487bf33897a8a22641">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="05c58efa7a2b918ad6ecd616ea" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="bcc9a805688dd27b529ef77772">
+        <type>component.base.imageAndText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "ITCLink" : null,
+  "ITCText" : null,
+  "textHAlign" : null,
+  "image" : {
+    "path" : "outdoor-footwear.jpg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    },
+    "meta_data" : {
+      "height" : 515,
+      "width" : 995
+    }
+  },
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;Outdoor Footwear for as many miles as you can go&lt;/p&gt;",
+  "textContrast" : "Drop Shadow",
+  "alt" : "Outdoor Footwear for as many miles as you can go",
+  "textBackground" : null,
+  "textColor" : "Page Background"
+}</data>
         <online-flag>true</online-flag>
         <page-attributes/>
     </content>
@@ -1221,6 +1725,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="cart-and-checkout"/>
+        </folder-links>
         <content-links>
             <content-link content-id="cf2962273062bd908421cbc1b0" type="page.cartPage.main">
                 <position>1.0</position>
@@ -1230,9 +1737,10 @@
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
-    <content content-id="cat-root-pdp">
+    <content content-id="catalog-root-pdp">
         <display-name xml:lang="x-default">cat-root-pdp</display-name>
         <type>page.productPage</type>
         <config>{
@@ -1246,6 +1754,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-details-pages"/>
+        </folder-links>
         <content-links>
             <content-link content-id="05367af9feea913e81b7ea36ea" type="page.productPage.main">
                 <position>0.0</position>
@@ -1261,9 +1772,10 @@
             <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
-    <content content-id="cat-root-plp">
+    <content content-id="catalog-root-plp">
         <display-name xml:lang="x-default">cat-root-plp</display-name>
         <type>page.categoryPage</type>
         <config>{
@@ -1277,6 +1789,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
         <content-links>
             <content-link content-id="c4f31aa5644567cd3dc6f9fb5d" type="page.categoryPage.main">
                 <position>0.0</position>
@@ -1286,9 +1801,10 @@
             <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
-    <content content-id="cat-sets-pdp">
+    <content content-id="catalog-sets-pdp">
         <display-name xml:lang="x-default">cat-sets-pdp</display-name>
         <type>page.productPage</type>
         <config>{
@@ -1302,6 +1818,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="pdps-for-product-type"/>
+        </folder-links>
         <content-links>
             <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
                 <position>1.0</position>
@@ -1314,6 +1833,7 @@
             <content-object-assignment object-id="product-sets" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="cbfbe6940cf3ef911b2044e7d7">
@@ -1378,6 +1898,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="cart-and-checkout"/>
+        </folder-links>
         <content-links>
             <content-link content-id="e59b140f72ce5ba90eb95e5d62" type="page.checkoutPage.main">
                 <position>0.0</position>
@@ -1390,6 +1913,7 @@
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="d4a67f4bbba836f33ebc995f17">
@@ -1429,6 +1953,68 @@
   "heading" : "&lt;p&gt;Customer Service&lt;/p&gt;",
   "textContrast" : "Drop Shadow",
   "alt" : null,
+  "textBackground" : null,
+  "textColor" : "Page Background"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="db58222b9c7d4ae946b4dc6b97">
+        <type>component.base.imageAndText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "ITCLink" : null,
+  "ITCText" : null,
+  "textHAlign" : null,
+  "image" : {
+    "path" : "outdoor-electronics.jpg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    },
+    "meta_data" : {
+      "height" : 782,
+      "width" : 1356
+    }
+  },
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;Outdoor electronics, for the touch of modern life&lt;/p&gt;",
+  "textContrast" : "Drop Shadow",
+  "alt" : "Outdoor electronics, for the touch of modern life",
+  "textBackground" : null,
+  "textColor" : "Page Background"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="e04e4a517ef3e6ec34670af4be">
+        <type>component.base.imageAndText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "ITCLink" : null,
+  "ITCText" : null,
+  "textHAlign" : null,
+  "image" : {
+    "path" : "outdoor-mens.jpg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    },
+    "meta_data" : {
+      "height" : 778,
+      "width" : 1355
+    }
+  },
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;Mens outdoor apparel - adventure with style&lt;/p&gt;",
+  "textContrast" : "Drop Shadow",
+  "alt" : "Mens outdoor apparel - adventure with style",
   "textBackground" : null,
   "textColor" : "Page Background"
 }</data>
@@ -1582,7 +2168,7 @@
 }</config>
         <data xml:lang="x-default">{
   "columns" : 1,
-  "style" : "overBleed"
+  "style" : "overBleedWidth spillIntoContent"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1637,6 +2223,43 @@
         </content-links>
     </content>
 
+    <content content-id="f0c96d6fcada71b2cc5fb37029">
+        <type>component.plp.productGrid</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "desktopColumns" : null,
+  "swatchDimension" : "yshColor",
+  "category" : null,
+  "imageViewType" : "large",
+  "mobileColumns" : null,
+  "imageDISConfig" : "sw=256&amp;sh=256"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="f109b15e198da16287b5d24595">
+        <type>component.commerce_layouts.onefourth</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="0f14040ac238a89af27779e89a" type="component.commerce_layouts.onefourth.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="5818714db19311620846c923a1" type="component.commerce_layouts.onefourth.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="f1119c433af0b5988b599bb481">
         <type>component.base.richText</type>
         <config>{
@@ -1649,6 +2272,24 @@
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="f3211dc65b1fcde70778580bc3">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "overBleedWidth spillIntoContent"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="bcc9a805688dd27b529ef77772" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="f3b1587aaffe7bb76be9d25a42">
@@ -1678,6 +2319,23 @@
         <page-attributes/>
     </content>
 
+    <content content-id="f55d770d1f04386f1781800b2f">
+        <type>component.plp.productGrid</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "desktopColumns" : null,
+  "swatchDimension" : "yshColor",
+  "category" : null,
+  "imageViewType" : "large",
+  "mobileColumns" : null,
+  "imageDISConfig" : "sw=256&amp;sh=256"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="f6ff9d26a14d5a7d12c00895fd">
         <type>component.theme.miniaccount</type>
         <config>{
@@ -1699,6 +2357,20 @@
   },
   "width" : "35px",
   "label" : "Login"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="f9de31eac675334d689e9e3522">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;p&gt;This is a demo store, no orders will be processed&lt;/p&gt;&lt;p&gt;&lt;a href=\"https://github.com/your-shop-here/your-shop-here/\" target=\"_self\" data-link-type=\"external\" data-link-label=\"https://github.com/your-shop-here/your-shop-here/\"&gt;Source Code available at github&lt;/a&gt;&lt;/p&gt;",
+  "align" : "center"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1735,8 +2407,104 @@
         <page-attributes/>
     </content>
 
+    <content content-id="ff2706fb14bcc4419aabf84f0a">
+        <type>component.base.imageAndText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "ITCLink" : null,
+  "ITCText" : null,
+  "textHAlign" : null,
+  "image" : {
+    "path" : "outdoor-nutrition.jpg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    },
+    "meta_data" : {
+      "height" : 686,
+      "width" : 1355
+    }
+  },
+  "textVAlign" : "top",
+  "heading" : "&lt;p&gt;Fuel your adventure with our nutrition products&lt;/p&gt;",
+  "textContrast" : "Drop Shadow",
+  "alt" : "Fuel your adventure with our nutrition products",
+  "textBackground" : null,
+  "textColor" : "Page Background"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="footwear-landing">
+        <display-name xml:lang="x-default">footwear-landing</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="f3211dc65b1fcde70778580bc3" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="36bd0e3bd33a63de73aa4acf21" type="page.categoryPage.main">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="shoes" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="gear-landing">
+        <display-name xml:lang="x-default">gear-landing</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="039da4d70fc46ab5f8bd2bd539" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="143bd8a1f26e58fbb81ce3db84" type="page.categoryPage.main">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="gear" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
     <content content-id="homepage">
         <display-name xml:lang="x-default">homepage</display-name>
+        <description xml:lang="x-default">This is the homepage of your-shop-here. Its ID is required to be unchanges, so the shop can pick it up on the homepage</description>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -1746,10 +2514,10 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="editorial-pages"/>
+        </folder-links>
         <content-links>
-            <content-link content-id="05c58efa7a2b918ad6ecd616ea" type="page.contentPage.main">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
                 <position>1.0</position>
             </content-link>
@@ -1759,8 +2527,12 @@
             <content-link content-id="e64f0d49453e94f677cf69474d" type="page.contentPage.main">
                 <position>3.0</position>
             </content-link>
+            <content-link content-id="bc427d9b487bf33897a8a22641" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="homepage-2">
@@ -1774,6 +2546,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="editorial-pages"/>
+        </folder-links>
         <content-links>
             <content-link content-id="3f11e590490d2da0efb4764779" type="page.contentPage.main">
                 <position>1.0</position>
@@ -1789,6 +2564,38 @@
         <sitemap-priority>0.0</sitemap-priority>
     </content>
 
+    <content content-id="kids-landing">
+        <display-name xml:lang="x-default">kids-landing</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="2b684f122275e3f24788141410" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="26f4078abcc3964a6263011c90" type="page.categoryPage.main">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="kids" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
     <content content-id="login">
         <display-name xml:lang="x-default">Login</display-name>
         <type>page.contentPage</type>
@@ -1797,15 +2604,115 @@
 }</config>
         <visibility-mode xml:lang="x-default">visible</visibility-mode>
         <data xml:lang="x-default">{ }</data>
-        <online-flag>false</online-flag>
+        <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="my-account-pages"/>
+        </folder-links>
         <content-links>
             <content-link content-id="1885f33fd36f7b0f3b5e8043a7" type="page.contentPage.main">
                 <position>0.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="men-landing">
+        <display-name xml:lang="x-default">men-landing</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="36dcd94791c30beb1472a79455" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="f109b15e198da16287b5d24595" type="page.categoryPage.main">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="men" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="nutrition-landing">
+        <display-name xml:lang="x-default">nutrition-landing</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="3b19fe1e698eda489321cb7bd4" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="3e22593366f6377512e69461ac" type="page.categoryPage.main">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="nutrition" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="nutrition-landing1747373812779">
+        <display-name xml:lang="x-default">electronics-landing</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="9dce5d1f2733f1da58a925bce6" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="963e82fbe3add5751f5ca08c67" type="page.categoryPage.main">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="electronics" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="order-thank-you">
@@ -1816,9 +2723,12 @@
 }</config>
         <visibility-mode xml:lang="x-default">visible</visibility-mode>
         <data xml:lang="x-default">{ }</data>
-        <online-flag>false</online-flag>
+        <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="cart-and-checkout"/>
+        </folder-links>
         <content-links>
             <content-link content-id="f3b1587aaffe7bb76be9d25a42" type="page.contentPage.main">
                 <position>1.0</position>
@@ -1828,6 +2738,7 @@
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="women-landing">
@@ -1844,6 +2755,9 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="product-listing-pages"/>
+        </folder-links>
         <content-links>
             <content-link content-id="ec94d42551dcfb26916e98d068" type="page.categoryPage.main">
                 <position>0.0</position>
@@ -1856,6 +2770,7 @@
             <content-object-assignment object-id="women" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
 </library>
