@@ -21,14 +21,13 @@ function ProductSearchModel(httpParams, config) {
         instance.addRefinementValues('ID', productId);
     }
 
-    const minPrice = httpParams.get('pmin');
-    if (minPrice) {
-        instance.setPriceMin(Number(minPrice));
+    // @todo make use of http parameters consistent
+    if (request.httpParameterMap.pmin.submitted) {
+        instance.setPriceMin(request.httpParameterMap.pmin.doubleValue);
     }
 
-    const maxPrice = httpParams.get('pmax');
-    if (maxPrice) {
-        instance.setPriceMax(Number(maxPrice));
+    if (request.httpParameterMap.pmax.submitted) {
+        instance.setPriceMax(request.httpParameterMap.pmax.doubleValue);
     }
 
     const promotionId = httpParams.get('pmid');

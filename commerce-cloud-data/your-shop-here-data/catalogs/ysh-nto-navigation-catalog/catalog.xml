@@ -17,9 +17,9 @@
     </header>
 
     <category category-id="root">
-        <display-name xml:lang="x-default">Northern Trail Outfitters</display-name>
-        <display-name xml:lang="es">Northern Trail Outfitters</display-name>
-        <display-name xml:lang="es-ES">Northern Trail Outfitters</display-name>
+        <display-name xml:lang="x-default">Unofficial Outdoor</display-name>
+        <display-name xml:lang="es">Unofficial Outdoor</display-name>
+        <display-name xml:lang="es-ES">Unofficial Outdoor</display-name>
         <display-name xml:lang="fr">Pourvoiries Northern Trail</display-name>
         <display-name xml:lang="fr-FR">Pourvoiries Northern Trail</display-name>
         <display-name xml:lang="it">Equipaggiatori del Northern Trail</display-name>
@@ -231,6 +231,46 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>0</cutoff-threshold>
                 <bucket-definitions>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€0 - €19.99</display-name>
+                        <threshold>20.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€20 - €49.99</display-name>
+                        <threshold>50.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€50-€99.99</display-name>
+                        <threshold>100.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€100-€199.99</display-name>
+                        <threshold>200.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€200-€499.99</display-name>
+                        <threshold>500.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€500-€999.99</display-name>
+                        <threshold>1000.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€1000-€1999.99</display-name>
+                        <threshold>2000.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€2000-€2999.99</display-name>
+                        <threshold>3000.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€3000-€4999.99</display-name>
+                        <threshold>5000.0</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€5000-€9999.99</display-name>
+                        <threshold>10000.0</threshold>
+                    </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <threshold>20.0</threshold>
@@ -366,7 +406,7 @@
         <position>1.0</position>
         <template>rendering/category/catListing</template>
         <page-attributes>
-            <page-title xml:lang="x-default">Women's Insulated Jackets at Northern Trail Outfitters</page-title>
+            <page-title xml:lang="x-default">Women's Insulated Jackets at Unofficial Outdoor</page-title>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="yshEnableCompare">true</custom-attribute>
@@ -3651,7 +3691,7 @@
         <image>electronics.png</image>
         <template>rendering/category/catLanding</template>
         <page-attributes>
-            <page-title xml:lang="x-default">Electronics at Northern Trail Outfitters</page-title>
+            <page-title xml:lang="x-default">Electronics at Unofficial Outdoor</page-title>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="yshEnableCompare">true</custom-attribute>
