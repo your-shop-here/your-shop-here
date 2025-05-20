@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<access-roles xmlns="http://www.demandware.com/xml/impex/accessrole/2007-09-05">
-    <access-role role-id="Administrator">
-        <description>The administrator has the rights to perform tasks related to the overall administration of the merchant organization and its users and roles. This access role is not site-specific and will grant the user access to the entire organization.</description>
-        <access-controls>
-            <access-control resource-path="BUSINESSMGR/CustomMenu/Sites/-/ysh" permission="ACCESS"/>
-        </access-controls>
-    </access-role>
-</access-roles>
