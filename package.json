@@ -55,8 +55,8 @@
     "cleanup": "shx rm -f site_template.zip && shx rm -f test-site.zip && shx rm -f version1.zip",
     "lint:js": "eslint .",
     "config:generate:environment": "node build/generateDWJson.js",
+    "import-data": "npm-run-all auth data:* cleanup",
     "all": "npm-run-all auth data:* code:* cleanup",
-    "build": "npm run partytown && next build",
-    "partytown": "partytown copylib 'public/~partytown'"
+    "unattanded": "npm-run-all data:* code:* cleanup"
   }
 }
