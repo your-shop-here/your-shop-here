@@ -5,10 +5,13 @@
  */
 const getListPrice = (priceModel) => {
     const PriceBookMgr = require('dw/catalog/PriceBookMgr');
-    const listPrices = PriceBookMgr.getSitePriceBooks().toArray()
+    const selectedCurrency = session.currency.currencyCode;
+    const priceBooks = PriceBookMgr.getApplicablePriceBooks().isEmpty() ? PriceBookMgr.getSitePriceBooks().toArray() : PriceBookMgr.getApplicablePriceBooks().toArray();
+    const currencyMatchedPriceBooks = priceBooks.filter((priceBook) => priceBook.currencyCode === selectedCurrency);
+    const parentPriceBookIds = currencyMatchedPriceBooks
         .map((priceBook) => (priceBook.getParentPriceBook() && priceBook.getParentPriceBook().ID))
-        .filter((id) => id !== null)
-        .map((id) => priceModel.getPriceBookPrice(id));
+        .filter((id) => id !== null);
+    const listPrices = parentPriceBookIds.map((id) => priceModel.getPriceBookPrice(id));
     listPrices.sort((a, b) => a.value - b.value);
     return listPrices.pop();
 };
