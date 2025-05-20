@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2C Commerce Trial Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.15.8/styles/salesforce-lightning-design-system.min.css">
+    <style>
+        body {
+            background-color: #f3f2f2;
+            padding: 2rem;
+        }
+        .slds-card {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .error-message {
+            color: #c23934;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .success-message {
+            color: #04844b;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .loading .slds-spinner {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <h2 class="slds-text-heading_medium slds-p-bottom_medium">Salesforce B2C Trial Signup</h2>
+            <p class="slds-text-body_regular slds-p-bottom_medium">Experience the features and performance of B2C Commerce</p>
+            
+            <form id="signupForm">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="email">Email</label>
+                    <div class="slds-form-element__control">
+                        <input type="email" id="email" class="slds-input" required>
+                    </div>
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+                <div class="slds-m-top_medium">
+                    <button type="submit" class="slds-button slds-button_brand">Create Trial Environment</button>
+                </div>
+            </form>
+
+            <div class="loading" id="loading">
+                <div class="slds-spinner_container">
+                    <div class="slds-spinner slds-spinner_medium" role="status">
+                        <span class="slds-spinner__dot-a"></span>
+                        <span class="slds-spinner__dot-b"></span>
+                    </div>
+                </div>
+                <p class="slds-m-top_medium">Creating your trial environment. This may take a few minutes...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const loading = document.getElementById('loading');
+            const form = document.getElementById('signupForm');
+
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            form.style.display = 'none';
+            loading.style.display = 'block';
+
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    loading.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    successMessage.innerHTML = `
+                        <p>Your trial environment has been created successfully!</p>
+                        <p>Business Manager: <a href="${data.businessManager}" target="_blank">${data.businessManager}</a></p>
+                        <p>Storefront: <a href="${data.storefront}" target="_blank">${data.storefront}</a></p>
+                        <p>Check your email for more details.</p>
+                    `;
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                form.style.display = 'block';
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = error.message || 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html> 

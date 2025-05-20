@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2C Commerce Trial - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.15.8/styles/salesforce-lightning-design-system.min.css">
+    <style>
+        body {
+            background-color: #f3f2f2;
+            padding: 2rem;
+        }
+        .slds-card {
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        .error-message {
+            color: #c23934;
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <h2 class="slds-text-heading_medium slds-p-bottom_medium">B2C Commerce Trial Access</h2>
+            <form id="loginForm">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="password">Password</label>
+                    <div class="slds-form-element__control">
+                        <input type="password" id="password" class="slds-input" required>
+                    </div>
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+                <div class="slds-m-top_medium">
+                    <button type="submit" class="slds-button slds-button_brand">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    window.location.href = '/';
+                } else {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = data.message;
+                }
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html> 
