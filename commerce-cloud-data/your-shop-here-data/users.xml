@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <users xmlns="http://www.demandware.com/xml/impex/user/2007-09-05">
-    <user login="hnestmann@salesforce.com" enabled-flag="true">
-        <credentials>
-            <external-id>c903d420-c97d-4a85-9b13-73b08894ed97</external-id>
-        </credentials>
-        <profile>
-            <first-name>Holger</first-name>
-            <last-name>Nestmann</last-name>
-            <email>hnestmann@salesforce.com</email>
-        </profile>
-    </user>
 
     <user login="demo" enabled-flag="true">
         <credentials>
