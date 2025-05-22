@@ -4,7 +4,6 @@
         <description>The administrator has the rights to perform tasks related to the overall administration of the merchant organization and its users and roles. This access role is not site-specific and will grant the user access to the entire organization.</description>
         <access-controls>
             <access-control resource-path="BUSINESSMGR/CustomMenu/Sites/-/ysh" permission="ACCESS"/>
-            <access-control resource-path="BUSINESSMGR/CustomMenu/Sites/YourShopHere/catalog-reducer" permission="ACCESS"/>
             <access-control resource-path="BUSINESSMGR/SystemMenu/Sites/-/auditing" permission="ACCESS"/>
             <access-control resource-path="BUSINESSMGR/SystemMenu/Sites/-/cdnManager" permission="ACCESS"/>
             <access-control resource-path="BUSINESSMGR/SystemMenu/Sites/-/contentlibraries_manage" permission="ACCESS"/>
