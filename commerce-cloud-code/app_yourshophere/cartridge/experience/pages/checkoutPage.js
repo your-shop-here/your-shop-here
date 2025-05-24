@@ -23,6 +23,11 @@ function renderComponent(context) {
     const metaDefinition = require('*/cartridge/experience/pages/checkoutPage.json');
     const BasketMgr = require('dw/order/BasketMgr');
     const basket = BasketMgr.getCurrentBasket();
+
+    const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+    // adds product to basket if basket is empty and we are in edit mode
+    PageRenderHelper.initializeBasketIfEmpty(basket);
+
     request.custom.model = new HashMap();
     request.custom.model.forceEdit = context.renderParameters && JSON.parse(context.renderParameters).forceEdit;
     model.regions = new RegionModelRegistry(page, metaDefinition);

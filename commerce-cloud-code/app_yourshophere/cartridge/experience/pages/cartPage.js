@@ -15,19 +15,19 @@ exports.render = function render(context) {
         return renderComponent(context);
     } catch (e) {
         const Logger = require('api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
     return '';
 };
 
-function renderComponent (context) {
-    const BasketMgr = require('dw/order/BasketMgr');
-
+function renderComponent(context) {
     const model = new HashMap();
     const page = context.page;
     model.page = page;
 
     model.basket = context.content.basket;
+    // adds product to basket if basket is empty and we are in edit mode
+    PageRenderHelper.initializeBasketIfEmpty(model.basket);
 
     // automatically register configured regions
     const metaDefinition = require('*/cartridge/experience/pages/cartPage.json');
@@ -44,7 +44,7 @@ function renderComponent (context) {
     model.CurrentPageMetaData.keywords = page.pageKeywords;
 
     if (PageRenderHelper.isInEditMode()) {
-        var HookManager = require('dw/system/HookMgr');
+        const HookManager = require('dw/system/HookMgr');
         HookManager.callHook('app.experience.editmode', 'editmode');
         model.resetEditPDMode = true;
     }
@@ -52,7 +52,7 @@ function renderComponent (context) {
     model.httpParameter = {};
 
     if (context.renderParameters) {
-        const queryString = JSON.parse(context.renderParameters).queryString; 
+        const queryString = JSON.parse(context.renderParameters).queryString;
         model.httpParameter = queryString ? JSON.parse(`{"${queryString.replace(/&/g, '","').replace(/=/g, '":"')}"}`, (key, value) => (key === '' ? value : decodeURIComponent(value))) : {};
     }
     request.custom.model = model;
