@@ -48,16 +48,16 @@ server.post('SaveAddresses', (req, res, next) => {
     } else {
         form.temp(request.httpParameterMap);
     }
-    const options = { object: { forceEdit: request.httpParameterMap.forceEdit.stringValue } };
+    const options = { object: { forceEdit: request.httpParameterMap.forceEdit.stringValue, addressValidation: { invalidFields: validationResult.invalidFields } } };
 
     const hxPartial = request.httpParameterMap.hxpartial;
     if (hxPartial.submitted) {
         res.renderPartial(hxPartial.stringValue, options);
         if (session.privacy.submitPartialId) {
-            res.appendPartial(session.privacy.submitPartialId, { object: { outOfBandSwap: true } });
+            res.appendPartial(session.privacy.submitPartialId, { object: { outOfBandSwap: true }, addressValidation: { invalidFields: validationResult.invalidFields } });
         }
     } else {
-        res.page('checkout');
+        res.page('checkout', { addressValidation: { invalidFields: validationResult.invalidFields } });
     }
 
     next();

@@ -9,6 +9,7 @@
     --ysh-warning: #fbbc05;
     --ysh-success: #34a853;
     --ysh-info: #4285f4;
+    --ysh-error: var(--form-element-invalid-border-color)
 
     /* Text Colors */
     --ysh-text-primary: #202124;
@@ -770,4 +771,20 @@ input.search-field {
         width: 100%;
         margin-top: var(--ysh-spacing-sm);
     }
+}
+
+/* Form Validation Styles */
+input[aria-invalid="true"] {
+    border-color:  #c62828;
+    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ea4335' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.5rem;
+}
+
+.form-field-invalid {
+    color: #c62828;
+    font-size: var(--ysh-font-size-sm);
 }

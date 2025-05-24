@@ -30,6 +30,7 @@ function renderComponent(context) {
 
     request.custom.model = new HashMap();
     request.custom.model.forceEdit = context.renderParameters && JSON.parse(context.renderParameters).forceEdit;
+    request.custom.model.addressValidation = context.renderParameters && JSON.parse(context.renderParameters).addressValidation;
     model.regions = new RegionModelRegistry(page, metaDefinition);
     model.regions.main.setClassName('page-checkout');
     model.analytics = JSON.stringify({
