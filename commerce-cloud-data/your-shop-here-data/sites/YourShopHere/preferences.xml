@@ -14,7 +14,7 @@
             <preference preference-id="SiteCurrencies">EUR:USD</preference>
             <preference preference-id="SiteCustomerList">your-shop-here-customers</preference>
             <preference preference-id="SiteDefaultLocale">en_IE</preference>
-            <preference preference-id="SiteInventoryList">nto-web</preference>
+            <preference preference-id="SiteInventoryList">ysh-nto-web</preference>
             <preference preference-id="SiteLibrary">YourShopHere</preference>
             <preference preference-id="SiteLocales">en_IE:de_DE:en_CA:fr_CA</preference>
             <preference preference-id="SitePriceBooks">cny-list-prices:cny-sale-prices:eur-list-prices:eur-sale-prices:gbp-list-prices:gbp-sale-prices:jpy-list-prices:jpy-sale-prices:ocapi-pricebook:ocapi-sales-pricebook:usd-list-prices:usd-sale-prices</preference>
@@ -77,4 +77,3 @@
         <production/>
     </custom-preferences>
 </preferences>
-

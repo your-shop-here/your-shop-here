@@ -57,6 +57,6 @@
     "config:generate:environment": "node build/generateDWJson.js",
     "import-data": "npm-run-all auth data:* cleanup",
     "all": "npm-run-all auth data:* code:* cleanup",
-    "unattanded": "npm-run-all data:* code:* cleanup"
+    "unattended": "npm-run-all code:* data:* cleanup"
   }
 }
