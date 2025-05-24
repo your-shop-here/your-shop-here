@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+This software is written on Salesforce B2C Commerce Cloud. This means any javascript code written in folders other then /static or within <script> tags need to be comptible with mozille Rhino 1.7.14 and allow API use as documented here: https://salesforcecommercecloud.github.io/b2c-dev-doc/docs/current/scriptapi/html/index.html
