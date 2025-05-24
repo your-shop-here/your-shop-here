@@ -68,7 +68,7 @@ function ProductSearchModel(httpParams, config) {
                 this.pagingModel.setStart(this.pagePosition);
                 this.pagingModel.setPageSize(this.pageSize);
 
-                this._viewResults = this.pagingModel.pageElements.asList().toArray().map((hit) => ProductSearchHit.get(hit, { swatchAttribute: this.swatchAttribute }));
+                this._viewResults = this.pagingModel.pageElements.asList().toArray().map((hit, index) => ProductSearchHit.get(hit, { swatchAttribute: this.swatchAttribute }, this.pagePosition + index));
             }
             return this._viewResults;
         },

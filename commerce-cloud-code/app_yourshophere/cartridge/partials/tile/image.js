@@ -79,6 +79,7 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
         pdpUrl: URLUtils.url('Product-Show', 'pid', hit.object.productID).toString(),
         name: hit.name,
         disParams: config.imageDISConfig,
+        loading: config.loadingMode,
         aspectRatio,
     };
 };
@@ -89,6 +90,6 @@ exports.createModel = function createImageModel(hit, search, imageFilter, config
  * @returns {string} The HTML template for the product tile image
  */
 exports.template = (model) => `<a href="${model.pdpUrl}">
-   <img loading="lazy" alt="${model.name}" src="${model.largeUrl}?${model.disParams}" style="aspect-ratio: ${model.aspectRatio}" />
+   <img loading="${model.loading}" alt="${model.name}" src="${model.largeUrl}?${model.disParams}" style="aspect-ratio: ${model.aspectRatio}" />
 </a>`;
 

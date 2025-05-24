@@ -104,7 +104,7 @@
         // Process any existing product view events in the data layer
         if (window.dataLayer) {
             window.dataLayer.forEach((item) => {
-                if (item.type === 'productView' && !item?.processed.includes('einstein')) {
+                if (item.type === 'productView' && !(item.processed && item.processed.includes('einstein')) {
                     sendProductView(item);
                     item.processed = item.processed || [];
                     item.processed.push('einstein');

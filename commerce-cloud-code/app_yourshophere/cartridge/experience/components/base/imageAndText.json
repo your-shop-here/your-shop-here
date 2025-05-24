@@ -41,32 +41,21 @@
           "id": "textContrast",
           "name": "Text Highlight",
           "type": "enum",
-          "values": [
-              "Drop Shadow",
-              "Gradient"
-          ],
+          "values": ["Drop Shadow", "Gradient"],
           "required": false
         },
         {
           "id": "textVAlign",
           "name": "Vertical alignment",
           "type": "enum",
-          "values": [
-              "top",
-              "middle",
-              "bottom"
-          ],
+          "values": ["top", "middle", "bottom"],
           "required": false
         },
         {
           "id": "textHAlign",
           "name": "Horizontal alignment",
           "type": "enum",
-          "values": [
-              "left",
-              "center",
-              "right"
-          ],
+          "values": ["left", "center", "right"],
           "required": false
         },
         {
@@ -75,11 +64,11 @@
           "type": "enum",
           "default_value": "Default",
           "values": [
-              "Default",
-              "Primary",
-              "Page Background",
-              "Link Color",
-              "Menu Background"
+            "Default",
+            "Primary",
+            "Page Background",
+            "Link Color",
+            "Menu Background"
           ],
           "required": false
         },
@@ -89,13 +78,25 @@
           "type": "enum",
           "default_value": "None",
           "values": [
-              "None",
-              "Primary",
-              "Page Background",
-              "Link Color",
-              "Menu Background"
+            "None",
+            "Primary",
+            "Page Background",
+            "Link Color",
+            "Menu Background"
           ],
-          
+
+          "required": false
+        },
+        {
+          "id": "loadingMode",
+          "name": "Loading Mode",
+          "type": "enum",
+          "default_value": "lazy",
+          "values": [
+            "lazy",
+            "eager"
+          ],
+
           "required": false
         }
       ]

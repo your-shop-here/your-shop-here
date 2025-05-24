@@ -13,7 +13,7 @@ ProductSearchHit.prototype.getRepresentedVariationValues = function getRepresent
     return this.representedVariationValuesAccessCache[object.toString()];
 };
 
-exports.get = function get(apiHit, config) {
+exports.get = function get(apiHit, config, position) {
     const swatchAttribute = config.swatchAttribute;
     const instance = new ProductSearchHit(apiHit);
 
@@ -21,13 +21,14 @@ exports.get = function get(apiHit, config) {
         get: function getTileUrl() {
             const URLUtils = require('dw/web/URLUtils');
             const url = URLUtils.url('Tile-Show');
-
             const productGroup = this.object.product;
             const colors = this.object.getRepresentedVariationValues(swatchAttribute).iterator().asList().toArray(0, 10);
 
             url.append('pid', this.mainProductId);
             url.append('lastModified', productGroup.lastModified.getTime());
-
+            if (position < 4) {
+                url.append('imageLoading', 'eager');
+            }
             const maxPrice = this.object.getMaxPrice();
             const minPrice = this.object.getMinPrice();
 

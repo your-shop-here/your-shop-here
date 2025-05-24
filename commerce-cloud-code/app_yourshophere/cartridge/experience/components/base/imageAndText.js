@@ -1,9 +1,7 @@
 
-
-'use strict';
-
 const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
+
 let imageContainerDecorator;
 
 /**
@@ -11,19 +9,19 @@ let imageContainerDecorator;
  * @param {dw.experience.ComponentScriptContext} context The Component script context object.
  * @returns {string} The template to be displayed
 */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
-        return renderComponent (context)
+        return renderComponent(context);
     } catch (e) {
         const Logger = require('api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
-}
+};
 
-function renderComponent (context) {
+function renderComponent(context) {
     const model = createViewModel(context);
     return template(model);
-};
+}
 
 function createViewModel(context) {
     const content = context.content;
@@ -32,10 +30,11 @@ function createViewModel(context) {
     imageContainerDecorator(tmpModel, content);
     const model = tmpModel.imageContainer;
     // @tothink the wysiwyg editor spits out a paragraph, should we make this configurable?
-    model.heading = model.heading.replace('<p>','');
-    model.heading = model.heading.replace(new RegExp('</p>$'),'');
+    model.heading = model.heading.replace('<p>', '');
+    model.heading = model.heading.replace(new RegExp('</p>$'), '');
     // @todo utility class
     model.hxlink = `${model.link}${(model.link.includes('?') ? '&' : '?')}hx=main`;
+    model.loading = content.loadingMode || 'lazy';
     return model;
 }
 
@@ -48,7 +47,7 @@ function template(model) {
                         aspect-ratio: ${model.image.aspectRatio};
                         background-image: url(${model.image.mini});
                     "
-                    loading="lazy"
+                    loading="${model.loading}"
                     srcset="${model.image.srcset}"
                     sizes="${model.image.sizes}"
                     src="${model.image.defaultsize}"
@@ -72,5 +71,5 @@ function template(model) {
             
             </figcaption>
         </figure>
-    `
+    `;
 }
