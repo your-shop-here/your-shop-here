@@ -1,6 +1,5 @@
-'use strict';
 
-var RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
+const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 module.exports = {
     /**
@@ -11,14 +10,14 @@ module.exports = {
      * @returns {dw.web.PageMetaData} The page meta data
      */
     getPageMetaData: function getPageMetaData(page) {
-        var computedMetaData = {
+        const computedMetaData = {
             title: page.pageTitle,
             description: page.pageDescription,
             keywords: page.pageKeywords,
-            pageMetaTags: []
+            pageMetaTags: [],
         };
 
-        request.pageMetaData.pageMetaTags.forEach(function (item) {
+        request.pageMetaData.pageMetaTags.forEach((item) => {
             if (item.title) {
                 computedMetaData.title = item.content;
             } else if (item.name && item.ID === 'description') {
@@ -42,7 +41,7 @@ module.exports = {
      * @returns {experience.utilities.RegionModelRegistry} The container regions
      */
     getRegionModelRegistry: function getRegionModelRegistry(container) {
-        var containerType;
+        let containerType;
         if (container && container instanceof dw.experience.Page) {
             containerType = 'pages';
         } else if (container && container instanceof dw.experience.Component) {
@@ -50,7 +49,7 @@ module.exports = {
         } else {
             return null;
         }
-        var metaDefinition = require('*/cartridge/experience/' + containerType + '/' + container.typeID.replace(/\./g, '/') + '.json');
+        const metaDefinition = require(`*/cartridge/experience/${containerType}/${container.typeID.replace(/\./g, '/')}.json`);
 
         return new RegionModelRegistry(container, metaDefinition);
     },
@@ -68,7 +67,7 @@ module.exports = {
      * @param {string} input a css class name.
      * @return {string} css
      */
-    safeCSSClass: function (input) {
+    safeCSSClass(input) {
         return encodeURIComponent(input.toLowerCase()).replace(/%[0-9A-F]{2}/gi, '');
     },
 
@@ -82,19 +81,47 @@ module.exports = {
      * @param {dw.experience.PageScriptContext} context The page script context object.
      * @return {dw/util/HashMap} previewParams HashMap or null
      */
-    getPreviewParams: function (context) {
-        var previewParams;
-        var desc = context.page.description;
+    getPreviewParams(context) {
+        let previewParams;
+        const desc = context.page.description;
         if (desc && desc.indexOf('{{') !== -1 && desc.indexOf('}}') !== -1) {
-            var jsonString = desc.substring(desc.indexOf('{{') + 1, desc.indexOf('}}') + 1);
+            const jsonString = desc.substring(desc.indexOf('{{') + 1, desc.indexOf('}}') + 1);
             try {
                 previewParams = JSON.parse(jsonString);
             } catch (error) {
-                var Logger = require('api/Logger');
+                const Logger = require('api/Logger');
                 Logger.warn('Found JSON in page description, but failed to parse it');
             }
         }
         return (previewParams || null);
-    }
+    },
+
+    /**
+     * Adds a product to the basket if the basket is empty and we are in edit mode
+     * @param {dw.order.Basket} basket The basket object
+     */
+    initializeBasketIfEmpty: function initializeBasketIfEmpty(basket) {
+        if (this.isInEditMode() && (!basket || !basket.productLineItems || basket.productLineItems.isEmpty())) {
+            // initialize product search model from root category
+
+            const firstVariantSearch = new (require('dw/catalog/ProductSearchModel'))();
+            firstVariantSearch.setCategoryID('root');
+            firstVariantSearch.setPriceMin(0.01);
+            firstVariantSearch.setOrderableProductsOnly(true);
+            firstVariantSearch.search();
+            if (firstVariantSearch.getCount() > 0) {
+                const Transaction = require('dw/system/Transaction');
+                Transaction.wrap(() => {
+                    const HookMgr = require('dw/system/HookMgr');
+                    const BasketMgr = require('dw/order/BasketMgr');
+                    const newBasket = BasketMgr.getCurrentOrNewBasket();
+                    const firstProduct = firstVariantSearch.productSearchHits.next().firstRepresentedProduct;
+                    const lineitem = newBasket.createProductLineItem(firstProduct.ID, newBasket.defaultShipment);
+                    lineitem.quantityValue = 1;
+                    HookMgr.callHook('dw.order.calculate', 'calculate', newBasket);
+                });
+            }
+        }
+    },
 
 };

@@ -212,6 +212,7 @@
 }</config>
         <data xml:lang="x-default">{
   "linkProducts" : false,
+  "showTableHeader" : false,
   "showOrderNumber" : false,
   "showSubtotal" : false,
   "imageViewType" : "small",
@@ -623,6 +624,19 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="3a6933d554d5993aab1b9f3688">
+        <type>component.searchstrip</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "searchdetails" : null,
+  "category" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="3b19fe1e698eda489321cb7bd4">
@@ -1113,14 +1127,14 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
+            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
             <content-link content-id="55210987f91643aff4898ac426" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="0785f27be4aa240f3421d4ed55" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
-            </content-link>
-            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
@@ -1527,6 +1541,7 @@
   },
   "textVAlign" : "top",
   "heading" : "&lt;p&gt;Kids outdoor clothing - survives any stroll&lt;/p&gt;",
+  "loadingMode" : "eager",
   "textContrast" : "Drop Shadow",
   "alt" : "Kids outdoor clothing - survives any stroll",
   "textBackground" : null,
@@ -1844,11 +1859,11 @@
             <classification-link folder-id="pdps-for-product-type"/>
         </folder-links>
         <content-links>
-            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
-                <position>1.0</position>
-            </content-link>
             <content-link content-id="f1119c433af0b5988b599bb481" type="page.productPage.main">
                 <position>0.0</position>
+            </content-link>
+            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
+                <position>1.0</position>
             </content-link>
         </content-links>
         <content-object-assignments>
@@ -2552,17 +2567,17 @@
             <classification-link folder-id="editorial-pages"/>
         </folder-links>
         <content-links>
-            <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
-                <position>2.0</position>
-            </content-link>
             <content-link content-id="bc427d9b487bf33897a8a22641" type="page.contentPage.main">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="a91fa32aa18058fa803b8f7927" type="page.contentPage.main">
                 <position>4.0</position>
+            </content-link>
+            <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
+                <position>2.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -2584,6 +2599,9 @@
             <classification-link folder-id="editorial-pages"/>
         </folder-links>
         <content-links>
+            <content-link content-id="3a6933d554d5993aab1b9f3688" type="page.contentPage.main">
+                <position>3.0</position>
+            </content-link>
             <content-link content-id="3f11e590490d2da0efb4764779" type="page.contentPage.main">
                 <position>1.0</position>
             </content-link>

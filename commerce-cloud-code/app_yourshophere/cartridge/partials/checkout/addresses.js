@@ -1,4 +1,3 @@
-
 exports.createModel = function createModel(input) {
     const BasketMgr = require('dw/order/BasketMgr');
     const basket = BasketMgr.getCurrentOrNewBasket();
@@ -11,10 +10,15 @@ exports.createModel = function createModel(input) {
     const Resource = require('dw/web/Resource');
 
     model.rows = form.rows();
-    const address = basket.billingAddress || form.getTemp();
+    model.invalidFields = input.addressValidation.invalidFields;
+    let address = basket.billingAddress;
+    let temp = false;
+    if (!address) {
+        address = form.getTemp();
+        temp = true;
+    }
     if (address) {
-        if (input && input.forceEdit && input.forceEdit.includes('address')) {
-            model.showForm = true;
+        if ((input && input.forceEdit && input.forceEdit.includes('address')) || temp) {
             model.showCancel = true;
         } else {
             model.showForm = false;
@@ -30,19 +34,22 @@ exports.createModel = function createModel(input) {
     model.hxActionUrl = URLUtils.url('Checkout-SaveAddresses', 'hxpartial', 'checkout/addresses', 'forceEdit', 'address');
 
     model.actionUrl = URLUtils.url('Checkout-SaveAddresses');
-
+    model.errorMessage = Resource.msg('forms.labels.error.invalid', 'translations', null);
     return model;
 };
 
 function inputControl(field, model) {
+    const isInvalid = model.invalidFields && model.invalidFields.includes(field.fieldId);
+
     return `
-    <label for="${field.fieldId}">
-      ${field.label}
+    <label for="${field.fieldId}" ${isInvalid ? 'class="form-field-invalid"' : ''}>
+      ${field.label}${isInvalid ? `<span role="alert">${model.errorMessage}</span>` : ''}
       <input type="${field.type}" 
         name="${field.fieldId}" 
         id="${field.fieldId}" 
         placeholder="${field.label}" 
         value="${field.value || ''}" 
+        aria-invalid="${isInvalid}"
         hx-post="${model.hxActionUrl}" 
         hx-trigger="change"/>
     </label>
