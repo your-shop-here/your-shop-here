@@ -22,6 +22,8 @@ function renderComponent(context) {
     const page = context.page;
     const metaDefinition = require('*/cartridge/experience/pages/checkoutPage.json');
     const BasketMgr = require('dw/order/BasketMgr');
+    const URLUtils = require('dw/web/URLUtils');
+
     const basket = BasketMgr.getCurrentBasket();
 
     const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
@@ -39,6 +41,7 @@ function renderComponent(context) {
         products: [],
         amount: basket.totalGrossPrice.value,
     });
+    model.checkoutCss = URLUtils.staticURL('checkout.css');
     return template(model);
 }
 
@@ -49,12 +52,18 @@ function template(model) {
         ${require('partials').html('global/htmlhead')()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
+    <body>
+    
+    <style>
+        <wainclude url="${model.checkoutCss}" />
+    </style>
+
     <main class="checkout-page" data-analytics='${model.analytics}'>
         ${model.regions.header.render()}
         ${model.regions.main.render()}
         ${model.regions.footer.render()}
     </main>
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-
+    </body>
     <html>`;
 }

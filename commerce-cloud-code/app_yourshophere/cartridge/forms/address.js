@@ -17,7 +17,7 @@ module.exports = [{
             rowId: 'street_house_no',
             mapping: {
                 persist: (businessObject, fieldValue) => { businessObject.custom.yshHouseNumber = fieldValue; },
-                load: (businessObject) => businessObject.custom.yshHouseNumber,
+                load: (businessObject) => businessObject.custom && businessObject.custom.yshHouseNumber,
             },
             validation: (fieldValue) => /[0-9]{1,2}/.test(fieldValue),
         },
