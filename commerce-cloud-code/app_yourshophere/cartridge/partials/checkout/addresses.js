@@ -52,7 +52,8 @@ exports.createModel = function createModel(input) {
     model.hxActionUrl = URLUtils.url('Checkout-SaveAddresses', 'hxpartial', 'checkout/addresses', 'forceEdit', 'address');
 
     model.actionUrl = URLUtils.url('Checkout-SaveAddresses');
-    model.errorMessage = Resource.msg('forms.labels.error.invalid', 'translations', null);
+
+    model.buildErrorMessage = (label) => Resource.msgf('forms.labels.error.invalid', 'translations', '', label);
     model.outOfBandSwap = input.outOfBandSwap;
 
     return model;
@@ -63,7 +64,7 @@ function inputControl(field, model) {
 
     return `
     <label for="${field.fieldId}" ${isInvalid ? 'class="form-field-invalid"' : ''}>
-      ${field.label}${isInvalid ? `<span role="alert">${model.errorMessage}</span>` : ''}
+      ${isInvalid ? `<span role="alert">${model.buildErrorMessage(field.label)}</span>` : field.label}
       <input type="${field.type}" 
         name="${field.fieldId}" 
         id="${field.fieldId}" 
