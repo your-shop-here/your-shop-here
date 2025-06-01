@@ -49,6 +49,9 @@ function initializeCheckout(currentBasket) {
                 copyCustomerAddressToBasket(customerAddress, currentBasket);
             });
         }
+        Transaction.wrap(() => {
+            currentBasket.setCustomerEmail(customer.getProfile().getEmail());
+        });
     }
 }
 
