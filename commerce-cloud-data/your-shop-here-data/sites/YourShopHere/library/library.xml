@@ -212,6 +212,7 @@
 }</config>
         <data xml:lang="x-default">{
   "linkProducts" : false,
+  "showTableHeader" : false,
   "showOrderNumber" : false,
   "showSubtotal" : false,
   "imageViewType" : "small",
@@ -458,6 +459,18 @@
         <page-attributes/>
     </content>
 
+    <content content-id="21fe1ea8851168eb08c6277431">
+        <type>component.checkout.addressbook</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "title" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="26f4078abcc3964a6263011c90">
         <type>component.commerce_layouts.onefourth</type>
         <config>{
@@ -623,6 +636,19 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="3a6933d554d5993aab1b9f3688">
+        <type>component.searchstrip</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "searchdetails" : null,
+  "category" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="3b19fe1e698eda489321cb7bd4">
@@ -1113,13 +1139,36 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
+            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
             <content-link content-id="55210987f91643aff4898ac426" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="0785f27be4aa240f3421d4ed55" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
+        </content-links>
+    </content>
+
+    <content content-id="82d108736b95193616c354db1b">
+        <type>component.base.collapsible</type>
+        <config>{
+  "visibility" : [ {
+    "schedule" : { },
+    "customer_group_ids" : [ "Registered" ],
+    "campaign_qualifier" : { },
+    "aspect_attribute_qualifiers" : [ ],
+    "locale_ids" : [ ]
+  } ]
+}</config>
+        <data xml:lang="x-default">{
+  "hintText" : "Saved Addresses"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="21fe1ea8851168eb08c6277431" type="component.base.collapsible.collapsed">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -1200,6 +1249,29 @@
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="907d2ff9dde8b4db538e077c75">
+        <type>component.base.collapsible</type>
+        <config>{
+  "visibility" : [ {
+    "schedule" : { },
+    "customer_group_ids" : [ "Unregistered" ],
+    "campaign_qualifier" : { },
+    "aspect_attribute_qualifiers" : [ ],
+    "locale_ids" : [ ]
+  } ]
+}</config>
+        <data xml:lang="x-default">{
+  "hintText" : "Already have an account? Sign in"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="a45c8d2cce8a9308bddf48ad5a" type="component.base.collapsible.collapsed">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="947a195a00af6dff22a672e911">
@@ -1463,6 +1535,18 @@
         <page-attributes/>
     </content>
 
+    <content content-id="a45c8d2cce8a9308bddf48ad5a">
+        <type>component.account.login</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "customClass" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="a7806336c29b9852425d66352f">
         <type>component.plp.refinements</type>
         <config>{
@@ -1527,6 +1611,7 @@
   },
   "textVAlign" : "top",
   "heading" : "&lt;p&gt;Kids outdoor clothing - survives any stroll&lt;/p&gt;",
+  "loadingMode" : "eager",
   "textContrast" : "Drop Shadow",
   "alt" : "Kids outdoor clothing - survives any stroll",
   "textBackground" : null,
@@ -1844,11 +1929,11 @@
             <classification-link folder-id="pdps-for-product-type"/>
         </folder-links>
         <content-links>
-            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
-                <position>1.0</position>
-            </content-link>
             <content-link content-id="f1119c433af0b5988b599bb481" type="page.productPage.main">
                 <position>0.0</position>
+            </content-link>
+            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
+                <position>1.0</position>
             </content-link>
         </content-links>
         <content-object-assignments>
@@ -2091,16 +2176,22 @@
                 <position>1.0</position>
             </content-link>
             <content-link content-id="4bdcb0b7798c93bb16dbb2722c" type="component.commerce_layouts.column.column1">
-                <position>1.0</position>
+                <position>3.0</position>
             </content-link>
             <content-link content-id="6f3392429cdf5e6a47f3081825" type="component.commerce_layouts.column.column2">
                 <position>2.0</position>
             </content-link>
             <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
-                <position>0.0</position>
+                <position>2.0</position>
             </content-link>
             <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
                 <position>0.0</position>
+            </content-link>
+            <content-link content-id="907d2ff9dde8b4db538e077c75" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="82d108736b95193616c354db1b" type="component.commerce_layouts.column.column1">
+                <position>1.0</position>
             </content-link>
         </content-links>
     </content>
@@ -2552,17 +2643,17 @@
             <classification-link folder-id="editorial-pages"/>
         </folder-links>
         <content-links>
-            <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
-                <position>2.0</position>
-            </content-link>
             <content-link content-id="bc427d9b487bf33897a8a22641" type="page.contentPage.main">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="a91fa32aa18058fa803b8f7927" type="page.contentPage.main">
                 <position>4.0</position>
+            </content-link>
+            <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
+                <position>2.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -2584,6 +2675,9 @@
             <classification-link folder-id="editorial-pages"/>
         </folder-links>
         <content-links>
+            <content-link content-id="3a6933d554d5993aab1b9f3688" type="page.contentPage.main">
+                <position>3.0</position>
+            </content-link>
             <content-link content-id="3f11e590490d2da0efb4764779" type="page.contentPage.main">
                 <position>1.0</position>
             </content-link>

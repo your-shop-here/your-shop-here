@@ -1,4 +1,3 @@
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
@@ -21,13 +20,13 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
-    const BasketMgr = require('dw/order/BasketMgr');
-
     const model = new HashMap();
     const page = context.page;
     model.page = page;
 
     model.basket = context.content.basket;
+    // adds product to basket if basket is empty and we are in edit mode
+    PageRenderHelper.initializeBasketIfEmpty(model.basket);
 
     // automatically register configured regions
     const metaDefinition = require('*/cartridge/experience/pages/cartPage.json');

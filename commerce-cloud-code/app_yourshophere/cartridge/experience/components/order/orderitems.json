@@ -45,6 +45,14 @@
                     "type": "boolean",
                     "required": false,
                     "default_value": true
+                },
+                {
+                    "id": "showTableHeader",
+                    "name": "Show Table Header",
+                    "description": "Toggle to show/hide the table header with column labels",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
                 }
             ]
         }

@@ -6,6 +6,7 @@
  * @param {string} [options.settings.imageViewType] - The type of image view to use
  * @param {string} [options.settings.imageDISConfig] - The DIS configuration for images
  * @param {boolean} [options.settings.showOrderNumber] - Whether to show the order number in the title
+ * @param {boolean} [options.settings.showTableHeader] - Whether to show the table header
  * @returns {Object} The model object containing order details and display settings
  */
 exports.createModel = function createModel(options) {
@@ -35,6 +36,7 @@ exports.createModel = function createModel(options) {
         orderDetailsTitle: options.settings.showOrderNumber !== false
             ? Resource.msgf('order.details', 'translations', null, order.orderNo)
             : '',
+        showTableHeader: options.settings.showTableHeader !== false,
         items: order.productLineItems.toArray().map((item) => ({
             quantity: item.quantityValue,
             text: item.lineItemText,
@@ -76,6 +78,7 @@ exports.createModel = function createModel(options) {
  * @param {boolean} model.empty - Whether the order is empty
  * @param {string} model.emptyMessage - Message to display when order is empty
  * @param {string} model.orderDetailsTitle - The title to display for the order details
+ * @param {boolean} model.showTableHeader - Whether to show the table header
  * @param {Array<Object>} model.items - Array of order line items
  * @param {string} model.merchandiseTotal - Formatted merchandise total
  * @param {string} model.total - Formatted order total
@@ -89,14 +92,14 @@ exports.template = (model) => (model.empty ? /* html */`
 ` : /* html */`<div class="order-details">
     ${model.orderDetailsTitle ? `<h2>${model.orderDetailsTitle}</h2>` : ''}
     <table role="grid">
-        <thead>
+        ${model.showTableHeader ? `<thead>
             <tr>
                 <th scope="col"></th>
                 <th scope="col">${model.labels.quantity}</th>
                 <th scope="col">${model.labels.product}</th>
                 <th scope="col">${model.labels.price}</th>
             </tr>
-        </thead>
+        </thead>` : ''}
         <tbody>
         ${model.items.map((item) => `<tr data-analytics-contribution='${item.analyticsContribution}'>
                 <th scope="row">
