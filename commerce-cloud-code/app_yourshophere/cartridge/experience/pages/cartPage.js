@@ -15,12 +15,12 @@ exports.render = function render(context) {
         return renderComponent(context);
     } catch (e) {
         const Logger = require('api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
     return '';
 };
 
-function renderComponent (context) {
+function renderComponent(context) {
     const BasketMgr = require('dw/order/BasketMgr');
 
     const model = new HashMap();
@@ -37,14 +37,13 @@ function renderComponent (context) {
 
     // Determine seo meta data.
     // Used in htmlHead.isml via common/layout/page.isml decorator.
-    model.CurrentPageMetaData = PageRenderHelper.getPageMetaData(page);
-    model.CurrentPageMetaData = {};
-    model.CurrentPageMetaData.title = page.pageTitle;
-    model.CurrentPageMetaData.description = page.pageDescription;
-    model.CurrentPageMetaData.keywords = page.pageKeywords;
+    model.pageMetaData = PageRenderHelper.getPageMetaData(page);
+    model.pageMetaData.title = page.pageTitle;
+    model.pageMetaData.description = page.pageDescription;
+    model.pageMetaData.keywords = page.pageKeywords;
 
     if (PageRenderHelper.isInEditMode()) {
-        var HookManager = require('dw/system/HookMgr');
+        const HookManager = require('dw/system/HookMgr');
         HookManager.callHook('app.experience.editmode', 'editmode');
         model.resetEditPDMode = true;
     }
@@ -52,11 +51,14 @@ function renderComponent (context) {
     model.httpParameter = {};
 
     if (context.renderParameters) {
-        const queryString = JSON.parse(context.renderParameters).queryString; 
+        const queryString = JSON.parse(context.renderParameters).queryString;
         model.httpParameter = queryString ? JSON.parse(`{"${queryString.replace(/&/g, '","').replace(/=/g, '":"')}"}`, (key, value) => (key === '' ? value : decodeURIComponent(value))) : {};
     }
     request.custom.model = model;
     // render the page
 
-    return new Template('experience/pages/cartpage').render(model).text;
+    // render the page
+    return require('*/cartridge/partials/page').content('cart/mainregion', {
+        model, context, metaDefinition,
+    }).decorateWith('global/decorator/main').html();
 }
