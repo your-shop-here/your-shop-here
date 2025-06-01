@@ -12,6 +12,7 @@ function getFont() {
             font-family: "Salesforce Sans";
             src: url("${URLUtils.staticURL('fonts/SalesforceSans-Regular.woff')}" ) format('woff');
             unicode-range: U+0000-007F;
+            font-display: swap;
         }
 
         @font-face {
@@ -19,6 +20,7 @@ function getFont() {
             src: url("${URLUtils.staticURL('fonts/SalesforceSans-Bold.woff')}" ) format('woff');
             font-weight: bold;
             unicode-range: U+0000-007F;
+            font-display: swap;
         }
 
         @font-face {
@@ -27,6 +29,7 @@ function getFont() {
             font-weight: bold;
             font-style: italic;
             unicode-range: U+0000-007F;
+            font-display: swap;
         }
 
         @font-face {
@@ -34,6 +37,7 @@ function getFont() {
             src: url("${URLUtils.staticURL('fonts/SalesforceSans-Italic.woff')}" ) format('woff');
             font-style: italic;
             unicode-range: U+0000-007F;
+            font-display: swap;
         }
 
         @font-face {
@@ -42,6 +46,7 @@ function getFont() {
             font-weight: lighter;
             font-style: italic;
             unicode-range: U+0000-007F;
+            font-display: swap;
         }
 
         @font-face {
@@ -49,6 +54,7 @@ function getFont() {
             src: url("${URLUtils.staticURL('fonts/SalesforceSans-Light.woff')}" ) format('woff');
             font-weight: lighter;
             unicode-range: U+0000-007F;
+            font-display: swap;
         }
     </style>`);
 }

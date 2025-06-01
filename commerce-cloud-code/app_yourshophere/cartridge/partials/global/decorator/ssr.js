@@ -2,6 +2,7 @@ exports.top = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-theme="
 
     <head>
         <title>${model.pageMetaData.title}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${require('partials').html('global/htmlhead')(model)}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>

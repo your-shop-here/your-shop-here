@@ -1,4 +1,10 @@
 {
     "caches": "./caches.json",
-    "hooks": "./hooks.json"
+    "hooks": "./hooks.json",
+    "scripts": {
+        "minify-css": "find cartridge/static/default -name '*.css' -not -name '*.min.css' -exec sh -c 'csso \"$1\" -o \"${1%.css}.min.css\"' sh {} \\;"
+    },
+    "devDependencies": {
+        "csso-cli": "^4.0.0"
+    }
 }

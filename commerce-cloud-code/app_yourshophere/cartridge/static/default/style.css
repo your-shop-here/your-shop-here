@@ -369,8 +369,15 @@ input.search-field {
 }
 
 .overBleedWidth {
-    width: 120%;
-    margin-left: -10%;
+    width: 100%;
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    .overBleedWidth {
+        width: 120%;
+        margin-left: -10%;
+    }
 }
 
 .spillIntoContent {

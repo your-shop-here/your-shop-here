@@ -1,0 +1,1 @@
+.onefourth-wrapper{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr;grid-column-gap:0;grid-row-gap:0}.onefourth-wrapper .div-left{grid-area:1/1/2/2}.onefourth-wrapper .div-right{grid-area:1/2/2/5}
