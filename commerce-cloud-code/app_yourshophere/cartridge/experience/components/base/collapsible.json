@@ -1,0 +1,27 @@
+{
+  "name": "Collapsible",
+  "group": "base",
+  "attribute_definition_groups": [
+    {
+      "id": "collapsible_spec",
+      "name": "Collapsible",
+      "description": "Collapsible settings",
+      "attribute_definitions": [
+        {
+          "id": "hintText",
+          "name": "Hint Text",
+          "description": "The clickable text which will reveal the compontent hidden in collapsed",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": [
+    {
+      "id": "collapsed",
+      "name": "Collapsed",
+      "component_type_exclusions": []
+    }
+  ]
+}

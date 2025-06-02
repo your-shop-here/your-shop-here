@@ -63,5 +63,8 @@ Why partials?
 - Great profileability, each component can be measured on model creation and HTML generation times which provides granular and actionable performance insights
 - Works well with Page Designer, but components can be used standalone as well
 
+## Forms
+How YSH handles forms can be found here [here](docs/concepts/forms-handling.md)
+
 # TODOs
 - move activity tracking for Analytics and Einstein to service worker (using i.e. party town)

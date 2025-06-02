@@ -1,0 +1,21 @@
+{
+    "name": "Customer Address Book",
+    "group": "Checkout",
+    "attribute_definition_groups": [
+        {
+            "id": "addressbook_atributes",
+            "name": "Address Book",
+            "description": "The address configuration",
+            "attribute_definitions": [
+                {
+                    "id": "title",
+                    "name": "Address Book Title",          
+                    "description": "The titale above the address book",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

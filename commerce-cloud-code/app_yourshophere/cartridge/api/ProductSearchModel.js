@@ -1,4 +1,5 @@
 function ProductSearchModel(httpParams, config) {
+    // @todo decouple from http params
     const ApiProductSearchModel = require('dw/catalog/ProductSearchModel');
 
     const instance = new ApiProductSearchModel();

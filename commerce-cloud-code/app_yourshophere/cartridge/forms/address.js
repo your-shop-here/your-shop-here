@@ -17,7 +17,7 @@ module.exports = [{
             rowId: 'street_house_no',
             mapping: {
                 persist: (businessObject, fieldValue) => { businessObject.custom.yshHouseNumber = fieldValue; },
-                load: (businessObject) => businessObject.custom.yshHouseNumber,
+                load: (businessObject) => businessObject.custom && businessObject.custom.yshHouseNumber,
             },
             validation: (fieldValue) => /[0-9]{1,2}/.test(fieldValue),
         },
@@ -38,6 +38,29 @@ module.exports = [{
             type: 'string',
             rowId: 'postal_city',
             validation: (fieldValue) => /[a-zA-Z]{1,20}/.test(fieldValue),
+        },
+        email: {
+            type: 'email',
+            rowId: 'email',
+            validation: (fieldValue) => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(fieldValue),
+            mapping: {
+                persist: (businessObject, fieldValue) => {
+                    // first form build with the framework and we hack around already. Nice.
+                    const BasketMgr = require('dw/order/BasketMgr');
+                    const basket = BasketMgr.getCurrentBasket();
+                    basket.setCustomerEmail(fieldValue);
+                },
+                load: () => {
+                    const BasketMgr = require('dw/order/BasketMgr');
+                    const basket = BasketMgr.getCurrentBasket();
+                    return basket.getCustomerEmail();
+                },
+            },
+        },
+        phone: {
+            type: 'tel',
+            rowId: 'phone',
+            validation: (fieldValue) => /[0-9]{10}/.test(fieldValue),
         },
     },
 }];
