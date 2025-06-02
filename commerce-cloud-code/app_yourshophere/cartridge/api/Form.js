@@ -137,6 +137,19 @@ Form.prototype.temp = function (parameterMap) {
 };
 
 /**
+ * @description Save form values
+ * @param {Object} parameterMap - The parameter map
+ * @returns {Object} an object with the form values
+ */
+Form.prototype.clearTemp = function () {
+    const CacheMgr = require('dw/system/CacheMgr');
+    const tempObject = {};
+    const tempCache = CacheMgr.getCache('Form');
+    tempCache.put(this.name + session.sessionID, tempObject);
+    return tempObject;
+};
+
+/**
  * @description Get the saved form values
  * @returns {Object} The saved form values
  */

@@ -22,9 +22,17 @@ function renderComponent(context) {
     const page = context.page;
     const metaDefinition = require('*/cartridge/experience/pages/checkoutPage.json');
     const BasketMgr = require('dw/order/BasketMgr');
+    const URLUtils = require('dw/web/URLUtils');
+
     const basket = BasketMgr.getCurrentBasket();
+
+    const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+    // adds product to basket if basket is empty and we are in edit mode
+    PageRenderHelper.initializeBasketIfEmpty(basket);
+
     request.custom.model = new HashMap();
     request.custom.model.forceEdit = context.renderParameters && JSON.parse(context.renderParameters).forceEdit;
+    request.custom.model.addressValidation = context.renderParameters && JSON.parse(context.renderParameters).addressValidation;
     model.regions = new RegionModelRegistry(page, metaDefinition);
     model.regions.main.setClassName('page-checkout');
     model.analytics = JSON.stringify({
@@ -33,6 +41,7 @@ function renderComponent(context) {
         products: [],
         amount: basket.totalGrossPrice.value,
     });
+    model.checkoutCss = URLUtils.staticURL('checkout.css');
     return template(model);
 }
 
@@ -43,12 +52,18 @@ function template(model) {
         ${require('partials').html('global/htmlhead')()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
+    <body>
+    
+    <style>
+        <wainclude url="${model.checkoutCss}" />
+    </style>
+
     <main class="checkout-page" data-analytics='${model.analytics}'>
         ${model.regions.header.render()}
         ${model.regions.main.render()}
         ${model.regions.footer.render()}
     </main>
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-
+    </body>
     <html>`;
 }

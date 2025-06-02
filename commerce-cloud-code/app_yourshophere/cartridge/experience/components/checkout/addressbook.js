@@ -10,5 +10,4 @@ exports.render = function render(context) {
         title: context.content.title,
     });
     return result;
-
 };
