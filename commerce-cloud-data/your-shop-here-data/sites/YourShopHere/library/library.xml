@@ -2869,4 +2869,41 @@
         <sitemap-priority>0.0</sitemap-priority>
     </content>
 
+    <content content-id="faq">
+        <display-name xml:lang="x-default">FAQ</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="editorial-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="faq-content" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="faq-content">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h1&gt;Frequently Asked Questions&lt;/h1&gt;&lt;h2&gt;Shipping Information&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Important Notice:&lt;/strong&gt; This is a demo store and no actual shipping will take place. All orders placed here are for demonstration purposes only.&lt;/p&gt;&lt;h3&gt;Shipping Methods&lt;/h3&gt;&lt;p&gt;In a real store, we would offer the following shipping options:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Standard Shipping (3-5 business days)&lt;/li&gt;&lt;li&gt;Express Shipping (1-2 business days)&lt;/li&gt;&lt;li&gt;Next Day Delivery (for eligible areas)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Shipping Costs&lt;/h3&gt;&lt;p&gt;Shipping costs would be calculated based on:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Order weight and dimensions&lt;/li&gt;&lt;li&gt;Delivery destination&lt;/li&gt;&lt;li&gt;Selected shipping method&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;International Shipping&lt;/h3&gt;&lt;p&gt;For international orders, we would:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Ship to most countries worldwide&lt;/li&gt;&lt;li&gt;Handle customs documentation&lt;/li&gt;&lt;li&gt;Provide tracking information&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;em&gt;Remember: This is a demo store and no actual shipping will occur. All orders are simulated for demonstration purposes only.&lt;/em&gt;&lt;/p&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
 </library>
