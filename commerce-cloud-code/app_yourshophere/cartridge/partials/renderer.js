@@ -27,7 +27,7 @@ exports.html = (id) => (
             model = partial.createModel(params);
         } catch (e) {
             Logger.error(`Model creation for partial '${id}' failed. Reason: ${e.message} at '${e.fileName}:${e.lineNumber}'
-                ${request.httpPath} ${request.httpQueryString}    
+                ${request.httpPath}?${request.httpQueryString}    
             `);
         }
 
@@ -36,7 +36,7 @@ exports.html = (id) => (
         } catch (e) {
             Logger.error(`
                 Template rendering for partial '${id}' failed. Reason: ${e.message} at '${e.fileName}:${e.lineNumber}'
-                    ${request.httpPath} ${request.httpQueryString}
+                    ${request.httpPath}?${request.httpQueryString} 
                 `);
         }
         return markup;

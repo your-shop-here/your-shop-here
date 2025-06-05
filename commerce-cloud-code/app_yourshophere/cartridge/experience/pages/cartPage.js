@@ -21,6 +21,7 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
+
     const model = new HashMap();
     const page = context.page;
     model.page = page;
@@ -37,11 +38,10 @@ function renderComponent(context) {
 
     // Determine seo meta data.
     // Used in htmlHead.isml via common/layout/page.isml decorator.
-    model.CurrentPageMetaData = PageRenderHelper.getPageMetaData(page);
-    model.CurrentPageMetaData = {};
-    model.CurrentPageMetaData.title = page.pageTitle;
-    model.CurrentPageMetaData.description = page.pageDescription;
-    model.CurrentPageMetaData.keywords = page.pageKeywords;
+    model.pageMetaData = PageRenderHelper.getPageMetaData(page);
+    model.pageMetaData.title = page.pageTitle;
+    model.pageMetaData.description = page.pageDescription;
+    model.pageMetaData.keywords = page.pageKeywords;
 
     if (PageRenderHelper.isInEditMode()) {
         const HookManager = require('dw/system/HookMgr');
@@ -58,5 +58,8 @@ function renderComponent(context) {
     request.custom.model = model;
     // render the page
 
-    return new Template('experience/pages/cartpage').render(model).text;
+    // render the page
+    return require('*/cartridge/partials/page').content('cart/mainregion', {
+        model, context, metaDefinition,
+    }).decorateWith('global/decorator/main').html();
 }

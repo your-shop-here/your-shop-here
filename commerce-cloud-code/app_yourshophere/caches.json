@@ -31,6 +31,10 @@
         {
             "id": "Form",
             "expireAfterSeconds": 10000000
+        },
+        {
+            "id": "Fonts",
+            "expireAfterSeconds": 10000000
         }
     ]
 }
