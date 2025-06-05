@@ -29,7 +29,7 @@ exports.createModel = function createModel(options) {
             quantity: item.quantityValue,
             text: item.lineItemText,
             price: StringUtils.formatMoney(item.price),
-            images: item.product.getImages(options.settings.imageViewType || 'small').toArray().slice(0, 1).map((image) => ({
+            images: item.product && item.product.getImages(options.settings.imageViewType || 'small').toArray().slice(0, 1).map((image) => ({
                 url: `${image.url}?${options.settings.imageDISConfig}`,
                 alt: image.alt,
             })),
@@ -75,14 +75,14 @@ exports.template = (model) => (model.empty ? /* html */ `
 </thead>
 <tbody>
 ${model.items.map((item) => /* html */ `<tr>
-        <th scope="row"><a href="${item.pdpUrl}"
+        <th scope="row">${item.images ? `<a href="${item.pdpUrl}"
                 hx-get="${item.pdpUrl}?hx=main"
                 hx-target="main"
                 hx-trigger="click"
                 hx-push-url="${item.pdpUrl}"
                 hx-indicator=".progress">
                     ${item.images.map((image) => `<img src="${image.url}" alt="${image.alt}"/>`).join('\n')}
-                </a></th>
+                </a>` : ''}</th>
         <td>
             <form action="${item.updateQuantityUrl}" method="post" class="quantity-form">
                 <input type="number" name="quantity" value="${item.quantity}" min="1" 
