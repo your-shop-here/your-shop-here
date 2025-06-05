@@ -1,0 +1,27 @@
+<meta charset=UTF-8 />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>${pdict.CurrentPageMetaData.title}</title>
+<meta name="description" content="${pdict.CurrentPageMetaData.description}"/>
+<meta name="keywords" content="${pdict.CurrentPageMetaData.keywords}"/>
+
+<iscomment>Additional Rule based page meta tags</iscomment>
+<isloop items="${pdict.CurrentPageMetaData.pageMetaTags}" var="pageMetaTag">
+    <isif condition="${pageMetaTag.name}">
+        <meta name="${pageMetaTag.ID}" content="${pageMetaTag.content}" />
+    <iselseif condition="${pageMetaTag.property}">
+        <meta property="${pageMetaTag.ID}" content="${pageMetaTag.content}" />
+    </isif>
+</isloop>
+
+<link rel="manifest" href="${URLUtils.staticURL('manifest.json')}" />
+<!-- it's should be fine to load css inline, we only load it once and then keep using it -->
+<style>
+    <isinclude url="${URLUtils.staticURL('pico.min.css')}" />
+    <isinclude url="${URLUtils.staticURL('style.css')}"/>
+    <isinclude url="${URLUtils.staticURL('header.css')}" />
+    <isinclude url="${URLUtils.staticURL('experience/layouts.css')}" />
+    <isinclude url="${URLUtils.staticURL('experience/components/base/moreImageAndText.css')}" />
+    <isinclude url="${URLUtils.staticURL('progress.css')}" />
+</style>
