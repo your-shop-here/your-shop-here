@@ -2,6 +2,7 @@ const HookMgr = require('dw/system/HookMgr');
 
 const arrayPrototype = Array.prototype;
 const hasOnResponseHook = HookMgr.hasHook('dw.custom.response.onResponse');
+
 /**
  * Retrieves session locale info
  *
@@ -633,6 +634,13 @@ function page(pageID, aspectAttributes, data) {
  */
 function applyRenderings(res) {
     if (res.renderings.length) {
+        if (response) {
+            const ResponseClass = require('dw/system/Response');
+            // this is for partytown to work without service worker. Service worker mode breaks bfcache
+            response.addHttpHeader(ResponseClass.CROSS_ORIGIN_EMBEDDER_POLICY, 'credentialless');
+            response.addHttpHeader(ResponseClass.CROSS_ORIGIN_OPENER_POLICY, 'same-origin');
+        }
+
         res.renderings.forEach((element) => {
             if (element.type === 'render') {
                 switch (element.subType) {

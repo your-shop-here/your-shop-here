@@ -24,8 +24,7 @@ exports.render = function render(context) {
             Logger.error('Einstein API Client is not set, Einstein data collection will not be enabled');
         }
     }
-    const System = require('dw/system/System');
-    model.debug = System.getInstanceType() !== System.PRODUCTION_SYSTEM;
+    model.debug = require('*/cartridge/utils/config.js').debug;
     const einsteinScriptUrl = URLUtils.staticURL('js/sfcc-analytics.js');
 
     return /* html */`${model.editMode ? 'SFCC Einstein' : ''}
