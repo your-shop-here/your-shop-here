@@ -7,7 +7,7 @@
  * @param {Object} object - object which contains page meta data for instance product/content
  */
 function setPageMetaData(pageMetaData, object) {
-    var title = '';
+    let title = '';
 
     if (object === null) {
         return;
@@ -58,14 +58,14 @@ function setPageMetaTags(pageMetaData, object) {
  * @returns {void}
  */
 function computedPageMetaData(req, res, next) {
-    var computedMetaData = {
+    const computedMetaData = {
         title: req.pageMetaData.title,
         description: req.pageMetaData.description,
         keywords: req.pageMetaData.keywords,
-        pageMetaTags: []
+        pageMetaTags: [],
     };
 
-    req.pageMetaData.pageMetaTags.forEach(function (item) {
+    req.pageMetaData.pageMetaTags.forEach((item) => {
         if (item.title) {
             computedMetaData.title = item.title;
         } else if (item.name && item.ID === 'description') {
@@ -78,13 +78,13 @@ function computedPageMetaData(req, res, next) {
     });
 
     res.setViewData({
-        CurrentPageMetaData: computedMetaData
+        CurrentPageMetaData: computedMetaData,
     });
     next();
 }
 
 module.exports = {
-    computedPageMetaData: computedPageMetaData,
-    setPageMetaData: setPageMetaData,
-    setPageMetaTags: setPageMetaTags
+    computedPageMetaData,
+    setPageMetaData,
+    setPageMetaTags,
 };
