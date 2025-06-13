@@ -1,5 +1,5 @@
 /**
- * @module app_yourshophere/cartridge/api/Promotions
+ * @module app_yourshophere/api/Promotions
  * @description API for managing costly promotions operations and caching results across the request lifecycle
  */
 

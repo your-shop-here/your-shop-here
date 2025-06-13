@@ -1,4 +1,4 @@
-const Logger = require('api/Logger');
+const Logger = require('*/api/Logger');
 const renderer = require('*/cartridge/partials/renderer');
 
 /**

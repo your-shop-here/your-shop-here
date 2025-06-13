@@ -1,7 +1,7 @@
 /**
  * @namespace Product
  */
-const server = require('server');
+const server = require('*/server');
 const cache = require('*/cartridge/middleware/cache');
 const pageMetaData = require('*/cartridge/middleware/pageMetaData');
 
@@ -12,7 +12,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     const Site = require('dw/system/Site');
     const PageMgr = require('dw/experience/PageMgr');
     const ProductMgr = require('dw/catalog/ProductMgr');
-    const Logger = require('api/Logger');
+    const Logger = require('*/api/Logger');
     const HashMap = require('dw/util/HashMap');
 
     pageMetaData.setPageMetaTags(req.pageMetaData, Site.current);
@@ -62,7 +62,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
         const aspectAttributes = new HashMap();
         aspectAttributes.product = product;
 
-        const HttpSearchParams = require('api/URLSearchParams');
+        const HttpSearchParams = require('*/api/URLSearchParams');
 
         // Filter out any parameters that are not required for the PDP to optimise caching
         const productParams = (new HttpSearchParams(request.httpParameterMap)).allowList(['pid', /^dwvar_.*|^dwopt_.*/]);

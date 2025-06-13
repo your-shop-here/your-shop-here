@@ -6,7 +6,7 @@ exports.createModel = function createModel(input) {
     const basket = BasketMgr.getCurrentOrNewBasket();
     const model = {};
     model.addressBookTitle = input.title || '';
-    const Form = require('api/Form');
+    const Form = require('*/api/Form');
 
     // the address form defines the local layout of an address. I.e. in which order the fields are displayed and how they are grouped.
     const form = new Form('address');

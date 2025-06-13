@@ -1,4 +1,4 @@
-const server = require('server');
+const server = require('*/server');
 
 /**
  * @description Show the login page
@@ -21,7 +21,7 @@ server.post('ProcessLogin', server.middleware.https, (req, res, next) => {
     const Resource = require('dw/web/Resource');
     const Transaction = require('dw/system/Transaction');
     const URLUtils = require('dw/web/URLUtils');
-    const Form = require('api/Form');
+    const Form = require('*/api/Form');
     const form = new Form('login');
 
     const loginForm = {};
@@ -70,7 +70,7 @@ server.post('ProcessLogin', server.middleware.https, (req, res, next) => {
     if (customerLoginResult.error) {
         form.addFormError(customerLoginResult.errorMessage);
         if (customerLoginResult.status === 'ERROR_CUSTOMER_LOCKED') {
-            const Notification = require('api/Notification');
+            const Notification = require('*/api/Notification');
             Notification.sendMessage('accountLocked', {
                 to: email,
                 subject: Resource.msg('subject.account.locked.email', 'translations', null),
@@ -98,7 +98,7 @@ server.post(
         const CustomerMgr = require('dw/customer/CustomerMgr');
         const Resource = require('dw/web/Resource');
         const URLUtils = require('dw/web/URLUtils');
-        const Form = require('api/Form');
+        const Form = require('*/api/Form');
         const form = new Form('register');
         res.page('login');
 
@@ -200,7 +200,7 @@ server.post(
                 }
 
                 if (registrationData.validForm && authenticatedCustomer) {
-                    const Notification = require('api/Notification');
+                    const Notification = require('*/api/Notification');
                     Notification.sendMessage('registration', {
                         to: authenticatedCustomer.profile.email,
                         subject: Resource.msg('email.subject.welcome', 'translations', 'Welcome to Your Shop Here!'),
