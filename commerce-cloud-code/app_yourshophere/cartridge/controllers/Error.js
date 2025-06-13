@@ -5,8 +5,8 @@
 
 const system = require('dw/system/System');
 const Resource = require('dw/web/Resource');
-const Logger = require('api/Logger');
-const partials = require('partials');
+const Logger = require('*/api/Logger');
+const partials = require('*/api/partials');
 
 /**
  * This endpoint is called when an error occurs

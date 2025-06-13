@@ -10,11 +10,11 @@ const addToCartButton = require('./addtocartbutton');
  * @todo Break out the tile into a separate components
  */
 exports.createModel = () => {
-    const HttpSearchParams = require('api/URLSearchParams');
+    const HttpSearchParams = require('*/api/URLSearchParams');
     const httpParams = new HttpSearchParams(request.httpParameterMap);
     const componentSettings = require('*/cartridge/utils/ComponentSettings').get(httpParams.get('component'));
 
-    const tileSearch = require('api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
+    const tileSearch = require('*/api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
     tileSearch.search();
 
     const imageFilter = {

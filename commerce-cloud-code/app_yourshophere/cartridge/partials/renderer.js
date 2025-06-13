@@ -21,7 +21,7 @@ exports.html = (id) => (
         const partial = require(`*/cartridge/partials/${id}`);
         let model;
         let markup = '';
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
 
         try {
             model = partial.createModel(params);

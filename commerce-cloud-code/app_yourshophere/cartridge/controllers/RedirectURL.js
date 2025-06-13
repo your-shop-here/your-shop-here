@@ -1,4 +1,4 @@
-const server = require('server');
+const server = require('*/server');
 
 server.get('Start', (req, res, next) => {
     const URLRedirectMgr = require('dw/web/URLRedirectMgr');

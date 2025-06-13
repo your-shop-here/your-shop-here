@@ -37,14 +37,14 @@ function storeComponentToFileSystemUrl(context) {
 exports.render = function render(context) {
     try {
         const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
-        require('api/ResponseCache').apply('DefaultCache');
+        require('*/api/ResponseCache').apply('DefaultCache');
         let result = renderComponent(context);
         if (PageRenderHelper.isInEditMode()) {
             result = `<wainclude url="${storeComponentToFileSystemUrl(context)}"/>${result}`;
         }
         return result;
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
 };
@@ -60,8 +60,8 @@ function createViewModel(context) {
     model = request.custom.model; // eslint-disable-line no-undef
     const URLUtils = require('dw/web/URLUtils');
 
-    const HttpSearchParams = require('api/URLSearchParams');
-    const searchParams = (new HttpSearchParams(request.custom.model.httpParameter)).allowList(require('api/ProductSearchModel').constants.urlAllowListAll);
+    const HttpSearchParams = require('*/api/URLSearchParams');
+    const searchParams = (new HttpSearchParams(request.custom.model.httpParameter)).allowList(require('*/api/ProductSearchModel').constants.urlAllowListAll);
     searchParams.sort();
     const queryString = searchParams.toString();
 

@@ -3,7 +3,7 @@
  * @returns {Object} The model for the login form
  */
 const createModel = () => {
-    const Form = require('api/Form');
+    const Form = require('*/api/Form');
     const form = new Form('login');
     const formData = form.getTemp();
     return {

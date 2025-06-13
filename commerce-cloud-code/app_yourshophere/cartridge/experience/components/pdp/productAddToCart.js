@@ -6,5 +6,5 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render() {
-    return require('partials').html('pdp/addtocartbutton')(request.custom.model.product);
+    return require('*/api/partials').html('pdp/addtocartbutton')(request.custom.model.product);
 };

@@ -9,7 +9,7 @@ exports.render = function render(context) {
     try {
         return renderer.html('global/miniaccount')(context.content);
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
         return '';
     }

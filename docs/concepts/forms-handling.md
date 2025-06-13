@@ -67,7 +67,7 @@ The system includes error management:
 Here's a typical usage pattern:
 
 ```javascript
-const Form = require('api/Form');
+const Form = require('*/api/Form');
 const form = new Form('address');
 
 // Get form structure

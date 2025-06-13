@@ -16,12 +16,12 @@ function getListPrices(httpParams) {
 
     try {
         PriceBookMgr.setApplicablePriceBooks(priceBookIds.list.map((id) => PriceBookMgr.getPriceBook(id)));
-        const listPriceSearch = require('api/ProductSearchModel').get(httpParams);
+        const listPriceSearch = require('*/api/ProductSearchModel').get(httpParams);
         listPriceSearch.search();
         listPriceMin = listPriceSearch.minPrice;
         listPriceMax = listPriceSearch.maxPrice;
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Issue on list pricebook search ${e}`);
     } finally {
         if (priceBookIds.applicable.length > 0) {

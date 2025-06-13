@@ -1,4 +1,4 @@
-const server = require('server');
+const server = require('*/server');
 
 /**
  * Copies all fields and custom fields from a customer address to the basket's billing and shipping addresses.
@@ -92,7 +92,7 @@ server.post('SaveAddresses', (req, res, next) => {
     const BasketMgr = require('dw/order/BasketMgr');
     const Transaction = require('dw/system/Transaction');
     const HookMgr = require('dw/system/HookMgr');
-    const Form = require('api/Form');
+    const Form = require('*/api/Form');
     const form = new Form('address');
     const basket = BasketMgr.getCurrentOrNewBasket();
     let validationResult = null;

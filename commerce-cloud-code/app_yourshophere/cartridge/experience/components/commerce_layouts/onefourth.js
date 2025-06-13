@@ -16,7 +16,7 @@ exports.render = function render (context, modelIn) {
     try {
         return renderComponent (context, modelIn)
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
     }
 }

@@ -4,11 +4,11 @@
  * @returns
  */
 exports.createModel = () => {
-    const HttpSearchParams = require('api/URLSearchParams');
+    const HttpSearchParams = require('*/api/URLSearchParams');
     const model = {};
     const httpParams = new HttpSearchParams(request.httpParameterMap);
     const componentSettings = require('*/cartridge/utils/ComponentSettings').get(httpParams.get('component'));
-    const search = require('api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
+    const search = require('*/api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
     search.search();
 
     const componentId = httpParams.get('component');

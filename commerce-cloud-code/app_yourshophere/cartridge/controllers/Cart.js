@@ -1,12 +1,12 @@
 
-const server = require('server');
+const server = require('*/server');
 const Logger = require('dw/system/Logger').getLogger('Cart');
 
 server.use('Show', (req, res, next) => {
     const BasketMgr = require('dw/order/BasketMgr');
     const HookMgr = require('dw/system/HookMgr');
     const Transaction = require('dw/system/Transaction');
-    const HttpSearchParams = require('api/URLSearchParams');
+    const HttpSearchParams = require('*/api/URLSearchParams');
     const basket = BasketMgr.getCurrentOrNewBasket();
 
     Transaction.wrap(() => {

@@ -16,7 +16,7 @@
         "./*/cartridge/scripts/**/*.js",
         "./*/cartridge/controllers/*.js",
         "./*/cartridge/experience/**/*.js",
-        "./*/cartridge/api/*.js",
+        "./*/api/*.js",
         "./*/cartridge/middleware/*.js",
         "./*/cartridge/partials/*.js",
         "./*/cartridge/utils/*.js",

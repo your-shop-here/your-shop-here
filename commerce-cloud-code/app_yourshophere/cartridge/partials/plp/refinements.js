@@ -17,10 +17,10 @@
 exports.createModel = () => {
     const Resource = require('dw/web/Resource');
 
-    const HttpSearchParams = require('api/URLSearchParams');
+    const HttpSearchParams = require('*/api/URLSearchParams');
     const httpParams = new HttpSearchParams(request.httpParameterMap);
 
-    const refinementSearch = require('api/ProductSearchModel').get(httpParams);
+    const refinementSearch = require('*/api/ProductSearchModel').get(httpParams);
     refinementSearch.search();
 
     const category = refinementSearch.getCategory();

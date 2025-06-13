@@ -7,7 +7,7 @@
  * @returns {Object} The model object
  */
 exports.createModel = function createModel(options) {
-    const partials = require('partials');
+    const partials = require('*/api/partials');
     const formatMoney = require('dw/util/StringUtils').formatMoney;
     const product = options.product;
     const model = {

@@ -1,7 +1,7 @@
 /**
  * @namespace Search
  */
-const server = require('server');
+const server = require('*/server');
 
 const cache = require('*/cartridge/middleware/cache');
 
@@ -11,7 +11,7 @@ const cache = require('*/cartridge/middleware/cache');
 server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     const PageMgr = require('dw/experience/PageMgr');
     const CatalogMgr = require('dw/catalog/CatalogMgr');
-    const Logger = require('api/Logger');
+    const Logger = require('*/api/Logger');
     const HashMap = require('dw/util/HashMap');
 
     const categoryId = request.httpParameterMap.cgid.submitted ? request.httpParameterMap.cgid.stringValue : 'root';
@@ -29,8 +29,8 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
         const aspectAttributes = new HashMap();
         aspectAttributes.category = category;
 
-        const HttpSearchParams = require('api/URLSearchParams');
-        const searchParams = (new HttpSearchParams(request.httpParameterMap)).allowList(require('api/ProductSearchModel').constants.urlAllowListAll);
+        const HttpSearchParams = require('*/api/URLSearchParams');
+        const searchParams = (new HttpSearchParams(request.httpParameterMap)).allowList(require('*/api/ProductSearchModel').constants.urlAllowListAll);
         searchParams.sort();
         const queryString = searchParams.toString();
 

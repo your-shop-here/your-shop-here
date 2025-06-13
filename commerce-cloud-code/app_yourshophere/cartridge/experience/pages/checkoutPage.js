@@ -12,7 +12,7 @@ exports.render = function render(context) {
     try {
         return renderComponent(context);
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
 };
@@ -49,7 +49,7 @@ function template(model) {
     return `<!DOCTYPE html><html lang="${model.lang}" data-theme="light">
 
     <head>
-        ${require('partials').html('global/htmlhead')()}
+        ${require('*/api/partials').html('global/htmlhead')()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
     <body>

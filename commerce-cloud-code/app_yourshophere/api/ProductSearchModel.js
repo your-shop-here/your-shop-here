@@ -62,7 +62,7 @@ function ProductSearchModel(httpParams, config) {
     Object.defineProperty(this, 'foundProducts', {
         get: function initSearchHits() {
             if (!this._viewResults) {
-                const ProductSearchHit = require('api/ProductSearchHit');
+                const ProductSearchHit = require('*/api/ProductSearchHit');
                 const PagingModel = require('dw/web/PagingModel');
 
                 this.pagingModel = new PagingModel(this.object.productSearchHits, this.object.count);

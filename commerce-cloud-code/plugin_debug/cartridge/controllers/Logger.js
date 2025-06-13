@@ -1,6 +1,6 @@
 'use strict';
 var CatalogMgr = require('dw/catalog/CatalogMgr');
-var server = require('server');
+var server = require('*/server');
 
 var cache = require('*/cartridge/middleware/cache');
 

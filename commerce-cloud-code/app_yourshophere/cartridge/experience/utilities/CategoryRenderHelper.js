@@ -51,7 +51,7 @@ module.exports = {
             componentConfig = JSON.parse(params.custom);
             return componentConfig.cgid;
         } catch (e) {
-            var Logger = require('api/Logger');
+            var Logger = require('*/api/Logger');
             Logger.error('Unable to parse parameters: ' + httpParameterMap.params);
         }
         return null;
