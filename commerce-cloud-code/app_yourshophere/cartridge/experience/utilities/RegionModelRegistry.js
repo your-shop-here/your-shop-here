@@ -1,4 +1,5 @@
-const RegionModel = require('*/cartridge/experience/utilities/RegionModel.js');
+
+var RegionModel = require('*/cartridge/experience/utilities/RegionModel.js');
 
 /**
  * Utility providing shortened access to render a subregion of the given container within a template
@@ -6,10 +7,9 @@ const RegionModel = require('*/cartridge/experience/utilities/RegionModel.js');
  * @param {*} container the container obejct (a page or component)
  * @param {*} metaDataDefinition the object representation of the defintion JSON
  */
-const RegionModelRegistry = function (container, metaDataDefinition) {
+var RegionModelRegistry = function (container, metaDataDefinition) {
     this.container = container;
     this.addRegions(metaDataDefinition);
-    
 };
 
 /**
