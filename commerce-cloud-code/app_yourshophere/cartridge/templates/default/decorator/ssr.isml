@@ -24,6 +24,6 @@
     <isinclude template="components/layout/footer-include"/>
 
 <!--- the ${''} input prevents salesforce out of the box tracking --->
-</body>
+</bo${''}dy>
 
 </html>
