@@ -5,9 +5,7 @@ const URLUtils = require('dw/web/URLUtils');
  * @returns {string} The font stylesheet
  */
 function getFont() {
-    const CacheMgr = require('dw/system/CacheMgr');
-    const fontCache = CacheMgr.getCache('Fonts');
-    return fontCache.get('salesforcesans', () => `<style>  
+    return `<style>  
         @font-face {
             font-family: "Salesforce Sans";
             src: url("${URLUtils.staticURL('fonts/SalesforceSans-Regular.woff')}" ) format('woff');
@@ -50,9 +48,9 @@ function getFont() {
             font-weight: lighter;
             unicode-range: U+0000-007F;
         }
-    </style>`);
+    </style>`;
 }
 
 module.exports = {
     getFont,
-};
+}; 

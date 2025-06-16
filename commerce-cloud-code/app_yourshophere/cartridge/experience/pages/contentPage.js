@@ -22,7 +22,7 @@ exports.render = function render(context) {
     return '';
 };
 
-function renderComponent(context) {
+function renderComponent (context) {
     const model = new HashMap();
     const Site = require('dw/system/Site');
     const page = context.page;
@@ -35,11 +35,11 @@ function renderComponent(context) {
 
     // Determine seo meta data.
     // Used in htmlHead.isml via common/layout/page.isml decorator.
-    model.pageMetaData = PageRenderHelper.getPageMetaData(page);
-    // @todo use injected page meta data as a fallback
-    model.pageMetaData.title = page.pageTitle || Site.current.name;
-    model.pageMetaData.description = page.pageDescription;
-    model.pageMetaData.keywords = page.pageKeywords;
+    model.CurrentPageMetaData = PageRenderHelper.getPageMetaData(page);
+    model.CurrentPageMetaData = {};
+    model.CurrentPageMetaData.title = page.pageTitle || Site.current.name;
+    model.CurrentPageMetaData.description = page.pageDescription;
+    model.CurrentPageMetaData.keywords = page.pageKeywords;
 
     if (PageRenderHelper.isInEditMode()) {
         const HookManager = require('dw/system/HookMgr');
@@ -52,8 +52,7 @@ function renderComponent(context) {
     if (context.renderParameters) {
         const queryString = JSON.parse(context.renderParameters).queryString;
         if (queryString) {
-            model.httpParameter = JSON.parse(
-                `{"${queryString.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
+            model.httpParameter = JSON.parse(`{"${queryString.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
                 (key, value) => (key === '' ? value : decodeURIComponent(value)),
             );
         } else {
@@ -62,7 +61,5 @@ function renderComponent(context) {
     }
 
     // render the page
-    return require('*/cartridge/partials/page').content('content/mainregion', {
-        model, context, metaDefinition,
-    }).decorateWith('global/decorator/main').html();
+    return new Template('experience/pages/pdpage').render(model).text;
 }

@@ -31,29 +31,26 @@ exports.createModel = function createModel(product) {
 
     const model = {
         variationAttributes: variationModel.productVariationAttributes.toArray().map(((attribute, index) => {
-            let selectedValue = variationModel.getSelectedValue(attribute);
+            const selectedValue = variationModel.getSelectedValue(attribute);
             // select first value if nothing has been selected yet / make sure this code is not shared with cart
-            // @todo only infer this for color
+            // @todo only infer this for color 
             if (!selectedValue && index === 0) {
                 variationModel.setSelectedAttributeValue(attribute.ID, variationModel.variants[0].custom[attribute.ID]);
-                selectedValue = variationModel.getSelectedValue(attribute);
             }
             return {
                 id: attribute.ID,
                 name: attribute.displayName,
-                values: variationModel[index ? 'getFilteredValues' : 'getAllValues'](attribute).toArray().map((value) => ({
+                values: variationModel[index ? 'getFilteredValues' : 'getAllValues'](attribute).toArray().map(value => ({
                     id: value.ID,
                     value: value.value,
                     displayValue: value.displayValue,
                     selected: ((selectedValue && selectedValue.value === value.value) ? 'selected' : ''),
-                    orderable: variationModel.hasOrderableVariants(attribute, value),
                 })),
                 url: URLUtils.url('Product-Show', 'pid', variationModel.master.ID, 'hx', 'main'),
                 selectName: `dwvar_${variationModel.master.ID}_${attribute.ID}`,
                 message: Resource.msgf('pdp.variation.select', 'translations', null, attribute.displayName),
             };
         })),
-        defaultOption: Resource.msg('pdp.variation.select.option', 'translations', null),
         hxTarget: params.hx || 'main',
     };
 
@@ -75,9 +72,8 @@ exports.template = (model) => `${model.variationAttributes.map((attribute) => `
             hx-include="form[name=pdp-actions]"
             hx-trigger="change"
             hx-indicator=".progress">
-            <option value="">${model.defaultOption}</option>
-            ${attribute.values.map((value) => `
-            <option value="${value.value}" ${value.selected} ${value.orderable ? '' : 'disabled'}>${value.displayValue}</option>
+            ${attribute.values.map(value => `
+            <option value="${value.value}" ${value.selected}>${value.displayValue}</option>
             `).join('')}
         </select>
     </div>
