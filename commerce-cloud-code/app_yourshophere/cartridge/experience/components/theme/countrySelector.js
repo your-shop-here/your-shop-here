@@ -10,12 +10,12 @@ exports.render = function render(context) {
         const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
         const regions = PageRenderHelper.getRegionModelRegistry(context.component);
 
-        const partials = require('partials');
+        const partials = require('*/api/partials');
         return `${partials.html('header/countryLanguageSelector')({
             showFlag: context.content.showFlag === true,
         })} ${regions.additionalContent.render()}`;
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
 

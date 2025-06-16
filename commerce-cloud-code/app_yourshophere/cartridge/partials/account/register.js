@@ -1,4 +1,4 @@
-const Form = require('api/Form');
+const Form = require('*/api/Form');
 
 /**
  * Creates a model for the register form

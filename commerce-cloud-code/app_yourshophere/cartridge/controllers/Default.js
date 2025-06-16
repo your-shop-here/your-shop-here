@@ -4,7 +4,7 @@
  * So it would require special handling there to catch it in a performant way
  */
 
-const partials = require('partials');
+const partials = require('*/api/partials');
 
 /**
  * Redirects to the home page, default route when no controller is specified in the URL

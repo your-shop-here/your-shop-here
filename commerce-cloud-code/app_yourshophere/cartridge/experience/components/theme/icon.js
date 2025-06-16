@@ -1,4 +1,4 @@
-const partials = require('partials');
+const partials = require('*/api/partials');
 
 /**
  * Component which renders an icon
@@ -15,7 +15,7 @@ exports.render = function render(context) {
             link: context.content.link,
         });
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
         return '';
     }

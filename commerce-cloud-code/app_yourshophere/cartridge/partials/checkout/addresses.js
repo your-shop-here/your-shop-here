@@ -6,7 +6,7 @@ exports.createModel = function createModel(input) {
     const model = {};
     model.showForm = true;
 
-    const Form = require('api/Form');
+    const Form = require('*/api/Form');
     const form = new Form('address');
     const Resource = require('dw/web/Resource');
 

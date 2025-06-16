@@ -27,7 +27,7 @@ const getListPrice = (priceModel) => {
  * @returns {Object} The first active promotional price
  */
 const getPromotionalPrice = (product, priceModel) => {
-    const Promotions = require('*/cartridge/api/Promotions');
+    const Promotions = require('*/api/Promotions');
     const promotions = Promotions.getProductPromotions(product);
     if (promotions && promotions.length > 0) {
         const promoPrice = promotions[0].getPromotionalPrice(product);

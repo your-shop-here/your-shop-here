@@ -13,11 +13,11 @@ const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionMode
  * @returns {string} The template text
  */
 exports.render = function render(context) {
-    require('api/Cache').days(14);
+    require('*/api/Cache').days(14);
     try {
         return renderComponent(context);
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
 
