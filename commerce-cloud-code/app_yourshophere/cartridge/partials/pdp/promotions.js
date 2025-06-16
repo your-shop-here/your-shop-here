@@ -5,7 +5,7 @@
  * @returns {Object} Model containing an array of promotion messages to display
  */
 const createModel = (options) => {
-    const Promotions = require('*/cartridge/api/Promotions');
+    const Promotions = require('*/api/Promotions');
     const promotions = Promotions.getProductPromotions(options.product);
     const model = {
         promotions: promotions.map((promotion) => ({

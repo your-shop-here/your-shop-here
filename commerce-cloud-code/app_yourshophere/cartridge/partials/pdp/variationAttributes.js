@@ -6,7 +6,7 @@
  * @returns {Object} The variation model for the product
  */
 exports.getVariationModel = function getVariationModel(product) {
-    const HttpSearchParams = require('api/URLSearchParams');
+    const HttpSearchParams = require('*/api/URLSearchParams');
 
     const variationModel = product.variationModel;
     const params = request.custom.model ? request.custom.model.httpParameter : request.httpParameterMap;

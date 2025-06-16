@@ -10,8 +10,8 @@ exports.render = function render(context) {
         const url = URLUtils.url('Search-Refinements');
 
         // Only use whitelisted parameters and sort them canonically to optimize caching
-        const HttpSearchParams = require('api/URLSearchParams');
-        const searchParams = (new HttpSearchParams(request.custom.model.httpParameter)).allowList(require('api/ProductSearchModel').constants.urlAllowListBase);
+        const HttpSearchParams = require('*/api/URLSearchParams');
+        const searchParams = (new HttpSearchParams(request.custom.model.httpParameter)).allowList(require('*/api/ProductSearchModel').constants.urlAllowListBase);
         searchParams.sort();
         const queryString = searchParams.toString();
 
@@ -19,7 +19,7 @@ exports.render = function render(context) {
 
         return `<wainclude url="${urlString}">`;
     } catch (e) {
-        const Logger = require('api/Logger');
+        const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
     }
     return '';
