@@ -1,4 +1,4 @@
-<title>${pdict.CurrentPageMetaData.title}</title>
+<title>${request.pageMetaData.title}</title>
 <dialog open>
     <a href="#close"
         aria-label="Close"

@@ -1,2 +1,2 @@
-<title>${pdict.CurrentPageMetaData.title}</title>
+<title>${request.pageMetaData.title}</title>
 <isreplace/>

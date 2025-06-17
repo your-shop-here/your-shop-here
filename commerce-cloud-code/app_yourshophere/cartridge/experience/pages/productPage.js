@@ -50,11 +50,9 @@ function renderComponent (context) {
     // Used in htmlHead.isml via common/layout/page.isml decorator.
     const pageMetaData = require('*/cartridge/middleware/pageMetaData');
 
-    model.CurrentPageMetaData = request.pageMetaData;
-
-    // does it make sense to ignore page meta data?
-    pageMetaData.setPageMetaData(model.CurrentPageMetaData, model.product);
-    pageMetaData.setPageMetaTags(model.CurrentPageMetaData, model.product);
+    // Set page metadata
+    pageMetaData.setPageMetaData(request.pageMetaData, model.product);
+    pageMetaData.setPageMetaTags(request.pageMetaData, model.product);
 
     if (PageRenderHelper.isInEditMode()) {
         require('dw/system/HookMgr').callHook('app.experience.editmode', 'editmode');
