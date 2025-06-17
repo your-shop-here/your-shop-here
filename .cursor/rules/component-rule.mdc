@@ -1,6 +1,6 @@
 ---
 description: when creating components, this rule should apply
-globs: 
-alwaysApply: false
+globs: **/cartridge/experience/components/**
+alwaysApply: true
 ---
 Components consist of a JSON definition and a JS file in the experience/components subfolder. The Page Designer component should pass the configuration to a partial and delegate all logic to it.
