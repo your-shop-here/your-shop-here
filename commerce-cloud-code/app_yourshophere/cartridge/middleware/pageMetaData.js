@@ -1,4 +1,8 @@
-'use strict';
+/**
+ * @fileoverview Middleware to compute request pageMetaData object, this is
+ * deprecated and will be removed in the future as metadata is now set in the page js files
+ * @deprecated
+ */
 
 /**
  * Set page meta Data including page title, page description and page keywords
