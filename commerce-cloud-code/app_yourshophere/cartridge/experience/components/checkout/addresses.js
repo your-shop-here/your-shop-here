@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    const result = require('*/cartridge/partials/renderer').html('checkout/addresses')({
+    const result = require('*/cartridge/partials/renderer').create('checkout/addresses').html({
         forceEdit: request.custom.model.forceEdit,
         addressValidation: request.custom.model.addressValidation,
         newAddress: false,

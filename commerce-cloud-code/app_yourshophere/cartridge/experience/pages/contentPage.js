@@ -61,8 +61,9 @@ function renderComponent(context) {
         }
     }
 
-    // render the page
-    return require('*/cartridge/partials/page').content('content/mainregion', {
+    const myPartial = require('*/cartridge/partials/renderer').create('content/mainregion').decorateWith('decorator/ssr');
+    const myhtml = myPartial.html({
         model, context, metaDefinition,
-    }).decorateWith('global/decorator/main').html();
+    });
+    return myhtml;
 }

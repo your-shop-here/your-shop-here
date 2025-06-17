@@ -1,8 +1,16 @@
-exports.top = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-theme="light">
+exports.createModel = function createDecoratorModel(myReq) {
+    const model = {
+        lang: myReq.locale,
+        pageMetaData: {},
+    };
+    return model;
+};
+
+exports.template = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-theme="light">
 
     <head>
         <title>${model.pageMetaData.title}</title>
-        ${require('partials').html('global/htmlhead')(model)}
+        ${require('partials').create('global/htmlhead').html(model)}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
     
@@ -11,10 +19,8 @@ exports.top = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-theme="
 
         <div class="container">  
         ${require('*/cartridge/experience/skin.js').renderHeader()}
-            <main>`;
-
-exports.bottom = () => `
-            </main>
+            <main>
+                -
             <footer>
                 ${require('*/cartridge/experience/skin.js').renderFooter()}
             </footer>

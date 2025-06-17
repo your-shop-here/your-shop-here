@@ -6,7 +6,7 @@
  * @returns {string} The rendered HTML template for the address book.
  */
 exports.render = function render(context) {
-    const result = require('*/cartridge/partials/renderer').html('checkout/addressbook')({
+    const result = require('*/cartridge/partials/renderer').create('checkout/addressbook').html({
         title: context.content.title,
     });
     return result;
