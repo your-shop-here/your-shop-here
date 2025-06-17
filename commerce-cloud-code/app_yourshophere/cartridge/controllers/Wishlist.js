@@ -19,6 +19,7 @@ server.use('Add', (req, res, next) => {
         product = ProductMgr.getProduct(productId);
         Transaction.wrap(() => {
             if (!wishlist) {
+                // @todo if this is a guest, move to profile on login 
                 wishlist = ProductListMgr.createProductList(customer, ProductList.TYPE_WISH_LIST);
             }
             if (product) {
