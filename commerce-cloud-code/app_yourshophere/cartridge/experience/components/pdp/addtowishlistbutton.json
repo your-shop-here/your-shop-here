@@ -1,0 +1,30 @@
+{
+  "name": "Add to Wishlist Button",
+  "description": "A button to add a product to the wishlist.",
+  "group": "pdp",
+  "attribute_definition_groups": [
+    {
+      "id": "addToWishlistButtonSettings",
+      "name": "Settings",
+      "description": "Add to Wishlist Button Settings",
+      "attribute_definitions": [
+        {
+          "id": "buttonStyle",
+          "name": "Button Style",
+          "description": "Choose the style for the button (primary or secondary)",
+          "type": "enum",
+          "values": ["primary", "secondary"],
+          "default_value": "primary"
+        },
+        {
+          "id": "buttonText",
+          "name": "Button Text",
+          "description": "Custom text for the Add to Wishlist button (optional)",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+} 

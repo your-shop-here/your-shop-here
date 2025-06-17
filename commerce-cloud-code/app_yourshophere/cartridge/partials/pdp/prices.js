@@ -6,10 +6,10 @@
 const getListPrice = (priceModel) => {
     const PriceBookMgr = require('dw/catalog/PriceBookMgr');
     const selectedCurrency = session.currency.currencyCode;
-    return PriceBookMgr.getApplicablePriceBooks().isEmpty() ? PriceBookMgr.getSitePriceBooks().toArray() : PriceBookMgr.getApplicablePriceBooks().toArray()
+    return (PriceBookMgr.getApplicablePriceBooks().isEmpty() ? PriceBookMgr.getSitePriceBooks().toArray() : PriceBookMgr.getApplicablePriceBooks().toArray())
         .filter((priceBook) => priceBook.currencyCode === selectedCurrency)
         .map((priceBook) => (priceBook.getParentPriceBook() && priceBook.getParentPriceBook().ID))
-        .filter((id) => id !== null)
+        .filter(Boolean)
         .map((id) => priceModel.getPriceBookPrice(id))
         .sort((a, b) => a.value - b.value)
         .pop();
@@ -53,7 +53,7 @@ const createModel = (options) => {
     const model = {
         price: salesPrice && salesPrice.value < priceModel.price.value
             ? StringUtils.formatMoney(salesPrice)
-            : StringUtils.formatMoney(priceModel.price),
+            : (priceModel.price && StringUtils.formatMoney(priceModel.price)),
         strikePrice: listPrice && listPrice.value !== priceModel.price.value
             ? StringUtils.formatMoney(listPrice)
             : null,

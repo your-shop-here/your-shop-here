@@ -1,5 +1,5 @@
 ---
-description: When being asked about partials, this riule should be used.
+description: When being asked about partials, this rule should be used.
 globs: 
 alwaysApply: false
 ---

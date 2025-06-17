@@ -1,0 +1,44 @@
+{
+  "name": "Wishlist Items",
+  "description": "This component shows the items in the wishlist.",
+  "group": "Account",
+  "attribute_definition_groups": [
+    {
+      "id": "wishlistItems",
+      "name": "Settings",
+      "description": "Wishlist Items Settings",
+      "attribute_definitions": [
+        {
+          "id": "buttonStyle",
+          "name": "Button Style",
+          "description": "Choose the style for the buttons (primary or secondary)",
+          "type": "enum",
+          "values": [
+            "primary",
+            "secondary"
+          ],
+          "default_value": "primary"
+        },
+        {
+          "id": "enableRemove",
+          "name": "Enable Remove Button",
+          "description": "Show or hide the remove button",
+          "type": "enum",
+          "values": [
+            "enabled",
+            "disabled"
+          ],
+          "default_value": "enabled"
+        },
+        {
+          "id": "addToCartText",
+          "name": "Add to Cart Button Text",
+          "description": "Custom text for the Add to Cart button (optional)",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+} 

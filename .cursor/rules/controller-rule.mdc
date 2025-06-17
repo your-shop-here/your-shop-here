@@ -1,0 +1,6 @@
+---
+description: 
+globs: **/cartridge/controllers/*.js
+alwaysApply: true
+---
+When creating or extending controllers, they should get created in a way that they primarily render a page designer page and pass the relevant parameters to this page. The page should then create components which either already exist or need to be created. Do no use ISML.

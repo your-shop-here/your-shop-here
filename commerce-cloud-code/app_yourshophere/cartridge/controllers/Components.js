@@ -19,4 +19,12 @@ server.get('MiniCart', server.middleware.include, (req, res, next) => {
     return next();
 });
 
+/**
+ * @name controller/Components-Miniwishlist
+ */
+server.get('MiniWishlist', server.middleware.include, (req, res, next) => {
+    res.renderPartial('header/miniwishlistinclude');
+    return next();
+});
+
 module.exports = server.exports();
