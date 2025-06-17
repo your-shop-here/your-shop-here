@@ -13,19 +13,20 @@ server.use('Add', (req, res, next) => {
     const Transaction = require('dw/system/Transaction');
 
     const productId = request.httpParameterMap.pid.stringValue;
-    let product = null;
     let wishlist = ProductListMgr.getProductLists(customer, ProductList.TYPE_WISH_LIST).toArray().pop();
-    Transaction.wrap(() => {
-        if (!wishlist) {
-            wishlist = ProductListMgr.createProductList(customer, ProductList.TYPE_WISH_LIST);
-        }
-        if (productId) {
-            product = ProductMgr.getProduct(productId);
+    let product;
+    if (productId) {
+        product = ProductMgr.getProduct(productId);
+        Transaction.wrap(() => {
+            if (!wishlist) {
+                wishlist = ProductListMgr.createProductList(customer, ProductList.TYPE_WISH_LIST);
+            }
             if (product) {
                 wishlist.createProductItem(product);
             }
-        }
-    });
+            session.privacy.wishlistCount = wishlist.productItems.length;
+        });
+    }
     if (req.httpParameterMap.hx.stringValue === 'wishlist-modal') {
         res.renderPartial('wishlist/addtowishlist', { object: { wishlist, product } });
     } else {
@@ -47,6 +48,7 @@ server.use('Remove', (req, res, next) => {
             if (productItem) {
                 wishlist.removeItem(productItem);
             }
+            session.privacy.wishlistCount = wishlist.productItems.length;
         }
     });
     res.redirect('Wishlist-Show');

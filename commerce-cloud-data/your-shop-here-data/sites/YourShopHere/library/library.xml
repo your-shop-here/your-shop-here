@@ -3,10 +3,6 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
-        <content-detail-page-meta-tag-rules>
-            <page-meta-tag-rule rule-id="Page Title"/>
-            <page-meta-tag-rule rule-id="Page Description"/>
-        </content-detail-page-meta-tag-rules>
     </folder>
 
     <folder folder-id="cart-and-checkout">
@@ -139,6 +135,9 @@
                 <position>2.0</position>
             </content-link>
             <content-link content-id="c24523f968e01c47d3f7599a03" type="component.commerce_layouts.column.column2">
+                <position>4.0</position>
+            </content-link>
+            <content-link content-id="0f823787b2c3829efaca169475" type="component.commerce_layouts.column.column2">
                 <position>3.0</position>
             </content-link>
         </content-links>
@@ -347,10 +346,10 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="0f82bce52247b6eb2ac9a20ca1" type="component.commerce_layouts.onefourth.column1">
+            <content-link content-id="332b857b40a3143a4bf0f05cbb" type="component.commerce_layouts.onefourth.column2">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="332b857b40a3143a4bf0f05cbb" type="component.commerce_layouts.onefourth.column2">
+            <content-link content-id="0f82bce52247b6eb2ac9a20ca1" type="component.commerce_layouts.onefourth.column1">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -737,6 +736,27 @@
         </content-links>
     </content>
 
+    <content content-id="3c22a93491283db5f90f917c2a">
+        <type>component.theme.icon</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "image" : {
+    "path" : "unofficial.svg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    }
+  },
+  "link" : "$url('Page-Show', 'cid', 'homepage')$",
+  "width" : "200px",
+  "height" : "64px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="3cdb2b79c516690301d135882f">
         <type>component.base.richText</type>
         <config>{
@@ -769,27 +789,6 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
-    </content>
-
-    <content content-id="3e98f7c67632a9006e8ab9fd0f">
-        <type>component.theme.icon</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "image" : {
-    "path" : "unofficial.svg",
-    "focal_point" : {
-      "x" : 0.5,
-      "y" : 0.5
-    }
-  },
-  "link" : "/s/YourShopHere/",
-  "width" : "200px",
-  "height" : "75px"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
     </content>
 
     <content content-id="3f11e590490d2da0efb4764779">
@@ -1047,19 +1046,6 @@
         <page-attributes/>
     </content>
 
-    <content content-id="6a8f2afbabc68120878aa1026b">
-        <type>component.pdp.bundleorsetproducts</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "showAddToCart" : false,
-  "title" : "Bundles Products"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="6c18f48acd3e3ab7df6a937e91">
         <type>component.base.richText</type>
         <config>{
@@ -1134,9 +1120,6 @@
             </content-link>
             <content-link content-id="cbfbe6940cf3ef911b2044e7d7" type="component.pdp.productActions.actions">
                 <position>4.0</position>
-            </content-link>
-            <content-link content-id="0f823787b2c3829efaca169475" type="component.pdp.productActions.actions">
-                <position>5.0</position>
             </content-link>
         </content-links>
     </content>
@@ -1221,6 +1204,25 @@
         <page-attributes/>
     </content>
 
+    <content content-id="7b351285d6866da36a49a10040">
+        <type>component.theme.miniwishlist</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "image" : {
+    "path" : "salesforce-service-cloud.svg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    }
+  },
+  "width" : "35px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="80b8b8416c27193c9ba3feb19d">
         <type>component.commerce_layouts.column</type>
         <config>{
@@ -1233,14 +1235,14 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
+            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
             <content-link content-id="55210987f91643aff4898ac426" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="0785f27be4aa240f3421d4ed55" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
-            </content-link>
-            <content-link content-id="17a7499d6649a03709ce906b49" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
@@ -1346,7 +1348,7 @@
 }</config>
         <data xml:lang="x-default">{
   "image" : {
-    "path" : "cart-slds.svg",
+    "path" : "b2c_commerce_cloud.svg",
     "focal_point" : {
       "x" : 0.5,
       "y" : 0.5
@@ -1612,9 +1614,6 @@
             <classification-link folder-id="theming-related"/>
         </folder-links>
         <content-links>
-            <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
@@ -1622,6 +1621,9 @@
                 <position>1.0</position>
             </content-link>
             <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -1966,19 +1968,21 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
-        <page-attributes/>
+        <page-attributes>
+            <page-title xml:lang="x-default">Cart Page</page-title>
+        </page-attributes>
         <folder-links>
             <classification-link folder-id="cart-and-checkout"/>
         </folder-links>
         <content-links>
-            <content-link content-id="ef80368e81f76c48d092d5a894" type="page.cartPage.main">
-                <position>0.0</position>
+            <content-link content-id="3cdb2b79c516690301d135882f" type="page.cartPage.main">
+                <position>1.0</position>
             </content-link>
             <content-link content-id="0d24caae2e7fbd0683dbe9bfd4" type="page.cartPage.main">
                 <position>2.0</position>
             </content-link>
-            <content-link content-id="3cdb2b79c516690301d135882f" type="page.cartPage.main">
-                <position>1.0</position>
+            <content-link content-id="ef80368e81f76c48d092d5a894" type="page.cartPage.main">
+                <position>0.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -2014,6 +2018,7 @@
             <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="cat-root-plp">
@@ -2030,41 +2035,7 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
-        <content-links>
-            <content-link content-id="c4f31aa5644567cd3dc6f9fb5d" type="page.categoryPage.main">
-                <position>0.0</position>
-            </content-link>
-        </content-links>
-        <content-object-assignments>
-            <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
-        </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
-    </content>
-
-    <content content-id="catalog-root-pdp">
-        <display-name xml:lang="x-default">cat-root-pdp</display-name>
-        <type>page.productPage</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <visibility-mode xml:lang="x-default">visible</visibility-mode>
-        <data xml:lang="x-default">{
-  "product" : null
-}</data>
-        <aspect-type>product</aspect-type>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="product-details-pages"/>
-        </folder-links>
-        <content-links>
-            <content-link content-id="6a8f2afbabc68120878aa1026b" type="page.productPage.main">
-                <position>2.0</position>
-            </content-link>
-        </content-links>
-        <sitemap-included-flag>false</sitemap-included-flag>
-        <sitemap-priority>0.0</sitemap-priority>
     </content>
 
     <content content-id="catalog-root-plp">
@@ -2084,6 +2055,14 @@
         <folder-links>
             <classification-link folder-id="product-listing-pages"/>
         </folder-links>
+        <content-links>
+            <content-link content-id="c4f31aa5644567cd3dc6f9fb5d" type="page.categoryPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <content-object-assignments>
+            <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
+        </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
     </content>
@@ -2106,11 +2085,11 @@
             <classification-link folder-id="pdps-for-product-type"/>
         </folder-links>
         <content-links>
-            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
-                <position>1.0</position>
-            </content-link>
             <content-link content-id="f1119c433af0b5988b599bb481" type="page.productPage.main">
                 <position>0.0</position>
+            </content-link>
+            <content-link content-id="80b8b8416c27193c9ba3feb19d" type="page.productPage.main">
+                <position>1.0</position>
             </content-link>
         </content-links>
         <content-object-assignments>
@@ -2149,6 +2128,18 @@
   },
   "link" : null,
   "width" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="cf2962273062bd908421cbc1b0">
+        <type>component.commerce_layouts.3column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "addStyleClassName" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -2346,6 +2337,9 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
+            <content-link content-id="82d108736b95193616c354db1b" type="component.commerce_layouts.column.column1">
+                <position>1.0</position>
+            </content-link>
             <content-link content-id="0c3ab7e5e936a24933566de0ed" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
             </content-link>
@@ -2355,17 +2349,14 @@
             <content-link content-id="6f3392429cdf5e6a47f3081825" type="component.commerce_layouts.column.column2">
                 <position>2.0</position>
             </content-link>
-            <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="20d9066be49793746ed0c9ec55" type="component.commerce_layouts.column.column1">
                 <position>2.0</position>
             </content-link>
-            <content-link content-id="907d2ff9dde8b4db538e077c75" type="component.commerce_layouts.column.column1">
+            <content-link content-id="0eb0e6da5f33478ab0d9418478" type="component.commerce_layouts.column.column2">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="82d108736b95193616c354db1b" type="component.commerce_layouts.column.column1">
-                <position>1.0</position>
+            <content-link content-id="907d2ff9dde8b4db538e077c75" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
@@ -2393,22 +2384,25 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
+            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="2e03ffa57feffcba56982c7658" type="component.theme.yshHeader.left">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
+            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
+            <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="7b351285d6866da36a49a10040" type="component.theme.yshHeader.right">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
+            <content-link content-id="3c22a93491283db5f90f917c2a" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -2472,20 +2466,20 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
-                <position>3.0</position>
-            </content-link>
-            <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="7988e6593a84de8ba781125aeb" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
+                <position>3.0</position>
             </content-link>
             <content-link content-id="69a12813f070e0cdc4d97b6e60" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="43590b461cc6dff6e2e0558516" type="component.commerce_layouts.column.column2">
                 <position>2.0</position>
+            </content-link>
+            <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
@@ -2854,17 +2848,17 @@
             <classification-link folder-id="editorial-pages"/>
         </folder-links>
         <content-links>
-            <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
-                <position>2.0</position>
-            </content-link>
             <content-link content-id="bc427d9b487bf33897a8a22641" type="page.contentPage.main">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="a91fa32aa18058fa803b8f7927" type="page.contentPage.main">
                 <position>4.0</position>
+            </content-link>
+            <content-link content-id="c6c9b96ec88b7c617311fe4355" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
+                <position>2.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -2886,6 +2880,9 @@
             <classification-link folder-id="editorial-pages"/>
         </folder-links>
         <content-links>
+            <content-link content-id="3a6933d554d5993aab1b9f3688" type="page.contentPage.main">
+                <position>3.0</position>
+            </content-link>
             <content-link content-id="3f11e590490d2da0efb4764779" type="page.contentPage.main">
                 <position>1.0</position>
             </content-link>
@@ -2894,9 +2891,6 @@
             </content-link>
             <content-link content-id="20de19be882502737f9cc2e96c" type="page.contentPage.main">
                 <position>0.0</position>
-            </content-link>
-            <content-link content-id="3a6933d554d5993aab1b9f3688" type="page.contentPage.main">
-                <position>3.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -3037,11 +3031,11 @@
             <classification-link folder-id="cart-and-checkout"/>
         </folder-links>
         <content-links>
-            <content-link content-id="5ed68db607f706611727a7a29d" type="page.contentPage.main">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="f3b1587aaffe7bb76be9d25a42" type="page.contentPage.main">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="5ed68db607f706611727a7a29d" type="page.contentPage.main">
+                <position>0.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>

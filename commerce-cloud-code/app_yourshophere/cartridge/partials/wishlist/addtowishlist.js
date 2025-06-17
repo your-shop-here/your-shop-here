@@ -8,7 +8,6 @@ exports.createModel = function createModel(options) {
     const Resource = require('dw/web/Resource');
 
     const product = options.product;
-
     const model = {
         productName: product.getName(),
         productImage: product.getImage('small', 0) ? product.getImage('small', 0).getURL().toString() : '',
@@ -19,6 +18,7 @@ exports.createModel = function createModel(options) {
             continueShopping: Resource.msg('addtowishlist.continue.shopping', 'translations', null) || 'Continue Shopping',
             goToWishlist: Resource.msg('addtowishlist.go.to.wishlist', 'translations', null) || 'Go to Wishlist',
         },
+        wishlistCount: options.wishlist.productItems.length,
     };
 
     return model;
@@ -53,4 +53,6 @@ exports.template = (model) => `<dialog open>
   </footer>
 </article>
 </dialog>
-`;
+<div hx-swap-oob="innerHTML:#header-wishlist-count">
+    ${model.wishlistCount}
+</div>`;

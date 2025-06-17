@@ -4,7 +4,7 @@
  */
 function createModel() {
     const StringUtils = require('dw/util/StringUtils');
-    // cart info is read from session.privacy to avoid fetching hte basket, the values are set in calculate.js
+    // cart info is read from session.privacy to avoid fetching the basket, the values are set in calculate.js
     const model = {
         cartInfo: {
             itemCount: StringUtils.formatNumber(session.privacy.cartItemCount || 0, '0.#'),
