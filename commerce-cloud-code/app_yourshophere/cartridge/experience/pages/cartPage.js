@@ -35,13 +35,10 @@ function renderComponent(context) {
     model.regions = new RegionModelRegistry(page, metaDefinition);
     model.regions.main.setClassName('page-cart');
 
-    // Determine seo meta data.
-    // Used in htmlHead.isml via common/layout/page.isml decorator.
-    model.CurrentPageMetaData = PageRenderHelper.getPageMetaData(page);
-    model.CurrentPageMetaData = {};
-    model.CurrentPageMetaData.title = page.pageTitle;
-    model.CurrentPageMetaData.description = page.pageDescription;
-    model.CurrentPageMetaData.keywords = page.pageKeywords;
+    // Set page metadata
+    request.pageMetaData.setTitle(page.pageTitle);
+    request.pageMetaData.setDescription(page.pageDescription);
+    request.pageMetaData.setKeywords(page.pageKeywords);
 
     if (PageRenderHelper.isInEditMode()) {
         const HookManager = require('dw/system/HookMgr');
