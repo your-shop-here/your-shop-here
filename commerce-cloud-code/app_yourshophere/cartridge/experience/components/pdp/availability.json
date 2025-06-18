@@ -1,0 +1,14 @@
+{
+  "name": "Product Availability",
+  "description": "Displays product availability and pre/back order info.",
+  "group": "pdp",
+  "attribute_definition_groups": [
+    {
+      "id": "availabilitySettings",
+      "name": "Settings",
+      "description": "Availability Settings",
+      "attribute_definitions": []
+    }
+  ],
+  "region_definitions": []
+} 

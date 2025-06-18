@@ -79,4 +79,20 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     return next();
 }, pageMetaData.computedPageMetaData);
 
+server.use('Availability', (req, res, next) => {
+    const ProductMgr = require('dw/catalog/ProductMgr');
+    const product = ProductMgr.getProduct(request.httpParameterMap.pid.stringValue);
+    const availabilityModel = product.getAvailabilityModel();
+    const now = new Date().getTime();
+    if (availabilityModel.timeToOutOfStock) {
+        // set the cache to expire 50% of the time to out of stock
+        response.setExpires(now + 1000 * 60 * 60 * (availabilityModel.timeToOutOfStock * 0.5));
+    } else {
+        // if out of stock, no time to out of stock, or perpetual inventory, cache for 1 hour
+        response.setExpires(now + 1000 * 60 * 60);
+    }
+    res.renderPartial('pdp/availability', { object: { product } });
+    return next();
+});
+
 module.exports = server.exports();

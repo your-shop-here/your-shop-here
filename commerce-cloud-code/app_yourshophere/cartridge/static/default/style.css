@@ -56,6 +56,11 @@
     --ysh-transition-fast: 150ms;
     --ysh-transition-normal: 250ms;
     --ysh-transition-slow: 350ms;
+
+    /* Availability Status Colors */
+    --ysh-availability-instock: #2e7d32;      /* Green - In Stock */
+    --ysh-availability-outofstock: #c62828;   /* Red - Out of Stock */
+    --ysh-availability-prebackorder: #f9a825; /* Orange - Pre/Backorder */
 }
 
 /* @todo map all skin colors - maybe overload from pico */
@@ -742,4 +747,14 @@ input[aria-invalid="true"] {
 .form-field-invalid {
     color: #c62828;
     font-size: var(--ysh-font-size-sm);
+}
+
+.product-availability-instock {
+    color: var(--ysh-availability-instock);
+}
+.product-availability-outofstock {
+    color: var(--ysh-availability-outofstock);
+}
+.product-availability-prebackorder {
+    color: var(--ysh-availability-prebackorder);
 }
