@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    return require('*/cartridge/partials/renderer').html('account/welcomeBack')({
+    return require('*/api/partials').create('account/welcomeBack').html({
         customer,
         settings: context.content,
     });

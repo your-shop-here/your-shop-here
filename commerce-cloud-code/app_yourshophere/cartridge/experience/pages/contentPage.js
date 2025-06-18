@@ -22,7 +22,7 @@ exports.render = function render(context) {
     return '';
 };
 
-function renderComponent (context) {
+function renderComponent(context) {
     const model = new HashMap();
     const Site = require('dw/system/Site');
     const page = context.page;
@@ -34,6 +34,7 @@ function renderComponent (context) {
     model.regions.main.setClassName('page-content');
 
     // Set page metadata
+    model.pageMetaData = PageRenderHelper.getPageMetaData(page);
     request.pageMetaData.setTitle(page.pageTitle || Site.current.name);
     request.pageMetaData.setDescription(page.pageDescription);
     request.pageMetaData.setKeywords(page.pageKeywords);
@@ -49,7 +50,8 @@ function renderComponent (context) {
     if (context.renderParameters) {
         const queryString = JSON.parse(context.renderParameters).queryString;
         if (queryString) {
-            model.httpParameter = JSON.parse(`{"${queryString.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
+            model.httpParameter = JSON.parse(
+                `{"${queryString.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
                 (key, value) => (key === '' ? value : decodeURIComponent(value)),
             );
         } else {
@@ -57,6 +59,7 @@ function renderComponent (context) {
         }
     }
 
-    // render the page
-    return new Template('experience/pages/pdpage').render(model).text;
+    return require('*/api/partials').create('content/mainregion').decorateWith('decorator/main').html({
+        model, context, metaDefinition,
+    });
 }

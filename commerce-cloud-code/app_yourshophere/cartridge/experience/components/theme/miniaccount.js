@@ -1,4 +1,4 @@
-const renderer = require('*/cartridge/partials/renderer');
+const renderer = require('*/api/partials');
 
 /**
  * Component which renders miniaccount
@@ -7,7 +7,7 @@ const renderer = require('*/cartridge/partials/renderer');
  */
 exports.render = function render(context) {
     try {
-        return renderer.html('global/miniaccount')(context.content);
+        return renderer.create('global/miniaccount').html(context.content);
     } catch (e) {
         const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);

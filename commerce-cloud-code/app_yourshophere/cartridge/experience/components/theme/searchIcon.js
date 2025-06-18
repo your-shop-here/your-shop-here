@@ -1,6 +1,5 @@
-'use strict';
 
-const partials = require('*/api/partials');
+const renderer = require('*/api/partials');
 
 /**
  * Component which renders an icon with inline search - ideally used in the main page header
@@ -10,7 +9,7 @@ const partials = require('*/api/partials');
  */
 exports.render = function render(context) {
     try {
-        return partials.html('header/searchicon')({
+        return renderer.create('header/searchicon').html({
             icon: context.content.icon,
             color: context.content.color,
             brightness: context.content.brightness,

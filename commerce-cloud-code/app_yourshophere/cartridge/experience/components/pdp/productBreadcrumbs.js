@@ -3,5 +3,5 @@
  *
  */
 exports.render = function render() {
-    return require('*/api/partials').html('pdp/breadcrumbs')(request.custom.model.product);
+    return require('*/api/partials').create('pdp/breadcrumbs').html(request.custom.model.product);
 };

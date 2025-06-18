@@ -5,6 +5,6 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render() {
-    return require('*/api/partials').html('pdp/name')(request.custom.model.product);
+    return require('*/api/partials').create('pdp/name').html(request.custom.model.product);
 };
 

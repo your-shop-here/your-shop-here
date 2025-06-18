@@ -1,11 +1,11 @@
 const HashSet = require('dw/util/HashSet');
-const partials = require('*/api/partials');
+const renderer = require('*/api/partials');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 
 // @todo remove the map, have the fonts loader directly plugin might work better
 const fontMap = {
     'Salesforce Sans': 'fonts/salesforcesans',
-    'Roboto': 'fonts/roboto',
+    Roboto: 'fonts/roboto',
     'Nunito Sans': 'fonts/nunito',
 };
 
@@ -36,7 +36,7 @@ exports.render = function render(context) {
         });
         model.fonts = fonts.toArray();
 
-        return partials.html('header/skin')(model);
+        return renderer.create('header/skin').html(model);
     } catch (e) {
         const Logger = require('*/api/Logger');
         Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);

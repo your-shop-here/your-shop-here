@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    return require('*/api/partials').html('pdp/prices')({
+    return require('*/api/partials').create('pdp/prices').html({
         product: request.custom.model.product,
         settings: context.content,
     });

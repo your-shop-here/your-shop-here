@@ -637,7 +637,7 @@ function applyRenderings(res) {
             if (element.type === 'render') {
                 switch (element.subType) {
                     case 'partial':
-                        require('*/cartridge/partials/renderer').render(element.view)(res.viewData[element.view] ? res.viewData[element.view].object : {});
+                        require('*/api/partials').create(element.view).render(res.viewData[element.view] ? res.viewData[element.view].object : {});
                         break;
                     case 'isml':
                         template(element.view, res.viewData);

@@ -1,5 +1,5 @@
 const Logger = require('*/api/Logger');
-const renderer = require('*/cartridge/partials/renderer');
+const renderer = require('*/api/partials');
 
 /**
  * @description Send a message to the user

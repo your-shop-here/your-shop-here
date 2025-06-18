@@ -40,7 +40,7 @@ exports.Start = (args) => {
             message: Resource.msg('subheading.error.general', 'translations', null),
         }));
     } else {
-        partials.render('error/error')({
+        partials.create('error/error').render({
             error: exposedError,
             showError: true,
             message: Resource.msg('subheading.error.general', 'translations', null),
@@ -57,7 +57,7 @@ exports.Start.public = true;
 exports.ErrorCode = () => {
     response.setStatus(500);
     const errorMessage = `message.error.${request.httpParameterMap.errorCode.stringValue}`;
-    partials.render('error/error')({
+    partials.create('error/error').render({
         error: { msg: errorMessage },
         message: Resource.msg(errorMessage, 'translations', null),
     });

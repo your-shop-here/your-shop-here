@@ -10,8 +10,8 @@ exports.render = function render(context) {
         const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
         const regions = PageRenderHelper.getRegionModelRegistry(context.component);
 
-        const partials = require('*/api/partials');
-        return `${partials.html('header/countryLanguageSelector')({
+        const renderer = require('*/api/partials');
+        return `${renderer.create('header/countryLanguageSelector').html({
             showFlag: context.content.showFlag === true,
         })} ${regions.additionalContent.render()}`;
     } catch (e) {

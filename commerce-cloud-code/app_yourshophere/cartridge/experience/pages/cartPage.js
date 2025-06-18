@@ -36,6 +36,7 @@ function renderComponent(context) {
     model.regions.main.setClassName('page-cart');
 
     // Set page metadata
+    model.pageMetaData = PageRenderHelper.getPageMetaData(page);
     request.pageMetaData.setTitle(page.pageTitle);
     request.pageMetaData.setDescription(page.pageDescription);
     request.pageMetaData.setKeywords(page.pageKeywords);
@@ -54,6 +55,7 @@ function renderComponent(context) {
     }
     request.custom.model = model;
     // render the page
-
-    return new Template('experience/pages/cartpage').render(model).text;
+    return require('*/api/partials').create('cart/mainregion').decorateWith('decorator/main').html({
+        model, context, metaDefinition,
+    });
 }

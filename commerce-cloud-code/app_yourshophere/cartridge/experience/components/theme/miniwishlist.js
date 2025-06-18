@@ -33,5 +33,5 @@ function renderComponent(context) {
         }
     }
 
-    return require('*/cartridge/partials/renderer').html('header/miniwishlist')(model);
+    return require('*/api/partials').create('header/miniwishlist').html(model);
 }

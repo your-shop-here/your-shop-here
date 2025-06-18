@@ -1,4 +1,4 @@
-const partials = require('*/api/partials');
+const renderer = require('*/api/partials');
 
 /**
  * Component which renders a search box - ideally used in the sfra page header
@@ -8,7 +8,7 @@ const partials = require('*/api/partials');
  */
 exports.render = function render(context) {
     try {
-        return partials.html('header/searchbox')({
+        return renderer.create('header/searchbox').html({
             placeholderText: context.content.placeholderText,
             accesssibilityLabel: context.content.accesssibilityLabel,
         });

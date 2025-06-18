@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    const result = require('*/cartridge/partials/renderer').html('checkout/shippingMethods')({
+    const result = require('*/api/partials').create('checkout/shippingMethods').html({
         forceEdit: request.custom.model.forceEdit,
         settings: context.content,
     });
