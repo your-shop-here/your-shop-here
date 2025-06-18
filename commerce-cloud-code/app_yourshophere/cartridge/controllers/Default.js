@@ -29,7 +29,7 @@ exports.Offline = () => {
     cacheTime.setHours(cacheTime.getHours() + 24);
     response.setExpires(cacheTime);
     response.setStatus(503);
-    partials.render('error/siteoffline')({
+    partials.create('error/siteoffline').render({
         lang: require('dw/util/Locale').getLocale(request.getLocale()).getLanguage(),
     });
 };

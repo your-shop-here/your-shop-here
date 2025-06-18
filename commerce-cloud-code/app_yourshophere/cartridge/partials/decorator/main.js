@@ -5,23 +5,24 @@ exports.createModel = function createDecoratorModel(input) {
     const model = input.model;
     const httpParams = model.httpParameter;
     const pageMetaData = model.pageMetaData;
-    let subDecoratorPath = '*/cartridge/partials/global/decorator/ssr.js';
+    const partials = require('*/api/partials');
+    let chosenDecorator = partials.create('decorator/ssr');
     const hxValue = httpParams.hx;
     if (hxValue) {
         if (hxValue === 'main') {
-            subDecoratorPath = '*/cartridge/partials/global/decorator/hx.js';
+            chosenDecorator = partials.create('decorator/hx');
         } else if (hxValue.includes('modal')) {
-            subDecoratorPath = '*/cartridge/partials/global/decorator/hxmodal.js';
+            chosenDecorator = partials.create('decorator/hxmodal');
         }
     }
 
     const Locale = require('dw/util/Locale');
     model.lang = Locale.getLocale(request.locale).language;
     model.pageMetaData = pageMetaData;
-    subDecorator = require(subDecoratorPath);
+    model.chosenDecorator = chosenDecorator;
+    model.content = input.content;
     return model;
 };
 
-exports.top = (input) => subDecorator.top(input);
+exports.template = (input) =>input.chosenDecorator.html(input);
 
-exports.bottom = (input) => subDecorator.bottom(input);

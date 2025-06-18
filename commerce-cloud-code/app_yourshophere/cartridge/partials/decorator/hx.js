@@ -1,3 +1,5 @@
-exports.top = (model) => `<title>${model.pageMetaData.title}</title>`;
+exports.createModel = function createDecoratorModel(model) {
+    return model;
+};
 
-exports.bottom = () => '';
+exports.template = (model) => `<title>${model.pageMetaData.title}</title>${model.content}`;

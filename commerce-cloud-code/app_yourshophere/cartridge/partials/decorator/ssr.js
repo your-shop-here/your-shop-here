@@ -1,7 +1,9 @@
-exports.createModel = function createDecoratorModel(myReq) {
+exports.createModel = function createDecoratorModel(params) {
+    const Locale = require('dw/util/Locale');
     const model = {
-        lang: myReq.locale,
-        pageMetaData: {},
+        lang: Locale.getLocale(request.locale).language,
+        pageMetaData: request.pageMetaData,
+        content: params.content,
     };
     return model;
 };
@@ -10,7 +12,7 @@ exports.template = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-th
 
     <head>
         <title>${model.pageMetaData.title}</title>
-        ${require('partials').create('global/htmlhead').html(model)}
+        ${require('*/api/partials').create('global/htmlhead').html(model)}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
     
@@ -18,9 +20,10 @@ exports.template = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-th
         <div class="progress">&nbsp;</div>
 
         <div class="container">  
-        ${require('*/cartridge/experience/skin.js').renderHeader()}
+            ${require('*/cartridge/experience/skin.js').renderHeader()}
             <main>
-                -
+                ${model.content}
+            </main>
             <footer>
                 ${require('*/cartridge/experience/skin.js').renderFooter()}
             </footer>

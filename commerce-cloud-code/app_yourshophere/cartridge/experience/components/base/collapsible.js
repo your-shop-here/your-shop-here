@@ -6,7 +6,7 @@
  */
 exports.render = function render(context) {
     const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
-    return require('*/cartridge/partials/renderer').create('base/collapsible').html({
+    return require('*/api/partials').create('base/collapsible').html({
         settings: context.content,
         regions: PageRenderHelper.getRegionModelRegistry(context.component),
     });

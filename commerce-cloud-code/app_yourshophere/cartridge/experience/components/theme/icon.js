@@ -1,4 +1,4 @@
-const partials = require('*/api/partials');
+const renderer = require('*/api/partials');
 
 /**
  * Component which renders an icon
@@ -8,7 +8,7 @@ const partials = require('*/api/partials');
  */
 exports.render = function render(context) {
     try {
-        return partials.html('header/icon')({
+        return renderer.create('header/icon').html({
             image: context.content.image.file,
             width: context.content.width || '100%',
             height: context.content.height || '100%',

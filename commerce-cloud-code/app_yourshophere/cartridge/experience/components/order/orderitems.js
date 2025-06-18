@@ -9,7 +9,7 @@ exports.render = function render(context) {
     const OrderMgr = require('dw/order/OrderMgr');
     const BasketMgr = require('dw/order/BasketMgr');
 
-    return require('*/cartridge/partials/renderer').create('order/orderitems').html({
+    return require('*/api/partials').create('order/orderitems').html({
         settings: context.content,
         order: session.privacy.placeOrderNo !== 'invalid' ? OrderMgr.getOrder(session.privacy.placeOrderNo) : BasketMgr.getCurrentBasket(),
     });

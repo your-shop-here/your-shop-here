@@ -49,7 +49,7 @@ function template(model) {
     return `<!DOCTYPE html><html lang="${model.lang}" data-theme="light">
 
     <head>
-        ${require('*/api/partials').html('global/htmlhead')()}
+        ${require('*/api/partials').create('global/htmlhead').html()}
         ${require('*/cartridge/experience/skin.js').renderSkin()}
     </head>
     <body>

@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    return require('*/cartridge/partials/renderer').create('account/register').html({
+    return require('*/api/partials').create('account/register').html({
         settings: context.content,
     });
 };

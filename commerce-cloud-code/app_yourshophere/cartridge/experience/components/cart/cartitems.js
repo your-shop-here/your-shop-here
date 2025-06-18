@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    return require('*/cartridge/partials/renderer').create('cart/cartitems').html({
+    return require('*/api/partials').create('cart/cartitems').html({
         settings: context.content,
     });
 };

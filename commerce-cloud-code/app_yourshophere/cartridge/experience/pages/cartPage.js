@@ -55,9 +55,7 @@ function renderComponent(context) {
     }
     request.custom.model = model;
     // render the page
-
-    // render the page
-    return require('*/cartridge/partials/page').content('cart/mainregion', {
+    return require('*/api/partials').create('cart/mainregion').decorateWith('decorator/main').html({
         model, context, metaDefinition,
-    }).decorateWith('global/decorator/main').html();
+    });
 }

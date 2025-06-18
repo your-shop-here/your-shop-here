@@ -1,11 +1,14 @@
-exports.top = (model) => `<title>${model.pageMetaData.title}</title>
+exports.createModel = function createDecoratorModel(model) {
+    return model;
+};
+
+exports.template = (model) => `<title>${model.pageMetaData.title}</title>
 <dialog open>
     <a href="#close"
         aria-label="Close"
         class="close"
         data-target="modal-example"
         onClick="this.closest('dialog').outerHTML=''">
+        Close
     </a>
-    <article>`;
-
-exports.bottom = () => '</article></dialog>';
+    <article>${model.content}</article></dialog>';

@@ -5,5 +5,5 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render() {
-    return require('*/cartridge/partials/renderer').create('checkout/ordertotals').html();
+    return require('*/api/partials').create('checkout/ordertotals').html();
 };

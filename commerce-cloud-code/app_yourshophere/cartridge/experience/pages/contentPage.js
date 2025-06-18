@@ -59,9 +59,7 @@ function renderComponent(context) {
         }
     }
 
-    const myPartial = require('*/cartridge/partials/renderer').create('content/mainregion').decorateWith('decorator/ssr');
-    const myhtml = myPartial.html({
+    return require('*/api/partials').create('content/mainregion').decorateWith('decorator/main').html({
         model, context, metaDefinition,
     });
-    return myhtml;
 }

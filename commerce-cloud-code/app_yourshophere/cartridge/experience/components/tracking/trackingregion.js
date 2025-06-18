@@ -19,5 +19,5 @@ exports.render = function render(context) {
     }
 
     const providersHtml = model.regions.providers.render();
-    return hint + require('*/cartridge/partials/renderer').create('tracking/trackingregion').html(providersHtml);
+    return hint + require('*/api/partials').create('tracking/trackingregion').html(providersHtml);
 };
