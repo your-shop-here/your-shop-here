@@ -3,10 +3,15 @@ exports.createModel = function createModel(options) {
 
     const model = {
         regionHtml: options.regions.actions.render(),
-        url: URLUtils.url('Product-Show', 'pid', options.product.ID),
+        url: URLUtils.url('Cart-Add', 'pid', options.product.ID),
+        productId: options.product.ID,
     };
 
     return model;
 };
 
-exports.template = model => `<form name="pdp-actions" action="${model.url}">${model.regionHtml}</form>`;
+exports.template = (model) => `
+    <form name="pdp-actions" action="${model.url}">
+        <input type="hidden" name="pid" value="${model.productId}" />
+        ${model.regionHtml}
+    </form>`;

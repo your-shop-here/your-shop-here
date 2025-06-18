@@ -135,6 +135,9 @@
                 <position>2.0</position>
             </content-link>
             <content-link content-id="c24523f968e01c47d3f7599a03" type="component.commerce_layouts.column.column2">
+                <position>4.0</position>
+            </content-link>
+            <content-link content-id="0f823787b2c3829efaca169475" type="component.commerce_layouts.column.column2">
                 <position>3.0</position>
             </content-link>
         </content-links>
@@ -205,6 +208,20 @@
         <page-attributes/>
     </content>
 
+    <content content-id="0d24caae2e7fbd0683dbe9bfd4">
+        <type>component.wishlist.wishlistitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "enableRemove" : "disabled",
+  "buttonStyle" : "secondary",
+  "addToCartText" : "Move to cart"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="0eb0e6da5f33478ab0d9418478">
         <type>component.order.orderitems</type>
         <config>{
@@ -234,6 +251,19 @@
   "imageViewType" : "large",
   "mobileColumns" : null,
   "imageDISConfig" : "sw=256&amp;sh=256"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="0f823787b2c3829efaca169475">
+        <type>component.pdp.addtowishlistbutton</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "buttonText" : null,
+  "buttonStyle" : "secondary"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -583,6 +613,33 @@
         <page-attributes/>
     </content>
 
+    <content content-id="3198577003fb35be60e6ca4cfa">
+        <type>component.pdp.addtowishlistbutton</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "buttonText" : null,
+  "buttonStyle" : "secondary"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="320a6dba51bb1d8ca967115cec">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;h2&gt;Saved for later&lt;/h2&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="332b857b40a3143a4bf0f05cbb">
         <type>component.plp.productGrid</type>
         <config>{
@@ -651,6 +708,16 @@
         <page-attributes/>
     </content>
 
+    <content content-id="3a852518985a867d03d4839a6d">
+        <type>component.wishlist.wishlistitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="3b19fe1e698eda489321cb7bd4">
         <type>component.commerce_layouts.column</type>
         <config>{
@@ -667,6 +734,41 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="3c22a93491283db5f90f917c2a">
+        <type>component.theme.icon</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "image" : {
+    "path" : "unofficial.svg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    }
+  },
+  "link" : "$url('Page-Show', 'cid', 'homepage')$",
+  "width" : "200px",
+  "height" : "64px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="3cdb2b79c516690301d135882f">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;h2&gt;Saved for later&lt;/h2&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="3e22593366f6377512e69461ac">
@@ -687,27 +789,6 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
-    </content>
-
-    <content content-id="3e98f7c67632a9006e8ab9fd0f">
-        <type>component.theme.icon</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "image" : {
-    "path" : "unofficial.svg",
-    "focal_point" : {
-      "x" : 0.5,
-      "y" : 0.5
-    }
-  },
-  "link" : "/s/YourShopHere/",
-  "width" : "200px",
-  "height" : "75px"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
     </content>
 
     <content content-id="3f11e590490d2da0efb4764779">
@@ -822,6 +903,18 @@
   "alt" : "Outdoor gear that keeps you safe",
   "textBackground" : null,
   "textColor" : "Page Background"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="4eed8ef31c0602757053a04614">
+        <type>component.theme.countrySelector</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showFlag" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -953,19 +1046,6 @@
         <page-attributes/>
     </content>
 
-    <content content-id="6a8f2afbabc68120878aa1026b">
-        <type>component.pdp.bundleorsetproducts</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "showAddToCart" : false,
-  "title" : "Bundles Products"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
     <content content-id="6c18f48acd3e3ab7df6a937e91">
         <type>component.base.richText</type>
         <config>{
@@ -988,21 +1068,6 @@
         <data xml:lang="x-default">{
   "imageCount" : 4,
   "viewType" : "large"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-    </content>
-
-    <content content-id="6de964a319bd71de1899e75800">
-        <display-name xml:lang="x-default">Checkout Link @todo replace with nice url</display-name>
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "No",
-  "richText" : "&lt;p&gt;&lt;a href=\"Checkout-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Checkout-Show\"&gt;Go To Checkout&lt;/a&gt;&lt;/p&gt;",
-  "align" : "right"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1079,6 +1144,18 @@
         </content-links>
     </content>
 
+    <content content-id="7950fd3913af930271ed1194e4">
+        <type>component.theme.countrySelector</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showFlag" : true
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="7988e6593a84de8ba781125aeb">
         <type>component.cart.selectshipping</type>
         <config>{
@@ -1122,6 +1199,25 @@
   "link" : "/s/YourShopHere/",
   "width" : "200px",
   "height" : "75px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="7b351285d6866da36a49a10040">
+        <type>component.theme.miniwishlist</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "image" : {
+    "path" : "salesforce-service-cloud.svg",
+    "focal_point" : {
+      "x" : 0.5,
+      "y" : 0.5
+    }
+  },
+  "width" : "35px"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1172,6 +1268,19 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="83341c8cae6800b9a3b9628697">
+        <type>component.pdp.bundleorsetproducts</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showAddToCart" : true,
+  "title" : "Products included"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="83ace80416deaa3dc3b90872c8">
@@ -1239,13 +1348,27 @@
 }</config>
         <data xml:lang="x-default">{
   "image" : {
-    "path" : "cart-slds.svg",
+    "path" : "b2c_commerce_cloud.svg",
     "focal_point" : {
       "x" : 0.5,
       "y" : 0.5
     }
   },
   "width" : "35px"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="8cc81bfb6f10e66d1362f40b77">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;p&gt;&lt;img src=\"unofficial.svg?$staticlink$\"&gt;Your Shop Here Checkout&lt;/p&gt;",
+  "align" : "center"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1418,6 +1541,20 @@
                 <position>0.0</position>
             </content-link>
         </content-links>
+    </content>
+
+    <content content-id="9efb0038d45d3cbf43e98c44a5">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;h1&gt;Saved for later&lt;/h1&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="9f00d597e7680010fa069af96c">
@@ -1831,13 +1968,18 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
-        <page-attributes/>
+        <page-attributes>
+            <page-title xml:lang="x-default">Cart Page</page-title>
+        </page-attributes>
         <folder-links>
             <classification-link folder-id="cart-and-checkout"/>
         </folder-links>
         <content-links>
-            <content-link content-id="cf2962273062bd908421cbc1b0" type="page.cartPage.main">
+            <content-link content-id="3cdb2b79c516690301d135882f" type="page.cartPage.main">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="0d24caae2e7fbd0683dbe9bfd4" type="page.cartPage.main">
+                <position>2.0</position>
             </content-link>
             <content-link content-id="ef80368e81f76c48d092d5a894" type="page.cartPage.main">
                 <position>0.0</position>
@@ -1847,7 +1989,7 @@
         <sitemap-priority>0.0</sitemap-priority>
     </content>
 
-    <content content-id="catalog-root-pdp">
+    <content content-id="cat-root-pdp">
         <display-name xml:lang="x-default">cat-root-pdp</display-name>
         <type>page.productPage</type>
         <config>{
@@ -1861,9 +2003,6 @@
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="product-details-pages"/>
-        </folder-links>
         <content-links>
             <content-link content-id="05367af9feea913e81b7ea36ea" type="page.productPage.main">
                 <position>0.0</position>
@@ -1871,7 +2010,7 @@
             <content-link content-id="5cb38775b22e2d739fb66bd111" type="page.productPage.main">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="6a8f2afbabc68120878aa1026b" type="page.productPage.main">
+            <content-link content-id="83341c8cae6800b9a3b9628697" type="page.productPage.main">
                 <position>2.0</position>
             </content-link>
         </content-links>
@@ -1880,6 +2019,23 @@
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="cat-root-plp">
+        <display-name xml:lang="x-default">cat-root-plp</display-name>
+        <type>page.categoryPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{
+  "category" : null
+}</data>
+        <aspect-type>category</aspect-type>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <sitemap-included-flag>false</sitemap-included-flag>
     </content>
 
     <content content-id="catalog-root-plp">
@@ -1987,11 +2143,6 @@
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
-        <content-links>
-            <content-link content-id="6de964a319bd71de1899e75800" type="component.commerce_layouts.3column.column3">
-                <position>0.0</position>
-            </content-link>
-        </content-links>
     </content>
 
     <content content-id="checkout">
@@ -2021,6 +2172,20 @@
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="d0887e8694e8ded9f4acf30862">
+        <type>component.wishlist.wishlistitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "enableRemove" : "disabled",
+  "buttonStyle" : "secondary",
+  "addToCartText" : "Move to cart"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="d4a67f4bbba836f33ebc995f17">
@@ -2172,6 +2337,9 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
+            <content-link content-id="82d108736b95193616c354db1b" type="component.commerce_layouts.column.column1">
+                <position>1.0</position>
+            </content-link>
             <content-link content-id="0c3ab7e5e936a24933566de0ed" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
             </content-link>
@@ -2189,9 +2357,6 @@
             </content-link>
             <content-link content-id="907d2ff9dde8b4db538e077c75" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
-            </content-link>
-            <content-link content-id="82d108736b95193616c354db1b" type="component.commerce_layouts.column.column1">
-                <position>1.0</position>
             </content-link>
         </content-links>
     </content>
@@ -2222,19 +2387,22 @@
             <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="3e98f7c67632a9006e8ab9fd0f" type="component.theme.yshHeader.branding">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="2e03ffa57feffcba56982c7658" type="component.theme.yshHeader.left">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
+                <position>0.0</position>
             </content-link>
             <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="7b351285d6866da36a49a10040" type="component.theme.yshHeader.right">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
+            <content-link content-id="3c22a93491283db5f90f917c2a" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -2298,11 +2466,11 @@
         <online-flag>true</online-flag>
         <page-attributes/>
         <content-links>
-            <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
-                <position>3.0</position>
-            </content-link>
             <content-link content-id="7988e6593a84de8ba781125aeb" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
+                <position>3.0</position>
             </content-link>
             <content-link content-id="69a12813f070e0cdc4d97b6e60" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
@@ -2496,6 +2664,43 @@
   "inParagraph" : "Yes",
   "richText" : "&lt;p&gt;This is a demo store, no orders will be processed&lt;/p&gt;&lt;p&gt;&lt;a href=\"https://github.com/your-shop-here/your-shop-here/\" target=\"_self\" data-link-type=\"external\" data-link-label=\"https://github.com/your-shop-here/your-shop-here/\"&gt;Source Code available at github&lt;/a&gt;&lt;/p&gt;",
   "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="faq">
+        <display-name xml:lang="x-default">FAQ</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <folder-links>
+            <classification-link folder-id="editorial-pages"/>
+        </folder-links>
+        <content-links>
+            <content-link content-id="faq-content" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
+        <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="faq-content">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h1&gt;Frequently Asked Questions&lt;/h1&gt;&lt;h2&gt;Shipping Information&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Important Notice:&lt;/strong&gt; This is a demo store and no actual shipping will take place. All orders placed here are for demonstration purposes only.&lt;/p&gt;&lt;h3&gt;Shipping Methods&lt;/h3&gt;&lt;p&gt;In a real store, we would offer the following shipping options:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Standard Shipping (3-5 business days)&lt;/li&gt;&lt;li&gt;Express Shipping (1-2 business days)&lt;/li&gt;&lt;li&gt;Next Day Delivery (for eligible areas)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Shipping Costs&lt;/h3&gt;&lt;p&gt;Shipping costs would be calculated based on:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Order weight and dimensions&lt;/li&gt;&lt;li&gt;Delivery destination&lt;/li&gt;&lt;li&gt;Selected shipping method&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;International Shipping&lt;/h3&gt;&lt;p&gt;For international orders, we would:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Ship to most countries worldwide&lt;/li&gt;&lt;li&gt;Handle customs documentation&lt;/li&gt;&lt;li&gt;Provide tracking information&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;em&gt;Remember: This is a demo store and no actual shipping will occur. All orders are simulated for demonstration purposes only.&lt;/em&gt;&lt;/p&gt;",
+  "align" : "left"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -2837,6 +3042,29 @@
         <sitemap-priority>0.0</sitemap-priority>
     </content>
 
+    <content content-id="wishlist">
+        <display-name xml:lang="x-default">Wishlist</display-name>
+        <description xml:lang="x-default">The customer's wishlist</description>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="3a852518985a867d03d4839a6d" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="9efb0038d45d3cbf43e98c44a5" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
+    </content>
+
     <content content-id="women-landing">
         <display-name xml:lang="x-default">women-landing</display-name>
         <type>page.categoryPage</type>
@@ -2867,43 +3095,6 @@
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
-    </content>
-
-    <content content-id="faq">
-        <display-name xml:lang="x-default">FAQ</display-name>
-        <type>page.contentPage</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <visibility-mode xml:lang="x-default">visible</visibility-mode>
-        <data xml:lang="x-default">{ }</data>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="editorial-pages"/>
-        </folder-links>
-        <content-links>
-            <content-link content-id="faq-content" type="page.contentPage.main">
-                <position>0.0</position>
-            </content-link>
-        </content-links>
-        <sitemap-included-flag>false</sitemap-included-flag>
-        <sitemap-priority>0.0</sitemap-priority>
-    </content>
-
-    <content content-id="faq-content">
-        <type>component.base.richText</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{
-  "inParagraph" : "Yes",
-  "richText" : "&lt;h1&gt;Frequently Asked Questions&lt;/h1&gt;&lt;h2&gt;Shipping Information&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Important Notice:&lt;/strong&gt; This is a demo store and no actual shipping will take place. All orders placed here are for demonstration purposes only.&lt;/p&gt;&lt;h3&gt;Shipping Methods&lt;/h3&gt;&lt;p&gt;In a real store, we would offer the following shipping options:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Standard Shipping (3-5 business days)&lt;/li&gt;&lt;li&gt;Express Shipping (1-2 business days)&lt;/li&gt;&lt;li&gt;Next Day Delivery (for eligible areas)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Shipping Costs&lt;/h3&gt;&lt;p&gt;Shipping costs would be calculated based on:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Order weight and dimensions&lt;/li&gt;&lt;li&gt;Delivery destination&lt;/li&gt;&lt;li&gt;Selected shipping method&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;International Shipping&lt;/h3&gt;&lt;p&gt;For international orders, we would:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Ship to most countries worldwide&lt;/li&gt;&lt;li&gt;Handle customs documentation&lt;/li&gt;&lt;li&gt;Provide tracking information&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;em&gt;Remember: This is a demo store and no actual shipping will occur. All orders are simulated for demonstration purposes only.&lt;/em&gt;&lt;/p&gt;",
-  "align" : "left"
-}</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
     </content>
 
 </library>

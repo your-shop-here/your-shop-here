@@ -1,4 +1,3 @@
-
 const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
@@ -22,8 +21,9 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
-    const model = new HashMap();
     const page = context.page;
+    const model = new HashMap();
+
     model.page = page;
 
     // automatically register configured regions
@@ -50,11 +50,17 @@ function renderComponent(context) {
     const ProductSearchModel = require('dw/catalog/ProductSearchModel');
     const searchModel = new ProductSearchModel();
     searchModel.setCategoryID(model.httpParameter.cgid);
+    const category = searchModel.getCategory();
+
+    // Set page metadata
+    request.pageMetaData.setTitle(category.pageTitle || page.pageTitle);
+    request.pageMetaData.setDescription(category.pageDescription || page.pageDescription);
+    request.pageMetaData.setKeywords(category.pageKeywords || page.pageKeywords);
+
     request.pageMetaData.addPageMetaTags(searchModel.pageMetaTags);
 
     // Determine seo meta data.
     // Used in htmlHead.isml via common/layout/page.isml decorator.
-    model.CurrentPageMetaData = PageRenderHelper.getPageMetaData(page);
 
     request.custom.model = model;
     // render the page

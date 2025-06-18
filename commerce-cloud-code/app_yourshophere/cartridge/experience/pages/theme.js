@@ -31,9 +31,10 @@ function renderComponent (context) {
     const metaDefinition = require('*/cartridge/experience/pages/theme.json');
     model.regions = new RegionModelRegistry(page, metaDefinition);
 
-    // Determine seo meta data.
-    // Used in htmlHead.isml via common/layout/page.isml decorator.
-    // model.CurrentPageMetaData = context.pageMetaData;
+    // Set page metadata
+    request.pageMetaData.setTitle(page.pageTitle);
+    request.pageMetaData.setDescription(page.pageDescription);
+    request.pageMetaData.setKeywords(page.pageKeywords);
 
     if (PageRenderHelper.isInEditMode()) {
         const HookManager = require('dw/system/HookMgr');
@@ -47,7 +48,7 @@ function renderComponent (context) {
             model[name] = parameters[name];
         });
     }
-    model.CurrentPageMetaData = {};
+
     // render the page
     return new Template('decorator/pdtheme').render(model).text;
 };

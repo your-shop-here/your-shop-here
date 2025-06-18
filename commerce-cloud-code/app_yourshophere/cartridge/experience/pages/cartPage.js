@@ -21,7 +21,6 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
-
     const model = new HashMap();
     const page = context.page;
     model.page = page;
@@ -36,12 +35,11 @@ function renderComponent(context) {
     model.regions = new RegionModelRegistry(page, metaDefinition);
     model.regions.main.setClassName('page-cart');
 
-    // Determine seo meta data.
-    // Used in htmlHead.isml via common/layout/page.isml decorator.
+    // Set page metadata
     model.pageMetaData = PageRenderHelper.getPageMetaData(page);
-    model.pageMetaData.title = page.pageTitle;
-    model.pageMetaData.description = page.pageDescription;
-    model.pageMetaData.keywords = page.pageKeywords;
+    request.pageMetaData.setTitle(page.pageTitle);
+    request.pageMetaData.setDescription(page.pageDescription);
+    request.pageMetaData.setKeywords(page.pageKeywords);
 
     if (PageRenderHelper.isInEditMode()) {
         const HookManager = require('dw/system/HookMgr');

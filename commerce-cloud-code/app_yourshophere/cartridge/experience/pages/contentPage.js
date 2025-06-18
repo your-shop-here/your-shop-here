@@ -33,13 +33,11 @@ function renderComponent(context) {
     model.regions = new RegionModelRegistry(page, metaDefinition);
     model.regions.main.setClassName('page-content');
 
-    // Determine seo meta data.
-    // Used in htmlHead.isml via common/layout/page.isml decorator.
+    // Set page metadata
     model.pageMetaData = PageRenderHelper.getPageMetaData(page);
-    // @todo use injected page meta data as a fallback
-    model.pageMetaData.title = page.pageTitle || Site.current.name;
-    model.pageMetaData.description = page.pageDescription;
-    model.pageMetaData.keywords = page.pageKeywords;
+    request.pageMetaData.setTitle(page.pageTitle || Site.current.name);
+    request.pageMetaData.setDescription(page.pageDescription);
+    request.pageMetaData.setKeywords(page.pageKeywords);
 
     if (PageRenderHelper.isInEditMode()) {
         const HookManager = require('dw/system/HookMgr');
