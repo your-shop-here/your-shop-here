@@ -132,7 +132,7 @@ nav.mainmenu input[type="checkbox"]:checked+.drop-icon {
 }
 
 nav.mainmenu .sub-menu a:hover {
-    color: #444;
+    color: var(--ysh-text-secondary);
 }
 
 #toggle-menu .drop-icon,

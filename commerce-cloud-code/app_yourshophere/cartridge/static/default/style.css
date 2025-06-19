@@ -5,11 +5,6 @@
     --ysh-primary-hover: color-mix(in srgb, var(--ysh-primary) 80%, black);
     --ysh-secondary: #5f6368;
     --ysh-accent: #34a853;
-    --ysh-error: #ea4335;
-    --ysh-warning: #fbbc05;
-    --ysh-success: #34a853;
-    --ysh-info: #4285f4;
-    --ysh-error: var(--form-element-invalid-border-color)
 
     /* Text Colors */
     --ysh-text-primary: #202124;
@@ -121,9 +116,14 @@ img {
 
 [role=button], button, input[type=button], input[type=reset], input[type=submit] {
     background-color: var(--ysh-primary);
-    color: var(--ysh-text-light);
+    color: var(--ysh-primary-invert);
     border-radius: var(--ysh-border-radius-md);
     transition: background-color var(--ysh-transition-normal) ease;
+}
+
+.btn-secondary {
+    background-color: var(--ysh-secondary);
+    color: var(--ysh-secondary-invert);
 }
 
 [role=button]:hover, button:hover, input[type=button]:hover, input[type=reset]:hover, input[type=submit]:hover {
@@ -430,7 +430,7 @@ input.search-field {
 }
 
 .experience-pdp-productPromotions li {
-    color: #eb4646;
+    color: var(--ysh-error);
     list-style-type: none;
 }
 
@@ -475,21 +475,21 @@ input.search-field {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #ccc;
+    background-color: var(--ysh-text-muted);
     cursor: pointer;
 }
 
 /* Style the dot when its corresponding radio button is checked */
 .image-slider:has( #slide-1-radio:checked) .slider-nav .nav-dot:nth-child(1) {
-  background-color: #333;
+  background-color: var(--ysh-text-primary);
 }
 
 .image-slider:has( #slide-2-radio:checked) .slider-nav .nav-dot:nth-child(2) {
-  background-color: #333;
+  background-color: var(--ysh-text-primary);
 }
 
 .image-slider:has( #slide-3-radio:checked) .slider-nav .nav-dot:nth-child(3) {
-  background-color: #333;
+  background-color: var(--ysh-text-primary);
 }
 /* Add more rules for additional slides */
 
@@ -530,9 +530,9 @@ input.search-field {
 }
 
 .error-message, .cart-error-message {
-    background-color: #f8d7da; /* Light red background */
-    border: 1px solid #f5c6cb; /* Darker red border */
-    color: #721c24; /* Dark red text */
+    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
+    color: var(--ysh-error);
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 4px;
@@ -730,7 +730,7 @@ input.search-field {
 
 /* Form Validation Styles */
 input[aria-invalid="true"] {
-    border-color:  #c62828;
+    border-color: var(--ysh-error);
     background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
     padding-right: 2.5rem;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ea4335' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
@@ -740,6 +740,6 @@ input[aria-invalid="true"] {
 }
 
 .form-field-invalid {
-    color: #c62828;
+    color: var(--ysh-error);
     font-size: var(--ysh-font-size-sm);
 }

@@ -167,6 +167,46 @@
                     "editor_definition": {
                         "type": "themer.colorpicker"
                     }
+                },
+                {
+                    "id": "errorColor",
+                    "name": "Error Color",
+                    "description": "Error color for validation messages and alerts (--ysh-error)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
+                    "id": "successColor",
+                    "name": "Success Color",
+                    "description": "Success color for positive feedback and confirmations (--ysh-success)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
+                    "id": "warningColor",
+                    "name": "Warning Color",
+                    "description": "Warning color for cautionary messages (--ysh-warning)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
+                    "id": "infoColor",
+                    "name": "Info Color",
+                    "description": "Info color for informational messages and highlights (--ysh-info)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
                 }
             ]
         },

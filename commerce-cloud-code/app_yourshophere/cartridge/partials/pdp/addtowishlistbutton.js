@@ -1,16 +1,17 @@
 /**
  * Creates a model for the Product add to wishlist button
  *
- * @param {Object} product - The product object
- * @param {Object} [options] - Optional settings for button style and text
+ * @param {Object} options - The options object containing product and optional settings
+ * @param {Object} options.product - The product object
+ * @param {string} [options.buttonStyle] - Optional button style (default: 'primary')
+ * @param {string} [options.buttonText] - Optional button text
  * @returns {Object} The model object
  */
-exports.createModel = function createModel(product, options) {
+exports.createModel = function createModel(options) {
     const Resource = require('dw/web/Resource');
     const URLUtils = require('dw/web/URLUtils');
-    const settings = options && options.settings ? options.settings : {};
-    const buttonStyle = options && options.buttonStyle ? options.buttonStyle : (settings.buttonStyle || 'primary');
-    const buttonText = options && options.buttonText ? options.buttonText : (settings.buttonText || '');
+    let { product, buttonStyle, buttonText } = options;
+    buttonStyle = buttonStyle || 'primary';
 
     const model = {
         id: product.ID,

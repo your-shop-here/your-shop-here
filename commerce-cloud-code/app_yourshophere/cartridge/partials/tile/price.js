@@ -35,13 +35,17 @@ function getListPrices(httpParams) {
 
 /**
  * Create view model for a product price
- * 
+ *
  * @todo Add proper price calculation and strike price
- * @param {dw.catalog.Product} product 
+ * @param {Object} options - The options object
+ * @param {Object} options.hit - The search hit containing product information
+ * @param {Object} options.tileSearch - The tile search model
+ * @param {Object} options.httpParams - HTTP parameters for price calculation
  * @returns the view model
  */
-exports.createModel = (hit, tileSearch, httpParams) => {
+exports.createModel = (options) => {
     const StringUtils = require('dw/util/StringUtils');
+    const { tileSearch, httpParams } = options;
 
     const listPrices = getListPrices(httpParams);
     const listPriceMax = listPrices.max;

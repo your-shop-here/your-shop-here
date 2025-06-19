@@ -37,17 +37,24 @@ function getCssAspectRatio(sw, sh) {
  * Create view model for a product image
  *
  * @todo Add responsive images
- * @param {dw.catalog.SearchHit} hit - The search hit containing product information
- * @param {dw.catalog.ProductSearchModel} search - The search model
- * @param {Object} imageFilter - Filter configuration for images
- * @param {string} imageFilter.key - Key for filtering images
- * @param {string} imageFilter.value - Value to filter images by
- * @param {Object} config - Configuration object
- * @param {string} [config.imageViewType=large] - Type of product image view
+ * @param {Object} options - The options object
+ * @param {dw.catalog.SearchHit} options.hit - The search hit containing product information
+ * @param {dw.catalog.ProductSearchModel} options.search - The search model
+ * @param {Object} options.imageFilter - Filter configuration for images
+ * @param {string} options.imageFilter.key - Key for filtering images
+ * @param {string} options.imageFilter.value - Value to filter images by
+ * @param {Object} options.config - Configuration object
+ * @param {string} [options.config.imageViewType=large] - Type of product image view
  * @returns {Object} The view model containing image URLs and product details
  */
-exports.createModel = function createImageModel(hit, search, imageFilter, config) {
+exports.createModel = function createImageModel(options) {
     const URLUtils = require('dw/web/URLUtils');
+    const {
+        hit,
+        search,
+        imageFilter,
+        config,
+    } = options;
 
     let url;
     if (imageFilter) {

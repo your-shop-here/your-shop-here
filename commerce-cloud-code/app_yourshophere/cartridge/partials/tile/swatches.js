@@ -1,5 +1,15 @@
-exports.createModel = function createModel(hit, search, config) {
+/**
+ * Creates a model for product swatches
+ * @param {Object} options - The options object
+ * @param {Object} options.hit - The search hit containing product information
+ * @param {Object} options.search - The search model
+ * @param {Object} options.config - Configuration object
+ * @param {string} options.config.swatchAttribute - The swatch attribute to use
+ * @returns {Object} The model object
+ */
+exports.createModel = function createModel(options) {
     const URLUtils = require('dw/web/URLUtils');
+    const { hit, search, config } = options;
     const colorValues = search.getRepresentedVariationValues(config.swatchAttribute);
     // nothing to select
     if (colorValues.length < 2) {

@@ -27,9 +27,25 @@ exports.createModel = () => {
 
     if (hit) {
         model.name = name.createModel(hit);
-        model.image = image.createModel(hit, tileSearch, imageFilter, { imageViewType: componentSettings.imageViewType, imageDISConfig: componentSettings.imageDISConfig });
-        model.price = price.createModel(hit, tileSearch, httpParams);
-        model.swatches = swatches.createModel(hit, tileSearch, { swatchAttribute: componentSettings.swatchDimension });
+        model.image = image.createModel({
+            hit,
+            search: tileSearch,
+            imageFilter,
+            config: {
+                imageViewType: componentSettings.imageViewType,
+                imageDISConfig: componentSettings.imageDISConfig,
+            },
+        });
+        model.price = price.createModel({
+            hit,
+            tileSearch,
+            httpParams,
+        });
+        model.swatches = swatches.createModel({
+            hit,
+            search: tileSearch,
+            config: { swatchAttribute: componentSettings.swatchDimension },
+        });
         model.addToCartButton = require('./addtocartbutton').createModel(hit);
         model.analytics = JSON.stringify({
             type: 'productView',

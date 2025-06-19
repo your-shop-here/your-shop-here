@@ -1,6 +1,14 @@
 const URLUtils = require('dw/web/URLUtils');
 
-exports.createModel = function createModel(product, categoryParam) {
+/**
+ * Creates a model for product breadcrumbs
+ * @param {Object} options - The options object
+ * @param {Object} options.product - The product object
+ * @param {Object} [options.categoryParam] - Optional category parameter (falls back to product.primaryCategory)
+ * @returns {Object} The model object
+ */
+exports.createModel = function createModel(options) {
+    const { product, categoryParam } = options;
     const category = categoryParam || product.primaryCategory;
     const model = {
         name: product.name,
@@ -26,8 +34,8 @@ function buildCategoryTree(category) {
     return tree;
 }
 
-exports.template = model => `
+exports.template = (model) => `
     <a href="${URLUtils.httpHome().toString()}">Home</a> >
-    ${model.categoryTree.map(cat => `<a href="${cat.url}">${cat.name}</a> >`).join(' ')}
+    ${model.categoryTree.map((cat) => `<a href="${cat.url}">${cat.name}</a> >`).join(' ')}
     <a href="${model.productUrl}">${model.name}</a>
 `;
