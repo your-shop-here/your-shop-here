@@ -9,7 +9,6 @@ exports.createModel = function createModel(options) {
     const product = options.product;
     const availabilityModel = product.availabilityModel;
     let message = '';
-    let date = null;
     let statusClass = '';
 
     if (availabilityModel.isOrderable()) {
@@ -19,12 +18,10 @@ exports.createModel = function createModel(options) {
             message = Resource.msg('availability.instock', 'translations', null);
             statusClass = 'product-availability-instock';
         } else if (inventoryRecord.preorderable) {
-            message = Resource.msg('availability.preorder', 'translations', null);
-            date = StringUtils.formatDate(inventoryRecord.inStockDate);
+            message = Resource.msgf('availability.preorder.withdate', 'translations', null, StringUtils.formatDate(inventoryRecord.inStockDate));
             statusClass = 'product-availability-prebackorder';
         } else if (inventoryRecord.backorderable) {
-            message = Resource.msg('availability.backorder', 'translations', null);
-            date = StringUtils.formatDate(inventoryRecord.inStockDate);
+            message = Resource.msgf('availability.backorder.withdate', 'translations', null, StringUtils.formatDate(inventoryRecord.inStockDate));
             statusClass = 'product-availability-prebackorder';
         } else {
             message = Resource.msg('availability.instock', 'translations', null);
@@ -37,7 +34,6 @@ exports.createModel = function createModel(options) {
 
     return {
         message,
-        date,
         statusClass,
     };
 };
@@ -50,6 +46,5 @@ exports.createModel = function createModel(options) {
 exports.template = (model) => `
     <div class="product-availability-status">
         <div class="${model.statusClass}">${model.message}</div>
-        ${model.date ? `<div class="product-availability-date">${model.date}</div>` : ''}
     </div>
 `;
