@@ -1,6 +1,29 @@
-header{
-    margin-top:7px;
+/* Header link styling - applies to all header regions except main menu */
+.announcement a,
+.take-row  a {
+    color: var(--ysh-primary);
+    text-decoration: none;
+    transition: color var(--ysh-transition-normal) ease;
 }
+
+.announcement a:hover,
+.take-row a:hover {
+    color: var(--ysh-secondary);
+    text-decoration: none;
+}
+
+/* Ensure SVG icons in header links also follow the color scheme */
+.announcement a svg,
+.take-row a svg {
+    fill: currentColor;
+    transition: fill var(--ysh-transition-normal) ease;
+}
+
+.announcement a:hover svg,
+.take-row a:hover svg {
+    fill: currentColor;
+}
+
 a.pill[role="button"] {
     border-radius: 2rem;
     border-width: 0px;

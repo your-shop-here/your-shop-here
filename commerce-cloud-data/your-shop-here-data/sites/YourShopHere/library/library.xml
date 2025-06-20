@@ -1475,8 +1475,8 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "warningColor" : null,
-  "errorColor" : null,
+  "warningColor" : {"value":"#fbbc05"},
+  "errorColor" : {"value":"#ea4335"},
   "headingColor" : {
     "value" : "#FFFFFF"
   },
@@ -1491,7 +1491,7 @@
   "selectBoxBackground" : {
     "value" : "#eeeeee"
   },
-  "infoColor" : null,
+  "infoColor" : {"value":"#4285f4"},
   "primaryAccentColorInvert" : {
     "value" : "#FFFFFF"
   },
@@ -1516,7 +1516,7 @@
   "menuTextColor" : {
     "value" : "#16325c"
   },
-  "successColor" : null,
+  "successColor" : {"value":"#34a853"},
   "bodyfont" : "Salesforce Sans",
   "priceTextColor" : {
     "value" : "#ea001e"
