@@ -180,8 +180,7 @@ input.search-field {
     background-color: var(--ysh-bg-primary);
     border: 1px solid var(--ysh-border-color);
     border-radius: var(--ysh-border-radius-md);
-    padding: var(--ysh-spacing-md);
-    margin-top: var(--block-spacing-vertical);
+    padding: var(--ysh-spacing-md) var(--ysh-spacing-md) 0 var(--ysh-spacing-md);
     margin-right: var(--grid-spacing-horizontal);
 }
 .refinements  .refinement-container {
@@ -221,7 +220,7 @@ input.search-field {
   }
 
 .refinements li {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.1rem;
     list-style-type: none; /* Remove bullet points */
 }
 
@@ -306,6 +305,7 @@ input.search-field {
 }
 
 .product-grid {
+    margin-top: var(--ysh-spacing-md);
     display: grid;
     gap: 10px;
 }
@@ -328,14 +328,15 @@ input.search-field {
 .product-grid article {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 0 10px;
     position: relative;
+    margin: 0;
 }
 
 .product-grid article header {
     text-align: center;
     font-size: 1.1em;
-    margin: 0 0 10px 0;
+    margin: 0;
     height: 4em;
     width: 100%;
     overflow: hidden;
@@ -365,7 +366,6 @@ input.search-field {
 .product-grid article img {
     width: 100%;
     height: auto;
-    margin-bottom: 10px;
 }
 
 .overBleedWidth {
@@ -378,14 +378,13 @@ input.search-field {
 }
 
 .product-grid article .price, .product-grid article .strike {
-    margin-top: 10px;
     text-align: center;
 }
 
 .product-grid article .swatches {
     display: flex;
     gap: 5px;
-    margin: 10px 0 10px 0;
+    margin: 0;
     min-height: 20px;
     justify-content: center;
 }

@@ -76,7 +76,7 @@ nav.mainmenu li,
 #toggle-menu,
 nav.mainmenu .sub-menu {
     border-style: solid;
-    border-color: var(--skin-selectbox-background-color-1);
+    border-color: var(--ysh-border-color);
 }
 
 nav.mainmenu li,
