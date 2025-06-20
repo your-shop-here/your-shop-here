@@ -29,8 +29,21 @@ function template(model) {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>${model.header}</title>
                 <style>
+                    :root {
+                        --ysh-error: #ea4335;
+                        --ysh-bg-primary: #ffffff;
+                        --ysh-border-color: #dadce0;
+                        --ysh-text-secondary: #5f6368;
+                        --ysh-text-muted: #80868b;
+                        --ysh-spacing-lg: 2rem;
+                        --ysh-spacing-md: 1rem;
+                        --ysh-border-radius-md: 8px;
+                        --ysh-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                        --ysh-line-height: 1.5;
+                    }
+                    
                     body {
-                        font-family: Arial, sans-serif;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                         margin: 0;
                         padding: 20px;
                         display: flex;
@@ -39,26 +52,31 @@ function template(model) {
                         min-height: 100vh;
                         background-color: #f5f5f5;
                     }
+                    
                     .error-container {
-                        text-align: center;
-                        padding: 40px;
-                        background-color: white;
-                        border-radius: 8px;
-                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        background-color: var(--ysh-bg-primary);
+                        border: 1px solid var(--ysh-border-color);
+                        border-radius: var(--ysh-border-radius-md);
+                        padding: var(--ysh-spacing-lg);
+                        margin: var(--ysh-spacing-lg) auto;
                         max-width: 600px;
-                        width: 100%;
+                        text-align: center;
+                        box-shadow: var(--ysh-shadow-sm);
                     }
-                    h1 {
-                        color: #333;
-                        margin-bottom: 20px;
+                    
+                    .error-container h1 {
+                        color: var(--ysh-error);
+                        margin-bottom: var(--ysh-spacing-md);
                     }
-                    p {
-                        color: #666;
-                        line-height: 1.6;
-                        margin-bottom: 20px;
+                    
+                    .error-container p {
+                        color: var(--ysh-text-secondary);
+                        line-height: var(--ysh-line-height);
+                        margin-bottom: var(--ysh-spacing-md);
                     }
-                    .thankyou {
-                        color: #888;
+                    
+                    .error-container .thankyou {
+                        color: var(--ysh-text-muted);
                         font-style: italic;
                     }
                 </style>

@@ -180,8 +180,7 @@ input.search-field {
     background-color: var(--ysh-bg-primary);
     border: 1px solid var(--ysh-border-color);
     border-radius: var(--ysh-border-radius-md);
-    padding: var(--ysh-spacing-md);
-    margin-top: var(--block-spacing-vertical);
+    padding: var(--ysh-spacing-md) var(--ysh-spacing-md) 0 var(--ysh-spacing-md);
     margin-right: var(--grid-spacing-horizontal);
 }
 .refinements  .refinement-container {
@@ -221,7 +220,7 @@ input.search-field {
   }
 
 .refinements li {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.1rem;
     list-style-type: none; /* Remove bullet points */
 }
 
@@ -306,8 +305,18 @@ input.search-field {
 }
 
 .product-grid {
+    margin-top: var(--ysh-spacing-md);
     display: grid;
     gap: 10px;
+}
+
+.add-to-cart ~ dialog article {
+    padding: 50px 10px;
+}
+
+.add-to-cart ~ dialog article a.close{
+    position: absolute;
+    right: 10px;
 }
 
 .grid.desktop-cols-3 {
@@ -328,14 +337,15 @@ input.search-field {
 .product-grid article {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 0 10px;
     position: relative;
+    margin: 0;
 }
 
 .product-grid article header {
     text-align: center;
     font-size: 1.1em;
-    margin: 0 0 10px 0;
+    margin: 0;
     height: 4em;
     width: 100%;
     overflow: hidden;
@@ -365,7 +375,6 @@ input.search-field {
 .product-grid article img {
     width: 100%;
     height: auto;
-    margin-bottom: 10px;
 }
 
 .overBleedWidth {
@@ -378,14 +387,13 @@ input.search-field {
 }
 
 .product-grid article .price, .product-grid article .strike {
-    margin-top: 10px;
     text-align: center;
 }
 
 .product-grid article .swatches {
     display: flex;
     gap: 5px;
-    margin: 10px 0 10px 0;
+    margin: 0;
     min-height: 20px;
     justify-content: center;
 }
@@ -733,7 +741,7 @@ input[aria-invalid="true"] {
     border-color: var(--ysh-error);
     background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
     padding-right: 2.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ea4335' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='var(--ysh-error)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: 1.5rem;
@@ -742,4 +750,82 @@ input[aria-invalid="true"] {
 .form-field-invalid {
     color: var(--ysh-error);
     font-size: var(--ysh-font-size-sm);
+}
+
+/* Additional Error Styles for Consistency */
+.promo-code-error {
+    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
+    color: var(--ysh-error);
+    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
+    margin-bottom: var(--ysh-spacing-md);
+    border-radius: var(--ysh-border-radius-sm);
+}
+
+.promo-code-error p {
+    margin: 0;
+}
+
+.register-error {
+    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
+    color: var(--ysh-error);
+    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
+    margin-bottom: var(--ysh-spacing-md);
+    border-radius: var(--ysh-border-radius-sm);
+}
+
+.register-error ul {
+    margin: 0;
+    padding-left: var(--ysh-spacing-md);
+}
+
+.register-error li {
+    margin-bottom: var(--ysh-spacing-xs);
+}
+
+.register-error li:last-child {
+    margin-bottom: 0;
+}
+
+/* Additional Error Styles for Consistency */
+.order-error-message {
+    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
+    color: var(--ysh-error);
+    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
+    margin-bottom: var(--ysh-spacing-md);
+    border-radius: var(--ysh-border-radius-sm);
+}
+
+.order-error-message p {
+    margin: 0;
+}
+
+/* Error container for system error pages */
+.error-container {
+    background-color: var(--ysh-bg-primary);
+    border: 1px solid var(--ysh-border-color);
+    border-radius: var(--ysh-border-radius-md);
+    padding: var(--ysh-spacing-lg);
+    margin: var(--ysh-spacing-lg) auto;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: var(--ysh-shadow-sm);
+}
+
+.error-container h1 {
+    color: var(--ysh-error);
+    margin-bottom: var(--ysh-spacing-md);
+}
+
+.error-container p {
+    color: var(--ysh-text-secondary);
+    line-height: var(--ysh-line-height);
+    margin-bottom: var(--ysh-spacing-md);
+}
+
+.error-container .thankyou {
+    color: var(--ysh-text-muted);
+    font-style: italic;
 }

@@ -3,6 +3,10 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
+        <content-detail-page-meta-tag-rules>
+            <page-meta-tag-rule rule-id="Page Title"/>
+            <page-meta-tag-rule rule-id="Page Description"/>
+        </content-detail-page-meta-tag-rules>
     </folder>
 
     <folder folder-id="cart-and-checkout">
@@ -1471,13 +1475,15 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
+  "warningColor" : {"value":"#fbbc05"},
+  "errorColor" : {"value":"#ea4335"},
   "headingColor" : {
     "value" : "#FFFFFF"
   },
   "headingColorInvert" : null,
   "menufont" : "Salesforce Sans",
   "secondaryAccentColor" : {
-    "value" : "#ccefeb"
+    "value" : "#f39c12"
   },
   "mainBackground" : {
     "value" : "#FFFFFF"
@@ -1485,6 +1491,7 @@
   "selectBoxBackground" : {
     "value" : "#eeeeee"
   },
+  "infoColor" : {"value":"#4285f4"},
   "primaryAccentColorInvert" : {
     "value" : "#FFFFFF"
   },
@@ -1501,14 +1508,15 @@
     "value" : "#5ebbff"
   },
   "secondaryAccentColorInvert" : {
-    "value" : "#001970"
+    "value" : "#ffffff"
   },
   "borderColorOne" : {
-    "value" : "#16325c"
+    "value" : "#dadce0"
   },
   "menuTextColor" : {
     "value" : "#16325c"
   },
+  "successColor" : {"value":"#34a853"},
   "bodyfont" : "Salesforce Sans",
   "priceTextColor" : {
     "value" : "#ea001e"
