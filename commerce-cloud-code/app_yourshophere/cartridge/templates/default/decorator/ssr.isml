@@ -20,7 +20,7 @@
                 <isprint value="${require('*/cartridge/experience/skin.js').renderFooter()}" encoding="off">
             </footer>
     </div>
-    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.5"></script>
     <isinclude template="components/layout/footer-include"/>
 
 <!--- the ${''} input prevents salesforce out of the box tracking --->

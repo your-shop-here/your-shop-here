@@ -63,7 +63,7 @@ function template(model) {
         ${model.regions.main.render()}
         ${model.regions.footer.render()}
     </main>
-    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.5"></script>
     </body>
     <html>`;
 }
