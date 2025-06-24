@@ -39,6 +39,10 @@
      * @param {string} data.id - The product ID
      */
     function sendProductView(data) {
+        // skip tracking if the user has rejected it
+        if (document.cookie.includes('dw_dnt=1')) {
+            return;
+        }
         if (!data || !data.id) {
             console.error('Invalid product view data:', data);
             return;
@@ -104,7 +108,7 @@
         // Process any existing product view events in the data layer
         if (window.dataLayer) {
             window.dataLayer.forEach((item) => {
-                if (item.type === 'productView' && !item?.processed.includes('einstein')) {
+                if (item.type === 'productView' && !item?.processed?.includes('einstein')) {
                     sendProductView(item);
                     item.processed = item.processed || [];
                     item.processed.push('einstein');

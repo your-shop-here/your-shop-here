@@ -1,0 +1,64 @@
+{
+  "name": "Cookie Consent Banner",
+  "description": "Displays a cookie consent banner that loads dynamically based on cookie presence",
+  "group": "Tracking",
+  "attribute_definition_groups": [
+    {
+      "id": "bannerContent",
+      "name": "Banner Content",
+      "description": "The content and configuration for the cookie consent banner",
+      "attribute_definitions": [
+        {
+          "id": "bannerText",
+          "name": "Banner Text",
+          "description": "The main text displayed in the cookie consent banner",
+          "type": "markup",
+          "required": true,
+          "default_value": "We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies."
+        },
+        {
+          "id": "acceptButtonText",
+          "name": "Accept Button Text",
+          "description": "Text for the accept cookies button",
+          "type": "string",
+          "required": true,
+          "default_value": "Accept"
+        },
+        {
+          "id": "rejectButtonText",
+          "name": "Reject Button Text",
+          "description": "Text for the reject cookies button",
+          "type": "string",
+          "required": true,
+          "default_value": "Decline"
+        },
+        {
+          "id": "bannerPosition",
+          "name": "Banner Position",
+          "description": "Position of the cookie consent banner",
+          "type": "enum",
+          "values": [
+            "top",
+            "bottom"
+          ],
+          "default_value": "top",
+          "required": false
+        },
+        {
+          "id": "bannerStyle",
+          "name": "Banner Style",
+          "description": "Visual style of the banner",
+          "type": "enum",
+          "values": [
+            "warning",
+            "info",
+            "success"
+          ],
+          "default_value": "warning",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+} 

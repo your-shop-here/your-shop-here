@@ -845,6 +845,22 @@
         </content-links>
     </content>
 
+    <content content-id="427ef5a3fdda636b8707dbc2cc">
+        <type>component.privacy.cookieConsent</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "bannerPosition" : "top",
+  "bannerText" : "&lt;p&gt;Hey there! Just a heads-up that we use cookies to make your experience with us as delightful as a fresh batch of chocolate chip cookies. By continuing to browse, you’re agreeing to our use of cookies. Want to know more? Check out our &lt;a data-content-page-id=\"homepage\" data-link-label=\"homepage\" data-link-type=\"page\" target=\"_self\" href=\"$url('Page-Show', 'cid', 'homepage')$\"&gt;Cookie Policy&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Happy browsing!&lt;/p&gt;",
+  "acceptButtonText" : "I consent",
+  "bannerStyle" : "warning",
+  "rejectButtonText" : "No, thanks!"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="43590b461cc6dff6e2e0558516">
         <type>component.cart.estimatedtotal</type>
         <config>{
@@ -1622,9 +1638,6 @@
             <classification-link folder-id="theming-related"/>
         </folder-links>
         <content-links>
-            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="9a8037c36b690794b0e70d9428" type="page.theme.skin">
                 <position>1.0</position>
             </content-link>
@@ -1632,6 +1645,9 @@
                 <position>0.0</position>
             </content-link>
             <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -2413,6 +2429,9 @@
             <content-link content-id="3c22a93491283db5f90f917c2a" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
             </content-link>
+            <content-link content-id="427ef5a3fdda636b8707dbc2cc" type="component.theme.yshHeader.announcement">
+                <position>0.0</position>
+            </content-link>
         </content-links>
     </content>
 
@@ -2475,19 +2494,19 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="7988e6593a84de8ba781125aeb" type="component.commerce_layouts.column.column2">
-                <position>1.0</position>
+                <position>2.0</position>
             </content-link>
             <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
-                <position>3.0</position>
+                <position>4.0</position>
             </content-link>
             <content-link content-id="69a12813f070e0cdc4d97b6e60" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="43590b461cc6dff6e2e0558516" type="component.commerce_layouts.column.column2">
-                <position>2.0</position>
+                <position>3.0</position>
             </content-link>
             <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
-                <position>0.0</position>
+                <position>1.0</position>
             </content-link>
         </content-links>
     </content>
