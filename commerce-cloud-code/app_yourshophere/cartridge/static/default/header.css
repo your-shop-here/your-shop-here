@@ -658,7 +658,7 @@ nav.mainmenu label.drop-icon img,
 /* Cookie Consent Banner Styles */
 .cookie-consent-banner {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 9999;
@@ -738,11 +738,6 @@ nav.mainmenu label.drop-icon img,
 .cookie-consent-reject:hover {
     background-color: color-mix(in srgb, currentColor 10%, transparent);
     text-decoration: none;
-}
-
-/* Adjust body padding when cookie consent is present */
-body:has(.cookie-consent-banner) {
-    padding-top: 60px;
 }
 
 /* Mobile styles for cookie consent */
