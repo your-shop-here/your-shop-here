@@ -86,7 +86,7 @@ const template = (model) => `
             --ysh-border-color-hover: ${model.borderColorOne ? colorMix(model.borderColorOne, 0.8) : '#bdc1c6'};
             --ysh-error: ${model.errorColor || model.priceTextColor || '#ea4335'};
             --ysh-success: ${model.successColor || model.secondaryAccentColor || '#34a853'};
-            --ysh-warning: ${model.warningColor || (model.secondaryAccentColor ? colorMix(model.secondaryAccentColor, 0.8) : '#fbbc05')};
+            --ysh-warning: ${model.warningColor || (model.secondaryAccentColor ? colorMix(model.secondaryAccentColor, 0.95) : '#fbbc05')};
             --ysh-info: ${model.infoColor || model.primaryAccentColor || '#4285f4'};
         }
     </style>
