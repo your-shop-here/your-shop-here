@@ -5,5 +5,6 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    return require('*/api/partials').create('privacy/cookieConsent').html(context.content);
+    const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+    return PageRenderHelper.isInEditMode() ? 'Cookie Consent' : require('*/api/partials').create('privacy/cookieConsent').html(context.content);
 };

@@ -2,7 +2,7 @@ const URLUtils = require('dw/web/URLUtils');
 
 /**
  * Creates the model for the cookie consent partial
- * @param {Object} context The component settings
+ * @param {Object} options The component settings
  * @returns {Object} The model for the partial
  */
 exports.createModel = function createModel(options) {
@@ -14,6 +14,7 @@ exports.createModel = function createModel(options) {
         bannerStyle: options.bannerStyle || 'warning',
         hasCookieConsent: false,
         formURL: URLUtils.url('Privacy-CookieConsent').toString(),
+        essentialJs: URLUtils.staticURL('js/privacy.js'),
     };
 
     // Check if the ysl_dnt cookie exists
@@ -24,7 +25,8 @@ exports.createModel = function createModel(options) {
 };
 
 /**
- * Renders the cookie consent partial
+ * Renders the cookie consent partial, the partial assumes the existence of a an element with the class .announcement
+ *
  * @param {Object} model - The model for the partial
  * @returns {string} The HTML for the partial
  */
@@ -51,4 +53,5 @@ exports.template = (model) => (model.renderCookieConsentText ? `
         hx-target=".announcement"
         hx-swap="outerHTML"
         hx-indicator=".progress"
-        hx-trigger="cookie-consent-check from:body"></div>`);
+        hx-trigger="cookie-consent-check from:body"></div>
+    <script src="${model.essentialJs}" defer></script>`);

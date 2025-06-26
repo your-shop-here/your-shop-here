@@ -1650,6 +1650,9 @@
             <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
             </content-link>
+            <content-link content-id="427ef5a3fdda636b8707dbc2cc" type="page.theme.footer">
+                <position>1.0</position>
+            </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
@@ -2429,9 +2432,6 @@
             <content-link content-id="3c22a93491283db5f90f917c2a" type="component.theme.yshHeader.branding">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="427ef5a3fdda636b8707dbc2cc" type="component.theme.yshHeader.announcement">
-                <position>0.0</position>
-            </content-link>
         </content-links>
     </content>
 
@@ -2507,6 +2507,9 @@
             </content-link>
             <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="b20c69a417acd802f47cac61f6" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
