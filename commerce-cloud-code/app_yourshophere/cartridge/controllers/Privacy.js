@@ -1,4 +1,10 @@
 const server = require('*/server');
+const cache = require('*/cartridge/middleware/cache');
+
+server.get('ShowCookieBanner', cache.applyDefaultCache, (req, res, next) => {
+    res.renderPartial('privacy/cookieConsent');
+    return next();
+});
 
 server.post('CookieConsent', (req, res, next) => {
     const Cookie = require('dw/web/Cookie');
@@ -22,15 +28,11 @@ server.post('CookieConsent', (req, res, next) => {
         session.trackingAllowed = false;
     }
 
-    if (action) {
-        if (request.httpHeaders['hx-request']) {
-            res.print('');
-        } else {
-            // Redirect back to the original page or home
-            res.redirect(currentUrl.toString());
-        }
+    if (request.httpHeaders['hx-request']) {
+        res.print('');
     } else {
-        res.renderPartial('privacy/cookieConsent');
+        // Redirect back to the original page or home
+        res.redirect(currentUrl.toString());
     }
 
     return next();

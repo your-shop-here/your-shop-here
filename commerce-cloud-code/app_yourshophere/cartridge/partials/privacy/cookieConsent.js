@@ -13,6 +13,7 @@ exports.createModel = function createModel(options) {
         bannerPosition: options.bannerPosition || 'top',
         bannerStyle: options.bannerStyle || 'warning',
         hasCookieConsent: false,
+        bannerURL: URLUtils.url('Privacy-ShowCookieBanner').toString(),
         formURL: URLUtils.url('Privacy-CookieConsent').toString(),
         essentialJs: URLUtils.staticURL('js/privacy.js'),
     };
@@ -49,7 +50,7 @@ exports.template = (model) => (model.renderCookieConsentText ? `
             </form>
         </div>
     </div>
-` : `<div id="cookie-consent-check" hx-post="${model.formURL}" 
+` : `<div id="cookie-consent-check" hx-get="${model.bannerURL}" 
         hx-target=".announcement"
         hx-swap="outerHTML"
         hx-indicator=".progress"
