@@ -71,7 +71,7 @@ const template = (model) => `
     <div class="country-language-selector">
         <div class="dropdown">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="countryLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                ${model.currentLocale.flag} ${model.currentLocale.displayLanguage} (${model.currentLocale.displayCountry})
+                <span class="country-language-selector-flag">${model.currentLocale.flag}</span> ${model.currentLocale.displayLanguage} (${model.currentLocale.displayCountry})
             </button>
             <ul class="dropdown-menu" aria-labelledby="countryLanguageDropdown">
                 ${model.groupedLocales.map((countryGroup) => `

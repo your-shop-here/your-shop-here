@@ -108,8 +108,8 @@ nav.mainmenu li,
 }
 
 nav.mainmenu .sub-menu {
-    border-width: 1px 1px 0;
-    margin: 0 1em;
+    border: none;
+    margin: 0 0 0 1em;
 }
 
 nav.mainmenu .sub-menu li:last-child {
@@ -128,7 +128,10 @@ nav.mainmenu {
 }
 
 
-#toggle-menu,
+#toggle-menu {
+    padding: .2em;
+    font-size: 2.5em;
+}
 nav.mainmenu a {
     padding: 1em 1.5em;
 }
@@ -168,7 +171,7 @@ nav.mainmenu li label.drop-icon {
 }
 
 nav.mainmenu li {
-    padding: 0 0.7rem;
+    padding: 0 0 0 0.7rem;
 }
 
 nav.mainmenu label.drop-icon,
@@ -176,7 +179,7 @@ nav.mainmenu label.drop-icon,
     font-size: 1rem;
     color: var(--skin-link-color-1);
     content: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" fill="var(--skin-selectbox-background-color-1)" viewBox="0 0 18 11"><g xmlns="http://www.w3.org/2000/svg" transform="matrix(0 1 -1 0 18 -0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25015 0.682317L10.2117 8.56693C10.4425 8.7977 10.4425 9.18232 10.2117 9.41309L2.25015 17.2977C2.01938 17.5285 1.63477 17.5285 1.404 17.2977L0.557843 16.4515C0.327073 16.2208 0.327073 15.8362 0.557843 15.6054L6.82707 9.41309C7.05784 9.18232 7.05784 8.7977 6.82707 8.56693L0.596304 2.37462C0.365535 2.14386 0.365535 1.75924 0.596304 1.52847L1.44246 0.682317C1.67323 0.490009 2.01938 0.490009 2.25015 0.682317Z" /></g></svg>');
-    border: 1px solid var(--skin-link-color-1);
+    border: none;
     background-color: var(--ysh-background);
     /* @todo how can I set the fill color of an SVG if its not embedded in html?*/
     filter: contrast(0.4) brightness(2) saturate(0.5)
@@ -304,6 +307,29 @@ nav.mainmenu label.drop-icon img,
 
 /* Mobile styles */
 @media (max-width: 1024px) {
+    header {
+        margin: 0 calc(var(--spacing)*-1);
+    }
+    
+    /* Hide menu by default and overlay page content */
+    #menu-root {
+        display: none;
+        position: fixed;
+        top: var(--header-height, 60px); /* Adjust if your header is taller */
+        left: 0;
+        width: 100vw;
+        max-width: 100vw;
+        background: white;
+        z-index: 2000;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 1em;
+    }
+    #hamburger:checked + #menu-root,
+    #hamburger:checked ~ #menu-root {
+        display: block;
+    }
+
     .country-language-selector .dropdown-menu {
         position: fixed;
         top: auto;
@@ -332,6 +358,44 @@ nav.mainmenu label.drop-icon img,
     .country-language-selector .country-header {
         margin-bottom: var(--ysh-spacing-xs);
     }
+
+    .experience-theme-yshHeader {
+        display: flex;
+    }
+
+    .experience-menu {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hide text in miniaccount link on mobile, keep only icon */
+    .take-row a.header-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0;
+        line-height: 0;
+    }
+    
+    .take-row a.header-link svg,
+    .take-row a.header-link img {
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0;
+    }
+
+    #countryLanguageDropdown  {
+        font-size: 0;
+        line-height: 0;
+    }
+
+    #countryLanguageDropdown span.country-language-selector-flag {
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0;
+    }
+
 }
 
 /* Desktop styles */
