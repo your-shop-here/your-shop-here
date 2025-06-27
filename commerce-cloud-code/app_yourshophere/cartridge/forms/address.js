@@ -45,10 +45,13 @@ module.exports = [{
             validation: (fieldValue) => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(fieldValue),
             mapping: {
                 persist: (businessObject, fieldValue) => {
+                    const Transaction = require('dw/system/Transaction');
                     // first form build with the framework and we hack around already. Nice.
-                    const BasketMgr = require('dw/order/BasketMgr');
-                    const basket = BasketMgr.getCurrentBasket();
-                    basket.setCustomerEmail(fieldValue);
+                    Transaction.wrap(() => {
+                        const BasketMgr = require('dw/order/BasketMgr');
+                        const basket = BasketMgr.getCurrentBasket();
+                        basket.setCustomerEmail(fieldValue);
+                    });
                 },
                 load: () => {
                     const BasketMgr = require('dw/order/BasketMgr');

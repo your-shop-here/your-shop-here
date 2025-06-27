@@ -23,9 +23,7 @@ exports.template = (model) => /* html */ `<!DOCTYPE html><html lang="${model.lan
             <main>
                 ${model.content}
             </main>
-            <footer>
-                ${require('*/cartridge/experience/skin.js').renderFooter()}
-            </footer>
+            ${require('*/cartridge/experience/skin.js').renderFooter()}
         </div>
         <script src="https://unpkg.com/htmx.org@2.0.5"></script>
     </body>

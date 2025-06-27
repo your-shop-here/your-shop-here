@@ -47,7 +47,13 @@ function renderComponent (context) {
         Object.keys(parameters).forEach((name) => {
             model[name] = parameters[name];
             if (model.regions[name]) {
-                markup = model.regions[name].render();
+                if (name === 'header') {
+                    markup = model.regions.header.setTagName('header', false).render();
+                } else if (name === 'footer') {
+                    markup = model.regions.footer.setTagName('footer', false).render();
+                } else {
+                    markup = model.regions[name].render();
+                }
             }
         });
     }
