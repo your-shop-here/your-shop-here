@@ -332,6 +332,37 @@ nav.mainmenu label.drop-icon img,
     .country-language-selector .country-header {
         margin-bottom: var(--ysh-spacing-xs);
     }
+
+}
+
+@media (max-width: 768px) {
+    /* Hide text in miniaccount link on mobile, keep only icon */
+    .take-row a.header-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0;
+        line-height: 0;
+    }
+    
+    .take-row a.header-link svg,
+    .take-row a.header-link img {
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0;
+    }
+
+    #countryLanguageDropdown  {
+        font-size: 0;
+        line-height: 0;
+    }
+
+    #countryLanguageDropdown span.country-language-selector-flag {
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0;
+    }
+
 }
 
 /* Desktop styles */
