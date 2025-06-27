@@ -1,6 +1,0 @@
-<isset name="product" value="${pdict.product}" scope="page" />
-<div class="row">
-    <div class="col">
-        <isinclude template="product/components/pidRating" />
-    </div>
-</div>

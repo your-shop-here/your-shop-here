@@ -1,4 +1,3 @@
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');

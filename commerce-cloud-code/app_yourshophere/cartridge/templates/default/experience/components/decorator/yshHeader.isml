@@ -1,7 +1,0 @@
-<isprint value="${pdict.regions.announcement.setTagName('div', true).setClassName('announcement').render()}" encoding="off"/>
-<div class="take-row">
-    <isprint value="${pdict.regions.left.setTagName('div', true).setClassName('left').render()}" encoding="off"/>
-    <isprint value="${pdict.regions.branding.setTagName('div', true).setClassName('').setComponentClassName('branding take-row').render()}" encoding="off"/>
-    <isprint value="${pdict.regions.right.setTagName('div', true).setClassName('right').render()}" encoding="off"/>
-</div>
-<isprint value="${pdict.regions.menu.setTagName('div', true).setComponentTagName('nav').setComponentClassName('mainmenu').render()}" encoding="off"/>
