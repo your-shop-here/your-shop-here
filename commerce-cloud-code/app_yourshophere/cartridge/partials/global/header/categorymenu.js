@@ -13,7 +13,7 @@ function createModel(apiCategory) {
 
 function template(model) {
     return `
-        <label for="hamburger" id="toggle-menu">&#9776; Navigation</label>
+        <label for="hamburger" id="toggle-menu">&#9776;</label>
         <input type="checkbox" id="hamburger" />
         <ul id="menu-root">
             ${model.children.map((childCategory) => subMenuTemplate(childCategory, 0)).join('')}

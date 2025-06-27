@@ -1,3 +1,5 @@
+
+
 /* Header link styling - applies to all header regions except main menu */
 .announcement a,
 .take-row  a {
@@ -128,7 +130,10 @@ nav.mainmenu {
 }
 
 
-#toggle-menu,
+#toggle-menu {
+    padding: .2em;
+    font-size: 2.5em;
+}
 nav.mainmenu a {
     padding: 1em 1.5em;
 }
@@ -304,6 +309,10 @@ nav.mainmenu label.drop-icon img,
 
 /* Mobile styles */
 @media (max-width: 1024px) {
+    header {
+        margin: 0 calc(var(--spacing)*-1);
+    }
+    
     .country-language-selector .dropdown-menu {
         position: fixed;
         top: auto;
@@ -333,6 +342,13 @@ nav.mainmenu label.drop-icon img,
         margin-bottom: var(--ysh-spacing-xs);
     }
 
+    .experience-theme-yshHeader {
+        display: flex;
+    }
+
+    .experience-menu {
+        order: -1;
+    }
 }
 
 @media (max-width: 768px) {
