@@ -37,9 +37,9 @@ function subMenuTemplate(currentCategory, level) {
                         title="Toggle Drop-down" 
                         class="drop-icon" 
                         role="button" 
-                        for="navbar-toggler-${currentCategory.ID}">
+                        for="navbar-toggler-${currentCategory.apiCategory.ID}">
                     </label>
-                    <input type="checkbox" id="navbar-toggler-${currentCategory.ID}">
+                    <input type="checkbox" id="navbar-toggler-${currentCategory.apiCategory.ID}">
                     <ul class="sub-menu">
                         ${currentCategory.children.map((childCategory) => subMenuTemplate(childCategory, level + 1)).join('')}
                     </ul>
