@@ -12,7 +12,7 @@ exports.createModel = function createModel(input) {
         id: productId,
         disabled: !input.model.hit.object.minPrice.available,
         title: input.model.label,
-        url: URLUtils.url('Cart-Add', 'pid', productId, 'hx', 'cart-modal'),
+        url: URLUtils.url('Product-Show', 'pid', productId, 'hx', 'product-modal').toString(),
     };
 
     return model;
