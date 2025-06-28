@@ -1,14 +1,13 @@
 exports.createModel = function createDecoratorModel(params) {
-    const Locale = require('dw/util/Locale');
     const model = {
-        lang: Locale.getLocale(request.locale).language,
+        lang: request.locale.split('_')[0],
         pageMetaData: request.pageMetaData,
         content: params.content,
     };
     return model;
 };
 
-exports.template = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-theme="light">
+exports.template = (model) => /* html */ `<!DOCTYPE html><html lang="${model.lang}" data-theme="light">
 
     <head>
         <title>${model.pageMetaData.title}</title>
@@ -24,9 +23,7 @@ exports.template = (model) => `<!DOCTYPE html><html lang="${model.lang}" data-th
             <main>
                 ${model.content}
             </main>
-            <footer>
-                ${require('*/cartridge/experience/skin.js').renderFooter()}
-            </footer>
+            ${require('*/cartridge/experience/skin.js').renderFooter()}
         </div>
         <script src="https://unpkg.com/htmx.org@2.0.5"></script>
     </body>

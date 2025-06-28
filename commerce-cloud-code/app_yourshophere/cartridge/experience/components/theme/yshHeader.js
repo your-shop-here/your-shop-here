@@ -1,5 +1,4 @@
 
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 

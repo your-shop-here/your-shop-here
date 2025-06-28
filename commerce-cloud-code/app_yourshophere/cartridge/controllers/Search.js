@@ -19,7 +19,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     if (!category) {
         const noCategoryError = `Category with ID ${categoryId} could not be found, rendering notfound page`;
         Logger.error(noCategoryError);
-        res.render('pages/notfound', { reason: noCategoryError });
+        res.renderPartial('error/notfound', { object: { reason: noCategoryError }, decorator: 'decorator/ssr' });
         return next();
     }
 
@@ -38,7 +38,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     } else {
         const error = `Page for category with ID ${categoryId} could not be found, rendering notfound page`;
         Logger.error(error);
-        res.render('pages/notfound', { reason: error });
+        res.renderPartial('error/notfound', { object: { reason: error }, decorator: 'decorator/ssr' });
     }
     return next();
 });

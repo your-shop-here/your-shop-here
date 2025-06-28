@@ -1,8 +1,0 @@
-<div class="miniwishlist">
-    <a href="${URLUtils.url('Wishlist-Show')}" class="header-link">
-        <span class="wishlist-icon">
-            <i class="fa fa-heart"></i>
-        </span>
-        <span class="wishlist-count">${pdict.wishlistCount}</span>
-    </a>
-</div> 

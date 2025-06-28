@@ -1,6 +1,0 @@
-<isset name="product" value="${pdict.product}" scope="page" />
-
-<!-- Social Sharing Icons -->
-<div class="row">
-    <isinclude template="product/components/socialIcons" />
-</div>

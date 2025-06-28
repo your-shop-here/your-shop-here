@@ -1,9 +1,0 @@
-<iscontent type="text/html" charset="UTF-8" compact="true" />
-<isdecorate template="decorator/main">
-    <isif condition="${!empty(pdict.httpParameter.error)}">
-        <div class="cart-error-message">
-            <p>${Resource.msg(pdict.httpParameter.error,'translations',null)}</p>
-        </div>
-    </isif>
-    <isprint value="${pdict.regions.main.render()}" encoding="off" />
-</isdecorate>

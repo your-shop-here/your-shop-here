@@ -1,4 +1,3 @@
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
@@ -68,5 +67,7 @@ function renderComponent (context) {
     request.custom.model = model;
     // render the page
 
-    return new Template('experience/pages/pdpage').render(model).text;
+    return require('*/api/partials').create('decorator/main').html({
+        model, context, metaDefinition, content: model.regions.main.render(),
+    });
 }
