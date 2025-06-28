@@ -4,12 +4,13 @@
  * @returns {Object} The view model containing the product page regionsxx
  */
 exports.createModel = (input) => {
-    const URLUtils = require('dw/web/URLUtils');
+    const PageMgr = require('dw/experience/PageMgr');
+    const HashMap = require('dw/util/HashMap');
     const modelProducts = input.products.map((product) => {
-        const url = URLUtils.url('Tile-Show');
-        url.append('pid', product.ID);
+        const aspectAttributes = new HashMap();
+        aspectAttributes.product = product;
         return {
-            tileUrl: url.toString(),
+            wainclude: PageMgr.renderPage('product-tile', aspectAttributes, JSON.stringify({ pid: product.ID })),
         };
     });
 
@@ -23,4 +24,4 @@ exports.createModel = (input) => {
  * @param {Object} model - The view model containing product details
  * @returns {string} The HTML template for the product tile name
  */
-exports.template = (model) => `${model.products.map((product) => `<wainclude url="${product.tileUrl}"/>`).join('')}`;
+exports.template = (model) => `${model.products.map((product) => `${product.wainclude}`).join('')}`;
