@@ -18,7 +18,7 @@ exports.createModel = function createModel(options) {
     }
     const swatches = colorValues.map((color) => {
         // @todo make swatch viewtype configurable including fallbacks
-        const image = color.getImage('swatch', 0);
+        const image = color.getImage(config.swatchViewType, 0);
         if (image) {
             const result = {
                 color: color.displayValue,
@@ -26,7 +26,7 @@ exports.createModel = function createModel(options) {
                 url: URLUtils.url('Product-Show', 'pid', hit.mainProductId, `dwvar_${hit.mainProductId}_${config.swatchAttribute}`, color.value),
                 alt: color.displayValue,
                 image: {
-                    url: image.url,
+                    url: `${image.url.toString()}?${config.swatchDISConfig}`,
                 },
             };
             return result;
