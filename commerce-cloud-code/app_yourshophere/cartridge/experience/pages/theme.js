@@ -46,6 +46,9 @@ function renderComponent (context) {
         model.isInEditMode = false;
         Object.keys(parameters).forEach((name) => {
             model[name] = parameters[name];
+
+            // This makes the theme tick. When rendering the page, users can decide to only render one region
+            // i.e. PageMgr.renderPage('_main-theme', JSON.stringify({ skin: true }));
             if (model.regions[name]) {
                 if (name === 'header') {
                     markup = model.regions.header.setTagName('header', false).render();
