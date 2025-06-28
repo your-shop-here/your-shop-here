@@ -1,5 +1,5 @@
 /**
- * Renders a Product Description Component
+ * Renders the add to cart button for the tile
  *
  * @param {dw.experience.ComponentScriptContext} context The component context
  * @returns {string} The template to be displayed

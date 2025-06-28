@@ -38,6 +38,11 @@ exports.createModel = function createModel(options) {
     };
 };
 
+/**
+ * Render the swatches template
+ * @param {Object} model - The view model containing the swatches
+ * @returns {string} The HTML template for the swatches
+ */
 exports.template = function template(model) {
     return `<div class="swatches">${model.swatches.map((swatch) => `<a href="${swatch.url}"><img src="${swatch.image.url}" alt="${swatch.alt}" /></a>`).join('')}</div>`;
 };

@@ -1,8 +1,7 @@
 /**
- * Renders a Product Description Component
- *
- * @param {dw.experience.ComponentScriptContext} context The component context
- * @returns {string} The template to be displayed
+ * Renders the image for the tile
+ * @param {Object} context - The component context
+ * @returns {string} The HTML template for the image
  */
 exports.render = function render(context) {
     const model = request.custom.model;

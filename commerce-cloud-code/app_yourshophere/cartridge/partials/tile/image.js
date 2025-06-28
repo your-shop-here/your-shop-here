@@ -34,7 +34,7 @@ function getCssAspectRatio(sw, sh) {
 }
 
 /**
- * Create view model for a product image
+ * Create view model for a product tile image
  *
  * @todo Add responsive images
  * @param {Object} options - The options object

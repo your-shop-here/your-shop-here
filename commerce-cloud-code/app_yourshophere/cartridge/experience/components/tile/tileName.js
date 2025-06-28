@@ -1,11 +1,9 @@
 /**
- * Renders a Product Description Component
- *
- * @param {dw.experience.ComponentScriptContext} context The component context
- * @returns {string} The template to be displayed
+ * Renders the name for the tile
+ * @returns {string} The HTML template for the name component
  */
-exports.render = function render(context) {
-    const model = request.custom.tileModel;
+exports.render = function render() {
+    const model = request.custom.model;
 
     return require('*/api/partials').create('tile/name').html({
         model,
