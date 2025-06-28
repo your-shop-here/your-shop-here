@@ -44,7 +44,7 @@ function getListPrices(httpParams) {
  * @returns the view model
  */
 exports.createModel = () => {
-    const model = request.custom.tileModel;
+    const model = request.custom.model;
 
     const StringUtils = require('dw/util/StringUtils');
     const tileSearch = model.search;

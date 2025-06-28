@@ -5,8 +5,8 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    const model = request.custom.tileModel;
-    const imageDimension = request.custom.tileModel.config.imageDimension;
+    const model = request.custom.model;
+    const imageDimension = model.config.imageDimension;
 
     model.imageFilter = {
         key: imageDimension,

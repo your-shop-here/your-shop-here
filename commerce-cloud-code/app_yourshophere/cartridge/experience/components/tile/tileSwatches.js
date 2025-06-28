@@ -5,7 +5,7 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
-    const model = request.custom.tileModel;
+    const model = request.custom.model;
     model.config.put('swatchDISConfig', context.content.swatchDISConfig);
     model.config.put('swatchViewType', context.content.swatchViewType);
     return require('*/api/partials').create('tile/swatches').html({

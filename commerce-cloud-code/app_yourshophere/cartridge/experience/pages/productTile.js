@@ -40,6 +40,21 @@ function renderComponent(context) {
         return 'Product not found';
     }
 
+    const HttpSearchParams = require('*/api/URLSearchParams');
+    let httpParams = new HttpSearchParams(model.renderParameters);
+    if (!httpParams.get('pid')) {
+        httpParams = new HttpSearchParams({ pid: model.product.ID });
+    }
+    model.searchParameters = httpParams;
+    const componentSettings = require('*/cartridge/utils/ComponentSettings').get(httpParams.get('component'));
+
+    const tileSearch = require('*/api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
+    tileSearch.search();
+
+    const hit = tileSearch.foundProducts[0];
+    model.hit = hit;
+    model.search = tileSearch;
+
     // automatically register configured regions
     const metaDefinition = require('*/cartridge/experience/pages/productTile.json');
 
@@ -53,11 +68,35 @@ function renderComponent(context) {
         decorator = 'decorator/main';
     }
 
-    request.custom.model = model;
-
-    // render the page
-
-    return require('*/api/partials').create(decorator).html({
-        model, context, metaDefinition, content: model.regions.main.render(),
+    model.analytics = JSON.stringify({
+        type: 'productView',
+        id: hit.object.productID,
     });
+    model.analyticsContribution = JSON.stringify({
+        contributesTo: [
+            'viewCategory',
+            'viewSearch',
+        ],
+        contributionOptions: { property: 'products', mode: 'array-push' },
+        value: {
+            id: hit.object.productID,
+            sku: '',
+            altId: '',
+            altIdType: '',
+        },
+    });
+
+    model.config = context.content;
+    request.custom.model = model;
+    // render the page
+    // data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'
+    let markup = require('*/api/partials').create('tile/tile').decorateWith(decorator).html({
+        model,
+    });
+    // remove the custom-deleteme tags if not in edit mode
+    if (!PageRenderHelper.isInEditMode()) {
+        markup = markup.replace(/<custom-deleteme.*?>/, '');
+        markup = markup.replace(/<\/custom-deleteme>/, '');
+    }
+    return markup;
 }
