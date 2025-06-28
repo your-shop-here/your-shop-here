@@ -23,7 +23,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     if (!product || !product.online) {
         error = `Product with ID ${productId} could not be found, rendering notfound page`;
         Logger.error(error);
-        res.render('pages/notfound', { reason: error });
+        res.renderPartial('error/notfound', { object: { reason: error }, decorator: 'decorator/ssr' });
         return next();
     }
 
@@ -73,7 +73,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
     } else {
         error = `No page for product ${productId} found`;
         Logger.error(error);
-        res.render('pages/notfound', { reason: error });
+        res.renderPartial('error/notfound', { object: { reason: error }, decorator: 'decorator/ssr' });
     }
 
     return next();

@@ -11,4 +11,5 @@ exports.template = (model) => `<title>${model.pageMetaData.title}</title>
         onClick="this.closest('dialog').outerHTML=''">
         Close
     </a>
-    <article>${model.content}</article></dialog>';
+    <article>${model.content}</article>
+</dialog>`;

@@ -249,8 +249,11 @@ server.get('OAuthLogin', server.middleware.https, (req, res, next) => {
             endpoints[targetEndPoint],
         );
     } else {
-        res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'translations', null),
+        res.renderPartial('error/error', {
+            object: {
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            },
+            decorator: 'decorator/ssr',
         });
 
         return next();
@@ -263,15 +266,21 @@ server.get('OAuthLogin', server.middleware.https, (req, res, next) => {
         if (result) {
             res.redirect(result.location);
         } else {
-            res.render('/error', {
-                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            res.renderPartial('error/error', {
+                object: {
+                    message: Resource.msg('error.oauth.login.failure', 'translations', null),
+                },
+                decorator: 'decorator/ssr',
             });
 
             return next();
         }
     } else {
-        res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'translations', null),
+        res.renderPartial('error/error', {
+            object: {
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            },
+            decorator: 'decorator/ssr',
         });
 
         return next();
@@ -303,16 +312,22 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
     const oauthProviderID = finalizeOAuthLoginResult.accessTokenResponse.oauthProviderId;
 
     if (!oauthProviderID) {
-        res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'translations', null),
+        res.renderPartial('error/error', {
+            object: {
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            },
+            decorator: 'decorator/ssr',
         });
 
         return next();
     }
 
     if (!response) {
-        res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'translations', null),
+        res.renderPartial('error/error', {
+            object: {
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            },
+            decorator: 'decorator/ssr',
         });
 
         return next();
@@ -320,8 +335,11 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
 
     const externalProfile = JSON.parse(response);
     if (!externalProfile) {
-        res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'translations', null),
+        res.renderPartial('error/error', {
+            object: {
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            },
+            decorator: 'decorator/ssr',
         });
 
         return next();
@@ -329,8 +347,11 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
 
     const userID = externalProfile.id || externalProfile.uid;
     if (!userID) {
-        res.render('/error', {
-            message: Resource.msg('error.oauth.login.failure', 'translations', null),
+        res.renderPartial('error/error', {
+            object: {
+                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            },
+            decorator: 'decorator/ssr',
         });
 
         return next();
@@ -386,8 +407,11 @@ server.get('OAuthReentry', server.middleware.https, (req, res, next) => {
                 CustomerMgr.loginExternallyAuthenticatedCustomer(oauthProviderID, userID, false);
             });
         } else {
-            res.render('/error', {
-                message: Resource.msg('error.oauth.login.failure', 'translations', null),
+            res.renderPartial('error/error', {
+                object: {
+                    message: Resource.msg('error.oauth.login.failure', 'translations', null),
+                },
+                decorator: 'decorator/ssr',
             });
 
             return next();

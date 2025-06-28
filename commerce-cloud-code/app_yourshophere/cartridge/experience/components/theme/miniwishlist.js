@@ -1,5 +1,4 @@
 
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
 const SVG = require('*/cartridge/experience/utilities/svg.js');
 

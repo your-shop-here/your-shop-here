@@ -9,7 +9,7 @@ server.get('Start', (req, res, next) => {
 
     if (!location) {
         res.setStatusCode(404);
-        res.render('pages/notfound', { httpParameter: {} });
+        res.renderPartial('error/notfound', { object: { httpParameter: {} }, decorator: 'decorator/ssr' });
     } else {
         if (redirectStatus) {
             res.setRedirectStatus(redirectStatus);

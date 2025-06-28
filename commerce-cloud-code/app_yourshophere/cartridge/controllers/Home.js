@@ -24,7 +24,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
         res.page('homepage');
     } else {
         Logger.error('Page with ID "homepage" not found')
-        res.render('pages/notfound', { reason: 'page "homepage" not found' });
+        res.renderPartial('error/notfound', { object: { reason: 'page "homepage" not found' }, decorator: 'decorator/ssr' });
     }
     next();
 }, pageMetaData.computedPageMetaData);
@@ -35,7 +35,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
  */
 server.get('ErrorNotFound', (req, res, next) => {
     res.setStatusCode(404);
-    res.render('pages/notfound', { reason: '404' });
+    res.renderPartial('error/notfound', { object: { reason: '404' }, decorator: 'decorator/ssr' });
     next();
 });
 

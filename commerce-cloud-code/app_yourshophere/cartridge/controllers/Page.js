@@ -20,7 +20,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
 
     if (!pageId) {
         Logger.error('No page ID provided in cid parameter');
-        res.render('pages/notfound', { reason: 'No page ID provided' });
+        res.renderPartial('error/notfound', { object: { reason: 'No page ID provided' }, decorator: 'decorator/ssr' });
         return next();
     }
 
@@ -31,7 +31,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
         res.page(pageId);
     } else {
         Logger.error('Page with ID "{0}" not found', pageId);
-        res.render('pages/notfound', { reason: `page "${pageId}" not found` });
+        res.renderPartial('error/notfound', { object: { reason: `page "${pageId}" not found` }, decorator: 'decorator/ssr' });
     }
     return next();
 }, pageMetaData.computedPageMetaData);

@@ -1,5 +1,0 @@
-<isdecorate template="decorator/main">
-    <h1>${pdict.translate('page_not_found')}</h1>
-    
-    <p>${pdict.translate('reason')}: ${pdict.reason}</p>
-</isdecorate>
