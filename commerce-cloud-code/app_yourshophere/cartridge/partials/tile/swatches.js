@@ -9,8 +9,9 @@
  */
 exports.createModel = function createModel(options) {
     const URLUtils = require('dw/web/URLUtils');
-    const { hit, search, config } = options;
-    const colorValues = search.getRepresentedVariationValues(config.swatchAttribute);
+    const model = options.model;
+    const { hit, search, config } = model;
+    const colorValues = search.getRepresentedVariationValues(config.imageDimension);
     // nothing to select
     if (colorValues.length < 2) {
         return { swatches: [] };

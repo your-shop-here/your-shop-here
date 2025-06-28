@@ -12,7 +12,7 @@ exports.createModel = () => {
     search.search();
 
     const componentId = httpParams.get('component');
-    model.products = search.foundProducts.map((hit) => ({ tileUrl: hit.tileUrl.append('component', componentId) }));
+    model.products = search.foundProducts.map((hit) => ({ tileUrl: hit.tileUrl }));
     model.showMoreButton = (search.pagePosition + search.pageSize) < search.resultCount;
     // @todo makes only sense with proper page controls
     model.moreUrlFull = search.nextPageUrl('Search-Show').toString();
@@ -50,7 +50,7 @@ exports.template = (model) => `
 `;
 
 function templateIncludeHit(hit) {
-    return `<wainclude url="${hit.tileUrl}"/>`;
+    return `${hit.tileUrl}`;
 }
 
 function templateIncludeMore(model) {

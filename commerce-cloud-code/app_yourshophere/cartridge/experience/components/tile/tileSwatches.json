@@ -1,0 +1,38 @@
+{
+    "name": "Tile Swatches",
+    "description": "This tile swatches component.",
+    "group": "Tile",
+    "attribute_definition_groups": [
+        {
+            "id": "productTile",
+            "name": "Settings",
+            "description": "Product Tile Settings",
+            "attribute_definitions": [
+                {
+                    "id": "product",
+                    "name": "Product", 
+                    "type": "product",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "tile"
+                    }
+                },
+                {
+                    "id": "swatchViewType",
+                    "name": "Swatch View Type",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "swatchDISConfig",
+                    "name": "Swatch Dimensions",
+                    "description": "DIS parameters i.e. sw=300&sh=400",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

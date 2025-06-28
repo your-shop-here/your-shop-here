@@ -1,0 +1,24 @@
+{
+    "name": "Tile Price",
+    "description": "This tile price component.",
+    "group": "Tile",
+    "attribute_definition_groups": [
+        {
+            "id": "productTile",
+            "name": "Settings",
+            "description": "Product Tile Settings",
+            "attribute_definitions": [
+                {
+                    "id": "product",
+                    "name": "Product", 
+                    "type": "product",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "tile"
+                    }
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

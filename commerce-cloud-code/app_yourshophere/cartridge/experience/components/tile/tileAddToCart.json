@@ -1,0 +1,31 @@
+{
+    "name": "Tile Add to Cart",
+    "description": "This tile add to cart component.",
+    "group": "Tile",
+    "attribute_definition_groups": [
+        {
+            "id": "productTile",
+            "name": "Settings",
+            "description": "Product Tile Settings",
+            "attribute_definitions": [
+                {
+                    "id": "product",
+                    "name": "Product", 
+                    "type": "product",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "tile"
+                    }
+                },
+                {
+                    "id": "addToCartButtonLabel",
+                    "name": "Add to Cart Button Label",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

@@ -1,9 +1,9 @@
 {
-    "name":"Product Page",
-    "description":"Creates a Product Page with 1 region with page designer",
+    "name":"Product Tile",
+    "description":"Creates a Product Tile with 1 region with page designer",
     "attribute_definition_groups": [
       {
-          "id": "productPage",
+          "id": "productTile",
           "name": "Product Settings",
           "description": "Product Settings",
           "attribute_definitions": [
@@ -22,10 +22,10 @@
     "region_definitions":[
       {
         "id":"main",
-        "name":"Main Product region",
+        "name":"Main Tile region",
         "component_type_exclusions": [
         ]
       }
     ],
-    "supported_aspect_types": ["product"]
+    "supported_aspect_types": ["tile"]
 }

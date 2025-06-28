@@ -19,23 +19,21 @@ exports.get = function get(apiHit, config) {
 
     Object.defineProperty(instance, 'tileUrl', {
         get: function getTileUrl() {
-            const URLUtils = require('dw/web/URLUtils');
-            const url = URLUtils.url('Tile-Show');
-
+            const pageParams = {};
             const productGroup = this.object.product;
             const colors = this.object.getRepresentedVariationValues(swatchAttribute).iterator().asList().toArray(0, 10);
 
-            url.append('pid', this.mainProductId);
-            url.append('lastModified', productGroup.lastModified.getTime());
+            pageParams.pid = this.mainProductId;
+            pageParams.lastModified = productGroup.lastModified.getTime();
 
             const maxPrice = this.object.getMaxPrice();
             const minPrice = this.object.getMinPrice();
 
             if (maxPrice && maxPrice.isAvailable()) {
-                url.append('maxPrice', maxPrice.getValue());
+                pageParams.maxPrice = maxPrice.getValue();
             }
             if (minPrice && minPrice.isAvailable()) {
-                url.append('minPrice', minPrice.getValue());
+                pageParams.minPrice = minPrice.getValue();
             }
 
             // the colorHash is a means to inform the product tile about out-of-stock colors
@@ -43,16 +41,21 @@ exports.get = function get(apiHit, config) {
             // and add them to the tile url to force a new tile vs the cached tile
             const colorHash = colors.reduce((accumulator, attrValue) => {
                 let attrNumber = attrValue.value;
-                if (isNaN(attrNumber)) {
+                if (Number.isNaN(attrNumber)) {
                     attrNumber = attrNumber.split('').map((char) => char.charCodeAt(0)).join(0);
                 }
                 return accumulator + parseInt(attrNumber, 10);
             }, 0);
 
-            url.append('colorHash', colorHash.toString());
-            url.append('color', colors && colors.length && colors[0].value);
+            pageParams.colorHash = colorHash.toString();
+            pageParams.color = colors && colors.length && colors[0].value;
 
-            return url;
+            const PageMgr = require('dw/experience/PageMgr');
+            const HashMap = require('dw/util/HashMap');
+            const aspectAttributes = new HashMap();
+            aspectAttributes.product = productGroup;
+
+            return PageMgr.renderPage('product-tile', aspectAttributes, JSON.stringify(pageParams));
         },
         configurable: true,
     });

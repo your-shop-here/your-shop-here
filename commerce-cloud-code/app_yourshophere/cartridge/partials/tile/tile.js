@@ -9,9 +9,13 @@ const addToCartButton = require('./addtocartbutton');
  * @returns {Object} The model for the product tile
  * @todo Break out the tile into a separate components
  */
-exports.createModel = () => {
+exports.createModel = (input) => {
     const HttpSearchParams = require('*/api/URLSearchParams');
-    const httpParams = new HttpSearchParams(request.httpParameterMap);
+    let httpParams = new HttpSearchParams(request.custom.model.renderParameters);
+    if (!httpParams.get('pid')) {
+        httpParams = new HttpSearchParams({ pid: request.custom.model.product.ID });
+    }
+
     const componentSettings = require('*/cartridge/utils/ComponentSettings').get(httpParams.get('component'));
 
     const tileSearch = require('*/api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
@@ -24,7 +28,7 @@ exports.createModel = () => {
 
     const hit = tileSearch.foundProducts[0];
     const model = {};
-
+    model.regions = input.model.regions;
     if (hit) {
         model.name = name.createModel(hit);
         model.image = image.createModel({
@@ -65,6 +69,7 @@ exports.createModel = () => {
             },
         });
     }
+    request.custom.partialTileModel = model;
 
     return model;
 };
@@ -78,7 +83,7 @@ exports.template = (model) => `
 <article data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'>
     <header>${name.template(model.name)}</header>
     <body>
-        ${image.template(model.image)}
+        ${model.regions.tileBody.render()}
         ${price.template(model.price)}
         ${swatches.template(model.swatches)}
     </body>

@@ -49,12 +49,13 @@ function getCssAspectRatio(sw, sh) {
  */
 exports.createModel = function createImageModel(options) {
     const URLUtils = require('dw/web/URLUtils');
+
     const {
         hit,
         search,
         imageFilter,
         config,
-    } = options;
+    } = options.model;
 
     let url;
     if (imageFilter) {

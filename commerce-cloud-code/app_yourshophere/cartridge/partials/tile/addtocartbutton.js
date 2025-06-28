@@ -3,15 +3,16 @@
  * @param {dw.catalog.SearchHit} hit - The search hit containing product information
  * @returns {Object} The view model containing product details
  */
-exports.createModel = function createModel(hit) {
-    const Resource = require('dw/web/Resource');
+exports.createModel = function createModel(input) {
     const URLUtils = require('dw/web/URLUtils');
 
+    const productId = input.model.hit.object.productID;
+
     const model = {
-        id: hit.productId,
-        disabled: false,
-        title: Resource.msg('add_to_bag', 'translations', null),
-        url: URLUtils.url('Product-Show', 'pid', hit.productId, 'hx', 'product-modal').toString(),
+        id: productId,
+        disabled: !input.model.hit.object.minPrice.available,
+        title: input.model.label,
+        url: URLUtils.url('Cart-Add', 'pid', productId, 'hx', 'cart-modal'),
     };
 
     return model;
