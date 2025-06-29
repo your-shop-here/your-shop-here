@@ -3,10 +3,12 @@
  * @param {dw.catalog.SearchHit} hit - The search hit containing product information
  * @returns {Object} The view model containing product details
  */
-exports.createModel = (hit) => {
+exports.createModel = () => {
     const URLUtils = require('dw/web/URLUtils');
+    const model = request.custom.model;
+    const hit = model.hit;
     return {
-        pdpUrl: URLUtils.url('Product-Show', 'pid', hit.productId),
+        pdpUrl: URLUtils.url('Product-Show', 'pid', model.hit.productId),
         pdpUrlHx: URLUtils.url('Product-Show', 'pid', hit.productId).append('hx', 'main'),
         name: hit.name,
     };

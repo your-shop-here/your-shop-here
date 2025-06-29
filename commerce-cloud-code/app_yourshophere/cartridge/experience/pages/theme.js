@@ -3,7 +3,7 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
- * Render logic for the theme page, which can be partially included oon the rest of the website
+ * Render logic for the theme page, which regions can be partially included on the rest of the website
  *
  * @param {dw.experience.PageScriptContext} context The page script context object.
  *

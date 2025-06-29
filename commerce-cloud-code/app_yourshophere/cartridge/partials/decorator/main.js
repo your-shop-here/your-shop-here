@@ -3,7 +3,7 @@ let subDecorator;
 
 exports.createModel = function createDecoratorModel(input) {
     const model = input.model;
-    const httpParams = model.httpParameter;
+    const httpParams = model.httpParameter || model.renderParameters;
     const pageMetaData = model.pageMetaData;
     const partials = require('*/api/partials');
     let chosenDecorator = partials.create('decorator/ssr');
@@ -24,5 +24,5 @@ exports.createModel = function createDecoratorModel(input) {
     return model;
 };
 
-exports.template = (input) =>input.chosenDecorator.html(input);
+exports.template = (input) => input.chosenDecorator.html(input);
 

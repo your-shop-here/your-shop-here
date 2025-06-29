@@ -3,7 +3,7 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
- * Render logic for the storepage.
+ * Render logic for the category page.
  *
  * @param {dw.experience.PageScriptContext} context The page script context object.
  *

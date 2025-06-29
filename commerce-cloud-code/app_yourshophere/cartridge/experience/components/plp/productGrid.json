@@ -18,27 +18,6 @@
                     }
                 },
                 {
-                    "id": "imageViewType",
-                    "name": "Image View Type",
-                    "description": "",
-                    "type": "string",
-                    "required": false
-                },
-                {
-                    "id": "imageDISConfig",
-                    "name": "Image Dimensions",
-                    "description": "DIS parameters i.e. sw=300&sh=400",
-                    "type": "string",
-                    "required": false
-                },
-                {
-                    "id": "swatchDimension", 
-                    "name": "Swatch Atttribute",
-                    "description": "",
-                    "type": "string",
-                    "required": false
-                },
-                {
                     "id": "desktopColumns",
                     "name": "Number of Columns (Desktop)",
                     "description": "Number of product columns to display on desktop (default: 3)",
