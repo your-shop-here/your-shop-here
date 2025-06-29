@@ -3,9 +3,7 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
- * Render logic for the storepage.
- *
- * @todo Refactor to not use ISML
+ * Virtual Page for the product tile - this is used to render the product tile in the product page
  *
  * @param {dw.experience.PageScriptContext} context The page script context object.
  *

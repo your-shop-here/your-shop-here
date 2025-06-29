@@ -3,9 +3,7 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
- * Render logic for the storepage.
- *
- * @todo Refactor to not use ISML
+ * The product page - this is used to render the product page
  *
  * @param {dw.experience.PageScriptContext} context The page script context object.
  *
@@ -28,7 +26,7 @@ exports.render = function render(context) {
  * @param {Object} context - The context object
  * @returns {string} The rendered HTML
  */
-function renderComponent (context) {
+function renderComponent(context) {
     const model = new HashMap();
     const page = context.page;
     model.page = page;
