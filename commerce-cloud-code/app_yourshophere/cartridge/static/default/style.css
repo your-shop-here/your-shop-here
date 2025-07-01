@@ -147,6 +147,11 @@ input.search-field {
 .grid.grid67_33 { grid-template-columns: 67% 33%; }
 .grid.grid75_25 { grid-template-columns: 75% 25%; }
 .grid.grid25_75 { grid-template-columns: 25% 75%; }
+.grid.grid33_33_33 div.experience-component { 
+    display: grid;
+    gap: 1rem; /* Adjust the gap between columns */
+    grid-template-columns: 33% 33% 33%;
+}
 
 /** PLP **/
 

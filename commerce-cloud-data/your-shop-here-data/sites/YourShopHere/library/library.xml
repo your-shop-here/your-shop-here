@@ -3,6 +3,10 @@
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes/>
+        <content-detail-page-meta-tag-rules>
+            <page-meta-tag-rule rule-id="Page Title"/>
+            <page-meta-tag-rule rule-id="Page Description"/>
+        </content-detail-page-meta-tag-rules>
     </folder>
 
     <folder folder-id="cart-and-checkout">
@@ -1683,11 +1687,11 @@
             <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
                 <position>0.0</position>
             </content-link>
-            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="427ef5a3fdda636b8707dbc2cc" type="page.theme.footer">
                 <position>1.0</position>
+            </content-link>
+            <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
+                <position>0.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
@@ -1857,6 +1861,25 @@
         <page-attributes/>
     </content>
 
+    <content content-id="b0e9baf89bbf8921f224eb225c">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columns" : 1,
+  "style" : "grid33_33_33",
+  "mobileColumns" : 1
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="c35b730980900689e306e0eb7c" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="b1e0a866deb2644859e291f340">
         <type>component.pdp.productPromotions</type>
         <config>{
@@ -1948,6 +1971,7 @@
   "searchdetails" : {
     "value" : "{\"srule\":\"\",\"filterattribute\":\"yshRefinementColor\",\"filtervalue\":\"Red\"}"
   },
+  "productlimit" : null,
   "category" : "root"
 }</data>
         <online-flag>true</online-flag>
@@ -2963,7 +2987,7 @@
             <content-link content-id="2c07d3fe6aa299212a8b2ffac3" type="page.contentPage.main">
                 <position>2.0</position>
             </content-link>
-            <content-link content-id="c35b730980900689e306e0eb7c" type="page.contentPage.main">
+            <content-link content-id="b0e9baf89bbf8921f224eb225c" type="page.contentPage.main">
                 <position>4.0</position>
             </content-link>
         </content-links>

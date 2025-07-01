@@ -1,7 +1,4 @@
-
-const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
-const ProductViewModel = require('*/cartridge/experience/viewmodels/ProductViewModel');
 
 // eslint-disable-next-line valid-jsdoc
 /**
@@ -17,7 +14,6 @@ exports.render = function render(context) {
 };
 
 function renderComponent(context) {
-    const model = new HashMap();
     const content = context.content;
     const category = content.category;
     const searchDetailsParam = content.searchdetails;
@@ -41,16 +37,8 @@ function renderComponent(context) {
     }
 
     searchModel.search();
-    const searchIterator = searchModel.productSearchHits;
-    const products = [];
-    const markup = '';
-    for (let i = 0; i < 10; i++) {
-        if (searchIterator.hasNext()) {
-            const product = searchIterator.next().firstRepresentedProduct;
-            products.push(product);
-        }
-    }
-    model.markup = markup;
+    const products = searchModel.productSearchHits.asList(0, content.productlimit).toArray()
+        .map((productHit) => productHit.firstRepresentedProduct);
 
     return require('*/api/partials').create('content/searchstrip').html({
         products,
