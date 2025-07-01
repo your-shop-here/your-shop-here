@@ -1,33 +1,3 @@
-
-function hashmapToObject(hashMap) {
-    return hashMap.keySet().toArray().reduce((accumulator, key) => {
-        accumulator[key] = hashMap[key];
-        return accumulator;
-    }, {});
-}
-
-function storeComponentToFileSystemUrl(context) {
-    const URLUtils = require('dw/web/URLUtils');
-    const Site = require('dw/system/Site');
-    const URLAction = require('dw/web/URLAction');
-    const ContentMgr = require('dw/content/ContentMgr');
-
-    const componentSettingsJson = JSON.stringify(hashmapToObject(context.content));
-
-    const urlAction = new URLAction('PDUtils-Store', 'ReplaceMe');
-    let url = URLUtils.url(urlAction);
-    url.append('settings', componentSettingsJson);
-    url.append('componentId', context.component.ID);
-    url.append('siteId', Site.current.ID);
-    url.append('libId', ContentMgr.getSiteLibrary().ID);
-    url = url.toString().replace('-ReplaceMe-', '-');
-
-    const cache = require('dw/system/CacheMgr').getCache('ComponentSettings');
-    cache.put(context.component.ID, JSON.parse(componentSettingsJson));
-
-    return url;
-}
-
 /**
  * Renders a Product Description Component
  *
@@ -36,12 +6,8 @@ function storeComponentToFileSystemUrl(context) {
  */
 exports.render = function render(context) {
     try {
-        const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
-        require('*/api/ResponseCache').apply('DefaultCache');
-        let result = renderComponent(context);
-        if (PageRenderHelper.isInEditMode()) {
-            result = `<wainclude url="${storeComponentToFileSystemUrl(context)}"/>${result}`;
-        }
+        const result = renderComponent(context);
+
         return result;
     } catch (e) {
         const Logger = require('*/api/Logger');

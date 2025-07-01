@@ -41,11 +41,14 @@ function getListPrices(httpParams) {
  * @param {Object} options.hit - The search hit containing product information
  * @param {Object} options.tileSearch - The tile search model
  * @param {Object} options.httpParams - HTTP parameters for price calculation
- * @returns the view model
+ * @returns {Object} The view model containing the price information
  */
-exports.createModel = (options) => {
+exports.createModel = () => {
+    const model = request.custom.model;
+
     const StringUtils = require('dw/util/StringUtils');
-    const { tileSearch, httpParams } = options;
+    const tileSearch = model.search;
+    const httpParams = model.searchParameters;
 
     const listPrices = getListPrices(httpParams);
     const listPriceMax = listPrices.max;
@@ -66,6 +69,11 @@ exports.createModel = (options) => {
     };
 };
 
+/**
+ * Render the price template
+ * @param {Object} model - The view model containing the price information
+ * @returns {string} The HTML template for the price
+ */
 exports.template = function (model) {
     const listPrice = model.showStrike ? `<div class="strike">${model.listPriceMarker}${model.listPrice}</div>` : '';
     const salePrice = `<div class="price">${model.salePriceMarker}${model.salesPrice}</div>`;

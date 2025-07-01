@@ -2,7 +2,7 @@ const HashMap = require('dw/util/HashMap');
 const RegionModelRegistry = require('*/cartridge/experience/utilities/RegionModelRegistry.js');
 
 /**
- * Render logic for the storepage.
+ * Render logic for the checkout page.
  *
  * @param {dw.experience.PageScriptContext} context The page script context object.
  *

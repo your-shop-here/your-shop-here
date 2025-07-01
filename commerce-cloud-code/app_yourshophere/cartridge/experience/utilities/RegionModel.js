@@ -1,7 +1,7 @@
-var RegionRenderSettings = require('dw/experience/RegionRenderSettings');
-var ComponentRenderSettings = require('dw/experience/ComponentRenderSettings');
-var PageMgr = require('dw/experience/PageMgr');
-var HashMap = require('dw/util/HashMap');
+const RegionRenderSettings = require('dw/experience/RegionRenderSettings');
+const ComponentRenderSettings = require('dw/experience/ComponentRenderSettings');
+const PageMgr = require('dw/experience/PageMgr');
+const HashMap = require('dw/util/HashMap');
 
 /**
  * Set name/value attribute pair at given settings object, this can be a settings
@@ -13,7 +13,7 @@ var HashMap = require('dw/util/HashMap');
  */
 function setAttribute(renderSettings, name, value) {
     if (renderSettings !== null) {
-        var attr = renderSettings.getAttributes() || new HashMap();
+        const attr = renderSettings.getAttributes() || new HashMap();
         attr.put(name, value);
         renderSettings.setAttributes(attr);
     }
@@ -84,8 +84,8 @@ RegionModel.prototype.setAttribute = function attr(name, value) {
 RegionModel.prototype.setComponentTagName = function componentTagName(tagName, position) {
     if (typeof position === 'number') {
         // ignore request in case position is invalid
-        if (!this.region.visibleComponents ||
-            position >= this.region.visibleComponents.length) {
+        if (!this.region.visibleComponents
+            || position >= this.region.visibleComponents.length) {
             return this;
         }
 
@@ -119,14 +119,14 @@ RegionModel.prototype.setComponentClassName = function setComponentClassName(css
  */
 RegionModel.prototype.setComponentAttribute = function setComponentAttribute(name, value, componentSelector) {
     // default is all components
-    var renderSettings = this.defaultComponentRenderSettings;
-    var position = componentSelector && componentSelector.position;
-    var component;
+    let renderSettings = this.defaultComponentRenderSettings;
+    const position = componentSelector && componentSelector.position;
+    let component;
     // when position is set, only set for the component at that position
     if (typeof position === 'number') {
         // ignore request in case position is invalid
-        if (!this.region.visibleComponents ||
-            position >= this.region.visibleComponents.length) {
+        if (!this.region.visibleComponents
+            || position >= this.region.visibleComponents.length) {
             return this;
         }
         component = this.region.visibleComponents[position];

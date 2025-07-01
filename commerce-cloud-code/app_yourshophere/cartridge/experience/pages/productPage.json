@@ -22,7 +22,7 @@
     "region_definitions":[
       {
         "id":"main",
-        "name":"Main Category region",
+        "name":"Main Product region",
         "component_type_exclusions": [
         ]
       }

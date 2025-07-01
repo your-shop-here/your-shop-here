@@ -9,15 +9,16 @@
  */
 exports.createModel = function createModel(options) {
     const URLUtils = require('dw/web/URLUtils');
-    const { hit, search, config } = options;
-    const colorValues = search.getRepresentedVariationValues(config.swatchAttribute);
+    const model = options.model;
+    const { hit, search, config } = model;
+    const colorValues = search.getRepresentedVariationValues(config.imageDimension);
     // nothing to select
     if (colorValues.length < 2) {
         return { swatches: [] };
     }
     const swatches = colorValues.map((color) => {
         // @todo make swatch viewtype configurable including fallbacks
-        const image = color.getImage('swatch', 0);
+        const image = color.getImage(config.swatchViewType, 0);
         if (image) {
             const result = {
                 color: color.displayValue,
@@ -25,7 +26,7 @@ exports.createModel = function createModel(options) {
                 url: URLUtils.url('Product-Show', 'pid', hit.mainProductId, `dwvar_${hit.mainProductId}_${config.swatchAttribute}`, color.value),
                 alt: color.displayValue,
                 image: {
-                    url: image.url,
+                    url: `${image.url.toString()}?${config.swatchDISConfig}`,
                 },
             };
             return result;
@@ -37,6 +38,11 @@ exports.createModel = function createModel(options) {
     };
 };
 
+/**
+ * Render the swatches template
+ * @param {Object} model - The view model containing the swatches
+ * @returns {string} The HTML template for the swatches
+ */
 exports.template = function template(model) {
     return `<div class="swatches">${model.swatches.map((swatch) => `<a href="${swatch.url}"><img src="${swatch.image.url}" alt="${swatch.alt}" /></a>`).join('')}</div>`;
 };

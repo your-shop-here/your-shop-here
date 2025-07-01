@@ -34,7 +34,7 @@ function getCssAspectRatio(sw, sh) {
 }
 
 /**
- * Create view model for a product image
+ * Create view model for a product tile image
  *
  * @todo Add responsive images
  * @param {Object} options - The options object
@@ -47,14 +47,16 @@ function getCssAspectRatio(sw, sh) {
  * @param {string} [options.config.imageViewType=large] - Type of product image view
  * @returns {Object} The view model containing image URLs and product details
  */
-exports.createModel = function createImageModel(options) {
+exports.createModel = function createImageModel() {
     const URLUtils = require('dw/web/URLUtils');
+    const model = request.custom.model;
+
     const {
         hit,
         search,
         imageFilter,
         config,
-    } = options;
+    } = model;
 
     let url;
     if (imageFilter) {
