@@ -23,6 +23,14 @@
           "editor_definition": {
             "type": "search.searchdetails"
           }
+        },
+        {
+          "id": "productlimit",
+          "name": "Product Limit",
+          "description": "The number of products to show in the search strip (default 3)",
+          "type": "integer",
+          "required": false,
+          "default_value": 3
         }
       ]
     }
