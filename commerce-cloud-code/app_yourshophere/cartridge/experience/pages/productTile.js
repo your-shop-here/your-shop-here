@@ -88,13 +88,9 @@ function renderComponent(context) {
     request.custom.model = model;
     // render the page
     // data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'
-    let markup = require('*/api/partials').create('tile/tile').decorateWith(decorator).html({
+    const markup = require('*/api/partials').create('tile/tile').decorateWith(decorator).html({
         model,
     });
-    // remove the custom-deleteme tags if not in edit mode
-    if (!PageRenderHelper.isInEditMode()) {
-        markup = markup.replace(/<custom-deleteme.*?>/, '');
-        markup = markup.replace(/<\/custom-deleteme>/, '');
-    }
+
     return markup;
 }

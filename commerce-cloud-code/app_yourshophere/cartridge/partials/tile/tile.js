@@ -14,7 +14,7 @@ exports.createModel = function createModel(input) {
  */
 exports.template = (model) => `
 <article data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'>
-    ${model.regions.tileHeader.setTagName('header').setComponentTagName('custom-deleteme').render()}
-    ${model.regions.tileBody.setTagName('body').setComponentTagName('custom-deleteme').render()}
-    ${model.regions.tileFooter.setTagName('footer').setComponentTagName('custom-deleteme').render()}
+    ${model.regions.tileHeader.setTagName('header').setComponentTagName('custom-container').render()}
+    ${model.regions.tileBody.setTagName('body').setComponentTagName('custom-container').render()}
+    ${model.regions.tileFooter.setTagName('footer').setComponentTagName('custom-container').render()}
 </article>`;
