@@ -24,4 +24,4 @@ exports.createModel = (input) => {
  * @param {Object} model - The view model containing product details
  * @returns {string} The HTML template for the product tile name
  */
-exports.template = (model) => `${model.products.map((product) => `${product.wainclude}`).join('')}`;
+exports.template = (model) => model.products.map((product) => product.wainclude).join('');

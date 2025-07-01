@@ -17,8 +17,8 @@ exports.get = function get(apiHit, config) {
     const swatchAttribute = config.swatchAttribute;
     const instance = new ProductSearchHit(apiHit);
 
-    Object.defineProperty(instance, 'tileUrl', {
-        get: function getTileUrl() {
+    Object.defineProperty(instance, 'tileInclude', {
+        get: function getTileInclude() {
             const pageParams = {};
             const productGroup = this.object.product;
             const colors = this.object.getRepresentedVariationValues(swatchAttribute).iterator().asList().toArray(0, 10);
