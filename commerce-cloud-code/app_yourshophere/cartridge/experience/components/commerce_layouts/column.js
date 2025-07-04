@@ -22,10 +22,12 @@ function renderComponent(context, modelIn) {
     model.regions = PageRenderHelper.getRegionModelRegistry(component);
     model.style = legacyMode ? `${context.content.style} desktop-cols-${context.content.columns} mobile-cols-${context.content.mobileColumns || '1'}" ` : context.content.style;
     model.cssClass = legacyMode ? '' : `cmp_${component.ID}`;
+    model.desktopGap = !legacyMode && context.content.columnConfiguration.desktopGap ? `gap: ${context.content.columnConfiguration.desktopGap}%` : '';
+    model.mobileGap = !legacyMode && context.content.columnConfiguration.mobileGap ? `gap: ${context.content.columnConfiguration.mobileGap}%` : '';
     const regionNames = Array.from(Array(desktopColumns).keys()).map((index) => `column${index + 1}`);
 
-    return /* html */`<style>.${model.cssClass} { grid-template-columns: ${columnWidths.join('% ')}%; }
-        @media (max-width: 768px) {.${model.cssClass} { grid-template-columns: ${mobileColumnWidths.join('% ')}%; }}
+    return /* html */`<style>.${model.cssClass} { grid-template-columns: ${columnWidths.join('% ')}%; ${model.desktopGap}; }
+        @media (max-width: 768px) {.${model.cssClass} { grid-template-columns: ${mobileColumnWidths.join('% ')}%; ${model.mobileGap}; }}
     </style>
     <div class="grid ${model.style} ${model.cssClass}">
         ${regionNames.map((regionName, index) => {

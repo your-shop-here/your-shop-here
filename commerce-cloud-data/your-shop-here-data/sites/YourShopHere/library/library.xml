@@ -1736,6 +1736,14 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
+  "columnConfiguration" : {
+    "desktopColumns" : 2,
+    "mobileColumns" : 1,
+    "columnWidths" : [ 49, 49 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
+  },
   "columns" : 2,
   "style" : null,
   "mobileColumns" : 1
@@ -1831,7 +1839,9 @@
     "desktopColumns" : 3,
     "mobileColumns" : 1,
     "columnWidths" : [ 32, 32, 32 ],
-    "mobileColumnWidths" : [ 100 ]
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 10
   }
 }</data>
         <online-flag>true</online-flag>
@@ -1998,7 +2008,7 @@
   "alt" : "apparel on unofficial-outdoor.com",
   "textBackground" : null,
   "textColor" : "Page Background"
-}</data>
+  }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
     </content>
@@ -2318,7 +2328,9 @@
     "desktopColumns" : 3,
     "mobileColumns" : 1,
     "columnWidths" : [ 32, 32, 32 ],
-    "mobileColumnWidths" : [ 100 ]
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 10
   },
   "columns" : 3,
   "style" : null,

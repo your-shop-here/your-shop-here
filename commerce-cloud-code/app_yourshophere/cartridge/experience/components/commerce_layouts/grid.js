@@ -18,10 +18,12 @@ function renderComponent(context, modelIn) {
     model.regions = PageRenderHelper.getRegionModelRegistry(component);
     model.cssClass = `cmp_${component.ID}`;
 
-    const modelSelector = context.content.applyGridToNestedComponent ? '> .experience-region > .experience-component' : '> .experience-region';
+    model.selector = context.content.applyGridToNestedComponent ? '> .experience-region > .experience-component' : '> .experience-region';
+    model.desktopGap = context.content.columnConfiguration.desktopGap ? `gap: ${context.content.columnConfiguration.desktopGap}%` : '';
+    model.mobileGap = context.content.columnConfiguration.mobileGap ? `gap: ${context.content.columnConfiguration.mobileGap}%` : '';
 
-    return /* html */`<style>.${model.cssClass} ${modelSelector} { display: grid; gap: 1rem; grid-template-columns: ${columnWidths.join('% ')}%; }
-        @media (max-width: 768px) {.${model.cssClass} ${modelSelector} { display: grid; gap: 1rem; grid-template-columns: ${mobileColumnWidths.join('% ')}%; }}
+    return /* html */`<style>.${model.cssClass} ${model.selector} { display: grid; ${model.desktopGap}; grid-template-columns: ${columnWidths.join('% ')}%; }
+        @media (max-width: 768px) {.${model.cssClass} ${model.selector} { display: grid; gap: ${model.mobileGap}; grid-template-columns: ${mobileColumnWidths.join('% ')}%; }}
     </style>
     <div class="grid ${model.cssClass}">
         ${model.regions.main.render()}

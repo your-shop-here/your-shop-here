@@ -4,6 +4,9 @@
         desktopColumns: 2,
         mobileColumns: 1,
         columnWidths: [50, 50], // Default 50/50 split
+        mobileColumnWidths: [100], // Default 100% for mobile
+        desktopGap: 2, // Default 10px gap
+        mobileGap: 2, // Default 10px gap
     };
 
     /**
@@ -137,19 +140,27 @@
         const mobileSliders = document.querySelectorAll('.mobile-column-width-slider');
         const mobileValues = Array.from(mobileSliders).map((slider) => parseInt(slider.value));
 
-        // If the last column was manually adjusted or the slider is initialised, don't adjust last column to maintain 100% but use actual value
+        // Calculate available space considering gaps
+        const desktopGap = currentConfig.desktopGap || 0;
+        const mobileGap = currentConfig.mobileGap || 0;
+        const desktopGapSpace = desktopColumns > 1 ? (desktopColumns - 1) * desktopGap : 0;
+        const mobileGapSpace = mobileColumns > 1 ? (mobileColumns - 1) * mobileGap : 0;
+        const desktopAvailableSpace = 100 - desktopGapSpace;
+        const mobileAvailableSpace = 100 - mobileGapSpace;
+
+        // If the last column was manually adjusted or the slider is initialised, don't adjust last column to maintain available space but use actual value
         if (isLastColumnEvent || !e) {
             const lastSliderIndex = e ? parseInt(e.target.dataset.columnIndex) : desktopValues.length - 1;
-            const lastValue = e ? parseInt(e.target.value) : 100 - desktopValues.reduce((sum, val) => sum + val, 0);
+            const lastValue = e ? parseInt(e.target.value) : desktopAvailableSpace - desktopValues.reduce((sum, val) => sum + val, 0);
 
             if (eventType === 'desktop') {
                 // Calculate how much the last column changed
                 const previousTotal = desktopValues.reduce((sum, val, index) => (index === lastSliderIndex ? sum : sum + val), 0);
                 const newTotal = previousTotal + lastValue;
 
-                if (newTotal > 100) {
-                    // If total exceeds 100%, adjust other columns proportionally
-                    const excess = newTotal - 100;
+                if (newTotal > desktopAvailableSpace) {
+                    // If total exceeds available space, adjust other columns proportionally
+                    const excess = newTotal - desktopAvailableSpace;
                     const otherColumns = desktopValues.filter((_, index) => index !== lastSliderIndex);
                     const otherTotal = otherColumns.reduce((sum, val) => sum + val, 0);
 
@@ -170,8 +181,8 @@
                 const previousTotal = mobileValues.reduce((sum, val, index) => (index === lastSliderIndex ? sum : sum + val), 0);
                 const newTotal = previousTotal + lastValue;
 
-                if (newTotal > 100) {
-                    const excess = newTotal - 100;
+                if (newTotal > mobileAvailableSpace) {
+                    const excess = newTotal - mobileAvailableSpace;
                     const otherColumns = mobileValues.filter((_, index) => index !== lastSliderIndex);
                     const otherTotal = otherColumns.reduce((sum, val) => sum + val, 0);
 
@@ -197,8 +208,8 @@
             const mobileOtherTotal = mobileNonLastValues.reduce((sum, val) => sum + val, 0);
 
             // Calculate last column values (remaining percentage)
-            const desktopLastValue = Math.max(10, 100 - desktopOtherTotal);
-            const mobileLastValue = Math.max(10, 100 - mobileOtherTotal);
+            const desktopLastValue = Math.max(10, desktopAvailableSpace - desktopOtherTotal);
+            const mobileLastValue = Math.max(10, mobileAvailableSpace - mobileOtherTotal);
 
             // Update last column sliders and their displays
             const desktopLastSlider = document.querySelector('.desktop-column-width-slider[data-is-last-column="true"]');
@@ -228,6 +239,46 @@
                 mobileColumns: currentConfig.mobileColumns,
                 columnWidths: currentConfig.columnWidths,
                 mobileColumnWidths: currentConfig.mobileColumnWidths,
+                desktopGap: currentConfig.desktopGap,
+                mobileGap: currentConfig.mobileGap,
+            },
+        });
+    }
+
+    /**
+     * Handles desktop gap slider changes
+     * @param {Event} e - The change event
+     */
+    function handleDesktopGapChange(e) {
+        currentConfig.desktopGap = parseInt(e.target.value, 10);
+        emit({
+            type: 'sfcc:value',
+            payload: {
+                desktopColumns: currentConfig.desktopColumns,
+                mobileColumns: currentConfig.mobileColumns,
+                columnWidths: currentConfig.columnWidths,
+                mobileColumnWidths: currentConfig.mobileColumnWidths,
+                desktopGap: currentConfig.desktopGap,
+                mobileGap: currentConfig.mobileGap,
+            },
+        });
+    }
+
+    /**
+     * Handles mobile gap slider changes
+     * @param {Event} e - The change event
+     */
+    function handleMobileGapChange(e) {
+        currentConfig.mobileGap = parseInt(e.target.value, 10);
+        emit({
+            type: 'sfcc:value',
+            payload: {
+                desktopColumns: currentConfig.desktopColumns,
+                mobileColumns: currentConfig.mobileColumns,
+                columnWidths: currentConfig.columnWidths,
+                mobileColumnWidths: currentConfig.mobileColumnWidths,
+                desktopGap: currentConfig.desktopGap,
+                mobileGap: currentConfig.mobileGap,
             },
         });
     }
@@ -277,24 +328,32 @@
             }
         }
 
+        // Calculate available space considering gaps
+        const desktopGap = currentConfig.desktopGap || 0;
+        const mobileGap = currentConfig.mobileGap || 0;
+        const desktopGapSpace = desktopColumns > 1 ? (desktopColumns - 1) * desktopGap : 0;
+        const mobileGapSpace = mobileColumns > 1 ? (mobileColumns - 1) * mobileGap : 0;
+        const desktopAvailableSpace = 100 - desktopGapSpace;
+        const mobileAvailableSpace = 100 - mobileGapSpace;
+
         // Initialize desktop column widths if not set or if column count changed
         if (!currentConfig.columnWidths || currentConfig.columnWidths.length !== desktopColumns) {
-            const equalWidth = Math.floor(100 / desktopColumns);
+            const equalWidth = Math.floor(desktopAvailableSpace / desktopColumns);
             currentConfig.columnWidths = Array(desktopColumns).fill(equalWidth);
 
             // Adjust the last column to use remaining space
             const total = equalWidth * (desktopColumns - 1);
-            currentConfig.columnWidths[desktopColumns - 1] = 100 - total;
+            currentConfig.columnWidths[desktopColumns - 1] = desktopAvailableSpace - total;
         }
 
         // Initialize mobile column widths if not set or if column count changed
         if (!currentConfig.mobileColumnWidths || currentConfig.mobileColumnWidths.length !== mobileColumns) {
-            const equalWidth = Math.floor(100 / mobileColumns);
+            const equalWidth = Math.floor(mobileAvailableSpace / mobileColumns);
             currentConfig.mobileColumnWidths = Array(mobileColumns).fill(equalWidth);
 
             // Adjust the last column to use remaining space
             const total = equalWidth * (mobileColumns - 1);
-            currentConfig.mobileColumnWidths[mobileColumns - 1] = 100 - total;
+            currentConfig.mobileColumnWidths[mobileColumns - 1] = mobileAvailableSpace - total;
         }
 
         // Set desktop slider values
@@ -314,6 +373,50 @@
                 slider.nextElementSibling.textContent = currentConfig.mobileColumnWidths[index];
             }
         });
+
+        // Show/hide gap settings based on column count
+        const gapSettingsContainer = rootEditorElement.querySelector('#gap-settings-container');
+        const desktopGapContainer = rootEditorElement.querySelector('#desktop-gap-container');
+        const mobileGapContainer = rootEditorElement.querySelector('#mobile-gap-container');
+        
+        // Clear existing gap sliders
+        desktopGapContainer.innerHTML = '';
+        mobileGapContainer.innerHTML = '';
+        
+        // Show desktop gap slider if more than 1 column
+        if (desktopColumns > 1) {
+            const desktopGapSlider = createSlider('desktop-gap', 'Desktop Gap (%)', 0, 50, currentConfig.desktopGap || 2);
+            desktopGapContainer.appendChild(desktopGapSlider);
+        }
+        
+        // Show mobile gap slider if more than 1 column
+        if (mobileColumns > 1) {
+            const mobileGapSlider = createSlider('mobile-gap', 'Mobile Gap (%)', 0, 50, currentConfig.mobileGap || 2);
+            mobileGapContainer.appendChild(mobileGapSlider);
+        }
+        
+        // Show gap settings container if any gap sliders are visible
+        if (desktopColumns > 1 || mobileColumns > 1) {
+            gapSettingsContainer.style.display = 'block';
+        } else {
+            gapSettingsContainer.style.display = 'none';
+        }
+
+        // Add event listeners for gap sliders (they are recreated each time, so we need to add listeners)
+        const desktopGapSlider = rootEditorElement.querySelector('#desktop-gap');
+        const mobileGapSlider = rootEditorElement.querySelector('#mobile-gap');
+        
+        if (desktopGapSlider) {
+            // Remove existing listener to prevent duplicates
+            desktopGapSlider.removeEventListener('change', handleDesktopGapChange);
+            desktopGapSlider.addEventListener('change', handleDesktopGapChange);
+        }
+        
+        if (mobileGapSlider) {
+            // Remove existing listener to prevent duplicates
+            mobileGapSlider.removeEventListener('change', handleMobileGapChange);
+            mobileGapSlider.addEventListener('change', handleMobileGapChange);
+        }
 
         updateColumnWidths();
     }
@@ -336,6 +439,19 @@
                 
                 <div class="slds-size_1-of-2 slds-p-left_small">
                     <div id="mobile-columns-container"></div>
+                </div>
+                
+                <div class="slds-size_1-of-1 slds-p-top_medium" id="gap-settings-container" style="display: none;">
+                    <div class="slds-divider slds-divider_vertical"></div>
+                    <h4 class="slds-text-heading_small slds-p-top_small">Column Gap Settings</h4>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_1-of-2 slds-p-right_small">
+                            <div id="desktop-gap-container"></div>
+                        </div>
+                        <div class="slds-size_1-of-2 slds-p-left_small">
+                            <div id="mobile-gap-container"></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="slds-size_1-of-1 slds-p-top_medium">
@@ -373,6 +489,8 @@
                 mobileColumns: value.mobileColumns || 1,
                 columnWidths: value.columnWidths || [50, 50],
                 mobileColumnWidths: value.mobileColumnWidths || [100],
+                desktopGap: value.desktopGap || 2,
+                mobileGap: value.mobileGap || 2,
             };
         }
 
@@ -396,7 +514,14 @@
         // Emit initial value
         emit({
             type: 'sfcc:value',
-            payload: currentConfig,
+            payload: {
+                desktopColumns: currentConfig.desktopColumns,
+                mobileColumns: currentConfig.mobileColumns,
+                columnWidths: currentConfig.columnWidths,
+                mobileColumnWidths: currentConfig.mobileColumnWidths,
+                desktopGap: currentConfig.desktopGap,
+                mobileGap: currentConfig.mobileGap,
+            },
         });
     });
 
