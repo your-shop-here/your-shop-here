@@ -8,8 +8,24 @@
             "name": "Additional Styling",
             "attribute_definitions": [
                 {
+                    "id": "columnConfiguration",
+                    "name": "Column Configuration",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "layout.columnConfigurator"
+                    }
+                },
+                {
+                    "id": "style",
+                    "name": "Style",
+                    "description": "An additional style Class Name",
+                    "type": "string",
+                    "required": false
+                },
+                {
                     "id": "columns",
-                    "name": "Desktop Columns",
+                    "name": "Desktop Columns (deprecated)",
                     "description": "the number of columns (up to 4)",
                     "type": "enum",
                     "values": [
@@ -18,11 +34,11 @@
                       3,
                       4
                     ],
-                    "required": true
+                    "required": false
                 },
                 {
                     "id": "mobileColumns",
-                    "name": "Mobile Columns",
+                    "name": "Mobile Columns (deprecated)",
                     "description": "the number of columns (up to 4)",
                     "type": "enum",
                     "values": [
@@ -32,13 +48,6 @@
                       4
                     ],
                     "default_value": 1,
-                    "required": false
-                },
-                {
-                    "id": "style",
-                    "name": "Style",
-                    "description": "An additional style Class Name",
-                    "type": "string",
                     "required": false
                 }
             ]

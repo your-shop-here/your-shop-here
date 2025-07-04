@@ -1,0 +1,12 @@
+{
+    "name": "Column Configurator",
+    "description": "Custom editor for configuring column layouts with sliders for desktop and mobile columns, and dynamic percentage sliders for column widths",
+    "resources": {
+        "scripts": [
+            "/experience/editors/layout/columnConfigurator.js"
+        ],
+        "styles": [
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+} 
