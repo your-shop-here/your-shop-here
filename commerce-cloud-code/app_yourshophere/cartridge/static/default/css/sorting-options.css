@@ -1,0 +1,60 @@
+/* Sorting Options Component */
+.sorting-options {
+    margin-bottom: var(--ysh-spacing-md, 1rem);
+    padding: var(--ysh-spacing-sm, 0.5rem) var(--ysh-spacing-md, 1rem);
+    background-color: var(--ysh-bg-primary, #ffffff);
+    border: 1px solid var(--ysh-border-color, #dadce0);
+    border-radius: var(--ysh-border-radius-md, 8px);
+    margin-right: var(--grid-spacing-horizontal, 1rem);
+}
+
+.sorting-header {
+    margin-bottom: var(--ysh-spacing-sm, 0.5rem);
+}
+
+.sorting-header label {
+    font-size: var(--ysh-font-size-sm, 0.875rem);
+    font-weight: 500;
+    color: var(--ysh-text-secondary, #5f6368);
+    margin-bottom: var(--ysh-spacing-xs, 0.25rem);
+}
+
+.sorting-options select {
+    width: 100%;
+    padding: var(--ysh-spacing-sm, 0.5rem);
+    border: 1px solid var(--ysh-border-color, #dadce0);
+    border-radius: var(--ysh-border-radius-sm, 4px);
+    background-color: var(--ysh-bg-primary, #ffffff);
+    color: var(--ysh-text-primary, #202124);
+    font-size: var(--ysh-font-size-sm, 0.875rem);
+    cursor: pointer;
+    transition: border-color var(--ysh-transition-normal, 250ms) ease;
+    margin-bottom: 0;
+}
+
+.sorting-options select:focus {
+    outline: none;
+    border-color: var(--ysh-primary, #1a73e8);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--ysh-primary, #1a73e8) 25%, transparent);
+}
+
+.sorting-options select:hover {
+    border-color: var(--ysh-border-color-hover, #bdc1c6);
+}
+
+/* Mobile adjustments */
+@media (max-width: 1024px) {
+    .sorting-options {
+        margin-right: 0;
+        margin-bottom: var(--ysh-spacing-sm, 0.5rem);
+    }
+}
+
+/* Integration with existing PLP layout */
+.page-plp .sorting-options {
+    order: -1; /* Place sorting above product grid */
+}
+
+.onefourth-wrapper .div-right .sorting-options {
+    margin-bottom: var(--ysh-spacing-lg, 1.5rem);
+} 

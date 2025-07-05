@@ -59,6 +59,16 @@ function ProductSearchModel(httpParams, config) {
         instance.addRefinementValues(refinementAttribute, refinementValue);
     });
 
+    // Handle sorting rule
+    const sortParam = httpParams.get('sort');
+    if (sortParam) {
+        const CatalogMgr = require('dw/catalog/CatalogMgr');
+        const sortingRule = CatalogMgr.getSortingRule(sortParam);
+        if (sortingRule) {
+            instance.setSortingRule(sortingRule);
+        }
+    }
+
     Object.defineProperty(this, 'foundProducts', {
         get: function initSearchHits() {
             if (!this._viewResults) {

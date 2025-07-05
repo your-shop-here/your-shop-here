@@ -60,6 +60,14 @@ server.get('Refinements', cache.applyDefaultCache, (req, res, next) => {
 });
 
 /**
+ * @name controller/Search-SortingOptions
+ */
+server.get('SortingOptions', cache.applyDefaultCache, (req, res, next) => {
+    res.renderPartial('plp/sortingOptions');
+    return next();
+});
+
+/**
  * @name controller/Search-Suggestions
  */
 server.get('Suggestions', cache.applyDefaultCache, (req, res, next) => {

@@ -1,0 +1,15 @@
+{
+    "name": "Search Sorting Options",
+    "description": "The sorting options for a search result.",
+    "group": "PLP",
+    "attribute_definition_groups": [
+        {
+            "id": "sortingSettings",
+            "name": "Sorting Settings",
+            "description": "Sorting Options Settings",
+            "attribute_definitions": [
+            ]
+        }
+    ],
+    "region_definitions": []
+} 
