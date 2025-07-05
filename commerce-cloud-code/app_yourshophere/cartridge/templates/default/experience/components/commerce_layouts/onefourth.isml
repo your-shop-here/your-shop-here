@@ -1,4 +1,0 @@
-<div class="onefourth-wrapper ${(pdict.addStyleClassName != '' && pdict.addStyleClassName != null)? pdict.addStyleClassName: ''}" >
-    <isprint value="${pdict.regions.column1.setClassName('div-left').render()}" encoding="off"/>
-    <isprint value="${pdict.regions.column2.setClassName('div-right').render()}" encoding="off"/>
-</div>

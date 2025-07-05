@@ -1,5 +1,0 @@
-<div class="grid ${(pdict.addStyleClassName != '' && pdict.addStyleClassName != null)? pdict.addStyleClassName: ''}" >
-    <isprint value="${pdict.regions.column1.render()}" encoding="off"/>
-    <isprint value="${pdict.regions.column2.render()}" encoding="off"/>
-    <isprint value="${pdict.regions.column3.render()}" encoding="off"/>
-</div>

@@ -144,15 +144,6 @@ input.search-field {
     gap: 1rem; /* Adjust the gap between columns */
 }
 
-.grid.grid67_33 { grid-template-columns: 67% 33%; }
-.grid.grid75_25 { grid-template-columns: 75% 25%; }
-.grid.grid25_75 { grid-template-columns: 25% 75%; }
-.grid.grid33_33_33 div.experience-component { 
-    display: grid;
-    gap: 1rem; /* Adjust the gap between columns */
-    grid-template-columns: 33% 33% 33%;
-}
-
 /** PLP **/
 
 /* Base refinement styles */
@@ -339,7 +330,7 @@ input.search-field {
     grid-template-columns: 67% 33%;
 }
 
-.product-grid article {
+article.product-tile {
     display: flex;
     flex-direction: column;
     padding: 0 10px;
@@ -347,7 +338,7 @@ input.search-field {
     margin: 0;
 }
 
-.product-grid article header {
+article.product-tile header {
     text-align: center;
     font-size: 1.1em;
     margin: 0;
@@ -359,7 +350,7 @@ input.search-field {
 }
 
 
-.product-grid article header a {
+article.product-tile header a {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -377,7 +368,7 @@ input.search-field {
     height: 100%;
 }
 
-.product-grid article img {
+article.product-tile img {
     width: 100%;
     height: auto;
 }
@@ -391,11 +382,11 @@ input.search-field {
     margin-bottom:  -30%;
 }
 
-.product-grid article .price, .product-grid article .strike {
+article.product-tile .price, article.product-tile .strike {
     text-align: center;
 }
 
-.product-grid article .swatches {
+article.product-tile .swatches {
     display: flex;
     gap: 5px;
     margin: 0;
@@ -403,24 +394,24 @@ input.search-field {
     justify-content: center;
 }
 
-.product-grid article .swatches a {  /* Target swatch links */
+article.product-tile .swatches a {  /* Target swatch links */
     width: 20px;                 /* Adjust swatch size as needed */
     height: 20px;
 }
 
-.product-grid article .swatches img { /* Target swatch images */
+article.product-tile .swatches img { /* Target swatch images */
     width: 100%;                 /* Ensure swatch images fill the link */
     height: 100%;
     display: block;               /* Prevent extra space below image */
 }
 
-.product-grid article footer {
+article.product-tile footer {
     margin: 0;
     padding: 0;
     margin-top: auto; /* Push the button to the bottom */
 }
 
-.product-grid article button {
+article.product-tile button {
     padding: 8px 16px;
     /* Adjust padding as needed */
     align-self: center;
@@ -568,10 +559,6 @@ input.search-field {
 
 /* Mobile styles */
 @media (max-width: 1024px) {
-    .page-plp .onefourth-wrapper {
-        display: block;
-    }
-
     .product-grid {
         gap: 10px;
     }
