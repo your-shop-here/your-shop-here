@@ -22,33 +22,6 @@
                     "description": "An additional style Class Name",
                     "type": "string",
                     "required": false
-                },
-                {
-                    "id": "columns",
-                    "name": "Desktop Columns (deprecated)",
-                    "description": "the number of columns (up to 4)",
-                    "type": "enum",
-                    "values": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ],
-                    "required": false
-                },
-                {
-                    "id": "mobileColumns",
-                    "name": "Mobile Columns (deprecated)",
-                    "description": "the number of columns (up to 4)",
-                    "type": "enum",
-                    "values": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ],
-                    "default_value": 1,
-                    "required": false
                 }
             ]
         }

@@ -11,19 +11,16 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 function renderComponent(context, modelIn) {
     const model = modelIn || new HashMap();
     const component = context.component;
-    const legacyMode = context.content.columnConfiguration === undefined;
 
-    // TODO: Remove legacyMode and use columnConfiguration instead
-    const desktopColumns = legacyMode ? context.content.columns : context.content.columnConfiguration.desktopColumns;
-    const mobileColumns = legacyMode ? context.content.mobileColumns || 1 : context.content.columnConfiguration.mobileColumns;
-    const columnWidths = legacyMode ? Array.from(Array(desktopColumns).keys()).map(() => (100 / desktopColumns)) : context.content.columnConfiguration.columnWidths;
-    const mobileColumnWidths = legacyMode ? Array.from(Array(mobileColumns).keys()).map(() => (100 / mobileColumns)) : context.content.columnConfiguration.mobileColumnWidths;
+    const desktopColumns = context.content.columnConfiguration.desktopColumns;
+    const columnWidths = context.content.columnConfiguration.columnWidths;
+    const mobileColumnWidths = context.content.columnConfiguration.mobileColumnWidths;
 
     model.regions = PageRenderHelper.getRegionModelRegistry(component);
-    model.style = legacyMode ? `${context.content.style} desktop-cols-${context.content.columns} mobile-cols-${context.content.mobileColumns || '1'}" ` : context.content.style;
-    model.cssClass = legacyMode ? '' : `cmp_${component.ID}`;
-    model.desktopGap = !legacyMode && context.content.columnConfiguration.desktopGap ? `gap: ${context.content.columnConfiguration.desktopGap}%` : '';
-    model.mobileGap = !legacyMode && context.content.columnConfiguration.mobileGap ? `gap: ${context.content.columnConfiguration.mobileGap}%` : '';
+    model.style = context.content.style;
+    model.cssClass = `cmp_${component.ID}`;
+    model.desktopGap = context.content.columnConfiguration.desktopGap ? `gap: ${context.content.columnConfiguration.desktopGap}%` : '';
+    model.mobileGap = context.content.columnConfiguration.mobileGap ? `gap: ${context.content.columnConfiguration.mobileGap}%` : '';
     const regionNames = Array.from(Array(desktopColumns).keys()).map((index) => `column${index + 1}`);
 
     return /* html */`<style>.${model.cssClass} { grid-template-columns: ${columnWidths.join('% ')}%; ${model.desktopGap}; }

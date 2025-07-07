@@ -383,39 +383,37 @@
         desktopGapContainer.innerHTML = '';
         mobileGapContainer.innerHTML = '';
         
-        // Show desktop gap slider if more than 1 column
-        if (desktopColumns > 1) {
-            const desktopGapSlider = createSlider('desktop-gap', 'Desktop Gap (%)', 0, 50, currentConfig.desktopGap || 2);
-            desktopGapContainer.appendChild(desktopGapSlider);
+        // Always create desktop gap slider, but disable if only 1 column
+        const desktopGapSlider = createSlider('desktop-gap', 'Desktop Gap (%)', 0, 50, currentConfig.desktopGap || 2);
+        desktopGapContainer.appendChild(desktopGapSlider);
+        if (desktopColumns <= 1) {
+            desktopGapSlider.querySelector('input').disabled = true;
         }
         
-        // Show mobile gap slider if more than 1 column
-        if (mobileColumns > 1) {
-            const mobileGapSlider = createSlider('mobile-gap', 'Mobile Gap (%)', 0, 50, currentConfig.mobileGap || 2);
-            mobileGapContainer.appendChild(mobileGapSlider);
+        // Always create mobile gap slider, but disable if only 1 column
+        const mobileGapSlider = createSlider('mobile-gap', 'Mobile Gap (%)', 0, 50, currentConfig.mobileGap || 2);
+        mobileGapContainer.appendChild(mobileGapSlider);
+        if (mobileColumns <= 1) {
+            mobileGapSlider.querySelector('input').disabled = true;
         }
         
-        // Show gap settings container if any gap sliders are visible
-        if (desktopColumns > 1 || mobileColumns > 1) {
-            gapSettingsContainer.style.display = 'block';
-        } else {
-            gapSettingsContainer.style.display = 'none';
-        }
+        // Always show gap settings container
+        gapSettingsContainer.style.display = 'block';
 
         // Add event listeners for gap sliders (they are recreated each time, so we need to add listeners)
-        const desktopGapSlider = rootEditorElement.querySelector('#desktop-gap');
-        const mobileGapSlider = rootEditorElement.querySelector('#mobile-gap');
+        const desktopGapSliderElement = rootEditorElement.querySelector('#desktop-gap');
+        const mobileGapSliderElement = rootEditorElement.querySelector('#mobile-gap');
         
-        if (desktopGapSlider) {
+        if (desktopGapSliderElement) {
             // Remove existing listener to prevent duplicates
-            desktopGapSlider.removeEventListener('change', handleDesktopGapChange);
-            desktopGapSlider.addEventListener('change', handleDesktopGapChange);
+            desktopGapSliderElement.removeEventListener('change', handleDesktopGapChange);
+            desktopGapSliderElement.addEventListener('change', handleDesktopGapChange);
         }
         
-        if (mobileGapSlider) {
+        if (mobileGapSliderElement) {
             // Remove existing listener to prevent duplicates
-            mobileGapSlider.removeEventListener('change', handleMobileGapChange);
-            mobileGapSlider.addEventListener('change', handleMobileGapChange);
+            mobileGapSliderElement.removeEventListener('change', handleMobileGapChange);
+            mobileGapSliderElement.addEventListener('change', handleMobileGapChange);
         }
 
         updateColumnWidths();

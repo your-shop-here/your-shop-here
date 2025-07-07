@@ -148,7 +148,14 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "columns" : 2,
+  "columnConfiguration" : {
+    "desktopColumns" : 2,
+    "mobileColumns" : 1,
+    "columnWidths" : [ 49, 49 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
+  },
   "style" : null
 }</data>
         <online-flag>true</online-flag>
@@ -372,10 +379,15 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "columnConfiguration" : null,
-  "columns" : 2,
-  "style" : null,
-  "mobileColumns" : null
+  "columnConfiguration" : {
+    "desktopColumns" : 2,
+    "mobileColumns" : 1,
+    "columnWidths" : [ 49, 49 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
+  },
+  "style" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -434,10 +446,15 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "columnConfiguration" : null,
-  "columns" : 2,
-  "style" : null,
-  "mobileColumns" : null
+  "columnConfiguration" : {
+    "desktopColumns" : 2,
+    "mobileColumns" : 1,
+    "columnWidths" : [ 49, 49 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
+  },
+  "style" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1261,7 +1278,14 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "columns" : 2,
+  "columnConfiguration" : {
+    "desktopColumns" : 2,
+    "mobileColumns" : 1,
+    "columnWidths" : [ 40, 58 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
+  },
   "style" : null
 }</data>
         <online-flag>true</online-flag>
@@ -2536,12 +2560,12 @@
   "columnConfiguration" : {
     "desktopColumns" : 2,
     "mobileColumns" : 1,
-    "columnWidths" : [ 67, 33 ],
-    "mobileColumnWidths" : [ 100 ]
+    "columnWidths" : [ 66, 32 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
   },
-  "columns" : 2,
-  "style" : "grid67_33",
-  "mobileColumns" : null
+  "style" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
