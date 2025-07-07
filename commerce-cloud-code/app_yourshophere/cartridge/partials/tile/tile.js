@@ -13,7 +13,7 @@ exports.createModel = function createModel(input) {
  * @returns {string} The HTML template for the tile
  */
 exports.template = (model) => `
-<article data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'>
+<article class="product-tile" data-include-url="${request.httpQueryString}" data-analytics='${model.analytics}' data-analytics-contribution='${model.analyticsContribution}'>
     ${model.regions.tileHeader.setTagName('header').setComponentTagName('custom-container').render()}
     ${model.regions.tileBody.setTagName('body').setComponentTagName('custom-container').render()}
     ${model.regions.tileFooter.setTagName('footer').setComponentTagName('custom-container').render()}

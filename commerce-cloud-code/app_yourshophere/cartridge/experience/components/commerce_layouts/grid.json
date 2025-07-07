@@ -1,0 +1,37 @@
+{
+    "name": "Grid Layout",
+    "description": "Grid layout by pico.css, supports up to 4 columns",
+    "group": "commerce_layouts",
+    "attribute_definition_groups": [
+        {
+            "id": "additionalStyling",
+            "name": "Additional Styling",
+            "attribute_definitions": [
+
+                {
+                    "id": "columnConfiguration",
+                    "name": "Column Configuration",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "layout.columnConfigurator"
+                    }
+                },
+                {
+                    "id": "applyGridToNestedComponent",
+                    "name": "Apply Grid to Nested Component",
+                    "description": "Apply the grid to a nested component (e.g. a set of tiles returned by a product search or Einstein)",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"main",
+            "name":"Main Region",
+            "component_type_exclusions": []
+        }
+    ]
+}
