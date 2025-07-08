@@ -58,6 +58,8 @@ function renderComponent(context) {
         }
     }
 
+    request.custom.model = model;
+
     return require('*/api/partials').create('content/mainregion').decorateWith('decorator/main').html({
         model, context, metaDefinition,
     });
