@@ -59,4 +59,19 @@ server.post('DeleteAddress', server.middleware.https, userLoggedIn.validateLogge
     return next();
 });
 
+server.get('Profile', server.middleware.https, userLoggedIn.validateLoggedIn, (req, res, next) => {
+    res.page('account-profile');
+    next();
+});
+
+server.get('AddressBook', server.middleware.https, userLoggedIn.validateLoggedIn, (req, res, next) => {
+    res.page('account-addressbook');
+    next();
+});
+
+server.get('Preferences', server.middleware.https, userLoggedIn.validateLoggedIn, (req, res, next) => {
+    res.page('account-preferences');
+    next();
+});
+
 module.exports = server.exports();

@@ -1,0 +1,55 @@
+{
+    "name": "Order History",
+    "description": "This component shows a list of customer orders in a table format.",
+    "group": "Order",
+    "attribute_definition_groups": [
+        {
+            "id": "orderHistory",
+            "name": "Settings",
+            "description": "Order History Settings",
+            "attribute_definitions": [
+                {
+                    "id": "showOrderNumber",
+                    "name": "Show Order Number",
+                    "description": "Toggle to show/hide the order number column",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
+                },
+                {
+                    "id": "showCreationDate",
+                    "name": "Show Creation Date",
+                    "description": "Toggle to show/hide the creation date column",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
+                },
+                {
+                    "id": "showStatus",
+                    "name": "Show Status",
+                    "description": "Toggle to show/hide the status column",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
+                },
+                {
+                    "id": "showActions",
+                    "name": "Show Actions",
+                    "description": "Toggle to show/hide the actions column",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": true
+                },
+                {
+                    "id": "maxOrders",
+                    "name": "Maximum Orders to Display",
+                    "description": "Maximum number of orders to display (max 20)",
+                    "type": "integer",
+                    "required": false,
+                    "default_value": 0
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 
