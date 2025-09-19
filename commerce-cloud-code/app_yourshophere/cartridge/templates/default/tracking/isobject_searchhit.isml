@@ -1,0 +1,1 @@
+<isobject object="${pdict.object}" view="searchhit"><isprint value="${pdict.content}" encoding="off"/></isobject>
