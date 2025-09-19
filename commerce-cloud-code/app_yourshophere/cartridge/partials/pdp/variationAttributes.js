@@ -48,13 +48,13 @@ exports.createModel = function createModel(product) {
                     selected: ((selectedValue && selectedValue.value === value.value) ? 'selected' : ''),
                     orderable: variationModel.hasOrderableVariants(attribute, value),
                 })),
-                url: URLUtils.url('Product-Show', 'pid', variationModel.master.ID, 'hx', 'main'),
+                url: URLUtils.url('Product-Show', 'pid', variationModel.master.ID, 'hx', params.hx || 'main'),
                 selectName: `dwvar_${variationModel.master.ID}_${attribute.ID}`,
                 message: Resource.msgf('pdp.variation.select', 'translations', null, attribute.displayName),
             };
         })),
         defaultOption: Resource.msg('pdp.variation.select.option', 'translations', null),
-        hxTarget: params.hx || 'main',
+        hxTarget: `.${params.hx}` || 'main',
     };
 
     return model;

@@ -3,11 +3,11 @@ exports.createModel = function createDecoratorModel(model) {
 };
 
 exports.template = (model) => `<title>${model.pageMetaData.title}</title>
-<dialog open>
+<dialog class="${model.httpParameter.hx}" open>
     <a href="#close"
         aria-label="Close"
         class="close"
-        data-target="modal-example"
+        data-target="${model.httpParameter.hx}"
         onClick="this.closest('dialog').outerHTML=''">
         Close
     </a>

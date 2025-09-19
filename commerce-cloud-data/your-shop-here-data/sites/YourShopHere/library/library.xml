@@ -1047,6 +1047,20 @@
         <page-attributes/>
     </content>
 
+    <content content-id="5d80e60552311d419760b91248">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h2&gt;&lt;a href=\"$url('Account-Profile')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Account-Profile')$\"&gt;My Profile&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;&lt;a href=\"$url('Account-Preferences')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Account-Preferences')$\"&gt;Payment&lt;/a&gt;&lt;a href=\"Account-Preferences\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Account-Preferences\"&gt; and Shipping&lt;/a&gt;&lt;/h2&gt;",
+  "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="5ed68db607f706611727a7a29d">
         <type>component.base.richText</type>
         <config>{
@@ -1056,6 +1070,20 @@
   "inParagraph" : "No",
   "richText" : "&lt;h1&gt;Thank you for your purchase!&lt;/h1&gt;",
   "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="5ee8838fe53520dd67b510294c">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;h1&gt;Your recent orders&lt;/h1&gt;",
+  "align" : "left"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1161,6 +1189,22 @@
   "inParagraph" : "Yes",
   "richText" : "&lt;h4&gt;Select Payment Method&lt;/h4&gt;",
   "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="741ad6ef2637fbd68293cce48d">
+        <type>component.order.orderhistory</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "showCreationDate" : true,
+  "showActions" : true,
+  "showOrderNumber" : true,
+  "showStatus" : true,
+  "maxOrders" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1744,6 +1788,20 @@
         <page-attributes/>
     </content>
 
+    <content content-id="a6bfa37695346419cdd261de7d">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "Yes",
+  "richText" : "&lt;h2&gt;&lt;a href=\"$url('Account-AddressBook')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Account-AddressBook')$\"&gt;My Addresses&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;&lt;a href=\"$url('Order-History')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Order-History')$\" style=\"background-color: rgb(255, 255, 255);\"&gt;My Orders&lt;/a&gt;&lt;span style=\"background-color: rgb(255, 255, 255);\"&gt;﻿&lt;/span&gt;&lt;/h2&gt;&lt;h2&gt;&lt;a href=\"$url('Wishlist-Show')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Wishlist-Show')$\"&gt;My Wishlist&lt;/a&gt;&lt;/h2&gt;",
+  "align" : "center"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="a7806336c29b9852425d66352f">
         <type>component.plp.refinements</type>
         <config>{
@@ -1768,9 +1826,7 @@
     "desktopGap" : 2,
     "mobileGap" : 2
   },
-  "columns" : 2,
-  "style" : null,
-  "mobileColumns" : 1
+  "style" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1792,6 +1848,34 @@
         <data xml:lang="x-default">{ }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
+    </content>
+
+    <content content-id="ac663fc3b80d53a05e97c1bab7">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columnConfiguration" : {
+    "desktopColumns" : 2,
+    "mobileColumns" : 1,
+    "columnWidths" : [ 49, 49 ],
+    "mobileColumnWidths" : [ 100 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2
+  },
+  "style" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="a6bfa37695346419cdd261de7d" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="5d80e60552311d419760b91248" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
     </content>
 
     <content content-id="ac79a7034bce7c2265440d9260">
@@ -1841,15 +1925,60 @@
             <classification-link folder-id="my-account-pages"/>
         </folder-links>
         <content-links>
-            <content-link content-id="0cc08587264515afd2e29b6bb8" type="page.contentPage.main">
-                <position>1.0</position>
-            </content-link>
             <content-link content-id="8a7c19b3bb75e679541fa6eac0" type="page.contentPage.main">
                 <position>0.0</position>
+            </content-link>
+            <content-link content-id="ac663fc3b80d53a05e97c1bab7" type="page.contentPage.main">
+                <position>3.0</position>
+            </content-link>
+            <content-link content-id="0cc08587264515afd2e29b6bb8" type="page.contentPage.main">
+                <position>1.0</position>
             </content-link>
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="account-addressbook">
+        <display-name xml:lang="x-default">Address Book</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <sitemap-included-flag>false</sitemap-included-flag>
+    </content>
+
+    <content content-id="account-preferences">
+        <display-name xml:lang="x-default">Preferences</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <sitemap-included-flag>false</sitemap-included-flag>
+    </content>
+
+    <content content-id="account-profile">
+        <display-name xml:lang="x-default">Profile</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <sitemap-included-flag>false</sitemap-included-flag>
     </content>
 
     <content content-id="b0a015013974f85f3cdaeb9841">
@@ -2265,7 +2394,7 @@
     }
   },
   "link" : null,
-  "width" : null
+  "width" : "100%"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -2551,6 +2680,23 @@
         <page-attributes/>
     </content>
 
+    <content content-id="e3f7b25f0ba25e5c4a4e434791">
+        <type>component.order.orderitems</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "linkProducts" : true,
+  "showTableHeader" : true,
+  "showOrderNumber" : true,
+  "showSubtotal" : true,
+  "imageViewType" : null,
+  "imageDISConfig" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
     <content content-id="e59b140f72ce5ba90eb95e5d62">
         <type>component.commerce_layouts.column</type>
         <config>{
@@ -2763,19 +2909,19 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="7988e6593a84de8ba781125aeb" type="component.commerce_layouts.column.column2">
-                <position>2.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
-                <position>4.0</position>
+                <position>3.0</position>
             </content-link>
             <content-link content-id="69a12813f070e0cdc4d97b6e60" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="43590b461cc6dff6e2e0558516" type="component.commerce_layouts.column.column2">
-                <position>3.0</position>
+                <position>2.0</position>
             </content-link>
             <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
-                <position>1.0</position>
+                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
@@ -3004,6 +3150,20 @@
         <data xml:lang="x-default">{
   "inParagraph" : "Yes",
   "richText" : "&lt;h1&gt;Frequently Asked Questions&lt;/h1&gt;&lt;h2&gt;Shipping Information&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Important Notice:&lt;/strong&gt; This is a demo store and no actual shipping will take place. All orders placed here are for demonstration purposes only.&lt;/p&gt;&lt;h3&gt;Shipping Methods&lt;/h3&gt;&lt;p&gt;In a real store, we would offer the following shipping options:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Standard Shipping (3-5 business days)&lt;/li&gt;&lt;li&gt;Express Shipping (1-2 business days)&lt;/li&gt;&lt;li&gt;Next Day Delivery (for eligible areas)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Shipping Costs&lt;/h3&gt;&lt;p&gt;Shipping costs would be calculated based on:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Order weight and dimensions&lt;/li&gt;&lt;li&gt;Delivery destination&lt;/li&gt;&lt;li&gt;Selected shipping method&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;International Shipping&lt;/h3&gt;&lt;p&gt;For international orders, we would:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Ship to most countries worldwide&lt;/li&gt;&lt;li&gt;Handle customs documentation&lt;/li&gt;&lt;li&gt;Provide tracking information&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;em&gt;Remember: This is a demo store and no actual shipping will occur. All orders are simulated for demonstration purposes only.&lt;/em&gt;&lt;/p&gt;",
+  "align" : "left"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="fedae744db520c8ae1e9ab97ac">
+        <type>component.base.richText</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "inParagraph" : "No",
+  "richText" : "&lt;h1&gt;Order Details&lt;/h1&gt;",
   "align" : "left"
 }</data>
         <online-flag>true</online-flag>
@@ -3344,6 +3504,50 @@
         </content-links>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="orderdetails">
+        <display-name xml:lang="x-default">Order Details</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="e3f7b25f0ba25e5c4a4e434791" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="fedae744db520c8ae1e9ab97ac" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
+    </content>
+
+    <content content-id="orderhistory">
+        <display-name xml:lang="x-default">Order History</display-name>
+        <type>page.contentPage</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <visibility-mode xml:lang="x-default">visible</visibility-mode>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="741ad6ef2637fbd68293cce48d" type="page.contentPage.main">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="5ee8838fe53520dd67b510294c" type="page.contentPage.main">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+        <sitemap-included-flag>false</sitemap-included-flag>
     </content>
 
     <content content-id="product-tile">
