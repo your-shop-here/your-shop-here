@@ -54,7 +54,7 @@ exports.createModel = function createModel(product) {
             };
         })),
         defaultOption: Resource.msg('pdp.variation.select.option', 'translations', null),
-        hxTarget: `.${params.hx}` || 'main',
+        hxTarget: params.hx ? `.${params.hx}` : 'main',
     };
 
     return model;
