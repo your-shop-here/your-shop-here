@@ -1054,7 +1054,7 @@
 }</config>
         <data xml:lang="x-default">{
   "inParagraph" : "Yes",
-  "richText" : "&lt;h2&gt;⚙️ &lt;a href=\"Account-Profile\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Account-Profile\"&gt;My Profile&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;&#55356;&#57217; &lt;a href=\"Account-Preferences\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Account-Preferences\"&gt;Payment and Shipping&lt;/a&gt;&lt;/h2&gt;",
+  "richText" : "&lt;h2&gt;&lt;a href=\"$url('Account-Profile')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Account-Profile')$\"&gt;My Profile&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;&lt;a href=\"$url('Account-Preferences')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Account-Preferences')$\"&gt;Payment&lt;/a&gt;&lt;a href=\"Account-Preferences\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Account-Preferences\"&gt; and Shipping&lt;/a&gt;&lt;/h2&gt;",
   "align" : "center"
 }</data>
         <online-flag>true</online-flag>
@@ -1795,7 +1795,7 @@
 }</config>
         <data xml:lang="x-default">{
   "inParagraph" : "Yes",
-  "richText" : "&lt;h2&gt;&#55357;&#56558; &lt;a href=\"Account-AddressBook\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Account-AddressBook\"&gt;My Addresses&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;&#55357;&#57037;️ &lt;a href=\"Order-History\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Order-History\" style=\"background-color: rgb(255, 255, 255);\"&gt;My Orders&lt;/a&gt;&lt;span style=\"background-color: rgb(255, 255, 255);\"&gt;﻿&lt;/span&gt;&lt;/h2&gt;&lt;h2&gt;&#55357;&#56541; &lt;a href=\"Wishlist-Show\" target=\"_self\" data-link-type=\"external\" data-link-label=\"Wishlist-Show\"&gt;My Wishlist&lt;/a&gt;&lt;/h2&gt;",
+  "richText" : "&lt;h2&gt;&lt;a href=\"$url('Account-AddressBook')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Account-AddressBook')$\"&gt;My Addresses&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;&lt;a href=\"$url('Order-History')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Order-History')$\" style=\"background-color: rgb(255, 255, 255);\"&gt;My Orders&lt;/a&gt;&lt;span style=\"background-color: rgb(255, 255, 255);\"&gt;﻿&lt;/span&gt;&lt;/h2&gt;&lt;h2&gt;&lt;a href=\"$url('Wishlist-Show')$\" target=\"_self\" data-link-type=\"external\" data-link-label=\"$url('Wishlist-Show')$\"&gt;My Wishlist&lt;/a&gt;&lt;/h2&gt;",
   "align" : "center"
 }</data>
         <online-flag>true</online-flag>
@@ -2909,19 +2909,19 @@
         <page-attributes/>
         <content-links>
             <content-link content-id="7988e6593a84de8ba781125aeb" type="component.commerce_layouts.column.column2">
-                <position>2.0</position>
+                <position>1.0</position>
             </content-link>
             <content-link content-id="9f1866b1d76218d246d0248f8c" type="component.commerce_layouts.column.column2">
-                <position>4.0</position>
+                <position>3.0</position>
             </content-link>
             <content-link content-id="69a12813f070e0cdc4d97b6e60" type="component.commerce_layouts.column.column1">
                 <position>0.0</position>
             </content-link>
             <content-link content-id="43590b461cc6dff6e2e0558516" type="component.commerce_layouts.column.column2">
-                <position>3.0</position>
+                <position>2.0</position>
             </content-link>
             <content-link content-id="0fff662b8e6366dddec48db08b" type="component.commerce_layouts.column.column2">
-                <position>1.0</position>
+                <position>0.0</position>
             </content-link>
         </content-links>
     </content>
