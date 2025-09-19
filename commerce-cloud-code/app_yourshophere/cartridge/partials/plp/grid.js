@@ -1,7 +1,9 @@
+const htmlUtils = require('*/cartridge/utils/html');
+
 /**
  * Render search refinements
  *
- * @returns
+ * @returns {Object} The model object
  */
 exports.createModel = () => {
     const HttpSearchParams = require('*/api/URLSearchParams');
@@ -12,7 +14,7 @@ exports.createModel = () => {
     search.search();
 
     const componentId = httpParams.get('component');
-    model.products = search.foundProducts.map((hit) => ({ tileInclude: hit.tileInclude }));
+    model.products = search.foundProducts.map((hit) => ({ tileInclude: hit.tileInclude, object: hit.object }));
     model.showMoreButton = (search.pagePosition + search.pageSize) < search.resultCount;
     // @todo makes only sense with proper page controls
     model.moreUrlFull = search.nextPageUrl('Search-Show').toString();
@@ -49,8 +51,13 @@ exports.template = (model) => `
     ${model.showMoreButton ? templateIncludeMore(model) : ''}
 `;
 
+/**
+ * Template include hit
+ * @param {Object} hit - The hit to template include
+ * @returns {string} The template include hit
+ */
 function templateIncludeHit(hit) {
-    return `${hit.tileInclude}`;
+    return htmlUtils.wrapWithDWMarker(`${hit.tileInclude}`, hit.object, 'searchhit');
 }
 
 function templateIncludeMore(model) {
