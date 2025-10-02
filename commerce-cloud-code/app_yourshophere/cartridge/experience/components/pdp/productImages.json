@@ -21,7 +21,69 @@
                     "description": "",
                     "type": "integer",
                     "required": false
-                }  
+                },
+                {
+                    "id": "displayMode",
+                    "name": "Display Mode",
+                    "description": "Choose between carousel or grid layout",
+                    "type": "enum",
+                    "values": [
+                        "carousel",
+                        "grid"
+                    ],
+                    "default_value": "carousel",
+                    "required": false
+                }
+
+            ]
+        },
+        {
+            "id": "carouselSettings",
+            "name": "Carousel Settings (no effect on grid mode)",
+            "description": "Display settings",
+            "attribute_definitions": [
+                {
+                    "id": "carouselOrientation",
+                    "name": "Carousel Orientation",
+                    "description": "Choose horizontal or vertical carousel orientation",
+                    "type": "enum",
+                    "values": [
+                        "horizontal",
+                        "vertical"
+                    ],
+                    "default_value": "horizontal",
+                    "required": false
+                },
+                {
+                    "id": "showThumbnails",
+                    "name": "Show Thumbnails",
+                    "description": "Display thumbnail navigation",
+                    "type": "boolean",
+                    "default_value": true,
+                    "required": false
+                },
+                {
+                    "id": "thumbnailPosition",
+                    "name": "Thumbnail Position",
+                    "description": "Position of thumbnail navigation",
+                    "type": "enum",
+                    "values": [
+                        "bottom",
+                        "top", 
+                        "left",
+                        "right"
+                    ],
+                    "default_value": "bottom",
+                    "required": false
+                },
+                {
+                    "id": "showDots",
+                    "name": "Show Navigation Dots",
+                    "description": "Display navigation dots",
+                    "type": "boolean",
+                    "default_value": true,
+                    "required": false
+                }
             ]
         }
     ],
