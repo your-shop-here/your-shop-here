@@ -1,6 +1,0 @@
-
-<isif condition="${pdict.link}">
-    <a href="<isprint value=${pdict.link} encoding="htmldoublequote">"><img src="${pdict.image.URL}" style="width:${pdict.width}; margin-left:auto;"/></a>
-<iselse>
-    <img src="${pdict.image.URL}" style="width:${pdict.width}; margin-left:auto;"/>
-</isif>
