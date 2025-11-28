@@ -1,66 +1,66 @@
-/* Theme Configuration Variables */
+/* Theme Configuration Variables - fallback defaults (overridden by skin.js) */
 :root {
     /* Base Colors */
-    --ysh-primary: #1a73e8;
-    --ysh-primary-hover: color-mix(in srgb, var(--ysh-primary) 80%, black);
-    --ysh-secondary: #5f6368;
-    --ysh-accent: #34a853;
+    --skin-primary-color-1: #1a73e8;
+    --skin-primary-color-hover-1: color-mix(in srgb, var(--skin-primary-color-1) 80%, black);
+    --skin-secondary-color-1: #5f6368;
+    --skin-accent-color-1: #34a853;
 
     /* Text Colors */
-    --ysh-text-primary: #202124;
-    --ysh-text-secondary: #5f6368;
-    --ysh-text-muted: #80868b;
-    --ysh-text-light: #ffffff;
+    --skin-main-text-color-1: #202124;
+    --skin-text-secondary-1: #5f6368;
+    --skin-text-muted-1: #80868b;
+    --skin-text-light-1: #ffffff;
 
     /* Background Colors */
-    --ysh-bg-primary: #ffffff;
-    --ysh-bg-secondary: #f8f9fa;
-    --ysh-bg-tertiary: #e8eaed;
-    --ysh-bg-dark: #202124;
+    --skin-bg-primary-1: #ffffff;
+    --skin-bg-secondary-1: #f8f9fa;
+    --skin-bg-tertiary-1: #e8eaed;
+    --skin-bg-dark-1: #202124;
 
     /* Border Colors */
-    --ysh-border-color: #dadce0;
-    --ysh-border-color-hover: #bdc1c6;
+    --skin-border-color-1: #dadce0;
+    --skin-border-color-hover-1: #bdc1c6;
 
     /* Spacing */
-    --ysh-spacing-xs: 0.25rem;
-    --ysh-spacing-sm: 0.5rem;
-    --ysh-spacing-md: 1rem;
-    --ysh-spacing-lg: 1.5rem;
-    --ysh-spacing-xl: 2rem;
+    --skin-spacing-xs: 0.25rem;
+    --skin-spacing-sm: 0.5rem;
+    --skin-spacing-md: 1rem;
+    --skin-spacing-lg: 1.5rem;
+    --skin-spacing-xl: 2rem;
 
     /* Typography */
-    --ysh-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --ysh-font-size-base: 16px;
-    --ysh-font-size-sm: 0.875rem;
-    --ysh-font-size-lg: 1.125rem;
-    --ysh-line-height: 1.5;
+    --skin-body-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --skin-font-size-base: 16px;
+    --skin-font-size-sm: 0.875rem;
+    --skin-font-size-lg: 1.125rem;
+    --skin-line-height: 1.5;
 
     /* Border Radius */
-    --ysh-border-radius-sm: 4px;
-    --ysh-border-radius-md: 8px;
-    --ysh-border-radius-lg: 12px;
-    --ysh-border-radius-full: 9999px;
+    --skin-border-radius-sm: 4px;
+    --skin-border-radius-md: 8px;
+    --skin-border-radius-lg: 12px;
+    --skin-border-radius-full: 9999px;
 
     /* Shadows */
-    --ysh-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --ysh-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --ysh-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --skin-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --skin-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --skin-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
     /* Transitions */
-    --ysh-transition-fast: 150ms;
-    --ysh-transition-normal: 250ms;
-    --ysh-transition-slow: 350ms;
+    --skin-transition-fast: 150ms;
+    --skin-transition-normal: 250ms;
+    --skin-transition-slow: 350ms;
 }
 
 /* @todo map all skin colors - maybe overload from pico */
 body {
-    font-family: var(--ysh-font-family);
-    color: var(--ysh-text-primary);
+    font-family: var(--skin-body-font);
+    color: var(--skin-main-text-color-1);
     font-display: optional;
-    font-size: var(--ysh-font-size-base);
-    line-height: var(--ysh-line-height);
-    background-color: var(--ysh-background);
+    font-size: var(--skin-font-size-base);
+    line-height: var(--skin-line-height);
+    background-color: var(--skin-background-color-1);
 }
 
 body.flairstripes {
@@ -111,28 +111,28 @@ img {
     font-style: italic;
     background-repeat: no-repeat;
     background-size: cover;
-    shape-margin: var(--ysh-spacing-sm);
+    shape-margin: var(--skin-spacing-sm);
 }
 
 [role=button], button, input[type=button], input[type=reset], input[type=submit] {
-    background-color: var(--ysh-primary);
-    color: var(--ysh-primary-invert);
-    border-radius: var(--ysh-border-radius-md);
-    transition: background-color var(--ysh-transition-normal) ease;
+    background-color: var(--skin-primary-color-1);
+    color: var(--skin-primary-color-invert-1);
+    border-radius: var(--skin-border-radius-md);
+    transition: background-color var(--skin-transition-normal) ease;
 }
 
 .btn-secondary {
-    background-color: var(--ysh-secondary);
-    color: var(--ysh-secondary-invert);
+    background-color: var(--skin-secondary-color-1);
+    color: var(--skin-secondary-color-invert-1);
 }
 
 [role=button]:hover, button:hover, input[type=button]:hover, input[type=reset]:hover, input[type=submit]:hover {
-    background-color: var(--ysh-primary-hover);
+    background-color: var(--skin-primary-color-hover-1);
 }
 
 select {
-    background-color: var(--ysh-selectbox-background-color);
-    color: var(--ysh-selectbox-text-color);
+    background-color: var(--skin-selectbox-background-color-1);
+    color: var(--skin-selectbox-text-color-1);
 }
 
 input.search-field {
@@ -152,31 +152,31 @@ input.search-field {
 }
 
 .refinements {
-    margin: var(--ysh-spacing-md) 0;
-    margin-bottom: var(--ysh-spacing-lg);
+    margin: var(--skin-spacing-md) 0;
+    margin-bottom: var(--skin-spacing-lg);
 }
 
 .refinements .filter-button {
     display: none; /* Hide filter button on desktop */
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    background-color: var(--ysh-primary);
-    color: var(--ysh-text-light);
-    border-radius: var(--ysh-border-radius-md);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    background-color: var(--skin-primary-color-1);
+    color: var(--skin-text-light);
+    border-radius: var(--skin-border-radius-md);
     cursor: pointer;
-    margin-bottom: var(--ysh-spacing-md);
+    margin-bottom: var(--skin-spacing-md);
 }
 
 .refinements .filter-button:hover {
-    background-color: var(--ysh-primary-hover);
+    background-color: var(--skin-primary-color-hover-1);
 }
 
 .refinements .filter-content {
     display: block; /* Always show on desktop */
     position: static; /* Reset position for desktop */
-    background-color: var(--ysh-bg-primary);
-    border: 1px solid var(--ysh-border-color);
-    border-radius: var(--ysh-border-radius-md);
-    padding: var(--ysh-spacing-md) var(--ysh-spacing-md) 0 var(--ysh-spacing-md);
+    background-color: var(--skin-bg-primary);
+    border: 1px solid var(--skin-border-color);
+    border-radius: var(--skin-border-radius-md);
+    padding: var(--skin-spacing-md) var(--skin-spacing-md) 0 var(--skin-spacing-md);
     margin-right: var(--grid-spacing-horizontal);
 }
 .refinements  .refinement-container {
@@ -184,7 +184,7 @@ input.search-field {
     padding: 0;
     margin: 0;
     max-height: 350px;
-    background-color: var(--ysh-background);
+    background-color: var(--skin-background);
     overflow: hidden;   
     box-sizing: border-box;
 }
@@ -194,8 +194,8 @@ input.search-field {
     list-style: none;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--ysh-text-muted) var(--ysh-bg-secondary);
-    background-color: var(--ysh-background);
+    scrollbar-color: var(--skin-text-muted) var(--skin-bg-secondary);
+    background-color: var(--skin-background);
 }
 /* adds a gradient to the bottom of the refinebar to indicate scrollability (mac with a trackpad dont show scroll bars)*/
 .refinements  .refinement-container::after {
@@ -207,7 +207,7 @@ input.search-field {
     height: 60px;
     
     background: linear-gradient(to top,
-        var(--ysh-background) 0%,        
+        var(--skin-background) 0%,        
       rgba(248, 248, 248, 0) 80%
     );
     
@@ -223,17 +223,17 @@ input.search-field {
 .refinements a {
     display: block;
     padding: 0.25rem 0;
-    color: var(--ysh-text-primary);
+    color: var(--skin-text-primary);
     text-decoration: none;
-    transition: color var(--ysh-transition-normal) ease;
+    transition: color var(--skin-transition-normal) ease;
 }
 
 .refinements a:hover {
-    color: var(--ysh-primary);
+    color: var(--skin-primary-color-1);
 }
 
 .refinements a.selected {
-    color: var(--ysh-primary);
+    color: var(--skin-primary-color-1);
     font-weight: bold;
 }
 
@@ -247,16 +247,16 @@ input.search-field {
 }
 
 .refinements ul::-webkit-scrollbar-track {
-    background: var(--ysh-bg-secondary);
+    background: var(--skin-bg-secondary);
 }
 
 .refinements ul::-webkit-scrollbar-thumb {
-    background: var(--ysh-text-muted);
+    background: var(--skin-text-muted);
     border-radius: 3px;
 }
 
 .refinements ul::-webkit-scrollbar-thumb:hover {
-    background: var(--ysh-text-primary);
+    background: var(--skin-text-primary);
 }
 
 /* Color swatch refinements */
@@ -301,7 +301,7 @@ input.search-field {
 }
 
 .product-grid {
-    margin-top: var(--ysh-spacing-md);
+    margin-top: var(--skin-spacing-md);
     display: grid;
     gap: 10px;
 }
@@ -434,7 +434,7 @@ article.product-tile button {
 }
 
 .experience-pdp-productPromotions li {
-    color: var(--ysh-error);
+    color: var(--skin-error);
     list-style-type: none;
 }
 
@@ -650,23 +650,23 @@ article.product-tile button {
 /* Thumbnail active state */
 .slide input[type="radio"]:checked ~ * .thumbnail-nav .thumbnail-item:nth-child(1),
 .image-container:has(.slide #slide-1-radio:checked) .thumbnail-nav .thumbnail-item:nth-child(1) {
-    border-color: var(--ysh-text-primary);
+    border-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-2-radio:checked) .thumbnail-nav .thumbnail-item:nth-child(2) {
-    border-color: var(--ysh-text-primary);
+    border-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-3-radio:checked) .thumbnail-nav .thumbnail-item:nth-child(3) {
-    border-color: var(--ysh-text-primary);
+    border-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-4-radio:checked) .thumbnail-nav .thumbnail-item:nth-child(4) {
-    border-color: var(--ysh-text-primary);
+    border-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-5-radio:checked) .thumbnail-nav .thumbnail-item:nth-child(5) {
-    border-color: var(--ysh-text-primary);
+    border-color: var(--skin-text-primary);
 }
 
 /* Navigation Dots */
@@ -682,34 +682,34 @@ article.product-tile button {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: var(--ysh-text-muted);
+    background-color: var(--skin-text-muted);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .slider-nav.dots .nav-dot:hover {
-    background-color: var(--ysh-text-secondary);
+    background-color: var(--skin-text-secondary);
 }
 
 /* Dots active state */
 .image-container:has(.slide #slide-1-radio:checked) .slider-nav.dots .nav-dot:nth-child(1) {
-    background-color: var(--ysh-text-primary);
+    background-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-2-radio:checked) .slider-nav.dots .nav-dot:nth-child(2) {
-    background-color: var(--ysh-text-primary);
+    background-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-3-radio:checked) .slider-nav.dots .nav-dot:nth-child(3) {
-    background-color: var(--ysh-text-primary);
+    background-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-4-radio:checked) .slider-nav.dots .nav-dot:nth-child(4) {
-    background-color: var(--ysh-text-primary);
+    background-color: var(--skin-text-primary);
 }
 
 .image-container:has(.slide #slide-5-radio:checked) .slider-nav.dots .nav-dot:nth-child(5) {
-    background-color: var(--ysh-text-primary);
+    background-color: var(--skin-text-primary);
 }
 
 /* Hide dots when configured */
@@ -833,9 +833,9 @@ article.product-tile button {
 }
 
 .error-message, .cart-error-message {
-    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
-    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
-    color: var(--ysh-error);
+    background-color: color-mix(in srgb, var(--skin-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--skin-error) 20%, white);
+    color: var(--skin-error);
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 4px;
@@ -889,7 +889,7 @@ article.product-tile button {
         left: 0;
         right: 0;
         z-index: 1000;
-        box-shadow: var(--ysh-shadow-md);
+        box-shadow: var(--skin-shadow-md);
     }
 
     .refinements .filter-content.show {
@@ -901,24 +901,24 @@ article.product-tile button {
 .bundle-products {
     display: flex;
     flex-direction: column;
-    gap: var(--ysh-spacing-md);
-    margin: var(--ysh-spacing-md) 0;
+    gap: var(--skin-spacing-md);
+    margin: var(--skin-spacing-md) 0;
 }
 
 .bundle-product {
     display: flex;
     align-items: center;
-    gap: var(--ysh-spacing-md);
-    border: 1px solid var(--ysh-border-color);
-    border-radius: var(--ysh-border-radius-md);
-    padding: var(--ysh-spacing-md);
-    background-color: var(--ysh-bg-primary);
-    transition: transform var(--ysh-transition-normal) ease, box-shadow var(--ysh-transition-normal) ease;
+    gap: var(--skin-spacing-md);
+    border: 1px solid var(--skin-border-color);
+    border-radius: var(--skin-border-radius-md);
+    padding: var(--skin-spacing-md);
+    background-color: var(--skin-bg-primary);
+    transition: transform var(--skin-transition-normal) ease, box-shadow var(--skin-transition-normal) ease;
 }
 
 .bundle-product:hover {
     transform: translateY(-2px);
-    box-shadow: var(--ysh-shadow-md);
+    box-shadow: var(--skin-shadow-md);
 }
 
 .bundle-product-image {
@@ -926,7 +926,7 @@ article.product-tile button {
     height: 100px;
     flex-shrink: 0;
     overflow: hidden;
-    border-radius: var(--ysh-border-radius-sm);
+    border-radius: var(--skin-border-radius-sm);
 }
 
 .bundle-product-image img {
@@ -939,65 +939,65 @@ article.product-tile button {
     display: flex;
     align-items: center;
     flex: 1;
-    gap: var(--ysh-spacing-lg);
+    gap: var(--skin-spacing-lg);
 }
 
 .bundle-product-name {
     flex: 2;
-    font-size: var(--ysh-font-size-base);
+    font-size: var(--skin-font-size-base);
     margin: 0;
-    color: var(--ysh-text-primary);
+    color: var(--skin-text-primary);
 }
 
 .bundle-product-quantity {
     flex: 1;
-    color: var(--ysh-text-secondary);
-    font-size: var(--ysh-font-size-base);
+    color: var(--skin-text-secondary);
+    font-size: var(--skin-font-size-base);
     text-align: center;
 }
 
 .bundle-product-price {
     flex: 1;
     font-weight: bold;
-    color: var(--ysh-text-primary);
-    font-size: var(--ysh-font-size-base);
+    color: var(--skin-text-primary);
+    font-size: var(--skin-font-size-base);
     text-align: right;
 }
 
 .bundle-product .add-to-cart {
     flex-shrink: 0;
-    padding: var(--ysh-spacing-xs) var(--ysh-spacing-xs);
-    font-size: var(--ysh-font-size-sm);
+    padding: var(--skin-spacing-xs) var(--skin-spacing-xs);
+    font-size: var(--skin-font-size-sm);
     min-width: 130px;
     max-width: 160px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--ysh-primary);
-    color: var(--ysh-text-light);
+    background-color: var(--skin-primary-color-1);
+    color: var(--skin-text-light);
     border: none;
-    border-radius: var(--ysh-border-radius-sm);
+    border-radius: var(--skin-border-radius-sm);
     cursor: pointer;
-    transition: background-color var(--ysh-transition-normal) ease;
+    transition: background-color var(--skin-transition-normal) ease;
     white-space: nowrap;
 }
 
 .bundle-product .add-to-cart:hover {
-    background-color: var(--ysh-primary-hover);
+    background-color: var(--skin-primary-color-hover-1);
 }
 
 .bundle-title {
-    font-size: var(--ysh-font-size-lg);
-    color: var(--ysh-text-primary);
-    margin-bottom: var(--ysh-spacing-md);
+    font-size: var(--skin-font-size-lg);
+    color: var(--skin-text-primary);
+    margin-bottom: var(--skin-spacing-md);
 }
 
 /* Mobile styles for bundle products */
 @media (max-width: 768px) {
     .bundle-product {
         flex-wrap: wrap;
-        gap: var(--ysh-spacing-sm);
+        gap: var(--skin-spacing-sm);
     }
 
     .bundle-product-image {
@@ -1008,7 +1008,7 @@ article.product-tile button {
     .bundle-product-details {
         flex: 1;
         flex-wrap: wrap;
-        gap: var(--ysh-spacing-sm);
+        gap: var(--skin-spacing-sm);
     }
 
     .bundle-product-name {
@@ -1023,34 +1023,34 @@ article.product-tile button {
 
     .bundle-product .add-to-cart {
         width: 100%;
-        margin-top: var(--ysh-spacing-sm);
+        margin-top: var(--skin-spacing-sm);
     }
 }
 
 /* Form Validation Styles */
 input[aria-invalid="true"] {
-    border-color: var(--ysh-error);
-    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
+    border-color: var(--skin-error);
+    background-color: color-mix(in srgb, var(--skin-error) 10%, white);
     padding-right: 2.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='var(--ysh-error)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='var(--skin-error)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: 1.5rem;
 }
 
 .form-field-invalid {
-    color: var(--ysh-error);
-    font-size: var(--ysh-font-size-sm);
+    color: var(--skin-error);
+    font-size: var(--skin-font-size-sm);
 }
 
 /* Additional Error Styles for Consistency */
 .promo-code-error {
-    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
-    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
-    color: var(--ysh-error);
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    margin-bottom: var(--ysh-spacing-md);
-    border-radius: var(--ysh-border-radius-sm);
+    background-color: color-mix(in srgb, var(--skin-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--skin-error) 20%, white);
+    color: var(--skin-error);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    margin-bottom: var(--skin-spacing-md);
+    border-radius: var(--skin-border-radius-sm);
 }
 
 .promo-code-error p {
@@ -1058,21 +1058,21 @@ input[aria-invalid="true"] {
 }
 
 .register-error {
-    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
-    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
-    color: var(--ysh-error);
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    margin-bottom: var(--ysh-spacing-md);
-    border-radius: var(--ysh-border-radius-sm);
+    background-color: color-mix(in srgb, var(--skin-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--skin-error) 20%, white);
+    color: var(--skin-error);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    margin-bottom: var(--skin-spacing-md);
+    border-radius: var(--skin-border-radius-sm);
 }
 
 .register-error ul {
     margin: 0;
-    padding-left: var(--ysh-spacing-md);
+    padding-left: var(--skin-spacing-md);
 }
 
 .register-error li {
-    margin-bottom: var(--ysh-spacing-xs);
+    margin-bottom: var(--skin-spacing-xs);
 }
 
 .register-error li:last-child {
@@ -1081,12 +1081,12 @@ input[aria-invalid="true"] {
 
 /* Additional Error Styles for Consistency */
 .order-error-message {
-    background-color: color-mix(in srgb, var(--ysh-error) 10%, white);
-    border: 1px solid color-mix(in srgb, var(--ysh-error) 20%, white);
-    color: var(--ysh-error);
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    margin-bottom: var(--ysh-spacing-md);
-    border-radius: var(--ysh-border-radius-sm);
+    background-color: color-mix(in srgb, var(--skin-error) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--skin-error) 20%, white);
+    color: var(--skin-error);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    margin-bottom: var(--skin-spacing-md);
+    border-radius: var(--skin-border-radius-sm);
 }
 
 .order-error-message p {
@@ -1095,107 +1095,107 @@ input[aria-invalid="true"] {
 
 /* Error container for system error pages */
 .error-container {
-    background-color: var(--ysh-bg-primary);
-    border: 1px solid var(--ysh-border-color);
-    border-radius: var(--ysh-border-radius-md);
-    padding: var(--ysh-spacing-lg);
-    margin: var(--ysh-spacing-lg) auto;
+    background-color: var(--skin-bg-primary);
+    border: 1px solid var(--skin-border-color);
+    border-radius: var(--skin-border-radius-md);
+    padding: var(--skin-spacing-lg);
+    margin: var(--skin-spacing-lg) auto;
     max-width: 600px;
     text-align: center;
-    box-shadow: var(--ysh-shadow-sm);
+    box-shadow: var(--skin-shadow-sm);
 }
 
 .error-container h1 {
-    color: var(--ysh-error);
-    margin-bottom: var(--ysh-spacing-md);
+    color: var(--skin-error);
+    margin-bottom: var(--skin-spacing-md);
 }
 
 .error-container p {
-    color: var(--ysh-text-secondary);
-    line-height: var(--ysh-line-height);
-    margin-bottom: var(--ysh-spacing-md);
+    color: var(--skin-text-secondary);
+    line-height: var(--skin-line-height);
+    margin-bottom: var(--skin-spacing-md);
 }
 
 .error-container .thankyou {
-    color: var(--ysh-text-muted);
+    color: var(--skin-text-muted);
     font-style: italic;
 }
 
 /* Order History Styles */
 .order-history {
-    margin: var(--ysh-spacing-lg) 0;
+    margin: var(--skin-spacing-lg) 0;
 }
 
 .order-history h2 {
-    color: var(--ysh-text-primary);
-    margin-bottom: var(--ysh-spacing-md);
-    font-size: var(--ysh-font-size-xl);
+    color: var(--skin-text-primary);
+    margin-bottom: var(--skin-spacing-md);
+    font-size: var(--skin-font-size-xl);
 }
 
 .order-history-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--ysh-bg-primary);
-    border-radius: var(--ysh-border-radius-md);
+    background-color: var(--skin-bg-primary);
+    border-radius: var(--skin-border-radius-md);
     overflow: hidden;
-    box-shadow: var(--ysh-shadow-sm);
+    box-shadow: var(--skin-shadow-sm);
 }
 
 .order-history-table thead {
-    background-color: var(--ysh-bg-secondary);
+    background-color: var(--skin-bg-secondary);
 }
 
 .order-history-table th {
-    padding: var(--ysh-spacing-md);
+    padding: var(--skin-spacing-md);
     text-align: left;
     font-weight: 600;
-    color: var(--ysh-text-primary);
-    border-bottom: 1px solid var(--ysh-border-color);
+    color: var(--skin-text-primary);
+    border-bottom: 1px solid var(--skin-border-color);
 }
 
 .order-history-table td {
-    padding: var(--ysh-spacing-md);
-    border-bottom: 1px solid var(--ysh-border-color);
-    color: var(--ysh-text-primary);
+    padding: var(--skin-spacing-md);
+    border-bottom: 1px solid var(--skin-border-color);
+    color: var(--skin-text-primary);
 }
 
 .order-history-table tbody tr:hover {
-    background-color: var(--ysh-bg-hover);
+    background-color: var(--skin-bg-hover);
 }
 
 .order-history-table .btn-sm {
-    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
-    font-size: var(--ysh-font-size-sm);
+    padding: var(--skin-spacing-xs) var(--skin-spacing-sm);
+    font-size: var(--skin-font-size-sm);
     min-width: auto;
 }
 
 .order-history-empty {
-    background-color: var(--ysh-bg-secondary);
-    border: 1px solid var(--ysh-border-color);
-    border-radius: var(--ysh-border-radius-md);
-    padding: var(--ysh-spacing-lg);
+    background-color: var(--skin-bg-secondary);
+    border: 1px solid var(--skin-border-color);
+    border-radius: var(--skin-border-radius-md);
+    padding: var(--skin-spacing-lg);
     text-align: center;
-    color: var(--ysh-text-secondary);
+    color: var(--skin-text-secondary);
 }
 
 .order-history-empty p {
     margin: 0;
-    font-size: var(--ysh-font-size-base);
+    font-size: var(--skin-font-size-base);
 }
 
 /* Mobile styles for order history */
 @media (max-width: 768px) {
     .order-history-table {
-        font-size: var(--ysh-font-size-sm);
+        font-size: var(--skin-font-size-sm);
     }
 
     .order-history-table th,
     .order-history-table td {
-        padding: var(--ysh-spacing-sm);
+        padding: var(--skin-spacing-sm);
     }
 
     .order-history-table .btn-sm {
-        padding: var(--ysh-spacing-xs);
-        font-size: var(--ysh-font-size-xs);
+        padding: var(--skin-spacing-xs);
+        font-size: var(--skin-font-size-xs);
     }
 }

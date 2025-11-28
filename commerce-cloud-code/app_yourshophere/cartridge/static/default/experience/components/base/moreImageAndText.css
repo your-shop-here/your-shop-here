@@ -65,60 +65,68 @@ span.image-below {
     text-shadow: 1px 1px 4px #000;
 }
 
-.bg-primary {
-
-    h1,
-    h2,
-    h3,
-    h4 {
-        background-color: var(--primary-color);
-    }
+.bg-primary h1,
+.bg-primary h2,
+.bg-primary h3,
+.bg-primary h4,
+.bg-primary a,
+.bg-primary span {
+    background-color: var(--skin-primary-color-1);
+    padding: 0.5rem 1rem;
 }
 
-.bg-bgcolor {
-
-    h1,
-    h2,
-    h3,
-    h4 {
-        background-color: var(--body-background-color);
-    }
+.bg-bgcolor h1,
+.bg-bgcolor h2,
+.bg-bgcolor h3,
+.bg-bgcolor h4,
+.bg-bgcolor a,
+.bg-bgcolor span {
+    background-color: var(--skin-background-color-1);
+    padding: 0.5rem 1rem;
 }
 
-.bg-interation {
-
-    h1,
-    h2,
-    h3,
-    h4 {
-        background-color: #{var(--interaction-color)};
-    }
+.bg-interation h1,
+.bg-interation h2,
+.bg-interation h3,
+.bg-interation h4,
+.bg-interation a,
+.bg-interation span {
+    background-color: var(--skin-link-color-1);
+    padding: 0.5rem 1rem;
 }
 
-.bg-menucolor {
-
-    h1,
-    h2,
-    h3,
-    h4 {
-        background-color: var(--menu-background);
-    }
+.bg-menucolor h1,
+.bg-menucolor h2,
+.bg-menucolor h3,
+.bg-menucolor h4,
+.bg-menucolor a,
+.bg-menucolor span {
+    background-color: var(--skin-banner-background-color-1);
+    padding: 0.5rem 1rem;
 }
 
-.fg-primary a {
+.fg-primary,
+.fg-primary a,
+.fg-primary span {
     color: var(--skin-primary-color-1);
 }
 
-.fg-bgcolor a {
-    color: var(--ysh-background);
+.fg-bgcolor,
+.fg-bgcolor a,
+.fg-bgcolor span {
+    color: var(--skin-background-color-1);
 }
 
-.fg-interation a {
-    color: var(--skin-price-1);
+.fg-interation,
+.fg-interation a,
+.fg-interation span {
+    color: var(--skin-link-color-1);
 }
 
-.fg-menucolor a {
-    color: var(--menu-background);
+.fg-menucolor,
+.fg-menucolor a,
+.fg-menucolor span {
+    color: var(--skin-banner-background-color-1);
 }
 
 .gradient-contrast::after {
