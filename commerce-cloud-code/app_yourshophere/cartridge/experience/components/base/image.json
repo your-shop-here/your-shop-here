@@ -1,6 +1,6 @@
 {
   "name": "More  Image",
-  "description": "A non styled image",
+  "description": "A non styled image with overlay region",
   "group": "base",
   "attribute_definition_groups": [
     {
@@ -28,7 +28,70 @@
           "required": false
         }
       ]
+    },
+    {
+      "id": "Overlay",
+      "name": "Overlay Settings",
+      "description": "Settings for the overlay region",
+      "attribute_definitions": [
+        {
+          "id": "overlayPosition",
+          "name": "Overlay Position",
+          "description": "Position of the overlay region",
+          "type": "enum",
+          "values": [
+            "top-left",
+            "top-center",
+            "top-right",
+            "center-left",
+            "center",
+            "center-right",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ],
+          "required": false
+        },
+        {
+          "id": "overlayWidth",
+          "name": "Overlay Width",
+          "description": "Width of the overlay region (e.g., 200px, 50%, auto)",
+          "type": "string",
+          "default_value": "auto",
+          "required": false
+        },
+        {
+          "id": "overlayHeight",
+          "name": "Overlay Height",
+          "description": "Height of the overlay region (e.g., 100px, 30%, auto)",
+          "type": "string",
+          "default_value": "auto",
+          "required": false
+        },
+        {
+          "id": "overlayOffsetX",
+          "name": "Horizontal Offset",
+          "description": "Horizontal offset from the position (e.g., 10px, -5px)",
+          "type": "string",
+          "default_value": "0px",
+          "required": false
+        },
+        {
+          "id": "overlayOffsetY",
+          "name": "Vertical Offset",
+          "description": "Vertical offset from the position (e.g., 10px, -5px)",
+          "type": "string",
+          "default_value": "0px",
+          "required": false
+        }
+      ]
     }
   ],
-  "region_definitions": []
+  "region_definitions": [
+    {
+      "id": "overlay",
+      "name": "Overlay Content",
+      "component_type_exclusions": []
+    }
+  ]
 }

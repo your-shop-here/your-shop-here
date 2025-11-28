@@ -10,8 +10,8 @@ const createModel = (options) => {
     const URLAction = require('dw/web/URLAction');
     const Locale = require('dw/util/Locale');
     const site = require('dw/system/Site').getCurrent();
-    const currentLocale = Locale.getLocale(request.locale);
     const availableLocales = site.allowedLocales.toArray().map((locale) => Locale.getLocale(locale));
+    const currentLocale = request.locale === 'default' ? availableLocales[0] : Locale.getLocale(request.locale);
 
     // Convert country code to flag emoji
     const getCountryFlag = (countryCode) => {
