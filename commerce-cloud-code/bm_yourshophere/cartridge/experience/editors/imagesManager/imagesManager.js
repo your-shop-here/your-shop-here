@@ -1,0 +1,51 @@
+// This code is based on: https://github.com/sfccplus/super-page-designer
+
+const ContentMgr = require('dw/content/ContentMgr');
+const Site = require('dw/system/Site');
+const URLUtils = require('dw/web/URLUtils');
+
+/**
+ * Returns Images View URL
+ * @returns {string} images view url
+ */
+function getImagesViewURL() {
+    const currentSite = Site.current;
+    const siteId = `Sites-${currentSite.ID}-Site`;
+    const controllerURL = URLUtils.url('SuperPD-ImageURL').toString().replace('Sites-Site', siteId);
+    return `${controllerURL}?imagePath=`;
+}
+
+module.exports.init = function (editor) {
+    const viewImageURL = getImagesViewURL();
+    editor.configuration.put('viewImageURL', viewImageURL);
+
+    const siteLibrary = ContentMgr.getSiteLibrary();
+    const libraryUtils = require('*/cartridge/utils/libraryUtils');
+    const folderId = libraryUtils.getSiteLibraryFolder();
+
+    const imageUploaderURL = URLUtils.url(
+        'PDUtils-ImageUpload',
+        'libraryId',
+        siteLibrary.ID,
+    ).toString();
+    editor.configuration.put('imageUploaderURL', imageUploaderURL);
+
+    const getLibraryFoldersURL = URLUtils.url(
+        'PDUtils-GetLibraryFolders',
+        'libraryId',
+        siteLibrary.ID,
+        'folderId',
+        folderId,
+    ).toString();
+    editor.configuration.put('getLibraryFoldersURL', getLibraryFoldersURL);
+
+    const getFolderImagesURL = URLUtils.url(
+        'PDUtils-GetFolderImages',
+        'libraryId',
+        siteLibrary.ID,
+        'folderId',
+        folderId,
+    ).toString();
+    editor.configuration.put('getFolderImagesURL', getFolderImagesURL);
+};
+

@@ -1,0 +1,11 @@
+{
+    "name": "Color Input",
+    "resources": {
+      "scripts": [
+        "/js/experience/editors/spdColorInput/spdColorInput.js"
+      ],  
+      "styles": [
+        "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+      ]
+    }
+}

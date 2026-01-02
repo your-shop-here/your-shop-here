@@ -3,14 +3,10 @@ exports.get = function getComponentSettings(componentId) {
     const CacheMgr = require('dw/system/CacheMgr');
     const cache = CacheMgr.getCache('ComponentSettings');
     return cache.get(componentId || 'default', () => {
-        const ContentMgr = require('dw/content/ContentMgr');
         const File = require('dw/io/File');
         const FileReader = require('dw/io/FileReader');
-        let libId = ContentMgr.getSiteLibrary().ID;
-        if (libId === 'Library') {
-            const Site = require('dw/system/Site');
-            libId = Site.current.ID;
-        }
+        const libraryUtils = require('*/cartridge/utils/libraryUtils');
+        const libId = libraryUtils.getSiteLibraryFolder();
         let file;
         if (componentId) {
             const path = `${File.LIBRARIES}/${libId}/default/experience/settings/components/${componentId}.json`;

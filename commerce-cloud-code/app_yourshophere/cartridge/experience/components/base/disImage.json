@@ -1,0 +1,48 @@
+{
+  "name": "DIS Image",
+  "description": "An image component using the custom image input editor with Dynamic Imaging Service support",
+  "group": "base",
+  "attribute_definition_groups": [
+    {
+      "id": "Image",
+      "name": "Image",
+      "description": "Image selection and configuration",
+      "attribute_definitions": [
+        {
+          "id": "imageUrl",
+          "name": "Image URL",
+          "description": "Select an image from the library using the image manager",
+          "type": "custom",
+          "required": false,
+          "editor_definition": {
+            "type": "imageInput.imageInput"
+          }
+        },
+        {
+          "id": "altText",
+          "name": "Alt Text",
+          "description": "Alternative text for the image",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "link",
+          "name": "Link",
+          "description": "Optional link URL for the image",
+          "type": "url",
+          "required": false
+        },
+        {
+          "id": "width",
+          "name": "Width",
+          "description": "Image width (e.g., 100%, 500px, auto)",
+          "type": "string",
+          "default_value": "100%",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}
+

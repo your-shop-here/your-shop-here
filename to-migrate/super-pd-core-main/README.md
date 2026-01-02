@@ -1,0 +1,2 @@
+# Super Page Designer UI KIT
+This repo provides a collection of custom editors designed for Salesforce Commerce Cloud (SFCC) and intended to be used within the [Super Page Designer](https://github.com/sfccplus/super-page-designer) plugin.
