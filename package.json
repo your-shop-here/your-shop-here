@@ -41,6 +41,7 @@
     "eslint-plugin-import": "^2.29.1"
   },
   "scripts": {
+    "reset-context": "sfcc-ci instance:clear",
     "auth": "sfcc-ci auth:login -D",
     "auth:unattended": "sfcc-ci client:auth",
     "data:main-zip": "cd commerce-cloud-data/ && cross-zip -r -q your-shop-here-data.zip your-shop-here-data && shx mv your-shop-here-data.zip ../your-shop-here-data.zip",
@@ -55,8 +56,8 @@
     "cleanup": "shx rm -f site_template.zip && shx rm -f test-site.zip && shx rm -f version1.zip",
     "lint:js": "eslint .",
     "config:generate:environment": "node build/generateDWJson.js",
-    "import-data": "npm-run-all auth data:* cleanup",
-    "all": "npm-run-all auth data:* code:* cleanup",
-    "unattended": "npm-run-all code:* data:* cleanup"
+    "import-data": "npm-run-all reset-context auth data:* cleanup",
+    "all": "npm-run-all reset-context auth data:* code:* cleanup",
+    "unattended": "npm-run-all reset-context code:* data:* cleanup"
   }
 }
