@@ -1,14 +1,14 @@
 /* Header link styling - applies to all header regions except main menu */
 .announcement a,
 .take-row  a {
-    color: var(--ysh-primary);
+    color: var(--skin-primary-color-1);
     text-decoration: none;
-    transition: color var(--ysh-transition-normal) ease;
+    transition: color var(--skin-transition-normal) ease;
 }
 
 .announcement a:hover,
 .take-row a:hover {
-    color: var(--ysh-secondary);
+    color: var(--skin-secondary-color-1);
     text-decoration: none;
 }
 
@@ -16,7 +16,7 @@
 .announcement a svg,
 .take-row a svg {
     fill: currentColor;
-    transition: fill var(--ysh-transition-normal) ease;
+    transition: fill var(--skin-transition-normal) ease;
 }
 
 .announcement a:hover svg,
@@ -27,10 +27,10 @@
 a.pill[role="button"] {
     border-radius: 2rem;
     border-width: 0px;
-    background-color: var(--ysh-secondary);
+    background-color: var(--skin-secondary-color-1);
     color: var(--skin-link-color-1);
     padding: 0, 7rem;
-    box-shadow: 0.3px 0.3px 0.5px color-mix(in srgb, var(--ysh-secondary) 75%, black);
+    box-shadow: 0.3px 0.3px 0.5px color-mix(in srgb, var(--skin-secondary-color-1) 75%, black);
 }
 
 a.header-link {
@@ -99,7 +99,7 @@ nav.mainmenu li,
 #toggle-menu,
 nav.mainmenu .sub-menu {
     border-style: solid;
-    border-color: var(--ysh-border-color);
+    border-color: var(--skin-border-color-1);
 }
 
 nav.mainmenu li,
@@ -124,7 +124,7 @@ nav.mainmenu a {
 }
 
 nav.mainmenu {
-    background-color: white;
+    background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
 }
 
 
@@ -158,7 +158,7 @@ nav.mainmenu input[type="checkbox"]:checked+.drop-icon {
 }
 
 nav.mainmenu .sub-menu a:hover {
-    color: var(--ysh-text-secondary);
+    color: var(--skin-text-secondary-1);
 }
 
 #toggle-menu .drop-icon,
@@ -180,7 +180,7 @@ nav.mainmenu label.drop-icon,
     color: var(--skin-link-color-1);
     content: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" fill="var(--skin-selectbox-background-color-1)" viewBox="0 0 18 11"><g xmlns="http://www.w3.org/2000/svg" transform="matrix(0 1 -1 0 18 -0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25015 0.682317L10.2117 8.56693C10.4425 8.7977 10.4425 9.18232 10.2117 9.41309L2.25015 17.2977C2.01938 17.5285 1.63477 17.5285 1.404 17.2977L0.557843 16.4515C0.327073 16.2208 0.327073 15.8362 0.557843 15.6054L6.82707 9.41309C7.05784 9.18232 7.05784 8.7977 6.82707 8.56693L0.596304 2.37462C0.365535 2.14386 0.365535 1.75924 0.596304 1.52847L1.44246 0.682317C1.67323 0.490009 2.01938 0.490009 2.25015 0.682317Z" /></g></svg>');
     border: none;
-    background-color: var(--ysh-background);
+    background-color: var(--skin-background-color-1);
     /* @todo how can I set the fill color of an SVG if its not embedded in html?*/
     filter: contrast(0.4) brightness(2) saturate(0.5)
 }
@@ -205,21 +205,21 @@ nav.mainmenu label.drop-icon img,
 .country-language-selector .btn {
     display: flex;
     align-items: center;
-    gap: var(--ysh-spacing-sm);
-    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
-    background-color: transparent;
-    border: 1px solid var(--ysh-border-color);
-    color: var(--ysh-text-primary);
-    font-size: var(--ysh-font-size-sm);
+    gap: var(--skin-spacing-sm);
+    padding: var(--skin-spacing-xs) var(--skin-spacing-sm);
+    background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
+    border: 1px solid var(--skin-border-color-1);
+    color: var(--skin-main-text-color-1);
+    font-size: var(--skin-font-size-sm);
     cursor: pointer;
-    transition: all var(--ysh-transition-normal) ease;
+    transition: all var(--skin-transition-normal) ease;
     white-space: nowrap;
     margin-bottom: 0;
 }
 
 .country-language-selector .btn:hover {
-    background-color: var(--ysh-bg-secondary);
-    border-color: var(--ysh-border-color-hover);
+    background-color: var(--skin-bg-secondary-1);
+    border-color: var(--skin-border-color-hover-1);
 }
 
 .country-language-selector .dropdown-menu {
@@ -227,16 +227,16 @@ nav.mainmenu label.drop-icon img,
     top: 100%;
     right: 0;
     min-width: 320px;
-    margin-top: var(--ysh-spacing-xs);
-    padding: var(--ysh-spacing-xs) 1em;
-    background-color: var(--ysh-bg-primary);
-    border: 1px solid var(--ysh-border-color);
-    border-radius: var(--ysh-border-radius-md);
-    box-shadow: var(--ysh-shadow-md);
+    margin-top: var(--skin-spacing-xs);
+    padding: var(--skin-spacing-xs) 1em;
+    background-color: var(--skin-bg-primary-1);
+    border: 1px solid var(--skin-border-color-1);
+    border-radius: var(--skin-border-radius-md);
+    box-shadow: var(--skin-shadow-md);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all var(--ysh-transition-normal) ease;
+    transition: all var(--skin-transition-normal) ease;
     z-index: 1000;
     list-style: none;
 }
@@ -256,10 +256,10 @@ nav.mainmenu label.drop-icon img,
 }
 
 .country-language-selector .country-group {
-    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
+    padding: var(--skin-spacing-xs) var(--skin-spacing-sm);
     display: flex;
     align-items: center;
-    gap: var(--ysh-spacing-xs);
+    gap: var(--skin-spacing-xs);
     white-space: nowrap;
     overflow-x: auto;
     scrollbar-width: none; /* Firefox */
@@ -272,36 +272,36 @@ nav.mainmenu label.drop-icon img,
 }
 
 .country-language-selector .country-group:not(:last-child) {
-    border-bottom: 1px solid var(--ysh-border-color);
+    border-bottom: 1px solid var(--skin-border-color-1);
 }
 
 .country-language-selector .country-header {
     display: inline-flex;
     align-items: center;
-    gap: var(--ysh-spacing-xs);
+    gap: var(--skin-spacing-xs);
     font-weight: 500;
-    color: var(--ysh-text-secondary);
+    color: var(--skin-text-secondary-1);
     flex-shrink: 0;
 }
 
 .country-language-selector .dropdown-item {
     display: inline-block;
-    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
-    color: var(--ysh-text-primary);
+    padding: var(--skin-spacing-xs) var(--skin-spacing-sm);
+    color: var(--skin-main-text-color-1);
     text-decoration: none;
-    transition: background-color var(--ysh-transition-fast) ease;
-    border-radius: var(--ysh-border-radius-sm);
-    font-size: var(--ysh-font-size-sm);
+    transition: background-color var(--skin-transition-fast) ease;
+    border-radius: var(--skin-border-radius-sm);
+    font-size: var(--skin-font-size-sm);
     white-space: nowrap;
 }
 
 .country-language-selector .dropdown-item:hover {
-    background-color: var(--ysh-bg-secondary);
+    background-color: var(--skin-bg-secondary-1);
 }
 
 .country-language-selector .dropdown-item.active {
-    background-color: var(--ysh-bg-secondary);
-    color: var(--ysh-primary);
+    background-color: var(--skin-bg-secondary-1);
+    color: var(--skin-primary-color-1);
     font-weight: 500;
 }
 
@@ -319,7 +319,7 @@ nav.mainmenu label.drop-icon img,
         left: 0;
         width: 100vw;
         max-width: 100vw;
-        background: white;
+        background: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
         z-index: 2000;
         box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         border-bottom: 1px solid #eee;
@@ -338,7 +338,7 @@ nav.mainmenu label.drop-icon img,
         right: 0;
         width: 100%;
         margin: 0;
-        border-radius: var(--ysh-border-radius-lg) var(--ysh-border-radius-lg) 0 0;
+        border-radius: var(--skin-border-radius-lg) var(--skin-border-radius-lg) 0 0;
         transform: translateY(100%);
         max-height: 80vh;
         overflow-y: auto;
@@ -351,12 +351,12 @@ nav.mainmenu label.drop-icon img,
     .country-language-selector .country-group {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--ysh-spacing-xs);
+        gap: var(--skin-spacing-xs);
         white-space: normal;
     }
 
     .country-language-selector .country-header {
-        margin-bottom: var(--ysh-spacing-xs);
+        margin-bottom: var(--skin-spacing-xs);
     }
 
     .experience-theme-yshHeader {
@@ -405,6 +405,7 @@ nav.mainmenu label.drop-icon img,
         width: auto;
         margin-top: auto;
         margin-right: auto;
+        background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
     }
 
     nav.mainmenu li {
@@ -457,7 +458,7 @@ nav.mainmenu label.drop-icon img,
     }
 
     nav.mainmenu .sub-menu {
-        background-color: var(--ysh-background);
+        background-color: var(--skin-background-color-1);
     }
 
     nav.mainmenu .sub-menu,
@@ -500,14 +501,14 @@ nav.mainmenu label.drop-icon img,
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--ysh-spacing-xs);
+    padding: var(--skin-spacing-xs);
     cursor: pointer;
-    color: var(--ysh-text-primary);
-    transition: color var(--ysh-transition-normal) ease;
+    color: var(--skin-text-primary);
+    transition: color var(--skin-transition-normal) ease;
 }
 
 .search-trigger:hover {
-    color: var(--ysh-primary);
+    color: var(--skin-primary-color-1);
 }
 
 .search-expanded {
@@ -516,13 +517,13 @@ nav.mainmenu label.drop-icon img,
     left: 0;
     right: 0;
     width: 100%;
-    padding: var(--ysh-spacing-lg) var(--ysh-spacing-xl);
-    background-color: var(--ysh-bg-secondary);
-    box-shadow: var(--ysh-shadow-md);
+    padding: var(--skin-spacing-lg) var(--skin-spacing-xl);
+    background-color: var(--skin-bg-secondary);
+    box-shadow: var(--skin-shadow-md);
     z-index: 1000;
     transform: translateY(-200px);
     opacity: 0;
-    transition: all 0.2s var(--ysh-transition-normal) ease;
+    transition: all 0.2s var(--skin-transition-normal) ease;
 }
 
 .search-expanded:has(input[type="search"]:focus) {
@@ -553,15 +554,15 @@ nav.mainmenu label.drop-icon img,
     width: 100%;
     margin: 0 auto;
     display: block;
-    padding: var(--ysh-spacing-md);
+    padding: var(--skin-spacing-md);
     font-size: 2rem;
     border: none;
-    background: var(--ysh-bg-secondary);
-    color: var(--ysh-text-primary);
+    background: var(--skin-bg-secondary);
+    color: var(--skin-text-primary);
 }
 
 .search-expanded input[type="search"]::placeholder {
-    color: var(--ysh-text-muted);
+    color: var(--skin-text-muted);
 }
 
 .search-expanded input[type="search"]:focus {
@@ -591,79 +592,79 @@ nav.mainmenu label.drop-icon img,
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--ysh-bg-primary);
-    border: 1px solid var(--ysh-border-color);
-    border-radius: var(--ysh-border-radius-md);
-    box-shadow: var(--ysh-shadow-md);
+    background: var(--skin-bg-primary);
+    border: 1px solid var(--skin-border-color-1);
+    border-radius: var(--skin-border-radius-md);
+    box-shadow: var(--skin-shadow-md);
     z-index: 1001;
     max-height: 80vh;
     overflow-y: auto;
-    padding: var(--ysh-spacing-md);
+    padding: var(--skin-spacing-md);
 }
 
 .suggestions-terms {
     display: flex;
     flex-direction: column;
-    gap: var(--ysh-spacing-sm);
-    margin-bottom: var(--ysh-spacing-md);
-    padding-bottom: var(--ysh-spacing-md);
-    border-bottom: 1px solid var(--ysh-border-color);
+    gap: var(--skin-spacing-sm);
+    margin-bottom: var(--skin-spacing-md);
+    padding-bottom: var(--skin-spacing-md);
+    border-bottom: 1px solid var(--skin-border-color-1);
 }
 
 .suggestion-term {
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    background: var(--ysh-bg-secondary);
-    border-radius: var(--ysh-border-radius-sm);
-    color: var(--ysh-text-primary);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    background: var(--skin-bg-secondary);
+    border-radius: var(--skin-border-radius-sm);
+    color: var(--skin-text-primary);
     text-decoration: none;
-    font-size: var(--ysh-font-size-sm);
-    transition: background-color var(--ysh-transition-normal) ease;
+    font-size: var(--skin-font-size-sm);
+    transition: background-color var(--skin-transition-normal) ease;
     width: 100%;
     text-align: left;
 }
 
 .suggestion-term:hover {
-    background: var(--ysh-bg-tertiary);
+    background: var(--skin-bg-tertiary);
 }
 
 .suggestions-section {
-    margin-bottom: var(--ysh-spacing-md);
+    margin-bottom: var(--skin-spacing-md);
 }
 
 .suggestions-section h3 {
-    font-size: var(--ysh-font-size-sm);
-    color: var(--ysh-text-secondary);
-    margin-bottom: var(--ysh-spacing-sm);
-    padding-bottom: var(--ysh-spacing-xs);
-    border-bottom: 1px solid var(--ysh-border-color);
+    font-size: var(--skin-font-size-sm);
+    color: var(--skin-text-secondary-1);
+    margin-bottom: var(--skin-spacing-sm);
+    padding-bottom: var(--skin-spacing-xs);
+    border-bottom: 1px solid var(--skin-border-color-1);
 }
 
 .suggestions-products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--ysh-spacing-sm);
+    gap: var(--skin-spacing-sm);
 }
 
 .suggestion-product {
     display: flex;
-    gap: var(--ysh-spacing-md);
-    padding: var(--ysh-spacing-sm);
-    border-radius: var(--ysh-border-radius-sm);
+    gap: var(--skin-spacing-md);
+    padding: var(--skin-spacing-sm);
+    border-radius: var(--skin-border-radius-sm);
     text-decoration: none;
-    color: var(--ysh-text-primary);
-    transition: background-color var(--ysh-transition-normal) ease;
+    color: var(--skin-text-primary);
+    transition: background-color var(--skin-transition-normal) ease;
     width: 100%;
 }
 
 .suggestion-product:hover {
-    background: var(--ysh-bg-secondary);
+    background: var(--skin-bg-secondary);
 }
 
 .suggestion-product img {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border-radius: var(--ysh-border-radius-sm);
+    border-radius: var(--skin-border-radius-sm);
     flex-shrink: 0;
 }
 
@@ -676,16 +677,16 @@ nav.mainmenu label.drop-icon img,
 }
 
 .suggestion-product-name {
-    font-size: var(--ysh-font-size-sm);
-    margin-bottom: var(--ysh-spacing-xs);
+    font-size: var(--skin-font-size-sm);
+    margin-bottom: var(--skin-spacing-xs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .suggestion-product-price {
-    font-size: var(--ysh-font-size-sm);
-    color: var(--ysh-text-secondary);
+    font-size: var(--skin-font-size-sm);
+    color: var(--skin-text-secondary-1);
 }
 
 .suggestions-categories,
@@ -694,20 +695,20 @@ nav.mainmenu label.drop-icon img,
 .suggestions-custom {
     display: flex;
     flex-direction: column;
-    gap: var(--ysh-spacing-sm);
+    gap: var(--skin-spacing-sm);
 }
 
 .suggestion-category,
 .suggestion-brand,
 .suggestion-content,
 .suggestion-custom {
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    background: var(--ysh-bg-secondary);
-    border-radius: var(--ysh-border-radius-sm);
-    color: var(--ysh-text-primary);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    background: var(--skin-bg-secondary);
+    border-radius: var(--skin-border-radius-sm);
+    color: var(--skin-text-primary);
     text-decoration: none;
-    font-size: var(--ysh-font-size-sm);
-    transition: background-color var(--ysh-transition-normal) ease;
+    font-size: var(--skin-font-size-sm);
+    transition: background-color var(--skin-transition-normal) ease;
     width: 100%;
     text-align: left;
 }
@@ -716,7 +717,7 @@ nav.mainmenu label.drop-icon img,
 .suggestion-brand:hover,
 .suggestion-content:hover,
 .suggestion-custom:hover {
-    background: var(--ysh-bg-tertiary);
+    background: var(--skin-bg-tertiary);
 }
 
 /* Cookie Consent Banner Styles */
@@ -726,12 +727,12 @@ nav.mainmenu label.drop-icon img,
     left: 0;
     right: 0;
     z-index: 9999;
-    background-color: var(--ysh-warning);
-    color: var(--ysh-text-primary);
-    padding: var(--ysh-spacing-sm) var(--ysh-spacing-md);
-    box-shadow: var(--ysh-shadow-sm);
-    font-size: var(--ysh-font-size-sm);
-    line-height: var(--ysh-line-height);
+    background-color: var(--skin-warning);
+    color: var(--skin-text-primary);
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    box-shadow: var(--skin-shadow-sm);
+    font-size: var(--skin-font-size-sm);
+    line-height: var(--skin-line-height);
 }
 
 .cookie-consent-content {
@@ -740,7 +741,7 @@ nav.mainmenu label.drop-icon img,
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--ysh-spacing-md);
+    gap: var(--skin-spacing-md);
 }
 
 .cookie-consent-text {
@@ -755,7 +756,7 @@ nav.mainmenu label.drop-icon img,
 
 .cookie-consent-actions {
     display: flex;
-    gap: var(--ysh-spacing-sm);
+    gap: var(--skin-spacing-sm);
     flex-shrink: 0;
     margin: 0;
     padding: 0;
@@ -765,11 +766,11 @@ nav.mainmenu label.drop-icon img,
 
 .cookie-consent-accept,
 .cookie-consent-reject {
-    padding: var(--ysh-spacing-xs) var(--ysh-spacing-sm);
-    border-radius: var(--ysh-border-radius-sm);
-    font-size: var(--ysh-font-size-sm);
+    padding: var(--skin-spacing-xs) var(--skin-spacing-sm);
+    border-radius: var(--skin-border-radius-sm);
+    font-size: var(--skin-font-size-sm);
     font-weight: 500;
-    transition: all var(--ysh-transition-normal) ease;
+    transition: all var(--skin-transition-normal) ease;
     white-space: nowrap;
     cursor: pointer;
     border: 1px solid transparent;
@@ -781,15 +782,15 @@ nav.mainmenu label.drop-icon img,
 }
 
 .cookie-consent-accept {
-    background-color: var(--ysh-primary);
-    color: var(--ysh-text-light);
-    border-color: var(--ysh-primary);
+    background-color: var(--skin-primary-color-1);
+    color: var(--skin-text-light);
+    border-color: var(--skin-primary-color-1);
 }
 
 .cookie-consent-accept:hover {
-    background-color: var(--ysh-primary-hover);
-    border-color: var(--ysh-primary-hover);
-    color: var(--ysh-text-light);
+    background-color: var(--skin-primary-hover);
+    border-color: var(--skin-primary-hover);
+    color: var(--skin-text-light);
     text-decoration: none;
 }
 
@@ -808,7 +809,7 @@ nav.mainmenu label.drop-icon img,
 @media (max-width: 768px) {
     .cookie-consent-content {
         flex-direction: column;
-        gap: var(--ysh-spacing-sm);
+        gap: var(--skin-spacing-sm);
         text-align: center;
     }
 
