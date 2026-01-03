@@ -75,22 +75,7 @@
         if (!imagePath) return '';
 
         let baseURL = config.viewImageURL + imagePath;
-        // Find crop for the requested display type, fallback to default
-        const typeMap = { Default: 'default', Tablet: 'tablet', Desktop: 'desktop' };
-        const type = typeMap[displayType] || 'default';
 
-        /*
-        let activeCrop = null;
-        if (crops && Array.isArray(crops)) {
-            activeCrop = crops.find((c) => c.type === type) || crops.find((c) => c.type === 'default');
-        }
-        if (activeCrop) {
-            baseURL += `&cropX=${activeCrop.topLeft.x.toFixed(3)}`;
-            baseURL += `&cropY=${activeCrop.topLeft.y.toFixed(3)}`;
-            baseURL += `&cropWidth=${activeCrop.size.width.toFixed(3)}`;
-            baseURL += `&cropHeight=${activeCrop.size.height.toFixed(3)}`;
-        }
-*/
         if (quality && quality !== 100) {
             baseURL += `&quality=${quality}`;
         }
@@ -310,11 +295,10 @@
                 x: state.cropRectangle.x,
                 y: state.cropRectangle.y,
             },
-            size: {
+            sizePercent: {
                 width: state.cropRectangle.width,
                 height: state.cropRectangle.height,
             },
-            cropWidthPercent: state.cropRectangle.width, // Width percentage of the crop rectangle
             type: state.editingCropType,
         };
 
