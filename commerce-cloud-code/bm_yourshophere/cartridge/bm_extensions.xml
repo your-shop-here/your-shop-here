@@ -14,6 +14,7 @@
          <pipeline name="PDUtils-ImageUpload" />
          <pipeline name="PDUtils-GetFolderImages" />
          <pipeline name="PDUtils-GetLibraryFolders" />
+         <pipeline name="PDUtils-GetDisUrl" />
       </sub-pipelines>
       <parameters>
         <parameter name="menuname" value="Your Shop Here Settings"/>

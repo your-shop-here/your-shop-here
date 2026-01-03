@@ -9,10 +9,8 @@ const URLUtils = require('dw/web/URLUtils');
  * @returns {string} images view url
  */
 function getImagesViewURL() {
-    const currentSite = Site.current;
-    const siteId = `Sites-${currentSite.ID}-Site`;
-    const controllerURL = URLUtils.url('SuperPD-ImageURL').toString().replace('Sites-Site', siteId);
-    return `${controllerURL}?imagePath=`;
+    const controllerURL = URLUtils.url('PDUtils-GetDisUrl', 'libaryId', ContentMgr.getSiteLibrary().ID, 'imagePath', '').toString();
+    return controllerURL;
 }
 
 module.exports.init = function (editor) {

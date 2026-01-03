@@ -28,14 +28,7 @@ store.public = true;
 
 exports.Store = store;
 
-/**
- * Image Manager Controller endpoints
- * This code is based on: https://github.com/sfccplus/super-page-designer
- */
-
-/**
- * Upload images for image manager editor
- */
+// This code is based on: https://github.com/sfccplus/super-page-designer
 function imageUpload() {
     const File = require('dw/io/File');
 
@@ -70,7 +63,7 @@ function imageUpload() {
 }
 imageUpload.public = true;
 exports.ImageUpload = imageUpload;
-
+// This code is based on: https://github.com/sfccplus/super-page-designer
 function getLibraryFolders() {
     const File = require('dw/io/File');
 
@@ -122,7 +115,7 @@ function getLibraryFolders() {
 }
 getLibraryFolders.public = true;
 exports.GetLibraryFolders = getLibraryFolders;
-
+// This code is based on: https://github.com/sfccplus/super-page-designer
 function getFolderImages() {
     const File = require('dw/io/File');
     const URLUtils = require('dw/web/URLUtils');
@@ -178,3 +171,43 @@ function getFolderImages() {
 }
 getFolderImages.public = true;
 exports.GetFolderImages = getFolderImages;
+
+// This code is based on: https://github.com/sfccplus/super-page-designer
+function getDisUrl() {
+    const URLUtils = require('dw/web/URLUtils');
+    const transformationObject = {};
+
+    const querystring = request.httpParameterMap;
+    const libraryId = querystring.libraryId.stringValue;
+    if (querystring.cropX.submitted) {
+        transformationObject.cropX = querystring.cropX.value;
+        transformationObject.cropY = querystring.cropY.value;
+        transformationObject.cropWidth = querystring.cropWidth.value;
+        transformationObject.cropHeight = querystring.cropHeight.value;
+    }
+
+    if (querystring.quality.submitted) {
+        transformationObject.quality = querystring.quality.intValue;
+    }
+
+    if (querystring.width.submitted) {
+        transformationObject.scaleWidth = querystring.width.value;
+    }
+
+    if (querystring.height.submitted) {
+        transformationObject.scaleHeight = querystring.height.value;
+    }
+
+    const libraryUrl = URLUtils.imageURL(
+        URLUtils.CONTEXT_LIBRARY,
+        libraryId,
+        querystring.imagePath.stringValue,
+        transformationObject,
+    ).toString();
+
+    response.setContentType('application/json');
+    response.setStatus(200);
+    response.writer.print(JSON.stringify({ url: libraryUrl }));
+}
+getDisUrl.public = true;
+exports.GetDisUrl = getDisUrl;

@@ -3,10 +3,8 @@
  * This code is based on: https://github.com/sfccplus/super-page-designer
  */
 (function () {
-    'use strict';
-
-    var rootEditorElement;
-    var currentValue = '';
+    let rootEditorElement;
+    let currentValue = '';
 
     /**
      * Initialize the editor markup
@@ -38,13 +36,13 @@
      * Update the preview image
      */
     function updatePreview(imageURL) {
-        var previewContainer = rootEditorElement.querySelector('.image-preview-container');
-        var deleteBtn = rootEditorElement.querySelector('.delete-image-btn');
-        
+        const previewContainer = rootEditorElement.querySelector('.image-preview-container');
+        const deleteBtn = rootEditorElement.querySelector('.delete-image-btn');
+
         if (imageURL) {
             // Reduce image quality for preview
-            var previewURL = imageURL + (imageURL.indexOf('?') === -1 ? '?' : '&') + 'width=230';
-            previewContainer.style.backgroundImage = 'url("' + previewURL + '")';
+            const previewURL = `${imageURL + (imageURL.indexOf('?') === -1 ? '?' : '&')}width=230`;
+            previewContainer.style.backgroundImage = `url("${previewURL}")`;
             deleteBtn.style.display = 'inline-block';
         } else {
             previewContainer.style.backgroundImage = '';
@@ -55,13 +53,13 @@
     /**
      * Handle image selection from breakout editor
      */
-    function handleBreakoutClose(event) {
-        if (event && event.type === 'sfcc:breakoutApply' && event.value) {
-            currentValue = event.value.value || '';
-            updatePreview(currentValue);
+    function handleBreakoutClose({ type, value }, event) {
+        if (type === 'sfcc:breakoutApply' && value) {
+            const previewUrl = value.previewUrl || '';
+            updatePreview(previewUrl);
             emit({
                 type: 'sfcc:value',
-                payload: currentValue ? { value: currentValue } : null
+                payload: value,
             });
         }
     }
@@ -87,13 +85,13 @@
         updatePreview('');
         emit({
             type: 'sfcc:value',
-            payload: null
+            payload: null,
         });
     }
 
     // Listen for SFCC ready event
-    listen('sfcc:ready', function (data) {
-        var value = data.value;
+    listen('sfcc:ready', (data) => {
+        const value = data.value;
         currentValue = (value && typeof value === 'object' && value.value) ? value.value : (value || '');
 
         // Set up event listeners
@@ -104,7 +102,14 @@
         updatePreview(currentValue);
     });
 
+    listen('sfcc:value', (data) => {
+        if (data.value && data.value.disImage) {
+            state.currentImage = data.value.disImage;
+            selectImage(data.value.disImage);
+        }
+    });
+
     // Initialize
     init();
-})();
+}());
 

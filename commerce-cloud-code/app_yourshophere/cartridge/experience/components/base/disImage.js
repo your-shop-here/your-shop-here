@@ -1,3 +1,4 @@
+
 const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
 
 /**
@@ -11,13 +12,12 @@ exports.render = function render(context) {
     const regions = PageRenderHelper.getRegionModelRegistry(component);
 
     // Extract image URL from custom editor value object
-    const imageUrlValue = context.content.imageUrl;
-    const imageUrl = (imageUrlValue && typeof imageUrlValue === 'object' && imageUrlValue.value) 
-        ? imageUrlValue.value 
-        : (imageUrlValue || null);
-
+    const disImageValue = context.content.disImage;
+    const ContentMgr = require('dw/content/ContentMgr');
+    const URLUtils = require('dw/web/URLUtils');
+    const imageUrl = URLUtils.httpsImage(URLUtils.CONTEXT_LIBRARY, ContentMgr.getSiteLibrary().ID, disImageValue.imagePath, {});
     return require('*/api/partials').create('base/disImage').html({
-        imageUrl: imageUrl,
+        imageUrl,
         altText: context.content.altText || '',
         link: context.content.link,
         width: context.content.width || '100%',
