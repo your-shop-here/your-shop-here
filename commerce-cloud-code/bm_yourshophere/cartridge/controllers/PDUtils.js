@@ -198,6 +198,12 @@ function getDisUrl() {
         transformationObject.scaleHeight = querystring.height.value;
     }
 
+    const originalFileUrl = URLUtils.httpsStatic(
+        URLUtils.CONTEXT_LIBRARY,
+        libraryId,
+        querystring.imagePath.stringValue,
+    ).toString();
+
     const libraryUrl = URLUtils.imageURL(
         URLUtils.CONTEXT_LIBRARY,
         libraryId,
@@ -207,7 +213,7 @@ function getDisUrl() {
 
     response.setContentType('application/json');
     response.setStatus(200);
-    response.writer.print(JSON.stringify({ url: libraryUrl }));
+    response.writer.print(JSON.stringify({ url: libraryUrl, originalFileUrl }));
 }
 getDisUrl.public = true;
 exports.GetDisUrl = getDisUrl;

@@ -26,6 +26,9 @@
     let dragStartX = 0;
     let dragStartY = 0;
     let cropStartRect = null;
+    let mouseMoveHandler = null;
+    let mouseUpHandler = null;
+    let mouseDownHandler = null;
 
     // Color mapping for crop types
     const cropColors = {
@@ -35,6 +38,32 @@
     };
 
     /**
+     * Get image dimensions from URL
+     * @param {string} url - The image URL
+     * @returns {Promise<Object>} Promise that resolves to {width: number, height: number}
+     */
+    function getImageDimensions(url) {
+        return new Promise((resolve, reject) => {
+            if (!url) {
+                reject(new Error('URL is required'));
+                return;
+            }
+
+            const img = new Image();
+            img.onload = function () {
+                resolve({
+                    width: img.naturalWidth || img.width,
+                    height: img.naturalHeight || img.height,
+                });
+            };
+            img.onerror = function () {
+                reject(new Error('Failed to load image'));
+            };
+            img.src = url;
+        });
+    }
+
+    /**
      * Get final image URL with crop and quality parameters
      * @param {string} imagePath - The image path
      * @param {Array} crops - Array of crop objects
@@ -42,7 +71,7 @@
      * @param {string} displayType - The display type to use ('default', 'tablet', 'desktop')
      * @returns {string} The final image URL
      */
-    async function getPreviewURL(imagePath, crops, quality, displayType) {
+    async function updateImageURLs(imagePath, crops, quality, displayType) {
         if (!imagePath) return '';
 
         let baseURL = config.viewImageURL + imagePath;
@@ -50,23 +79,26 @@
         const typeMap = { Default: 'default', Tablet: 'tablet', Desktop: 'desktop' };
         const type = typeMap[displayType] || 'default';
 
+        /*
         let activeCrop = null;
         if (crops && Array.isArray(crops)) {
             activeCrop = crops.find((c) => c.type === type) || crops.find((c) => c.type === 'default');
         }
-
         if (activeCrop) {
             baseURL += `&cropX=${activeCrop.topLeft.x.toFixed(3)}`;
             baseURL += `&cropY=${activeCrop.topLeft.y.toFixed(3)}`;
             baseURL += `&cropWidth=${activeCrop.size.width.toFixed(3)}`;
             baseURL += `&cropHeight=${activeCrop.size.height.toFixed(3)}`;
         }
-
+*/
         if (quality && quality !== 100) {
             baseURL += `&quality=${quality}`;
         }
         const response = await fetch(baseURL);
         const data = await response.json();
+
+        state.currentImageDimensions = await getImageDimensions(data.originalFileUrl);
+
         return data.url;
     }
 
@@ -282,6 +314,7 @@
                 width: state.cropRectangle.width,
                 height: state.cropRectangle.height,
             },
+            cropWidthPercent: state.cropRectangle.width, // Width percentage of the crop rectangle
             type: state.editingCropType,
         };
 
@@ -521,85 +554,105 @@
     }
 
     /**
+     * Handle mouse move for dragging/resizing
+     */
+    function handleMouseMove(e) {
+        if (!state.editingCropType || !state.cropRectangle) return;
+
+        const previewContainerEl = rootEditorElement.querySelector('.image-preview');
+        if (!previewContainerEl) return;
+
+        const containerRect = previewContainerEl.getBoundingClientRect();
+        const deltaX = ((e.clientX - dragStartX) / containerRect.width) * 100;
+        const deltaY = ((e.clientY - dragStartY) / containerRect.height) * 100;
+
+        if (isDragging && cropStartRect) {
+            let newX = cropStartRect.x + deltaX;
+            let newY = cropStartRect.y + deltaY;
+
+            // Constrain to bounds
+            newX = Math.max(0, Math.min(100 - state.cropRectangle.width, newX));
+            newY = Math.max(0, Math.min(100 - state.cropRectangle.height, newY));
+
+            state.cropRectangle.x = newX;
+            state.cropRectangle.y = newY;
+            renderEditingRectangle();
+            // Auto-save crop on drag
+            saveCropToArray();
+        } else if (isResizing && cropStartRect) {
+            // Handle resizing
+            let newWidth = cropStartRect.width + deltaX;
+            let newHeight = cropStartRect.height + deltaY;
+
+            if (state.cropAspectType === 'fixed' && state.cropAspectRatio) {
+                // Maintain aspect ratio
+                const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
+                const containerAspect = containerRect.width / containerRect.height;
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    newWidth = Math.max(10, Math.min(100 - cropStartRect.x, newWidth));
+                    newHeight = (newWidth / aspectRatio) * containerAspect;
+                } else {
+                    newHeight = Math.max(10, Math.min(100 - cropStartRect.y, newHeight));
+                    newWidth = (newHeight * aspectRatio) / containerAspect;
+                }
+            } else {
+                // Free mode - allow independent width/height changes
+                newWidth = Math.max(10, Math.min(100 - cropStartRect.x, newWidth));
+                newHeight = Math.max(10, Math.min(100 - cropStartRect.y, newHeight));
+            }
+
+            state.cropRectangle.width = newWidth;
+            state.cropRectangle.height = newHeight;
+            renderEditingRectangle();
+            // Auto-save crop on resize
+            saveCropToArray();
+        }
+    }
+
+    /**
+     * Handle mouse up for stopping drag/resize
+     */
+    function handleMouseUp() {
+        if (isDragging || isResizing) {
+            // Re-render overlays after drag/resize ends to ensure clean state
+            updateImagePreview();
+        }
+        isDragging = false;
+        isResizing = false;
+        cropStartRect = null;
+    }
+
+    /**
      * Initialize crop overlay with mouse events
      */
     function initCropOverlay() {
+        // Remove existing mouse down handler if any
+        if (activeOverlay && mouseDownHandler) {
+            activeOverlay.removeEventListener('mousedown', mouseDownHandler);
+        }
+
         // Mouse down on active overlay - start dragging
         if (activeOverlay) {
-            activeOverlay.addEventListener('mousedown', (e) => {
+            mouseDownHandler = (e) => {
                 if (e.target.classList.contains('crop-handle')) return;
                 if (!state.cropRectangle) return;
                 isDragging = true;
                 dragStartX = e.clientX;
                 dragStartY = e.clientY;
                 cropStartRect = { ...state.cropRectangle };
-            });
+            };
+            activeOverlay.addEventListener('mousedown', mouseDownHandler);
         }
 
-        // Mouse move - update position/size
-        document.addEventListener('mousemove', (e) => {
-            if (!state.editingCropType || !state.cropRectangle) return;
-
-            const previewContainerEl = rootEditorElement.querySelector('.image-preview');
-            if (!previewContainerEl) return;
-
-            const containerRect = previewContainerEl.getBoundingClientRect();
-            const deltaX = ((e.clientX - dragStartX) / containerRect.width) * 100;
-            const deltaY = ((e.clientY - dragStartY) / containerRect.height) * 100;
-
-            if (isDragging && cropStartRect) {
-                let newX = cropStartRect.x + deltaX;
-                let newY = cropStartRect.y + deltaY;
-
-                // Constrain to bounds
-                newX = Math.max(0, Math.min(100 - state.cropRectangle.width, newX));
-                newY = Math.max(0, Math.min(100 - state.cropRectangle.height, newY));
-
-                state.cropRectangle.x = newX;
-                state.cropRectangle.y = newY;
-                renderEditingRectangle();
-                // Auto-save crop on drag
-                saveCropToArray();
-            } else if (isResizing && cropStartRect) {
-                // Handle resizing
-                let newWidth = cropStartRect.width + deltaX;
-                let newHeight = cropStartRect.height + deltaY;
-
-                if (state.cropAspectType === 'fixed' && state.cropAspectRatio) {
-                    // Maintain aspect ratio
-                    const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
-                    const containerAspect = containerRect.width / containerRect.height;
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        newWidth = Math.max(10, Math.min(100 - cropStartRect.x, newWidth));
-                        newHeight = (newWidth / aspectRatio) * containerAspect;
-                    } else {
-                        newHeight = Math.max(10, Math.min(100 - cropStartRect.y, newHeight));
-                        newWidth = (newHeight * aspectRatio) / containerAspect;
-                    }
-                } else {
-                    // Free mode - allow independent width/height changes
-                    newWidth = Math.max(10, Math.min(100 - cropStartRect.x, newWidth));
-                    newHeight = Math.max(10, Math.min(100 - cropStartRect.y, newHeight));
-                }
-
-                state.cropRectangle.width = newWidth;
-                state.cropRectangle.height = newHeight;
-                renderEditingRectangle();
-                // Auto-save crop on resize
-                saveCropToArray();
-            }
-        });
-
-        // Mouse up - stop dragging/resizing
-        document.addEventListener('mouseup', () => {
-            if (isDragging || isResizing) {
-                // Re-render overlays after drag/resize ends to ensure clean state
-                updateImagePreview();
-            }
-            isDragging = false;
-            isResizing = false;
-            cropStartRect = null;
-        });
+        // Add mouse move and mouse up listeners only once
+        if (!mouseMoveHandler) {
+            mouseMoveHandler = handleMouseMove;
+            document.addEventListener('mousemove', mouseMoveHandler);
+        }
+        if (!mouseUpHandler) {
+            mouseUpHandler = handleMouseUp;
+            document.addEventListener('mouseup', mouseUpHandler);
+        }
     }
 
     /**
@@ -611,10 +664,10 @@
         const previewContainer = rootEditorElement.querySelector('.image-preview');
         const typeMap = { Default: 'default', Tablet: 'tablet', Desktop: 'desktop' };
         const displayType = typeMap[state.cropDisplayType] || 'default';
-        const finalURL = await getPreviewURL(state.currentImage, state.crops, state.quality, displayType);
+        const previewUrl = await updateImageURLs(state.currentImage, state.crops, state.quality, displayType);
 
         // Always show the preview image as background
-        previewContainer.style.backgroundImage = `url("${finalURL}")`;
+        previewContainer.style.backgroundImage = `url("${previewUrl}")`;
         previewContainer.style.backgroundSize = 'contain';
         previewContainer.style.backgroundPosition = 'center';
         previewContainer.style.backgroundRepeat = 'no-repeat';
@@ -1130,6 +1183,7 @@
                 handleAspectRatioChange(ratio);
             });
         });
+
         rootEditorElement.querySelector('.apply-btn').addEventListener('click', async () => {
             if (state.currentImage) {
                 // Ensure latest crop changes are saved
@@ -1138,16 +1192,19 @@
                 }
 
                 // Get preview URL using default crop (fallback logic)
-                const previewUrl = await getPreviewURL(state.currentImage, state.crops, state.quality, 'default');
+                const previewUrl = await updateImageURLs(state.currentImage, state.crops, state.quality, 'default');
 
                 // Emit breakout apply event for breakout editor communication
-                debugger;
                 const payload = {
                     previewUrl,
                     imagePath: state.currentImage,
+                    sourceDimensions: state.currentImageDimensions,
                     quality: state.quality,
-                    crops: state.crops, // Send all crops
+                    crops: state.crops,
                 };
+
+                debugger;
+
                 emit({
                     type: 'sfcc:value',
                     payload,

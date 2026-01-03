@@ -15,7 +15,14 @@ exports.render = function render(context) {
     const disImageValue = context.content.disImage;
     const ContentMgr = require('dw/content/ContentMgr');
     const URLUtils = require('dw/web/URLUtils');
-    const imageUrl = URLUtils.httpsImage(URLUtils.CONTEXT_LIBRARY, ContentMgr.getSiteLibrary().ID, disImageValue.imagePath, {});
+    const transformationObject = {};
+    disImageValue.crops.toArray().forEach((crop) => {
+        transformationObject.cropX = (crop.topLeft.x / 100) * disImageValue.sourceDimensions.width;
+        transformationObject.cropY = (crop.topLeft.y / 100) * disImageValue.sourceDimensions.height;
+        transformationObject.cropWidth = (crop.cropWidthPercent / 100) * disImageValue.sourceDimensions.width;
+        transformationObject.cropHeight = ((crop.aspectRatio.h * crop.cropWidthPercent) / 100) * disImageValue.sourceDimensions.height;
+    });
+    const imageUrl = URLUtils.httpsImage(URLUtils.CONTEXT_LIBRARY, ContentMgr.getSiteLibrary().ID, disImageValue.imagePath, transformationObject);
     return require('*/api/partials').create('base/disImage').html({
         imageUrl,
         altText: context.content.altText || '',
