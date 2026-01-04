@@ -22,10 +22,19 @@
                             <span class="slds-assistive-text">Delete</span>
                         </button>
                         <button class="slds-button slds-button_icon slds-button_icon-border-filled open-image-manager-btn" title="Open Image Manager">
-                            <i class="fas fa-folder-open slds-button__icon"></i>
+                            <i class="fas open-icon slds-button__icon"></i>
                             <span class="slds-assistive-text">Open</span>
                         </button>
-                    </div>
+                        <button class="slds-button slds-button_icon slds-button_icon-border-filled image-config-details-btn" aria-describedby="help" title="Image Config Details">
+                            <i class="fas fa-info-circle slds-button__icon"></i>
+                            <span class="slds-assistive-text">Image Config Details</span>
+                            <div id="image-config-details" style="position:relative">
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_right" role="tooltip" id="help" style="position:absolute;right:100%;top:50%;transform:translateY(-50%);margin-right:0.5rem;display:none;">
+                                    <div class="slds-popover__body" style="font-size:6pt;"></div>
+                                </div>
+                            </div>
+                        </button>
+                        </div>
                 </div>
             </div>
         `;
@@ -56,11 +65,26 @@
     function handleBreakoutClose({ type, value }, event) {
         if (type === 'sfcc:breakoutApply' && value) {
             const previewUrl = value.previewUrl || '';
+            currentValue = previewUrl;
             updatePreview(previewUrl);
+            updateIcon();
+            updateHoverInfo(value);
             emit({
                 type: 'sfcc:value',
                 payload: value,
             });
+        }
+    }
+
+    function updateHoverInfo(value) {
+        if (value) {
+            rootEditorElement.querySelector('#image-config-details .slds-popover__body').innerHTML = `
+                <p>Image Path: ${value.imagePath}</p>
+                <p>Image Quality: ${value.quality}</p>
+                <p>Image Crops: ${value.crops.map((crop) => crop.type).join(', ')}</p>
+            `;
+        } else {
+            rootEditorElement.querySelector('#image-config-details').style.display = 'none';
         }
     }
 
@@ -83,30 +107,62 @@
     function deleteImage() {
         currentValue = '';
         updatePreview('');
+        updateIcon();
         emit({
             type: 'sfcc:value',
             payload: null,
         });
     }
 
+    /**
+     * Update the icon based on whether a value is set
+     */
+    function updateIcon() {
+        const iconElement = rootEditorElement.querySelector('.open-icon');
+        if (iconElement) {
+            if (currentValue) {
+                iconElement.className = 'fas fa-pencil-alt open-icon slds-button__icon';
+            } else {
+                iconElement.className = 'fas fa-folder-open open-icon slds-button__icon';
+            }
+        }
+    }
+
     // Listen for SFCC ready event
     listen('sfcc:ready', (data) => {
         const value = data.value;
-        currentValue = (value && typeof value === 'object' && value.value) ? value.value : (value || '');
+        currentValue = (value && typeof value === 'object' && value.previewUrl) ? value.previewUrl : (value || '');
 
+        updateHoverInfo(value);
+        updateIcon();
         // Set up event listeners
         rootEditorElement.querySelector('.open-image-manager-btn').addEventListener('click', openImageManager);
         rootEditorElement.querySelector('.delete-image-btn').addEventListener('click', deleteImage);
 
+        // Set up hover handlers for image config details popover
+        const imageConfigDetailsContainer = rootEditorElement.querySelector('#image-config-details');
+        const imageConfigDetailsBtn = rootEditorElement.querySelector('.image-config-details-btn');
+        const popover = rootEditorElement.querySelector('#help');
+
+        if (imageConfigDetailsContainer && popover) {
+            const showPopover = () => {
+                if (currentValue) {
+                    popover.style.display = 'block';
+                }
+            };
+
+            const hidePopover = () => {
+                popover.style.display = 'none';
+            };
+
+            imageConfigDetailsBtn.addEventListener('mouseenter', showPopover);
+            imageConfigDetailsBtn.addEventListener('mouseleave', hidePopover);
+            popover.addEventListener('mouseenter', showPopover);
+            popover.addEventListener('mouseleave', hidePopover);
+        }
+
         // Update preview with initial value
         updatePreview(currentValue);
-    });
-
-    listen('sfcc:value', (data) => {
-        if (data.value && data.value.disImage) {
-            state.currentImage = data.value.disImage;
-            selectImage(data.value.disImage);
-        }
     });
 
     // Initialize

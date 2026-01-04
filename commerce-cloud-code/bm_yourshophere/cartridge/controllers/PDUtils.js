@@ -33,7 +33,7 @@ function imageUpload() {
     const File = require('dw/io/File');
 
     const params = request.httpParameterMap;
-    const libraryId = params.libraryId.value;
+    const libraryId = params.folderId.value || params.libraryId.value;
     const locale = params.locale.value;
     const uploadPath = params.uploadPath.value;
 

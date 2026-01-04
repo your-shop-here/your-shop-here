@@ -4,21 +4,23 @@
  */
 (function () {
     let rootEditorElement;
+
     const state = {
         currentFolder: '',
         currentImage: null,
         crops: [], // Array of crop objects: [{aspectRatio: {w: 1, h: 1}, topLeft: {x: 10, y: 0}, size: {width: 50, height: 50}, type: "default"}, ...]
         quality: 100,
+        activeTab: null, // currently selected crop type tab
         editorPage: 'home', // 'home' or 'crop'
         folders: [],
         images: [],
         editingCropType: null, // 'default', 'tablet', 'desktop' - which crop is currently being edited
-        cropDisplayType: 'Default', // 'Default', 'Tablet', 'Desktop' - selected in dropdown
         cropAspectRatio: '1:1', // Current aspect ratio selection for editing (e.g., '1:1', '16:9', etc.)
         cropAspectType: 'fixed', // 'fixed' or 'free' - whether aspect ratio is constrained
         cropRectangle: null, // { x, y, width, height } in percentage - current editing rectangle
     };
     let config = {};
+    let disOptions = {};
     let cropOverlays = {}; // Object with keys: 'default', 'tablet', 'desktop' - stores overlay elements
     let activeOverlay = null; // Currently active/editable overlay
     let isDragging = false;
@@ -30,12 +32,87 @@
     let mouseUpHandler = null;
     let mouseDownHandler = null;
 
-    // Color mapping for crop types
-    const cropColors = {
-        default: { border: '#0070d2', background: 'rgba(0, 112, 210, 0.1)' }, // Blue
-        tablet: { border: '#04844b', background: 'rgba(4, 132, 75, 0.1)' }, // Green
-        desktop: { border: '#c23934', background: 'rgba(194, 57, 52, 0.1)' }, // Red
-    };
+    // Helpers to derive editor options from disOptions.json
+    function getTypesConfig() {
+        return (disOptions && disOptions.types) || {};
+    }
+
+    function getTypeKeys() {
+        return Object.keys(getTypesConfig());
+    }
+
+    function getTypeConfig(type) {
+        return getTypesConfig()[type] || {};
+    }
+
+    function getTypeDisplayName(type) {
+        const cfg = getTypeConfig(type);
+        if (cfg && cfg.name) {
+            return cfg.name;
+        }
+        return type ? type.charAt(0).toUpperCase() + type.slice(1) : '';
+    }
+
+    function getAspectRatiosForType(type) {
+        return getTypeConfig(type).aspectRatios || [];
+    }
+
+    function getPreselectedAspect(type) {
+        const cfg = getTypeConfig(type);
+        if (!cfg) {
+            return null;
+        }
+        const aspects = cfg.aspectRatios || [];
+        if (!aspects.length) {
+            return null;
+        }
+        const pre = cfg.preselectedAspectRatio;
+        if (pre) {
+            const found = aspects.find((aspect) => aspect.name === pre);
+            if (found) {
+                return found;
+            }
+        }
+        return aspects[0];
+    }
+
+    function getDefaultQualityValue() {
+        const configured = disOptions && typeof disOptions.defaultQuality !== 'undefined'
+            ? Number(disOptions.defaultQuality)
+            : 100;
+        if (Number.isFinite(configured) && configured >= 1 && configured <= 100) {
+            return configured;
+        }
+        return 100;
+    }
+
+    function aspectToRatioString(aspect) {
+        if (!aspect || !aspect.ratio) {
+            return null;
+        }
+        return `${aspect.ratio.w}:${aspect.ratio.h}`;
+    }
+
+    function isAspectFree(aspect) {
+        return !!(aspect && aspect.userAdjustable);
+    }
+
+    function getTypeColors(type) {
+        const typeConfig = getTypeConfig(type);
+        if (typeConfig && typeConfig.colors) {
+            const cfgColors = typeConfig.colors;
+            if (cfgColors.border || cfgColors.background) {
+                return {
+                    border: cfgColors.border,
+                    background: cfgColors.background,
+                };
+            }
+        }
+        return {
+            border: '#0070d2',
+            background: 'rgba(0, 112, 210, 0.1)',
+        };
+    }
 
     /**
      * Get image dimensions from URL
@@ -68,10 +145,9 @@
      * @param {string} imagePath - The image path
      * @param {Array} crops - Array of crop objects
      * @param {number} quality - The quality
-     * @param {string} displayType - The display type to use ('default', 'tablet', 'desktop')
      * @returns {string} The final image URL
      */
-    async function updateImageURLs(imagePath, crops, quality, displayType) {
+    async function updateImageURLs(imagePath, crops, quality) {
         if (!imagePath) return '';
 
         let baseURL = config.viewImageURL + imagePath;
@@ -223,6 +299,94 @@
         state.cropData = null;
         state.editorPage = 'home';
         showImageEditor();
+        applyCurrentValue();
+    }
+
+    /**
+     * Restore saved state from config
+     * @param {Object} savedValue - The saved image configuration
+     */
+    function restoreSavedState(savedValue) {
+        if (!savedValue) {
+            return;
+        }
+
+        // Parse the value if it's a string (JSON)
+        let savedConfig = savedValue;
+        if (typeof savedValue === 'string') {
+            try {
+                savedConfig = JSON.parse(savedValue);
+            } catch (e) {
+                console.error('Failed to parse saved value:', e);
+                return;
+            }
+        }
+
+        if (!savedConfig || typeof savedConfig !== 'object') {
+            return;
+        }
+
+        // Restore image path
+        if (savedConfig.imagePath) {
+            state.currentImage = savedConfig.imagePath;
+        }
+
+        // Restore quality
+        if (typeof savedConfig.quality !== 'undefined') {
+            state.quality = savedConfig.quality;
+            const qualitySlider = rootEditorElement.querySelector('.quality-slider');
+            const qualityValue = rootEditorElement.querySelector('.quality-value');
+            if (qualitySlider) {
+                qualitySlider.value = savedConfig.quality;
+            }
+            if (qualityValue) {
+                qualityValue.textContent = savedConfig.quality;
+            }
+        }
+
+        // Restore crops
+        if (savedConfig.crops && Array.isArray(savedConfig.crops) && savedConfig.crops.length > 0) {
+            // Normalize crop format - ensure sizePercent is set correctly
+            state.crops = savedConfig.crops.map((crop) => {
+                const normalizedCrop = {
+                    aspectRatio: crop.aspectRatio || { w: 1, h: 1 },
+                    topLeft: crop.topLeft || { x: 0, y: 0 },
+                    type: crop.type || 'default',
+                };
+
+                // Handle sizePercent or size
+                if (crop.sizePercent) {
+                    normalizedCrop.sizePercent = crop.sizePercent;
+                } else {
+                    // Default size if missing
+                    normalizedCrop.sizePercent = { width: 50, height: 50 };
+                }
+
+                return normalizedCrop;
+            });
+        }
+
+        // Switch to editing view if image is set
+        if (state.currentImage) {
+            showImageEditor();
+
+            // Restore crops after UI is ready
+            if (state.crops && state.crops.length > 0) {
+                setTimeout(() => {
+                    // Restore the first crop for editing (this will set up all the UI)
+                    const firstCrop = state.crops[0];
+                    if (firstCrop && firstCrop.type) {
+                        selectCropForEditing(firstCrop.type);
+                    }
+                    updateTabTitles();
+                }, 300);
+            } else {
+                // No crops, just update preview
+                setTimeout(() => {
+                    updateImagePreview();
+                }, 300);
+            }
+        }
     }
 
     /**
@@ -262,6 +426,7 @@
         state.cropRectangle = null;
         activeOverlay = null;
         cropOverlays = {};
+        state.activeTab = null;
     }
 
     /**
@@ -294,6 +459,10 @@
             topLeft: {
                 x: state.cropRectangle.x,
                 y: state.cropRectangle.y,
+            },
+            size: {
+                width: state.cropRectangle.width,
+                height: state.cropRectangle.height,
             },
             sizePercent: {
                 width: state.cropRectangle.width,
@@ -409,7 +578,7 @@
 
             const overlay = document.createElement('div');
             overlay.className = `crop-overlay crop-overlay-${crop.type}`;
-            const colors = cropColors[crop.type] || cropColors.default;
+            const colors = getTypeColors(crop.type);
 
             overlay.style.cssText = `
                 position: absolute;
@@ -423,8 +592,9 @@
             // Calculate position and size
             const x = (crop.topLeft.x / 100) * containerRect.width;
             const y = (crop.topLeft.y / 100) * containerRect.height;
-            const width = (crop.size.width / 100) * containerRect.width;
-            const height = (crop.size.height / 100) * containerRect.height;
+            const size = crop.sizePercent || { width: 0, height: 0 };
+            const width = ((size.width || 0) / 100) * containerRect.width;
+            const height = ((size.height || 0) / 100) * containerRect.height;
 
             overlay.style.left = `${x}px`;
             overlay.style.top = `${y}px`;
@@ -456,7 +626,7 @@
         if (!previewContainer) return;
 
         const containerRect = previewContainer.getBoundingClientRect();
-        const colors = cropColors[state.editingCropType] || cropColors.default;
+        const colors = getTypeColors(state.editingCropType);
 
         // Remove existing editing overlay if any
         if (activeOverlay && activeOverlay.classList.contains('editing-overlay')) {
@@ -600,6 +770,7 @@
         if (isDragging || isResizing) {
             // Re-render overlays after drag/resize ends to ensure clean state
             updateImagePreview();
+            applyCurrentValue();
         }
         isDragging = false;
         isResizing = false;
@@ -646,8 +817,7 @@
         if (!state.currentImage) return;
 
         const previewContainer = rootEditorElement.querySelector('.image-preview');
-        const typeMap = { Default: 'default', Tablet: 'tablet', Desktop: 'desktop' };
-        const displayType = typeMap[state.cropDisplayType] || 'default';
+        const displayType = state.activeTab || state.editingCropType || 'default';
         const previewUrl = await updateImageURLs(state.currentImage, state.crops, state.quality, displayType);
 
         // Always show the preview image as background
@@ -691,27 +861,52 @@
             const hasCrop = state.crops.some((c) => c && c.type === cropId);
 
             // Update the text content
-            const displayName = cropId.charAt(0).toUpperCase() + cropId.slice(1);
+            const displayName = getTypeDisplayName(cropId);
             tabTitle.textContent = hasCrop ? `${displayName} ✓` : displayName;
         });
+    }
+
+    function setTabActive(cropType) {
+        const navItems = rootEditorElement.querySelectorAll('.slds-tabs_default__item');
+        const tabContents = rootEditorElement.querySelectorAll('.slds-tabs_default__content');
+
+        navItems.forEach((item) => item.classList.remove('slds-is-active'));
+        tabContents.forEach((content) => {
+            content.classList.add('slds-hide');
+            content.classList.remove('slds-show');
+        });
+
+        const activeLink = rootEditorElement.querySelector(`[data-tab="${cropType}"]`);
+        if (activeLink) {
+            const item = activeLink.closest('.slds-tabs_default__item');
+            if (item) {
+                item.classList.add('slds-is-active');
+            }
+        }
+        const activeContent = rootEditorElement.querySelector(`#tab-${cropType}`);
+        if (activeContent) {
+            activeContent.classList.remove('slds-hide');
+            activeContent.classList.add('slds-show');
+        }
     }
 
     /**
      * Select crop for editing
      */
     function selectCropForEditing(cropType) {
-        const typeMap = { default: 'Default', tablet: 'Tablet', desktop: 'Desktop' };
-        state.cropDisplayType = typeMap[cropType] || 'Default';
+        state.activeTab = cropType;
         state.editingCropType = cropType;
+        setTabActive(cropType);
 
         // Load existing crop or create new editing rectangle
         const existingCrop = state.crops.find((c) => c.type === cropType);
         if (existingCrop) {
+            const size = existingCrop.sizePercent || { width: 50, height: 50 };
             state.cropRectangle = {
                 x: existingCrop.topLeft.x,
                 y: existingCrop.topLeft.y,
-                width: existingCrop.size.width,
-                height: existingCrop.size.height,
+                width: size.width,
+                height: size.height,
             };
             // Restore aspect ratio (handle "Free" mode)
             // Check if it's a freeform crop (aspect ratio is 1:1 but might be free)
@@ -734,7 +929,11 @@
                 width: 50,
                 height: 50,
             };
-            if (!state.cropAspectRatio) {
+            const preselectedAspect = getPreselectedAspect(cropType);
+            if (preselectedAspect) {
+                state.cropAspectRatio = aspectToRatioString(preselectedAspect) || '1:1';
+                state.cropAspectType = isAspectFree(preselectedAspect) ? 'free' : 'fixed';
+            } else if (!state.cropAspectRatio) {
                 state.cropAspectRatio = '1:1';
             }
             updateCropRectangleForAspectRatio();
@@ -769,7 +968,8 @@
         // Update aspect ratio button states
         aspectRatioBtns.forEach((btn) => {
             const ratio = btn.getAttribute('data-ratio') || '';
-            const isFreeButton = ratio === '';
+            const aspectType = btn.getAttribute('data-aspect-type') || 'fixed';
+            const isFreeButton = aspectType === 'free' || ratio === '';
             const isSelected = (isFreeButton && state.cropAspectType === 'free')
                               || (!isFreeButton && state.cropAspectType === 'fixed' && state.cropAspectRatio === ratio);
 
@@ -795,11 +995,15 @@
         }
 
         state.editingCropType = cropType;
-        const typeMap = { default: 'Default', tablet: 'Tablet', desktop: 'Desktop' };
-        state.cropDisplayType = typeMap[cropType] || 'Default';
+        state.activeTab = cropType;
+        setTabActive(cropType);
 
         // Set default aspect ratio to 1:1 if not set
-        if (!state.cropAspectRatio) {
+        const preselectedAspect = getPreselectedAspect(cropType);
+        if (preselectedAspect) {
+            state.cropAspectRatio = aspectToRatioString(preselectedAspect) || '1:1';
+            state.cropAspectType = isAspectFree(preselectedAspect) ? 'free' : 'fixed';
+        } else if (!state.cropAspectRatio) {
             state.cropAspectRatio = '1:1';
         }
 
@@ -875,8 +1079,8 @@
      * Handle tab change
      */
     function handleTabChange(cropType) {
-        const typeMap = { default: 'Default', tablet: 'Tablet', desktop: 'Desktop' };
-        state.cropDisplayType = typeMap[cropType] || 'Default';
+        state.activeTab = cropType;
+        setTabActive(cropType);
 
         // Load existing crop for this display type if it exists
         const existingCrop = state.crops.find((c) => c.type === cropType);
@@ -889,6 +1093,11 @@
                 state.cropRectangle = null;
                 activeOverlay = null;
             }
+            const preselectedAspect = getPreselectedAspect(cropType);
+            if (preselectedAspect) {
+                state.cropAspectRatio = aspectToRatioString(preselectedAspect) || '1:1';
+                state.cropAspectType = isAspectFree(preselectedAspect) ? 'free' : 'fixed';
+            }
             updateTabUI(cropType);
             updateImagePreview();
         }
@@ -897,9 +1106,10 @@
     /**
      * Handle aspect ratio change
      */
-    function handleAspectRatioChange(ratio) {
+    function handleAspectRatioChange(ratio, aspectType) {
         // Empty string means "Free" mode (no aspect ratio constraint)
-        if (ratio === '' || ratio === null || ratio === undefined) {
+        const isFreeMode = aspectType === 'free' || ratio === '' || ratio === null || ratio === undefined;
+        if (isFreeMode) {
             state.cropAspectType = 'free';
             state.cropAspectRatio = '1:1'; // Keep a default value for storage
         } else {
@@ -912,6 +1122,130 @@
             updateCropRectangleForAspectRatio();
             updateTabUI(state.editingCropType);
             // saveCropToArray() is called inside updateCropRectangleForAspectRatio()
+        }
+    }
+
+    /**
+     * Build crop tabs UI from disOptions configuration
+     */
+    function renderCropTabs() {
+        if (!rootEditorElement) {
+            return;
+        }
+        const tabsContainer = rootEditorElement.querySelector('.crop-tabs-container');
+        if (!tabsContainer) {
+            return;
+        }
+
+        const typeKeys = getTypeKeys();
+        if (!typeKeys.length) {
+            tabsContainer.innerHTML = '<div class="slds-text-body_small slds-text-color_weak" style="text-align: center;">No crop types configured</div>';
+            return;
+        }
+
+        let navHtml = '<ul class="slds-tabs_default__nav" role="tablist">';
+        let contentHtml = '';
+
+        typeKeys.forEach((type, index) => {
+            const displayName = getTypeDisplayName(type);
+            const isActive = index === 0;
+            navHtml += `
+                <li class="slds-tabs_default__item ${isActive ? 'slds-is-active' : ''}" title="${displayName}" role="presentation">
+                    <a class="slds-tabs_default__link" href="#tab-${type}" role="tab" aria-selected="${isActive}" aria-controls="tab-${type}" id="tab-${type}__item" data-tab="${type}" data-crop-id="${type}">
+                        <span data-crop-id="${type}">${displayName}</span>
+                    </a>
+                </li>
+            `;
+
+            const aspectButtons = getAspectRatiosForType(type).map((aspect) => {
+                const ratioString = isAspectFree(aspect) ? '' : aspectToRatioString(aspect) || '';
+                const aspectType = isAspectFree(aspect) ? 'free' : 'fixed';
+                const label = aspect.name || ratioString || 'Free';
+                return `<button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="${ratioString}" data-aspect-type="${aspectType}" data-type="${type}">${label}</button>`;
+            }).join('');
+
+            contentHtml += `
+                <div id="tab-${type}" class="slds-tabs_default__content ${isActive ? 'slds-show' : 'slds-hide'}" role="tabpanel" aria-labelledby="tab-${type}__item">
+                    <div class="tab-content-${type}">
+                        <button class="slds-button slds-button_neutral add-crop-btn-${type}" style="width: 100%;">Add Crop</button>
+                        <div class="crop-controls-${type}" style="display: none;">
+                            <div class="slds-m-top_small">
+                                <button class="slds-button slds-button_destructive remove-crop-btn-${type}" style="width: 100%;">Remove Crop</button>
+                            </div>
+                            <div class="slds-m-top_small">
+                                <label class="slds-form-element__label">Aspect Ratio</label>
+                                <div class="slds-button-group" role="group" style="margin-top: 0.5rem;">
+                                    ${aspectButtons}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        tabsContainer.innerHTML = `
+            <div class="slds-tabs_default">
+                ${navHtml}
+            </ul>
+            ${contentHtml}
+            </div>
+        `;
+
+        // Tab navigation
+        tabsContainer.querySelectorAll('[data-tab]').forEach((tabLink) => {
+            tabLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const cropType = tabLink.getAttribute('data-tab');
+                handleTabChange(cropType);
+            });
+        });
+
+        // Add/remove crop buttons per type
+        typeKeys.forEach((type) => {
+            const addBtn = tabsContainer.querySelector(`.add-crop-btn-${type}`);
+            if (addBtn) {
+                addBtn.addEventListener('click', () => addCrop(type));
+            }
+            const removeBtn = tabsContainer.querySelector(`.remove-crop-btn-${type}`);
+            if (removeBtn) {
+                removeBtn.addEventListener('click', () => removeCrop(type));
+            }
+        });
+
+        // Aspect ratio buttons
+        tabsContainer.querySelectorAll('.aspect-ratio-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const ratio = btn.getAttribute('data-ratio');
+                const aspectType = btn.getAttribute('data-aspect-type');
+                handleAspectRatioChange(ratio, aspectType);
+            });
+        });
+
+        // Set default active tab and aspect selections
+        state.activeTab = typeKeys[0];
+        setTabActive(state.activeTab);
+        const preselectedAspect = getPreselectedAspect(state.activeTab);
+        if (preselectedAspect) {
+            state.cropAspectRatio = aspectToRatioString(preselectedAspect) || state.cropAspectRatio;
+            state.cropAspectType = isAspectFree(preselectedAspect) ? 'free' : 'fixed';
+        }
+        updateTabUI(state.activeTab);
+    }
+
+    /**
+     * Apply default quality from configuration to state and UI
+     */
+    function applyDefaultQualityFromConfig() {
+        const defaultQuality = getDefaultQualityValue();
+        state.quality = defaultQuality;
+        const qualitySlider = rootEditorElement.querySelector('.quality-slider');
+        const qualityValue = rootEditorElement.querySelector('.quality-value');
+        if (qualitySlider) {
+            qualitySlider.value = defaultQuality;
+        }
+        if (qualityValue) {
+            qualityValue.textContent = defaultQuality;
         }
     }
 
@@ -995,7 +1329,10 @@
                                 <h3 class="slds-text-heading_small">Image Editor</h3>
                             </div>
                             <div class="slds-col">
-                                <button class="slds-button slds-button_neutral close-editor-btn">Close</button>
+                                <button class="slds-button slds-button_neutral close-editor-btn">
+                                    <i class="fas fa-folder-open open-icon slds-button__icon"></i>
+                                    Select Image
+                                </button>
                             </div>
                         </div>
                         
@@ -1015,91 +1352,11 @@
                                 </div>
 
                                 <!-- Crop Controls with Tabs -->
-                                <div class="slds-tabs_default slds-m-top_medium">
-                                    <ul class="slds-tabs_default__nav" role="tablist">
-                                        <li class="slds-tabs_default__item slds-is-active" title="Default" role="presentation">
-                                            <a class="slds-tabs_default__link" href="#tab-default" role="tab" aria-selected="true" aria-controls="tab-default" id="tab-default__item" data-tab="default" data-crop-id="default">
-                                                <span data-crop-id="default">Default</span>
-                                            </a>
-                                        </li>
-                                        <li class="slds-tabs_default__item" title="Tablet" role="presentation">
-                                            <a class="slds-tabs_default__link" href="#tab-tablet" role="tab" aria-selected="false" aria-controls="tab-tablet" id="tab-tablet__item" data-tab="tablet" data-crop-id="tablet">
-                                                <span data-crop-id="tablet">Tablet</span>
-                                            </a>
-                                        </li>
-                                        <li class="slds-tabs_default__item" title="Desktop" role="presentation">
-                                            <a class="slds-tabs_default__link" href="#tab-desktop" role="tab" aria-selected="false" aria-controls="tab-desktop" id="tab-desktop__item" data-tab="desktop" data-crop-id="desktop">
-                                                <span data-crop-id="desktop">Desktop</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div id="tab-default" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default__item">
-                                        <div class="tab-content-default">
-                                            <button class="slds-button slds-button_neutral add-crop-btn-default" style="width: 100%;">Add Crop</button>
-                                            <div class="crop-controls-default" style="display: none;">
-                                                <div class="slds-m-top_small">
-                                                    <button class="slds-button slds-button_destructive remove-crop-btn-default" style="width: 100%;">Remove Crop</button>
-                                                </div>
-                                                <div class="slds-m-top_small">
-                                                    <label class="slds-form-element__label">Aspect Ratio</label>
-                                                    <div class="slds-button-group" role="group" style="margin-top: 0.5rem;">
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="1:1">1:1</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="16:9">16:9</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="9:16">9:16</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="4:3">4:3</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="3:4">3:4</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="">Free</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="slds-form-element slds-m-top_medium">
+                                    <label class="slds-form-element__label">Crops</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="crop-tabs-container"></div>
                                     </div>
-                                    <div id="tab-tablet" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-tablet__item">
-                                        <div class="tab-content-tablet">
-                                            <button class="slds-button slds-button_neutral add-crop-btn-tablet" style="width: 100%;">Add Crop</button>
-                                            <div class="crop-controls-tablet" style="display: none;">
-                                                <div class="slds-m-top_small">
-                                                    <button class="slds-button slds-button_destructive remove-crop-btn-tablet" style="width: 100%;">Remove Crop</button>
-                                                </div>
-                                                <div class="slds-m-top_small">
-                                                    <label class="slds-form-element__label">Aspect Ratio</label>
-                                                    <div class="slds-button-group" role="group" style="margin-top: 0.5rem;">
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="1:1">1:1</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="16:9">16:9</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="9:16">9:16</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="4:3">4:3</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="3:4">3:4</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="">Free</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="tab-desktop" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-desktop__item">
-                                        <div class="tab-content-desktop">
-                                            <button class="slds-button slds-button_neutral add-crop-btn-desktop" style="width: 100%;">Add Crop</button>
-                                            <div class="crop-controls-desktop" style="display: none;">
-                                                <div class="slds-m-top_small">
-                                                    <button class="slds-button slds-button_destructive remove-crop-btn-desktop" style="width: 100%;">Remove Crop</button>
-                                                </div>
-                                                <div class="slds-m-top_small">
-                                                    <label class="slds-form-element__label">Aspect Ratio</label>
-                                                    <div class="slds-button-group" role="group" style="margin-top: 0.5rem;">
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="1:1">1:1</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="16:9">16:9</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="9:16">9:16</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="4:3">4:3</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="3:4">3:4</button>
-                                                        <button class="slds-button slds-button_neutral aspect-ratio-btn" data-ratio="">Free</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slds-m-top_medium">
-                                    <button class="slds-button slds-button_brand apply-btn" style="width: 100%;">Apply</button>
                                 </div>
                             </div>
                         </div>
@@ -1110,6 +1367,13 @@
         document.body.appendChild(rootEditorElement);
         document.body.style.minHeight = '500px';
 
+        rootEditorElement.querySelectorAll('button').forEach((button) => {
+            button.addEventListener('click', applyCurrentValue);
+        });
+        rootEditorElement.querySelectorAll('input').forEach((input) => {
+            input.addEventListener('click', applyCurrentValue);
+        });
+
         // Set up event listeners
         rootEditorElement.querySelector('.file-input').addEventListener('change', handleImageUpload);
         rootEditorElement.querySelector('.quality-slider').addEventListener('input', (e) => {
@@ -1117,120 +1381,68 @@
             handleQualityChange(e.target.value);
         });
 
-        // Tab navigation
-        rootEditorElement.querySelectorAll('[data-tab]').forEach((tabLink) => {
-            tabLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                const cropType = tabLink.getAttribute('data-tab');
-
-                // Update tab states
-                rootEditorElement.querySelectorAll('.slds-tabs_default__item').forEach((item) => {
-                    item.classList.remove('slds-is-active');
-                });
-                rootEditorElement.querySelectorAll('.slds-tabs_default__content').forEach((content) => {
-                    content.classList.remove('slds-show');
-                    content.classList.add('slds-hide');
-                });
-
-                tabLink.closest('.slds-tabs_default__item').classList.add('slds-is-active');
-                const tabContent = rootEditorElement.querySelector(`#tab-${cropType}`);
-                if (tabContent) {
-                    tabContent.classList.remove('slds-hide');
-                    tabContent.classList.add('slds-show');
-                }
-
-                handleTabChange(cropType);
-            });
-        });
-
-        // Add crop buttons for each tab
-        ['default', 'tablet', 'desktop'].forEach((type) => {
-            const addBtn = rootEditorElement.querySelector(`.add-crop-btn-${type}`);
-            if (addBtn) {
-                addBtn.addEventListener('click', () => {
-                    addCrop(type);
-                });
-            }
-
-            const removeBtn = rootEditorElement.querySelector(`.remove-crop-btn-${type}`);
-            if (removeBtn) {
-                removeBtn.addEventListener('click', () => {
-                    removeCrop(type);
-                });
-            }
-        });
-
-        // Aspect ratio buttons
-        rootEditorElement.querySelectorAll('.aspect-ratio-btn').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                const ratio = btn.getAttribute('data-ratio');
-                handleAspectRatioChange(ratio);
-            });
-        });
-
-        rootEditorElement.querySelector('.apply-btn').addEventListener('click', async () => {
-            if (state.currentImage) {
-                // Ensure latest crop changes are saved
-                if (state.editingCropType && state.cropRectangle) {
-                    saveCropToArray();
-                }
-
-                // Get preview URL using default crop (fallback logic)
-                const previewUrl = await updateImageURLs(state.currentImage, state.crops, state.quality, 'default');
-
-                // Emit breakout apply event for breakout editor communication
-                const payload = {
-                    previewUrl,
-                    imagePath: state.currentImage,
-                    sourceDimensions: state.currentImageDimensions,
-                    quality: state.quality,
-                    crops: state.crops,
-                };
-
-                debugger;
-
-                emit({
-                    type: 'sfcc:value',
-                    payload,
-                });
-
-                emit({
-                    type: 'sfcc:breakoutApply',
-                    value: payload,
-                });
-            }
-        });
         rootEditorElement.querySelector('.close-editor-btn').addEventListener('click', () => {
             hideImageEditor();
         });
     }
-
     /**
      * Load library folders
      */
     function loadLibraryFolders() {
-        fetch(config.getLibraryFoldersURL)
+        return fetch(config.getLibraryFoldersURL)
             .then((response) => response.json())
             .then((folders) => {
                 state.folders = folders;
                 const container = rootEditorElement.querySelector('.folders-container');
                 renderFolderTree(folders, container);
 
-                // Select first folder if available
-                if (folders && folders.length > 0) {
+                // Select first folder if available and no image is being restored
+                if (folders && folders.length > 0 && !state.currentImage) {
                     selectFolder(folders[0].id);
                 }
+                return folders;
             })
             .catch((error) => {
                 console.error('Error loading folders:', error);
                 // Trigger resize even on error to show error message
+                throw error;
             });
+    }
+
+    /**
+     * Apply the current value of the breakout editor
+     */
+    async function applyCurrentValue() {
+        if (state.currentImage) {
+            // Ensure latest crop changes are saved
+            if (state.editingCropType && state.cropRectangle) {
+                saveCropToArray();
+            }
+
+            // Get preview URL using default crop (fallback logic)
+            const previewUrl = await updateImageURLs(state.currentImage, state.crops, state.quality, 'default');
+
+            // Emit breakout apply event for breakout editor communication
+            const payload = {
+                previewUrl,
+                imagePath: state.currentImage,
+                sourceDimensions: state.currentImageDimensions,
+                quality: state.quality,
+                crops: state.crops,
+            };
+
+            console.info('imagesManager:applyCurrentValue', JSON.stringify(payload, null, 2));
+            emit({
+                type: 'sfcc:value',
+                payload,
+            });
+        }
     }
 
     // Listen for SFCC ready event
     subscribe('sfcc:ready', (data) => {
         config = data.config || {};
-
+        disOptions = config.disOptions || {};
         // Store config globally for breakout editors
         window.EditorsContext = {
             urls: {
@@ -1241,15 +1453,41 @@
             },
         };
 
-        // Load folders
-        loadLibraryFolders();
+        // Initialize quality from configuration
+        state.quality = getDefaultQualityValue();
+        applyDefaultQualityFromConfig();
+
+        // Build UI based on configuration
+        renderCropTabs();
+
+        // Check if there's a saved value to restore
+        const savedValue = data.value;
+
+        // Load folders first
+        loadLibraryFolders().then(() => {
+            // After folders load, restore state if there's a saved value
+            if (savedValue) {
+                restoreSavedState(savedValue);
+            }
+        }).catch(() => {
+            // Even if folders fail, try to restore state
+            if (savedValue) {
+                restoreSavedState(savedValue);
+            }
+        });
     });
 
     subscribe('sfcc:value', (data) => {
         console.log('sfcc:value', data);
-        if (data && data.value && data.value.imageUrl) {
-            state.currentImage = data.value.imageUrl;
-            selectImage(data.value.imageUrl);
+        if (data && data.value) {
+            // Handle both imageUrl (legacy) and full config object
+            if (data.value.imageUrl) {
+                state.currentImage = data.value.imageUrl;
+                selectImage(data.value.imageUrl);
+            } else if (data.value.imagePath) {
+                // Restore full state from saved config
+                restoreSavedState(data.value);
+            }
         }
     });
     // Initialize

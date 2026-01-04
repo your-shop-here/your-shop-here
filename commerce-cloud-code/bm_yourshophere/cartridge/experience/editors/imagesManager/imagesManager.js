@@ -16,6 +16,9 @@ function getImagesViewURL() {
 module.exports.init = function (editor) {
     const viewImageURL = getImagesViewURL();
     editor.configuration.put('viewImageURL', viewImageURL);
+    // hardcoded to JSON file in code. If you want you can overload it with a js module that reads a custom site preference
+    const disOptions = require('*/cartridge/experience/editors/imagesManager/disOptions.json');
+    editor.configuration.put('disOptions', disOptions);
 
     const siteLibrary = ContentMgr.getSiteLibrary();
     const libraryUtils = require('*/cartridge/utils/libraryUtils');
@@ -25,6 +28,8 @@ module.exports.init = function (editor) {
         'PDUtils-ImageUpload',
         'libraryId',
         siteLibrary.ID,
+        'folderId',
+        folderId,
     ).toString();
     editor.configuration.put('imageUploaderURL', imageUploaderURL);
 
