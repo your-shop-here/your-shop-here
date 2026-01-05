@@ -18,6 +18,15 @@ module.exports.init = function (editor) {
     editor.configuration.put('viewImageURL', viewImageURL);
     // hardcoded to JSON file in code. If you want you can overload it with a js module that reads a custom site preference
     const disOptions = require('*/cartridge/experience/editors/imagesManager/disOptions.json');
+    let frontendBreakpoints = {};
+    try {
+        frontendBreakpoints = require('app_yourshophere/cartridge/experience/breakpoints.json');
+    } catch (error) {
+        const Logger = require('dw/system/Logger');
+        Logger.error('Failed to load frontend breakpoints configuration', error);
+    }
+
+    editor.configuration.put('frontendBreakpoints', frontendBreakpoints);
     editor.configuration.put('disOptions', disOptions);
 
     const siteLibrary = ContentMgr.getSiteLibrary();

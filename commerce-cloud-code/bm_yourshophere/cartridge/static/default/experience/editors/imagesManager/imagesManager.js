@@ -21,6 +21,7 @@
     };
     let config = {};
     let disOptions = {};
+    let frontendBreakpoints = {};
     let cropOverlays = {}; // Object with keys: 'default', 'tablet', 'desktop' - stores overlay elements
     let activeOverlay = null; // Currently active/editable overlay
     let isDragging = false;
@@ -112,6 +113,159 @@
             border: '#0070d2',
             background: 'rgba(0, 112, 210, 0.1)',
         };
+    }
+
+    /**
+     * Get breakpoint for a crop type
+     * Uses alias from disOptions if available, otherwise uses the type name
+     * @param {string} cropType - The crop type (e.g., 'default', 'tablet', 'desktop')
+     * @returns {number|null} The breakpoint in pixels, or null if no mapping exists
+     */
+    function getBreakpointForCropType(cropType) {
+        if (!cropType || !frontendBreakpoints) {
+            return null;
+        }
+
+        const typeConfig = getTypeConfig(cropType);
+        // Use alias if available, otherwise use the crop type name
+        const breakpointKey = (typeConfig && typeConfig.alias) || cropType;
+
+        if (frontendBreakpoints[breakpointKey]) {
+            return frontendBreakpoints[breakpointKey];
+        }
+
+        return null;
+    }
+
+    /**
+     * Calculate crop dimensions in pixels
+     * The crop rectangle percentages are relative to the source image dimensions
+     * @param {Object} cropRectangle - The crop rectangle in percentages {x, y, width, height}
+     * @returns {Object|null} {width, height} in pixels, or null if dimensions unavailable
+     */
+    function calculateCropPixelDimensions(cropRectangle) {
+        if (!cropRectangle || !state.currentImageDimensions) {
+            return null;
+        }
+
+        const sourceWidth = state.currentImageDimensions.width;
+        const sourceHeight = state.currentImageDimensions.height;
+
+        if (!sourceWidth || !sourceHeight) {
+            return null;
+        }
+
+        // Crop percentages are relative to source image dimensions
+        return {
+            width: (cropRectangle.width / 100) * sourceWidth,
+            height: (cropRectangle.height / 100) * sourceHeight,
+        };
+    }
+
+    /**
+     * Get the rendered image rectangle inside the preview container.
+     * Background uses `contain`, so the displayed image may be letterboxed.
+     * Returns { left, top, width, height } relative to the preview container.
+     */
+    function getDisplayedImageRect() {
+        const previewContainer = rootEditorElement && rootEditorElement.querySelector('.image-preview');
+        if (!previewContainer) {
+            return null;
+        }
+
+        const containerRect = previewContainer.getBoundingClientRect();
+        const imageDims = state.currentImageDimensions;
+        if (!imageDims || !imageDims.width || !imageDims.height) {
+            return {
+                left: 0,
+                top: 0,
+                width: containerRect.width,
+                height: containerRect.height,
+            };
+        }
+
+        const scale = Math.min(containerRect.width / imageDims.width, containerRect.height / imageDims.height);
+        const width = imageDims.width * scale;
+        const height = imageDims.height * scale;
+        const left = (containerRect.width - width) / 2;
+        const top = (containerRect.height - height) / 2;
+
+        return {
+            left,
+            top,
+            width,
+            height,
+        };
+    }
+
+    /**
+     * Update crop size warning message for the currently editing crop
+     */
+    function updateCropSizeWarning() {
+        if (!state.editingCropType || !state.cropRectangle) {
+            // Hide all warnings if not editing
+            const allControls = rootEditorElement.querySelectorAll('[class*="crop-controls-"]');
+            allControls.forEach((controls) => {
+                const warningEl = controls.querySelector('.crop-size-warning');
+                if (warningEl) {
+                    warningEl.style.display = 'none';
+                }
+            });
+            return;
+        }
+
+        const controls = rootEditorElement.querySelector(`.crop-controls-${state.editingCropType}`);
+        if (!controls) {
+            return;
+        }
+
+        const breakpoint = getBreakpointForCropType(state.editingCropType);
+        if (breakpoint === null) {
+            // No breakpoint mapping, hide warning
+            const warningEl = controls.querySelector('.crop-size-warning');
+            if (warningEl) {
+                warningEl.style.display = 'none';
+            }
+            return;
+        }
+
+        const cropPixels = calculateCropPixelDimensions(state.cropRectangle);
+        if (!cropPixels) {
+            // Can't calculate, hide warning
+            const warningEl = controls.querySelector('.crop-size-warning');
+            if (warningEl) {
+                warningEl.style.display = 'none';
+            }
+            return;
+        }
+
+        // Check if crop width is below breakpoint
+        const cropWidth = Math.round(cropPixels.width);
+        const isTooSmall = cropWidth < breakpoint;
+
+        let warningEl = controls.querySelector('.crop-size-warning');
+        if (!warningEl) {
+            // Create warning element if it doesn't exist
+            warningEl = document.createElement('div');
+            warningEl.className = 'crop-size-warning slds-m-top_small';
+            const aspectRatioGroup = controls.querySelector('.slds-button-group');
+            if (aspectRatioGroup && aspectRatioGroup.parentNode) {
+                aspectRatioGroup.parentNode.insertBefore(warningEl, aspectRatioGroup.nextSibling);
+            }
+        }
+
+        if (isTooSmall) {
+            const displayName = getTypeDisplayName(state.editingCropType);
+            warningEl.innerHTML = `
+                <div class="slds-text-body_small" style="color: #ffb75d;">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 0.25rem;"></i>
+                    Warning: Crop width (${cropWidth}px) is below ${displayName} breakpoint (${breakpoint}px)
+                </div>
+            `;
+            warningEl.style.display = 'block';
+        } else {
+            warningEl.style.display = 'none';
+        }
     }
 
     /**
@@ -379,11 +533,13 @@
                         selectCropForEditing(firstCrop.type);
                     }
                     updateTabTitles();
+                    updateCropSizeWarning();
                 }, 300);
             } else {
                 // No crops, just update preview
                 setTimeout(() => {
                     updateImagePreview();
+                    updateCropSizeWarning();
                 }, 300);
             }
         }
@@ -485,6 +641,7 @@
         // Update UI
         updateTabUI(state.editingCropType);
         updateTabTitles();
+        updateCropSizeWarning();
     }
 
     /**
@@ -502,9 +659,9 @@
         const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
         if (!aspectRatio) return;
 
-        const previewContainer = rootEditorElement.querySelector('.image-preview');
-        const containerRect = previewContainer.getBoundingClientRect();
-        const containerAspect = containerRect.width / containerRect.height;
+        const displayRect = getDisplayedImageRect();
+        if (!displayRect) return;
+        const containerAspect = displayRect.width / displayRect.height;
 
         // Calculate maximum size that fits in container with the aspect ratio
         let maxWidth;
@@ -512,11 +669,11 @@
         if (containerAspect > aspectRatio) {
             // Container is wider, constrain by height (span full height)
             maxHeight = 100;
-            maxWidth = (maxHeight * aspectRatio) * (containerRect.height / containerRect.width);
+            maxWidth = (maxHeight * aspectRatio) * (displayRect.height / displayRect.width);
         } else {
             // Container is taller, constrain by width (span full width)
             maxWidth = 100;
-            maxHeight = (maxWidth / aspectRatio) * (containerRect.width / containerRect.height);
+            maxHeight = (maxWidth / aspectRatio) * (displayRect.width / displayRect.height);
         }
 
         // Center the rectangle
@@ -534,6 +691,7 @@
         renderEditingRectangle();
         // Auto-save crop when aspect ratio changes
         saveCropToArray();
+        updateCropSizeWarning();
     }
 
     /**
@@ -542,6 +700,9 @@
     function renderAllCropOverlays() {
         const previewContainer = rootEditorElement.querySelector('.image-preview');
         if (!previewContainer) return;
+
+        const displayRect = getDisplayedImageRect();
+        if (!displayRect) return;
 
         previewContainer.style.position = 'relative';
 
@@ -567,8 +728,6 @@
             }
         });
 
-        const containerRect = previewContainer.getBoundingClientRect();
-
         // Render all crops (but skip the one being edited - it will be shown as editing overlay)
         state.crops.forEach((crop) => {
             // Skip rendering saved crop if it's currently being edited
@@ -590,11 +749,11 @@
             `;
 
             // Calculate position and size
-            const x = (crop.topLeft.x / 100) * containerRect.width;
-            const y = (crop.topLeft.y / 100) * containerRect.height;
+            const x = displayRect.left + ((crop.topLeft.x / 100) * displayRect.width);
+            const y = displayRect.top + ((crop.topLeft.y / 100) * displayRect.height);
             const size = crop.sizePercent || { width: 0, height: 0 };
-            const width = ((size.width || 0) / 100) * containerRect.width;
-            const height = ((size.height || 0) / 100) * containerRect.height;
+            const width = ((size.width || 0) / 100) * displayRect.width;
+            const height = ((size.height || 0) / 100) * displayRect.height;
 
             overlay.style.left = `${x}px`;
             overlay.style.top = `${y}px`;
@@ -625,7 +784,8 @@
         const previewContainer = rootEditorElement.querySelector('.image-preview');
         if (!previewContainer) return;
 
-        const containerRect = previewContainer.getBoundingClientRect();
+        const displayRect = getDisplayedImageRect();
+        if (!displayRect) return;
         const colors = getTypeColors(state.editingCropType);
 
         // Remove existing editing overlay if any
@@ -655,10 +815,10 @@
             z-index: 15;
         `;
 
-        const x = (state.cropRectangle.x / 100) * containerRect.width;
-        const y = (state.cropRectangle.y / 100) * containerRect.height;
-        const width = (state.cropRectangle.width / 100) * containerRect.width;
-        const height = (state.cropRectangle.height / 100) * containerRect.height;
+        const x = displayRect.left + ((state.cropRectangle.x / 100) * displayRect.width);
+        const y = displayRect.top + ((state.cropRectangle.y / 100) * displayRect.height);
+        const width = (state.cropRectangle.width / 100) * displayRect.width;
+        const height = (state.cropRectangle.height / 100) * displayRect.height;
 
         overlay.style.left = `${x}px`;
         overlay.style.top = `${y}px`;
@@ -716,9 +876,11 @@
         const previewContainerEl = rootEditorElement.querySelector('.image-preview');
         if (!previewContainerEl) return;
 
-        const containerRect = previewContainerEl.getBoundingClientRect();
-        const deltaX = ((e.clientX - dragStartX) / containerRect.width) * 100;
-        const deltaY = ((e.clientY - dragStartY) / containerRect.height) * 100;
+        const displayRect = getDisplayedImageRect();
+        if (!displayRect || !displayRect.width || !displayRect.height) return;
+
+        const deltaX = ((e.clientX - dragStartX) / displayRect.width) * 100;
+        const deltaY = ((e.clientY - dragStartY) / displayRect.height) * 100;
 
         if (isDragging && cropStartRect) {
             let newX = cropStartRect.x + deltaX;
@@ -733,6 +895,7 @@
             renderEditingRectangle();
             // Auto-save crop on drag
             saveCropToArray();
+            updateCropSizeWarning();
         } else if (isResizing && cropStartRect) {
             // Handle resizing
             let newWidth = cropStartRect.width + deltaX;
@@ -741,7 +904,7 @@
             if (state.cropAspectType === 'fixed' && state.cropAspectRatio) {
                 // Maintain aspect ratio
                 const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
-                const containerAspect = containerRect.width / containerRect.height;
+                const containerAspect = displayRect.width / displayRect.height;
                 if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     newWidth = Math.max(10, Math.min(100 - cropStartRect.x, newWidth));
                     newHeight = (newWidth / aspectRatio) * containerAspect;
@@ -760,6 +923,7 @@
             renderEditingRectangle();
             // Auto-save crop on resize
             saveCropToArray();
+            updateCropSizeWarning();
         }
     }
 
@@ -833,6 +997,7 @@
                 initCropOverlay();
             }
             updateTabTitles();
+            updateCropSizeWarning();
         }, 100);
     }
 
@@ -942,6 +1107,7 @@
         // Update UI for this tab
         updateTabUI(cropType);
         updateImagePreview();
+        updateCropSizeWarning();
     }
 
     /**
@@ -981,6 +1147,11 @@
                 btn.classList.add('slds-button_neutral');
             }
         });
+
+        // Update crop size warning
+        if (state.editingCropType === cropType) {
+            updateCropSizeWarning();
+        }
     }
 
     /**
@@ -1024,6 +1195,7 @@
         // Update UI
         updateTabUI(cropType);
         updateImagePreview();
+        updateCropSizeWarning();
     }
 
     /**
@@ -1100,6 +1272,7 @@
             }
             updateTabUI(cropType);
             updateImagePreview();
+            updateCropSizeWarning();
         }
     }
 
@@ -1443,6 +1616,7 @@
     subscribe('sfcc:ready', (data) => {
         config = data.config || {};
         disOptions = config.disOptions || {};
+        frontendBreakpoints = config.frontendBreakpoints || {};
         // Store config globally for breakout editors
         window.EditorsContext = {
             urls: {

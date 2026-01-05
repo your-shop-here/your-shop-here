@@ -12,6 +12,7 @@
         {"ratio": {"w": 1, "h": 1}, "name": "Free", "userAdjustable": true }
       ],
       "preselectedAspectRatio": "1:1",
+      "alias": "mobile",
       "colors": { "border": "#0070d2", "background": "rgba(0, 112, 210, 0.1)" }
     },
     "tablet": {

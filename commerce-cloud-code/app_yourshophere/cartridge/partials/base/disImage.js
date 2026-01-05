@@ -111,6 +111,10 @@ function buildSourceByCrop(imagePath, crop, sourceDimensions, quality) {
         transformationObject.scaleWidth = targetWidth;
         transformationObject.scaleMode = 'fit';
         transformationObject.format = 'jpg'; // @todo make configurable
+    } else {
+        transformationObject.scaleWidth = targetWidth;
+        transformationObject.scaleMode = 'fit';
+        transformationObject.format = 'jpg'; // @todo make configurable
     }
 
     if (quality) {
@@ -224,7 +228,7 @@ function renderSource(source) {
 }
 
 function generateImgStyle(source) {
-    return `width: ${Math.round(source.transformationObject.scaleWidth || source.transformationObject.cropWidth)}px; max-width: 100%; height: auto; display: block; ${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}`;
+    return `width: 100%; height: auto; display: block; ${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}`;
 }
 
 /**
