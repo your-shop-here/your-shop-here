@@ -30,7 +30,7 @@ module.exports.init = function (editor) {
     editor.configuration.put('disOptions', disOptions);
 
     const siteLibrary = ContentMgr.getSiteLibrary();
-    const libraryUtils = require('*/cartridge/utils/libraryUtils');
+    const libraryUtils = require('app_yourshophere/cartridge/utils/libraryUtils.js');
     const folderId = libraryUtils.getSiteLibraryFolder();
 
     const imageUploaderURL = URLUtils.url(
