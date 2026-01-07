@@ -26,23 +26,45 @@
           "required": false
         },
         {
+          "id": "titleText",
+          "name": "Title Text",
+          "description": "Title text for the image",
+          "type": "string",
+          "required": false
+        },
+        {
           "id": "link",
           "name": "Link",
           "description": "Optional link URL for the image",
           "type": "url",
           "required": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "Overlay",
+      "name": "Overlay Settings",
+      "description": "Settings for the overlay region",
+      "attribute_definitions": [
         {
-          "id": "width",
-          "name": "Width",
-          "description": "Image width (e.g., 100%, 500px, auto)",
-          "type": "string",
-          "default_value": "100%",
+          "id": "valign",
+          "name": "Vertical alignment",
+          "type": "enum",
+          "values": [
+              "top",
+              "middle",
+              "bottom"
+          ],
           "required": false
         }
       ]
     }
   ],
-  "region_definitions": []
+  "region_definitions": [
+    {
+      "id": "overlay",
+      "name": "Overlay Content",
+      "component_type_exclusions": []
+    }
+  ]
 }
-

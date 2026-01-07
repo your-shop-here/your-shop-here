@@ -212,6 +212,8 @@ exports.createModel = function createModel(options) {
         altText: options.altText || '',
         link: options.link || null,
         width: options.width || '100%',
+        overlayRegion: options.regions.overlay || null,
+        valign: options.valign,
     };
 };
 
@@ -247,10 +249,14 @@ exports.template = function template(model) {
     const fallback = model.sources[0];
 
     const pictureHtml = `
+    <div class="image-component">
         <picture>
             ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
             <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(fallback)}" loading="lazy" />
-        </picture>`;
+            </picture>
+            ${model.overlayRegion.setTagName('figcaption').setClassName(`dis-image-overlay fg-bgcolor image-on valign-${model.valign}`).render()}
+        </div>
+        `;
 
     // Wrap in link if provided
     if (model.link) {

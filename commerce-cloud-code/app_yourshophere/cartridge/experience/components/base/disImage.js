@@ -5,12 +5,12 @@
  * @returns {string} The template to be displayed
  */
 exports.render = function render(context) {
+    const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+
     // Extract image URL from custom editor value object
     const disImageValue = context.content.disImage;
-
-    // Pass crops array to partial - let the partial generate URLs for each crop type
+    const component = context.component;
     const crops = disImageValue.crops ? disImageValue.crops.toArray() : [];
-
     return require('*/api/partials').create('base/disImage').html({
         imagePath: disImageValue.imagePath,
         sourceDimensions: disImageValue.sourceDimensions,
@@ -19,6 +19,8 @@ exports.render = function render(context) {
         altText: context.content.altText || '',
         link: context.content.link,
         width: context.content.width || '100%',
+        regions: PageRenderHelper.getRegionModelRegistry(component),
+        valign: context.content.valign || 'top',
     });
 };
 

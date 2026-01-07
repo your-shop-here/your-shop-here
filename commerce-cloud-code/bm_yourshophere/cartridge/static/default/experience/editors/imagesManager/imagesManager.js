@@ -1,5 +1,7 @@
 /**
- * Images Manager Editor - Vanilla JavaScript implementation
+ * Images Manager Editor
+ * Customized custom attribute editor for page designer, which replaces the default image selector.
+ * It allows to upload images, select one and crop them for different breakpoints.
  * This code is based on: https://github.com/sfccplus/super-page-designer
  */
 (function () {
@@ -18,6 +20,7 @@
         cropAspectRatio: '1:1', // Current aspect ratio selection for editing (e.g., '1:1', '16:9', etc.)
         cropAspectType: 'fixed', // 'fixed' or 'free' - whether aspect ratio is constrained
         cropRectangle: null, // { x, y, width, height } in percentage - current editing rectangle
+        openFolders: [], // which folders are expanded in the tree
     };
     let config = {};
     let disOptions = {};
@@ -113,6 +116,49 @@
             border: '#0070d2',
             background: 'rgba(0, 112, 210, 0.1)',
         };
+    }
+
+    function isFolderOpen(folderId) {
+        return state.openFolders.indexOf(folderId) !== -1;
+    }
+
+    function setFolderOpen(folderId, shouldBeOpen) {
+        if (!folderId) {
+            return;
+        }
+        if (shouldBeOpen) {
+            if (!isFolderOpen(folderId)) {
+                state.openFolders.push(folderId);
+            }
+            return;
+        }
+        state.openFolders = state.openFolders.filter(
+            (id) => id !== folderId && id.indexOf(`${folderId}/`) !== 0,
+        );
+    }
+
+    function ensureAncestorsOpen(folderId) {
+        if (!folderId) {
+            return;
+        }
+        const parts = folderId.split('/').filter(Boolean);
+        let current = '';
+        parts.forEach((part) => {
+            current = current ? `${current}/${part}` : part;
+            setFolderOpen(current, true);
+        });
+    }
+
+    function toggleFolderExpansion(folderId) {
+        if (!folderId) {
+            return;
+        }
+        const currentlyOpen = isFolderOpen(folderId);
+        setFolderOpen(folderId, !currentlyOpen);
+        const container = rootEditorElement && rootEditorElement.querySelector('.folders-container');
+        if (container) {
+            renderFolderTree(state.folders, container);
+        }
     }
 
     /**
@@ -327,24 +373,31 @@
         }
 
         let html = '<ul class="slds-tree" role="tree">';
-
         function renderFolder(folder, level) {
-            const indent = level * 20;
             const hasChildren = folder.children && folder.children.length > 0;
             const isSelected = state.currentFolder === folder.id ? 'slds-is-selected' : '';
+            const isOpen = hasChildren && isFolderOpen(folder.id);
 
-            html += `<li role="treeitem" class="slds-tree__item ${isSelected}" data-folder-id="${folder.id}" style="padding-left: ${indent}px;">`;
-            html += '<div class="slds-tree__item-meta">';
-            html += '<span class="slds-icon_container slds-m-right_x-small">';
+            const expandedClass = isOpen ? 'slds-is-expanded' : '';
+            html += `<li role="treeitem" class="${isSelected} ${expandedClass}" data-folder-id="${folder.id}" style="padding-left: ${level}em;">`;
+            html += '<div class="slds-tree__item slds-is-relative" style="display: flex; align-items: center;">';
             if (hasChildren) {
-                html += '<svg class="slds-icon slds-icon_x-small" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use></svg>';
+                html += `
+                    <button class="slds-button slds-button_icon slds-button_icon-x-small folder-toggle" data-folder-id="${folder.id}" aria-expanded="${isOpen}" aria-label="Toggle ${folder.name}">
+                        <i class="fas ${isOpen ? 'fa-chevron-down' : 'fa-chevron-right'} slds-button__icon"></i>
+                        <span class="slds-assistive-text">Toggle ${folder.name}</span>
+                    </button>
+                `;
+            } else {
+                html += '<span class="slds-icon_container slds-m-right_x-small" style="width: 1.5rem; display: inline-block;"></span>';
             }
+            html += '<span class="slds-truncate" style="width: 100%; margin-left: 0.25rem;">';
+            html += `<a href="#" class="slds-tree__item-label folder-link" data-folder-id="${folder.id}" aria-expanded="${isOpen}" title="${folder.name}" style="display: inline-block; width: 100%;">${folder.name}</a>`;
             html += '</span>';
-            html += `<a href="#" class="slds-tree__item-label folder-link" data-folder-id="${folder.id}">${folder.name}</a>`;
             html += '</div>';
 
             if (hasChildren) {
-                html += '<ul role="group" class="slds-tree" style="display: none;">';
+                html += `<ul role="group" class="slds-tree" data-folder-children="${folder.id}" style="${isOpen ? 'display: block;' : 'display: none;'}">`;
                 folder.children.forEach((child) => {
                     renderFolder(child, level + 1);
                 });
@@ -369,6 +422,13 @@
                 selectFolder(folderId);
             });
         });
+        container.querySelectorAll('.folder-toggle').forEach((toggle) => {
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                const folderId = this.getAttribute('data-folder-id');
+                toggleFolderExpansion(folderId);
+            });
+        });
     }
 
     /**
@@ -377,13 +437,12 @@
     function selectFolder(folderId) {
         state.currentFolder = folderId;
 
-        // Update UI
-        rootEditorElement.querySelectorAll('.slds-tree__item').forEach((item) => {
-            item.classList.remove('slds-is-selected');
-        });
-        const selectedItem = rootEditorElement.querySelector(`[data-folder-id="${folderId}"]`);
-        if (selectedItem) {
-            selectedItem.classList.add('slds-is-selected');
+        // Keep ancestors expanded so the selection stays visible
+        ensureAncestorsOpen(folderId);
+
+        const container = rootEditorElement.querySelector('.folders-container');
+        if (container) {
+            renderFolderTree(state.folders, container);
         }
 
         // Load images for this folder
@@ -1450,7 +1509,7 @@
             body: formData,
         })
             .then((response) => response.json())
-            .then((data) => {
+            .then(() => {
             // Reload images
                 loadFolderImages(state.currentFolder);
                 uploadBtn.disabled = false;
@@ -1473,14 +1532,14 @@
         rootEditorElement.innerHTML = `
             <div class="images-manager-container" style="display: flex; width: 100%; height: 100%; min-height: 500px;">
                 <!-- Left Panel -->
-                <div class="left-panel" style="width: 250px; min-width: 250px; border-right: 1px solid #dddbda; padding: 1rem; overflow-y: auto; background-color: #fafaf9;">
+                <div class="left-panel" style="width: 250px; min-width: 250px; border-right: 1px solid #dddbda; padding: 1rem; background-color: #fafaf9; display: flex; flex-direction: column;">
                     <div class="upload-container" style="margin-bottom: 1rem;">
                         <label class="slds-button slds-button_neutral slds-button_stretch upload-btn" style="cursor: pointer;">
                             <i class="fas fa-upload slds-button__icon"></i> Upload Image
                             <input type="file" accept="image/*" style="display: none;" class="file-input">
                         </label>
                     </div>
-                    <div class="folders-container" style="min-height: 200px;">
+                    <div class="folders-container" style="min-height: 200px; flex: 1; overflow-y: auto;">
                         <div class="slds-text-body_small slds-text-color_weak" style="text-align: center; padding: 1rem;">
                             Loading folders...
                         </div>
