@@ -1,0 +1,64 @@
+{
+  "types" : {
+    "default": {
+      "name": "Default",
+      "description": "Mobile first, this doubles as default if only one crop is added or mobile only",
+      "aspectRatios": [
+        {"ratio": {"w": 1, "h": 1}, "name": "1:1", "userAdjustable": false },
+        {"ratio": {"w": 16, "h": 9}, "name": "16:9", "userAdjustable": false },
+        {"ratio": {"w": 9, "h": 16}, "name": "9:16", "userAdjustable": false },
+        {"ratio": {"w": 4, "h": 3}, "name": "4:3", "userAdjustable": false },
+        {"ratio": {"w": 3, "h": 4}, "name": "3:4", "userAdjustable": false },
+        {"ratio": {"w": 1, "h": 1}, "name": "Free", "userAdjustable": true }
+      ],
+      "preselectedAspectRatio": "1:1",
+      "alias": "mobile",
+      "colors": { "border": "#0070d2", "background": "rgba(0, 112, 210, 0.1)" }
+    },
+    "tablet": {
+      "name": "Tablet",
+      "description": "Tablet",
+      "aspectRatios": [
+        {"ratio": {"w": 1, "h": 1}, "name": "1:1", "userAdjustable": false },
+        {"ratio": {"w": 16, "h": 9}, "name": "16:9", "userAdjustable": false },
+        {"ratio": {"w": 9, "h": 16}, "name": "9:16", "userAdjustable": false },
+        {"ratio": {"w": 4, "h": 3}, "name": "4:3", "userAdjustable": false },
+        {"ratio": {"w": 3, "h": 4}, "name": "3:4", "userAdjustable": false },
+        {"ratio": {"w": 1, "h": 1}, "name": "Free", "userAdjustable": true }
+      ],
+      "preselectedAspectRatio": "1:1",
+      "colors": { "border": "#04844b", "background": "rgba(4, 132, 75, 0.1)" }
+      },
+      "desktop": {
+      "name": "Desktop",
+      "description": "Desktop",
+      "aspectRatios": [
+        {"ratio": {"w": 1, "h": 1}, "name": "1:1", "userAdjustable": false },
+        {"ratio": {"w": 16, "h": 9}, "name": "16:9", "userAdjustable": false },
+        {"ratio": {"w": 9, "h": 16}, "name": "9:16", "userAdjustable": false },
+        {"ratio": {"w": 4, "h": 3}, "name": "4:3", "userAdjustable": false },
+        {"ratio": {"w": 3, "h": 4}, "name": "3:4", "userAdjustable": false },
+        {"ratio": {"w": 1, "h": 1}, "name": "Free", "userAdjustable": true }
+      ],
+      "preselectedAspectRatio": "1:1",
+      "colors": { "border": "#c23934", "background": "rgba(194, 57, 52, 0.1)" }
+    },
+    "tv": {
+      "name": "TV",
+      "description": "Television",
+      "aspectRatios": [
+        {"ratio": {"w": 1, "h": 1}, "name": "1:1", "userAdjustable": false },
+        {"ratio": {"w": 16, "h": 9}, "name": "16:9", "userAdjustable": false },
+        {"ratio": {"w": 9, "h": 16}, "name": "9:16", "userAdjustable": false },
+        {"ratio": {"w": 4, "h": 3}, "name": "4:3", "userAdjustable": false },
+        {"ratio": {"w": 3, "h": 4}, "name": "3:4", "userAdjustable": false },
+        {"ratio": {"w": 1, "h": 1}, "name": "Free", "userAdjustable": true }
+      ],
+      "preselectedAspectRatio": "1:1",
+      "colors": { "border": "#c23934", "background": "rgba(194, 57, 52, 0.1)" }
+    }
+  },
+  "defaultQuality": 85,
+  "allowedFormats": ["jpg", "png", "gif", "webp"]
+}
+

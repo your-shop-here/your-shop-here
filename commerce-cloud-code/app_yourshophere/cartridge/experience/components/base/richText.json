@@ -1,6 +1,6 @@
 {
-  "name": "More Textbox",
-  "description": "This is the Textbox Component, can be used as Help or FAQ pages",
+  "name": "Textbox",
+  "description": "This is the Textbox Component, can be used as Help or FAQ pages or on smaller areas such as image overlays",
   "group": "base",
   "attribute_definition_groups": [
     {
@@ -14,16 +14,29 @@
           "description": "This is the rich text content area",
           "type": "markup",
           "required": true
+        }
+      ]
+    },
+    {
+      "id": "textStyle",
+      "name": "Text Style",
+      "description": "The style of the text",
+      "attribute_definitions": [
+        {
+          "id": "textContrast",
+          "name": "Text Highlight",
+          "type": "enum",
+          "values": [
+              "Drop Shadow",
+              "Gradient"
+          ],
+          "required": false
         },
         {
           "id": "align",
           "name": "Alignent",
           "type": "enum",
-          "values": [
-              "left",
-              "center",
-              "right"
-          ],
+          "values": ["left", "center", "right"],
           "default_value": "left",
           "required": true
         },
@@ -31,11 +44,38 @@
           "id": "inParagraph",
           "name": "in Paragraph",
           "type": "enum",
-          "values": [
-              "Yes",
-              "No"          ],
+          "values": ["Yes", "No"],
           "default_value": "Yes",
           "required": true
+        },
+        {
+          "id": "textColor",
+          "name": "Text Color",
+          "type": "enum",
+          "default_value": "Default",
+          "values": [
+            "Default",
+            "Primary",
+            "Page Background",
+            "Link Color",
+            "Menu Background"
+          ],
+          "required": false
+        },
+        {
+          "id": "textBackground",
+          "name": "Text Background (if selected)",
+          "type": "enum",
+          "default_value": "None",
+          "values": [
+            "None",
+            "Primary",
+            "Page Background",
+            "Link Color",
+            "Menu Background"
+          ],
+
+          "required": false
         }
       ]
     }
