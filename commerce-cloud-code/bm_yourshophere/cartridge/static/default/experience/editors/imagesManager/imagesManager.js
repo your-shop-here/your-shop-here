@@ -10,6 +10,7 @@
     const state = {
         currentFolder: '',
         currentImage: null,
+        currentImageUrl: null, // Original URL from image list (used for SVG)
         crops: [], // Array of crop objects: [{aspectRatio: {w: 1, h: 1}, topLeft: {x: 10, y: 0}, size: {width: 50, height: 50}, type: "default"}, ...]
         quality: 100,
         activeTab: null, // currently selected crop type tab
@@ -116,6 +117,18 @@
             border: '#0070d2',
             background: 'rgba(0, 112, 210, 0.1)',
         };
+    }
+
+    /**
+     * Check if an image path is an SVG file
+     * @param {string} imagePath - The image path
+     * @returns {boolean} True if the image is an SVG
+     */
+    function isSvgImage(imagePath) {
+        if (!imagePath) return false;
+        const parts = imagePath.split('.');
+        const extension = parts.length > 0 ? parts[parts.length - 1].toLowerCase() : '';
+        return extension === 'svg';
     }
 
     function isFolderOpen(folderId) {
@@ -384,6 +397,23 @@
     async function updateImageURLs(imagePath, crops, quality) {
         if (!imagePath) return '';
 
+        // For SVG files, return the original static URL without transformations
+        if (isSvgImage(imagePath)) {
+            if (state.currentImageUrl) {
+                // Try to get dimensions for SVG (may not always work)
+                try {
+                    state.currentImageDimensions = await getImageDimensions(state.currentImageUrl);
+                } catch (e) {
+                    // SVG dimensions might not be available, set defaults
+                    state.currentImageDimensions = { width: 400, height: 400 };
+                }
+                return state.currentImageUrl;
+            }
+            // Fallback: construct static URL if we don't have the stored URL
+            // This shouldn't happen in normal flow, but handle it gracefully
+            return '';
+        }
+
         let baseURL = config.viewImageURL + imagePath;
 
         if (quality && quality !== 100) {
@@ -519,7 +549,7 @@
 
         images.forEach((image) => {
             html += '<div class="slds-col slds-size_1-of-4" style="cursor: pointer;">';
-            html += `<div class="image-thumbnail" data-image-path="${image.path}" style="width: 100%; height: 150px; background-image: url('${image.url}'); background-size: cover; background-position: center; border: 2px solid transparent; border-radius: 4px;"></div>`;
+            html += `<div class="image-thumbnail" data-image-path="${image.path}" data-image-url="${image.url || ''}" style="width: 100%; height: 150px; background-image: url('${image.url}'); background-size: cover; background-position: center; border: 2px solid transparent; border-radius: 4px;"></div>`;
             html += `<div class="slds-text-body_small slds-m-top_x-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${image.name}</div>`;
             html += '</div>';
         });
@@ -531,7 +561,8 @@
         container.querySelectorAll('.image-thumbnail').forEach((thumb) => {
             thumb.addEventListener('click', function () {
                 const imagePath = this.getAttribute('data-image-path');
-                selectImage(imagePath);
+                const imageUrl = this.getAttribute('data-image-url');
+                selectImage(imagePath, imageUrl);
             });
         });
 
@@ -541,8 +572,9 @@
     /**
      * Select an image
      */
-    function selectImage(imagePath) {
+    function selectImage(imagePath, imageUrl) {
         state.currentImage = imagePath;
+        state.currentImageUrl = imageUrl || null;
         state.cropData = null;
         state.editorPage = 'home';
         showImageEditor();
@@ -591,8 +623,9 @@
             }
         }
 
-        // Restore crops
-        if (savedConfig.crops && Array.isArray(savedConfig.crops) && savedConfig.crops.length > 0) {
+        // Restore crops (skip for SVG images)
+        const isSvg = state.currentImage && isSvgImage(state.currentImage);
+        if (!isSvg && savedConfig.crops && Array.isArray(savedConfig.crops) && savedConfig.crops.length > 0) {
             // Normalize crop format - ensure sizePercent is set correctly
             state.crops = savedConfig.crops.map((crop) => {
                 const normalizedCrop = {
@@ -611,14 +644,17 @@
 
                 return normalizedCrop;
             });
+        } else if (isSvg) {
+            // Clear crops for SVG
+            state.crops = [];
         }
 
         // Switch to editing view if image is set
         if (state.currentImage) {
             showImageEditor();
 
-            // Restore crops after UI is ready
-            if (state.crops && state.crops.length > 0) {
+            // Restore crops after UI is ready (skip for SVG)
+            if (!isSvg && state.crops && state.crops.length > 0) {
                 setTimeout(() => {
                     // Restore the first crop for editing (this will set up all the UI)
                     const firstCrop = state.crops[0];
@@ -653,6 +689,28 @@
         editorContainer.style.flexDirection = 'column';
         editorContainer.style.flex = '1';
 
+        // Hide quality and crop controls for SVG images
+        const isSvg = isSvgImage(state.currentImage);
+        const qualitySlider = rootEditorElement.querySelector('.quality-slider');
+        const qualityControl = qualitySlider ? qualitySlider.closest('.slds-form-element') : null;
+        const cropControls = rootEditorElement.querySelector('.crop-tabs-container');
+
+        if (isSvg) {
+            if (qualityControl) {
+                qualityControl.style.display = 'none';
+            }
+            if (cropControls) {
+                cropControls.style.display = 'none';
+            }
+        } else {
+            if (qualityControl) {
+                qualityControl.style.display = 'block';
+            }
+            if (cropControls) {
+                cropControls.style.display = 'block';
+            }
+        }
+
         updateImagePreview();
     }
 
@@ -671,6 +729,7 @@
 
         // Reset crop editing state (but keep crops)
         state.currentImage = null;
+        state.currentImageUrl = null;
         state.editingCropType = null;
         state.cropRectangle = null;
         activeOverlay = null;
@@ -749,17 +808,34 @@
             return;
         }
 
-        const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
+        // const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
+        const selectedAspectRatioButton = rootEditorElement.querySelector(`.aspect-ratio-buttons-${state.editingCropType} .slds-button_brand`);
+        const aspectRatio = selectedAspectRatioButton ? getAspectRatioValue(selectedAspectRatioButton.getAttribute('data-ratio')) : getAspectRatioValue(state.cropAspectRatio);
+
         if (!aspectRatio) return;
 
         const displayRect = getDisplayedImageRect(true);
         if (!displayRect) return;
+
         const containerAspect = displayRect.width / displayRect.height;
+        if (containerAspect === aspectRatio) {
+            renderEditingRectangle();
+            return;
+        }
 
         // Calculate maximum size that fits in container with the aspect ratio
         let maxWidth;
         let maxHeight;
-        if (options.pin === 'width') {
+
+        if (options.reset) {
+            if (aspectRatio > 1) {
+                maxWidth = 100;
+                maxHeight = (maxWidth / aspectRatio);
+            } else {
+                maxHeight = 100;
+                maxWidth = (maxHeight * aspectRatio);
+            }
+        } else if (options.pin === 'width') {
             maxWidth = displayRect.width;
             maxHeight = (maxWidth / aspectRatio) * (displayRect.width / displayRect.height);
         } else if (containerAspect > aspectRatio) {
@@ -1038,6 +1114,18 @@
     }
 
     /**
+     * Re-render overlays when the viewport size changes to keep crops aligned
+     */
+    function handleResize() {
+        if (!rootEditorElement) return;
+        renderAllCropOverlays();
+        if (state.editingCropType && state.cropRectangle) {
+            initCropOverlay();
+            updateCropSizeWarning();
+        }
+    }
+
+    /**
      * Initialize crop overlay with mouse events
      */
     function initCropOverlay() {
@@ -1079,22 +1167,51 @@
         const previewContainer = rootEditorElement.querySelector('.image-preview');
         const displayType = state.activeTab || state.editingCropType || 'default';
         const previewUrl = await updateImageURLs(state.currentImage, state.crops, state.quality, displayType);
+        const isSvg = isSvgImage(state.currentImage);
 
-        // Always show the preview image as background
-        previewContainer.style.backgroundImage = `url("${previewUrl}")`;
-        previewContainer.style.backgroundSize = 'contain';
-        previewContainer.style.backgroundPosition = 'center';
-        previewContainer.style.backgroundRepeat = 'no-repeat';
-
-        // Render all crop overlays
-        setTimeout(() => {
-            renderAllCropOverlays();
-            if (state.editingCropType && state.cropRectangle) {
-                initCropOverlay();
+        // For SVG, render as img tag; for other images, use background-image
+        if (isSvg) {
+            // Remove any existing img tag
+            const existingImg = previewContainer.querySelector('img.svg-preview');
+            if (existingImg) {
+                existingImg.remove();
             }
-            updateTabTitles();
-            updateCropSizeWarning();
-        }, 100);
+
+            // Clear background styles
+            previewContainer.style.backgroundImage = '';
+            previewContainer.style.backgroundSize = '';
+            previewContainer.style.backgroundPosition = '';
+            previewContainer.style.backgroundRepeat = '';
+
+            // Create and append img tag for SVG
+            const img = document.createElement('img');
+            img.src = previewUrl;
+            img.className = 'svg-preview';
+            img.style.cssText = 'max-width: 100%; max-height: 100%; object-fit: contain;';
+            previewContainer.appendChild(img);
+        } else {
+            // Remove any existing SVG img tag
+            const existingImg = previewContainer.querySelector('img.svg-preview');
+            if (existingImg) {
+                existingImg.remove();
+            }
+
+            // Show the preview image as background
+            previewContainer.style.backgroundImage = `url("${previewUrl}")`;
+            previewContainer.style.backgroundSize = 'contain';
+            previewContainer.style.backgroundPosition = 'center';
+            previewContainer.style.backgroundRepeat = 'no-repeat';
+
+            // Render all crop overlays (only for non-SVG images)
+            setTimeout(() => {
+                renderAllCropOverlays();
+                if (state.editingCropType && state.cropRectangle) {
+                    initCropOverlay();
+                }
+                updateTabTitles();
+                updateCropSizeWarning();
+            }, 100);
+        }
     }
 
     /**
@@ -1351,7 +1468,7 @@
 
         // If in fixed aspect ratio mode, ensure it's properly constrained
         if (state.cropAspectType === 'fixed' && state.cropAspectRatio) {
-            updateCropRectangleForAspectRatio({ pin: 'width' });
+            updateCropRectangleForAspectRatio({ reset: true });
         } else {
             // Just render the rectangle
             renderEditingRectangle();
@@ -1459,7 +1576,7 @@
 
         if (state.editingCropType && state.cropRectangle) {
             // Update rectangle based on aspect ratio (or freeform if ratio is empty)
-            updateCropRectangleForAspectRatio();
+            updateCropRectangleForAspectRatio({ reset: true });
             updateTabUI(state.editingCropType);
             // saveCropToArray() is called inside updateCropRectangleForAspectRatio()
         }
@@ -1515,7 +1632,7 @@
                             </div>
                             <div class="slds-m-top_small">
                                 <label class="slds-form-element__label">Aspect Ratio</label>
-                                <div class="slds-button-group" role="group" style="margin-top: 0.5rem;">
+                                <div class="slds-button-group aspect-ratio-buttons-${type}" role="group" style="margin-top: 0.5rem;">
                                     ${aspectButtons}
                                 </div>
                             </div>
@@ -1563,6 +1680,15 @@
             btn.addEventListener('click', () => {
                 const ratio = btn.getAttribute('data-ratio');
                 const aspectType = btn.getAttribute('data-aspect-type');
+                // get all aspect ratio buttons for the current crop type
+                const aspectRatioButtons = tabsContainer.querySelectorAll(`.aspect-ratio-buttons-${state.editingCropType} .aspect-ratio-btn`);
+                aspectRatioButtons.forEach((loopedBt) => {
+                    loopedBt.classList.remove('slds-button_brand');
+                    loopedBt.classList.add('slds-button_neutral');
+                });
+                btn.classList.add('slds-button_brand');
+                btn.classList.remove('slds-button_neutral');
+
                 handleAspectRatioChange(ratio, aspectType);
             });
         });
@@ -1729,6 +1855,9 @@
         rootEditorElement.querySelector('.close-editor-btn').addEventListener('click', () => {
             hideImageEditor();
         });
+
+        // Keep overlays in sync with preview position on viewport resize
+        window.addEventListener('resize', handleResize);
     }
     /**
      * Load library folders
@@ -1758,11 +1887,15 @@
      * Apply the current value of the breakout editor
      */
     async function applyCurrentValue() {
-        debugger;
         if (state.currentImage) {
-            // Ensure latest crop changes are saved
-            if (state.editingCropType && state.cropRectangle) {
-                saveCropToArray();
+            const isSvg = isSvgImage(state.currentImage);
+
+            // For SVG, skip crop handling
+            if (!isSvg) {
+                // Ensure latest crop changes are saved
+                if (state.editingCropType && state.cropRectangle) {
+                    saveCropToArray();
+                }
             }
 
             // Get preview URL using default crop (fallback logic)
@@ -1773,8 +1906,9 @@
                 previewUrl,
                 imagePath: state.currentImage,
                 sourceDimensions: state.currentImageDimensions,
-                quality: state.quality,
-                crops: state.crops,
+                // For SVG, don't include quality and crops
+                quality: isSvg ? undefined : state.quality,
+                crops: isSvg ? [] : state.crops,
             };
 
             console.info('imagesManager:applyCurrentValue', JSON.stringify(payload, null, 2));

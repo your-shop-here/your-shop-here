@@ -140,7 +140,12 @@ function getFolderImages() {
         return;
     }
 
-    const images = files.map((file) => {
+    const images = files.filter((file) => {
+        if (file.name.startsWith('.')) {
+            return false;
+        }
+        return true;
+    }).map((file) => {
         const filePath = file.getFullPath();
         const pathComponents = filePath.split('/');
 
@@ -150,8 +155,9 @@ function getFolderImages() {
         let imagePath = pathComponents.join('/');
         imagePath = imagePath.replace(new RegExp(`LIBRARIES/${folderId}/default/`), '');
         const imageType = 'png,gif,jpeg,jpg,jp2,jxr,webp,avif'.split(',');
+        const fileExtension = file.name.split('.').pop().toLowerCase() || '';
         let url;
-        if (imageType.includes(file.name.split('.').pop() || '')) {
+        if (imageType.includes(fileExtension)) {
             url = URLUtils.imageURL(URLUtils.CONTEXT_LIBRARY, folderId, imagePath, {
                 scaleWidth: 230,
             }).toString();

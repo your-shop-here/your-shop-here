@@ -59,6 +59,6 @@
     }
   },
   "defaultQuality": 85,
-  "allowedFormats": ["jpg", "png", "gif", "webp"]
+  "allowedFormats": ["jpg", "png", "gif", "webp", "svg"]
 }
 
