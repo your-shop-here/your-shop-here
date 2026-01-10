@@ -209,11 +209,45 @@
     }
 
     /**
+     * Get default crop width percentage based on breakpoint
+     * Returns the percentage of image width that matches the breakpoint, or 100% if image is smaller
+     * @param {string} cropType - The crop type (e.g., 'default', 'tablet', 'desktop')
+     * @returns {number} Width percentage (0-100)
+     */
+    function getDefaultCropWidthPercent(cropType) {
+        if (!state.currentImageDimensions || !state.currentImageDimensions.width) {
+            return 50; // Fallback if image dimensions not available
+        }
+
+        const breakpoint = getBreakpointForCropType(cropType);
+        if (breakpoint === null) {
+            return 50; // Fallback if no breakpoint configured
+        }
+
+        const imageWidth = state.currentImageDimensions.width;
+
+        // If image is smaller than breakpoint, use full width (100%)
+        if (imageWidth <= breakpoint) {
+            return 100;
+        }
+
+        // Calculate percentage: (breakpoint / imageWidth) * 100
+        return Math.min(100, (breakpoint / imageWidth) * 100);
+    }
+
+    /**
      * Get the rendered image rectangle inside the preview container.
      * Background uses `contain`, so the displayed image may be letterboxed.
      * Returns { left, top, width, height } relative to the preview container.
      */
-    function getDisplayedImageRect() {
+    function getDisplayedImageRect(useRectangleFromState = false) {
+        if (useRectangleFromState) {
+            const stateRectangle = state.cropRectangle;
+            stateRectangle.left = stateRectangle.x;
+            stateRectangle.top = stateRectangle.y;
+
+            return stateRectangle;
+        }
         const previewContainer = rootEditorElement && rootEditorElement.querySelector('.image-preview');
         if (!previewContainer) {
             return null;
@@ -706,7 +740,7 @@
     /**
      * Update crop rectangle based on aspect ratio - spans longest direction
      */
-    function updateCropRectangleForAspectRatio() {
+    function updateCropRectangleForAspectRatio(options = {}) {
         if (!state.cropRectangle) return;
 
         // If in free mode, don't enforce aspect ratio
@@ -718,14 +752,17 @@
         const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
         if (!aspectRatio) return;
 
-        const displayRect = getDisplayedImageRect();
+        const displayRect = getDisplayedImageRect(true);
         if (!displayRect) return;
         const containerAspect = displayRect.width / displayRect.height;
 
         // Calculate maximum size that fits in container with the aspect ratio
         let maxWidth;
         let maxHeight;
-        if (containerAspect > aspectRatio) {
+        if (options.pin === 'width') {
+            maxWidth = displayRect.width;
+            maxHeight = (maxWidth / aspectRatio) * (displayRect.width / displayRect.height);
+        } else if (containerAspect > aspectRatio) {
             // Container is wider, constrain by height (span full height)
             maxHeight = 100;
             maxWidth = (maxHeight * aspectRatio) * (displayRect.height / displayRect.width);
@@ -1237,22 +1274,93 @@
             state.cropAspectRatio = '1:1';
         }
 
-        // Initialize crop rectangle in center, will be adjusted by aspect ratio
-        state.cropRectangle = {
-            x: 25,
-            y: 25,
-            width: 50,
-            height: 50,
-        };
+        // Get default width based on breakpoint
+        const defaultWidthPercent = getDefaultCropWidthPercent(cropType);
 
+        // Initialize crop rectangle with default width, centered horizontally
+        state.cropRectangle = {
+            x: (100 - defaultWidthPercent) / 2, // Center horizontally
+            y: 25,
+            width: defaultWidthPercent,
+            height: 50, // Will be adjusted by aspect ratio
+        };
         // Apply aspect ratio (will span longest direction)
-        updateCropRectangleForAspectRatio();
+        updateCropRectangleForAspectRatio({ pin: 'width' });
 
         // Immediately save to array
         saveCropToArray();
 
         // Update UI
         updateTabUI(cropType);
+        updateImagePreview();
+        updateCropSizeWarning();
+    }
+
+    /**
+     * Reset crop to default width based on breakpoint
+     */
+    function resetCropToDefault(cropType) {
+        const targetType = cropType || state.editingCropType;
+        if (!targetType) return;
+
+        // If no crop exists yet, create one (which will use default width)
+        if (!state.crops.find((c) => c.type === targetType)) {
+            addCrop(targetType);
+            return;
+        }
+
+        // Make sure we're editing this crop type
+        if (state.editingCropType !== targetType) {
+            selectCropForEditing(targetType);
+            // Wait a bit for the UI to update, then reset
+            setTimeout(() => {
+                resetCropToDefault(targetType);
+            }, 100);
+            return;
+        }
+
+        // Get default width based on breakpoint
+        const defaultWidthPercent = getDefaultCropWidthPercent(targetType);
+
+        // Calculate height based on aspect ratio if in fixed mode
+        let defaultHeightPercent = 50; // Default fallback
+        if (state.cropAspectType === 'fixed' && state.cropAspectRatio) {
+            const aspectRatio = getAspectRatioValue(state.cropAspectRatio);
+            if (aspectRatio && state.currentImageDimensions) {
+                // Calculate height to maintain aspect ratio
+                // Width percentage represents pixels: (defaultWidthPercent / 100) * imageWidth
+                // Height percentage should be: (widthPixels / aspectRatio) / imageHeight * 100
+                const imageWidth = state.currentImageDimensions.width;
+                const imageHeight = state.currentImageDimensions.height;
+                const widthPixels = (defaultWidthPercent / 100) * imageWidth;
+                const heightPixels = widthPixels / aspectRatio;
+                defaultHeightPercent = (heightPixels / imageHeight) * 100;
+                // Clamp to 100%
+                defaultHeightPercent = Math.min(100, defaultHeightPercent);
+            }
+        }
+
+        // Update crop rectangle with default width, centered horizontally
+        const centerY = state.cropRectangle ? (state.cropRectangle.y + (state.cropRectangle.height / 2)) : 50;
+        state.cropRectangle = {
+            x: (100 - defaultWidthPercent) / 2, // Center horizontally
+            y: Math.max(0, Math.min(100 - defaultHeightPercent, centerY - (defaultHeightPercent / 2))), // Center vertically
+            width: defaultWidthPercent,
+            height: defaultHeightPercent,
+        };
+
+        // If in fixed aspect ratio mode, ensure it's properly constrained
+        if (state.cropAspectType === 'fixed' && state.cropAspectRatio) {
+            updateCropRectangleForAspectRatio({ pin: 'width' });
+        } else {
+            // Just render the rectangle
+            renderEditingRectangle();
+        }
+
+        // Save to array
+        saveCropToArray();
+
+        // Update UI
         updateImagePreview();
         updateCropSizeWarning();
     }
@@ -1401,8 +1509,9 @@
                     <div class="tab-content-${type}">
                         <button class="slds-button slds-button_neutral add-crop-btn-${type}" style="width: 100%;">Add Crop</button>
                         <div class="crop-controls-${type}" style="display: none;">
-                            <div class="slds-m-top_small">
-                                <button class="slds-button slds-button_destructive remove-crop-btn-${type}" style="width: 100%;">Remove Crop</button>
+                            <div class="slds-m-top_small" style="display: flex; gap: 0.5rem;">
+                                <button class="slds-button slds-button_destructive remove-crop-btn-${type}" style="flex: 1;">Remove Crop</button>
+                                <button class="slds-button slds-button_neutral reset-crop-btn-${type}" style="flex: 1;">Reset to Default Width</button>
                             </div>
                             <div class="slds-m-top_small">
                                 <label class="slds-form-element__label">Aspect Ratio</label>
@@ -1433,7 +1542,7 @@
             });
         });
 
-        // Add/remove crop buttons per type
+        // Add/remove/reset crop buttons per type
         typeKeys.forEach((type) => {
             const addBtn = tabsContainer.querySelector(`.add-crop-btn-${type}`);
             if (addBtn) {
@@ -1442,6 +1551,10 @@
             const removeBtn = tabsContainer.querySelector(`.remove-crop-btn-${type}`);
             if (removeBtn) {
                 removeBtn.addEventListener('click', () => removeCrop(type));
+            }
+            const resetBtn = tabsContainer.querySelector(`.reset-crop-btn-${type}`);
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => resetCropToDefault(type));
             }
         });
 
@@ -1645,6 +1758,7 @@
      * Apply the current value of the breakout editor
      */
     async function applyCurrentValue() {
+        debugger;
         if (state.currentImage) {
             // Ensure latest crop changes are saved
             if (state.editingCropType && state.cropRectangle) {
@@ -1726,4 +1840,3 @@
     // Initialize
     init();
 }());
-
