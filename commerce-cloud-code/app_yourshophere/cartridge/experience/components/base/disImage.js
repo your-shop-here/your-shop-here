@@ -21,6 +21,9 @@ exports.render = function render(context) {
         width: context.content.width || '100%',
         regions: PageRenderHelper.getRegionModelRegistry(component),
         valign: context.content.valign || 'top',
+        outputFileType: disImageValue.outputFileType || 'jpg',
+        forceWidth: disImageValue.forceWidth || null,
+        forceHeight: disImageValue.forceHeight || null,
     });
 };
 

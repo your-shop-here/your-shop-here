@@ -83,9 +83,14 @@ function calculateAspectRatio(crop, sourceDimensions) {
 /**
      * Build a source entry from a crop in a single pass
      * @param {Object} crop - Crop definition
+     * @param {Object} sourceDimensions - Source dimensions
+     * @param {number} quality - The image quality (1-100)
+     * @param {string} outputFileType - The output file type
+     * @param {number} forceWidth - The force width
+     * @param {number} forceHeight - The force height
      * @returns {Object|null} Source entry
      */
-function buildSourceByCrop(imagePath, crop, sourceDimensions, quality) {
+function buildSource(imagePath, crop, sourceDimensions, quality, outputFileType, forceWidth, forceHeight) {
     if (!crop || !crop.type) {
         return null;
     }
@@ -104,17 +109,26 @@ function buildSourceByCrop(imagePath, crop, sourceDimensions, quality) {
         transformationObject.cropWidth = croppedWidth;
         transformationObject.cropHeight = croppedHeight;
     }
+    transformationObject.format = outputFileType;
 
     const targetWidth = getTargetWidthForCropType(crop.type);
     const effectiveWidth = croppedWidth || (sourceDimensions && sourceDimensions.width);
     if (targetWidth && effectiveWidth && effectiveWidth > targetWidth) {
         transformationObject.scaleWidth = targetWidth;
         transformationObject.scaleMode = 'fit';
-        transformationObject.format = 'jpg'; // @todo make configurable
     } else {
         transformationObject.scaleWidth = targetWidth;
         transformationObject.scaleMode = 'fit';
-        transformationObject.format = 'jpg'; // @todo make configurable
+    }
+
+    if (forceWidth || forceHeight) {
+        transformationObject.scaleMode = 'fit';
+    }
+    if (forceWidth) {
+        transformationObject.scaleWidth = forceWidth;
+    }
+    if (forceHeight) {
+        transformationObject.scaleHeight = forceHeight;
     }
 
     if (quality) {
@@ -167,7 +181,7 @@ exports.createModel = function createModel(options) {
 
     if (hasCrops) {
         options.crops.forEach((crop) => {
-            const source = buildSourceByCrop(options.imagePath, crop, options.sourceDimensions, options.quality);
+            const source = buildSource(options.imagePath, crop, options.sourceDimensions, options.quality, options.outputFileType, options.forceWidth, options.forceHeight);
             if (source) {
                 sources.push(source);
             }
@@ -176,7 +190,7 @@ exports.createModel = function createModel(options) {
 
     if (sources.length === 0) {
         const fallbackCrop = { type: 'default' };
-        const source = buildSourceByCrop(options.imagePath, fallbackCrop, options.sourceDimensions, options.quality);
+        const source = buildSource(options.imagePath, fallbackCrop, options.sourceDimensions, options.quality, options.outputFileType, options.forceWidth, options.forceHeight);
         if (source) {
             sources.push(source);
         }
@@ -214,6 +228,7 @@ exports.createModel = function createModel(options) {
         width: options.width || '100%',
         overlayRegion: options.regions.overlay || null,
         valign: options.valign,
+        cssWidth: options.forceWidth ? 'auto' : '100%',
     };
 };
 
@@ -229,8 +244,8 @@ function renderSource(source) {
     return `<source srcset="${source.url}" style="${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}"/>`;
 }
 
-function generateImgStyle(source) {
-    return `width: 100%; height: auto; display: block; ${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}`;
+function generateImgStyle(source, cssWidth) {
+    return `width: ${cssWidth}; height: auto; display: block; ${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}`;
 }
 
 /**
@@ -252,7 +267,7 @@ exports.template = function template(model) {
     <div class="image-component">
         <picture>
             ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
-            <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(fallback)}" loading="lazy" />
+            <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(fallback, model.cssWidth)}" loading="lazy" />
             </picture>
             ${model.overlayRegion.setTagName('figcaption').setClassName(`dis-image-overlay fg-bgcolor image-on valign-${model.valign}`).render()}
         </div>

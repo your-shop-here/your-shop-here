@@ -22,6 +22,10 @@
         cropAspectType: 'fixed', // 'fixed' or 'free' - whether aspect ratio is constrained
         cropRectangle: null, // { x, y, width, height } in percentage - current editing rectangle
         openFolders: [], // which folders are expanded in the tree
+        forceWidth: null, // Force width in pixels
+        forceHeight: null, // Force height in pixels
+        outputFileType: null, // Output file type (jpg, png, etc.)
+        advancedSectionOpen: false, // Whether advanced section is expanded
     };
     let config = {};
     let disOptions = {};
@@ -622,6 +626,20 @@
                 qualityValue.textContent = savedConfig.quality;
             }
         }
+
+        // Restore advanced options
+        if (typeof savedConfig.forceWidth !== 'undefined') {
+            state.forceWidth = savedConfig.forceWidth;
+        }
+        if (typeof savedConfig.forceHeight !== 'undefined') {
+            state.forceHeight = savedConfig.forceHeight;
+        }
+        if (typeof savedConfig.outputFileType !== 'undefined') {
+            state.outputFileType = savedConfig.outputFileType;
+        }
+
+        // Re-render advanced section to show restored values
+        renderAdvancedSection();
 
         // Restore crops (skip for SVG images)
         const isSvg = state.currentImage && isSvgImage(state.currentImage);
@@ -1583,6 +1601,96 @@
     }
 
     /**
+     * Render advanced section content
+     */
+    function renderAdvancedSection() {
+        const advancedContent = rootEditorElement.querySelector('.advanced-section-inner');
+        if (!advancedContent) {
+            return;
+        }
+
+        let html = '';
+
+        // Add force width/height inputs if allowScale is true
+        if (disOptions && disOptions.allowScale === true) {
+            html += '<div><i style="margin-right: 0.25rem;" class="fas fa-info"></i>Force output dimensions. If both are provided, the one that scales the image less is used to calculate the scale factor. </div>';
+            html += '<div class="slds-grid slds-grid_pull-padded slds-gutters slds-m-bottom_small">';
+            html += '<div class="slds-col slds-size_1-of-2">';
+            html += '<label class="slds-form-element__label">Force Width (px)</label>';
+            html += `<input type="number" class="slds-input force-width-input" placeholder="auto" min="1" value="${state.forceWidth || ''}">`;
+            html += '</div>';
+            html += '<div class="slds-col slds-size_1-of-2">';
+            html += '<label class="slds-form-element__label">Force Height (px)</label>';
+            html += `<input type="number" class="slds-input force-height-input" placeholder="auto" min="1" value="${state.forceHeight || ''}">`;
+            html += '</div>';
+            html += '</div>';
+        }
+
+        // Add output file type select if allowedFormats is available and not empty
+        if (disOptions && disOptions.allowedFormats && Array.isArray(disOptions.allowedFormats) && disOptions.allowedFormats.length > 0) {
+            html += '<div class="slds-form-element slds-m-bottom_small">';
+            html += '<label class="slds-form-element__label">Output File Type</label>';
+            html += '<div class="slds-form-element__control">';
+            html += '<select class="slds-select output-file-type-select">';
+            html += '<option value="">Default</option>';
+            disOptions.allowedFormats.forEach((format) => {
+                const selected = state.outputFileType === format ? 'selected' : '';
+                html += `<option value="${format}" ${selected}>${format.toUpperCase()}</option>`;
+            });
+            html += '</select>';
+            html += '</div>';
+            html += '</div>';
+        }
+
+        advancedContent.innerHTML = html;
+
+        // Update placeholders for force width/height
+        if (disOptions && disOptions.allowScale === true) {
+            const forceWidthInput = advancedContent.querySelector('.force-width-input');
+            const forceHeightInput = advancedContent.querySelector('.force-height-input');
+            if (forceWidthInput && forceHeightInput) {
+                forceWidthInput.placeholder = 'auto';
+                forceHeightInput.placeholder = 'auto';
+                // Add event listeners
+                forceWidthInput.addEventListener('input', () => {
+                    state.forceWidth = forceWidthInput.value.trim() ? parseInt(forceWidthInput.value, 10) : null;
+                    applyCurrentValue();
+                });
+
+                forceHeightInput.addEventListener('input', () => {
+                    state.forceHeight = forceHeightInput.value.trim() ? parseInt(forceHeightInput.value, 10) : null;
+                    applyCurrentValue();
+                });
+            }
+        }
+
+        // Add event listener for output file type select
+        const outputFileTypeSelect = advancedContent.querySelector('.output-file-type-select');
+        if (outputFileTypeSelect) {
+            outputFileTypeSelect.addEventListener('change', () => {
+                state.outputFileType = outputFileTypeSelect.value || null;
+                applyCurrentValue();
+            });
+        }
+    }
+
+    /**
+     * Toggle advanced section visibility
+     */
+    function toggleAdvancedSection() {
+        state.advancedSectionOpen = !state.advancedSectionOpen;
+        const content = rootEditorElement.querySelector('.advanced-section-content');
+        const icon = rootEditorElement.querySelector('.advanced-section-icon');
+
+        if (content) {
+            content.style.display = state.advancedSectionOpen ? 'block' : 'none';
+        }
+        if (icon) {
+            icon.style.transform = state.advancedSectionOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+        }
+    }
+
+    /**
      * Build crop tabs UI from disOptions configuration
      */
     function renderCropTabs() {
@@ -1829,6 +1937,17 @@
                                         <div class="crop-tabs-container"></div>
                                     </div>
                                 </div>
+
+                                <!-- Advanced Section -->
+                                <div class="slds-form-element slds-m-top_medium advanced-section">
+                                    <div class="slds-form-element__label advanced-section-header" style="cursor: pointer; user-select: none;">
+                                        <i class="fas fa-chevron-right advanced-section-icon" style="margin-right: 0.5rem; transition: transform 0.2s;"></i>
+                                        <span>Advanced</span>
+                                    </div>
+                                    <div class="slds-form-element__control advanced-section-content" style="display: none; margin-top: 0.5rem;">
+                                        <div class="advanced-section-inner"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1855,6 +1974,12 @@
         rootEditorElement.querySelector('.close-editor-btn').addEventListener('click', () => {
             hideImageEditor();
         });
+
+        // Advanced section toggle
+        const advancedSectionHeader = rootEditorElement.querySelector('.advanced-section-header');
+        if (advancedSectionHeader) {
+            advancedSectionHeader.addEventListener('click', toggleAdvancedSection);
+        }
 
         // Keep overlays in sync with preview position on viewport resize
         window.addEventListener('resize', handleResize);
@@ -1911,6 +2036,17 @@
                 crops: isSvg ? [] : state.crops,
             };
 
+            // Add advanced options if they exist
+            if (state.forceWidth !== null && state.forceWidth !== undefined) {
+                payload.forceWidth = state.forceWidth;
+            }
+            if (state.forceHeight !== null && state.forceHeight !== undefined) {
+                payload.forceHeight = state.forceHeight;
+            }
+            if (state.outputFileType !== null && state.outputFileType !== undefined) {
+                payload.outputFileType = state.outputFileType;
+            }
+
             console.info('imagesManager:applyCurrentValue', JSON.stringify(payload, null, 2));
             emit({
                 type: 'sfcc:value',
@@ -1940,6 +2076,7 @@
 
         // Build UI based on configuration
         renderCropTabs();
+        renderAdvancedSection();
 
         // Check if there's a saved value to restore
         const savedValue = data.value;
