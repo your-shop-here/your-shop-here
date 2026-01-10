@@ -59,19 +59,26 @@ exports.createModel = function createImageModel() {
     } = model;
 
     let url;
+    let image;
     if (imageFilter) {
         url = (function getFilteredImages() {
             const foundColor = search.getRepresentedVariationValues(imageFilter.key).filter((color) => color.value === imageFilter.value).pop();
             if (foundColor && foundColor.getImage(config.imageViewType || 'large', 0)) {
-                return foundColor.getImage(config.imageViewType || 'large', 0).url;
+                image = foundColor.getImage(config.imageViewType || 'large', 0);
+                url = image.url;
             }
-            return undefined;
         }());
     }
     if (!url && hit.object.product.getImage(config.imageViewType || 'large', 0)) {
-        url = hit.object.product.getImage(config.imageViewType || 'large', 0).url;
+        image = hit.object.product.getImage(config.imageViewType || 'large', 0);
+        url = image.url.toString();
     }
 
+    // local images, not handled by DIS yet
+    if (!url.startsWith('http')) {
+        // create dis base url, without transformation parameters
+        url = image.getImageURL({ scaleWidth: 999 }).toString().split('?')[0];
+    }
     const disObject = config.imageDISConfig.split('&').reduce((acc, pair) => {
         const [key, value] = pair.split('=');
         // Convert value to number if possible, otherwise keep as string
