@@ -24,7 +24,7 @@ const createModel = (options) => {
  * @returns {string} HTML string containing the promotions list
  */
 const template = (model) => `<ul>
-    ${model.promotions.map((promotion) => `<li>${promotion.message}</li>`).join('\n')}
+    ${model.promotions.map((promotion) => (promotion.message ? `<li>${promotion.message}</li>` : '')).join('\n')}
 </ul>`;
 
 module.exports = {
