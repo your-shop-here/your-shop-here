@@ -184,7 +184,7 @@ input.search-field {
     padding: 0;
     margin: 0;
     max-height: 350px;
-    background-color: var(--skin-background);
+    background-color: var(--skin-background-color-1, var(--skin-bg-primary-1, #ffffff));
     overflow: hidden;   
     box-sizing: border-box;
 }
@@ -195,10 +195,10 @@ input.search-field {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--skin-text-muted) var(--skin-bg-secondary);
-    background-color: var(--skin-background);
+    background-color: var(--skin-background-color-1, var(--skin-bg-primary-1, #ffffff));
 }
 /* adds a gradient to the bottom of the refinebar to indicate scrollability (mac with a trackpad dont show scroll bars)*/
-.refinements  .refinement-container::after {
+.refinements .refinement-container::after {
     content: ""; 
     position: absolute;
     bottom: 0;    
@@ -207,7 +207,7 @@ input.search-field {
     height: 60px;
     
     background: linear-gradient(to top,
-        var(--skin-background) 0%,        
+        var(--skin-background-color-1, var(--skin-bg-primary-1, #ffffff)) 0%,        
       rgba(248, 248, 248, 0) 80%
     );
     

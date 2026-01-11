@@ -28,7 +28,9 @@ exports.createModel = function createModel(options) {
         items: basket.productLineItems.toArray().map((item) => ({
             quantity: item.quantityValue,
             text: item.lineItemText,
-            price: StringUtils.formatMoney(item.price),
+            // @todo strike price should do a list price check
+            basePrice: item.price.value > item.adjustedPrice.value ? StringUtils.formatMoney(item.price) : null,
+            adjustedPrice: StringUtils.formatMoney(item.adjustedPrice),
             images: item.product && item.product.getImages(options.settings.imageViewType || 'small').toArray().slice(0, 1).map((image) => ({
                 url: `${image.url}?${options.settings.imageDISConfig}`,
                 alt: image.alt,
@@ -101,8 +103,12 @@ ${model.items.map((item) => /* html */ `<tr>
                 hx-push-url="${item.pdpUrl}"
                 hx-indicator=".progress">${item.text}</a>${item.bundledItems.length > 0
         ? `<div class="bundled-items-header">Includes:</div><div class="bundled-items">${item.bundledItems.map(
-            (bundledItem) => `<div>${bundledItem.text}</div>`).join('\n')}</div>` : ''}</td>
-        <td>${item.price}</td>
+            (bundledItem) => `<div>${bundledItem.text}</div>`,
+        ).join('\n')}</div>` : ''}</td>
+        <td>
+            ${(item.basePrice) ? `<span class="strike">${item.basePrice}</span>` : ''}
+            ${item.adjustedPrice}
+        </td>
         <td><a href="${item.deleteUrl}" class="close"
                 hx-get="${item.deleteUrl}&hx=main"
                 hx-target="main"

@@ -50,11 +50,15 @@ const createModel = (options) => {
     const listPrice = getListPrice(priceModel);
     const salesPrice = getPromotionalPrice(product, priceModel);
 
+    let basePrice;
+    if (salesPrice && salesPrice.available && salesPrice.value < priceModel.price.value) {
+        basePrice = StringUtils.formatMoney(salesPrice);
+    } else {
+        basePrice = priceModel.price && priceModel.price.available ? StringUtils.formatMoney(priceModel.price) : '';
+    }
     const model = {
-        price: salesPrice && salesPrice.value < priceModel.price.value
-            ? StringUtils.formatMoney(salesPrice)
-            : (priceModel.price && StringUtils.formatMoney(priceModel.price)),
-        strikePrice: listPrice && listPrice.value !== priceModel.price.value
+        price: basePrice,
+        strikePrice: listPrice && listPrice.available && listPrice.value !== priceModel.price.value
             ? StringUtils.formatMoney(listPrice)
             : null,
     };
