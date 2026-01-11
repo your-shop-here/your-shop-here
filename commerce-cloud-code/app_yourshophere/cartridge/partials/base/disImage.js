@@ -61,6 +61,10 @@ function getTargetWidthForCropType(cropType) {
      * @returns {string|null} CSS aspect ratio string
      */
 function calculateAspectRatio(crop, sourceDimensions) {
+    if (crop.aspectRatio) {
+        return `${crop.aspectRatio.w} / ${crop.aspectRatio.h}`;
+    }
+
     if (crop && crop.sizePercent) {
         const cropWidth = crop.sizePercent.width || 0;
         const cropHeight = crop.sizePercent.height || 0;
@@ -245,7 +249,7 @@ function renderSource(source) {
 }
 
 function generateImgStyle(source, cssWidth) {
-    return `width: ${cssWidth}; height: auto; display: block; ${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}`;
+    return `width: ${cssWidth}; height: auto; display: block;}`;
 }
 
 /**

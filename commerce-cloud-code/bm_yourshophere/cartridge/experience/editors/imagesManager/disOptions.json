@@ -1,7 +1,7 @@
 {
   "types" : {
     "default": {
-      "name": "Default",
+      "name": "Default (Mobile)",
       "description": "Mobile first, this doubles as default if only one crop is added or mobile only",
       "aspectRatios": [
         {"ratio": {"w": 1, "h": 1}, "name": "1:1", "userAdjustable": false },
