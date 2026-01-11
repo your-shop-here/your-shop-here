@@ -243,13 +243,37 @@ exports.createModel = function createModel(options) {
  */
 function renderSource(source) {
     if (source.mediaQuery) {
-        return `<source srcset="${source.url}" media="${source.mediaQuery}" style="${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}"/>`;
+        return `<source srcset="${source.url}" media="${source.mediaQuery}"/>`;
     }
-    return `<source srcset="${source.url}" style="${source.aspectRatio ? `aspect-ratio: ${source.aspectRatio};` : ''}"/>`;
+    return `<source srcset="${source.url}"/>`;
 }
 
-function generateImgStyle(source, cssWidth) {
-    return `width: ${cssWidth}; height: auto; display: block;}`;
+/**
+ * Generates CSS media queries for aspect ratios based on sources
+ * @param {Array} sources - Array of source objects with mediaQuery and aspectRatio
+ * @param {string} fallbackAspectRatio - The fallback aspect ratio for mobile/default
+ * @returns {string} CSS rules string with media queries for use in style tag
+ */
+function generateAspectRatioStyles(sources, fallbackAspectRatio) {
+    const rules = [];
+
+    // Base style for fallback (mobile/default) - applied directly to img
+    if (fallbackAspectRatio) {
+        rules.push(`aspect-ratio: ${fallbackAspectRatio};`);
+    }
+
+    // Generate media queries for each breakpoint
+    sources.forEach((source) => {
+        if (source.mediaQuery && source.aspectRatio) {
+            rules.push(`@media ${source.mediaQuery} { aspect-ratio: ${source.aspectRatio}; }`);
+        }
+    });
+
+    return rules.join('\n    ');
+}
+
+function generateImgStyle(cssWidth) {
+    return `width: ${cssWidth}; height: auto; display: block;`;
 }
 
 /**
@@ -267,11 +291,27 @@ exports.template = function template(model) {
     // Fallback is the first source (sorted to be first, has no mediaQuery)
     const fallback = model.sources[0];
 
+    // Generate aspect ratio styles for the img element
+    const aspectRatioStyles = generateAspectRatioStyles(model.sources, fallback.aspectRatio);
+
+    // Create a unique ID for this image component to scope the styles
+    const imageId = `dis-image-${Math.random().toString(36).substr(2, 9)}`;
+
+    // Generate style tag with media queries for aspect ratios
+    const styleTag = aspectRatioStyles ? `
+        <style>
+            #${imageId} img {
+                ${aspectRatioStyles}
+            }
+        </style>
+    ` : '';
+
     const pictureHtml = `
-    <div class="image-component">
+    ${styleTag}
+    <div class="image-component" id="${imageId}">
         <picture>
             ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
-            <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(fallback, model.cssWidth)}" loading="lazy" />
+            <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(model.cssWidth)}" loading="lazy" />
             </picture>
             ${model.overlayRegion.setTagName('figcaption').setClassName(`dis-image-overlay fg-bgcolor image-on valign-${model.valign}`).render()}
         </div>
