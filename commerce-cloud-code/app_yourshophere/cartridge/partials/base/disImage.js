@@ -1,160 +1,6 @@
-const ContentMgr = require('dw/content/ContentMgr');
-const URLUtils = require('dw/web/URLUtils');
+
 const BREAKPOINTS = require('*/cartridge/experience/breakpoints.json');
-const getCssAspectRatio = require('*/cartridge/utils/image').getCssAspectRatio;
-
-/**
- * Maps crop types to media query breakpoints
- * @param {string} cropType - The crop type (e.g., 'default', 'tablet', 'desktop')
- * @returns {string|null} Media query string or null for default/fallback
- */
-function getMediaQueryForCropType(cropType) {
-    const breakpointWidths = {
-        mobile: BREAKPOINTS.mobile,
-        default: BREAKPOINTS.mobile, // Default uses mobile breakpoint
-        tablet: BREAKPOINTS.tablet,
-        desktop: BREAKPOINTS.desktop,
-    };
-
-    const width = breakpointWidths[cropType];
-    if (!width) {
-        return null; // Fallback, no media query
-    }
-
-    // Generate media query based on breakpoint width
-    // Mobile/default: no query (fallback)
-    // Tablet: min-width of tablet breakpoint
-    // Desktop: min-width of desktop breakpoint
-    if (cropType === 'mobile' || cropType === 'default') {
-        return null;
-    }
-    if (cropType === 'tablet') {
-        return `(min-width: ${BREAKPOINTS.mobile + 1}px)`;
-    }
-    if (cropType === 'desktop') {
-        return `(min-width: ${BREAKPOINTS.tablet + 1}px)`;
-    }
-
-    return null;
-}
-
-/**
- * Gets the target width for scaling based on crop type
- * @param {string} cropType - The crop type
- * @returns {number|null} Target width in pixels or null if no scaling needed
- */
-function getTargetWidthForCropType(cropType) {
-    const breakpointWidths = {
-        mobile: BREAKPOINTS.mobile,
-        default: BREAKPOINTS.mobile,
-        tablet: BREAKPOINTS.tablet,
-        desktop: BREAKPOINTS.desktop,
-    };
-
-    return breakpointWidths[cropType] || null;
-}
-
-/**
-     * Calculate aspect ratio for a crop or fall back to source dimensions
-     * @param {Object} crop - Crop object
-     * @param {Object} sourceDimensions - Source dimensions
-     * @returns {string|null} CSS aspect ratio string
-     */
-function calculateAspectRatio(crop, sourceDimensions) {
-    if (crop.aspectRatio) {
-        return `${crop.aspectRatio.w} / ${crop.aspectRatio.h}`;
-    }
-
-    if (crop && crop.sizePercent) {
-        const cropWidth = crop.sizePercent.width || 0;
-        const cropHeight = crop.sizePercent.height || 0;
-        if (cropWidth > 0 && cropHeight > 0) {
-            return getCssAspectRatio(cropWidth, cropHeight);
-        }
-    }
-
-    if (sourceDimensions) {
-        const sourceWidth = sourceDimensions.width || 0;
-        const sourceHeight = sourceDimensions.height || 0;
-        if (sourceWidth > 0 && sourceHeight > 0) {
-            return getCssAspectRatio(sourceWidth, sourceHeight);
-        }
-    }
-
-    return null;
-}
-
-/**
-     * Build a source entry from a crop in a single pass
-     * @param {Object} crop - Crop definition
-     * @param {Object} sourceDimensions - Source dimensions
-     * @param {number} quality - The image quality (1-100)
-     * @param {string} outputFileType - The output file type
-     * @param {number} forceWidth - The force width
-     * @param {number} forceHeight - The force height
-     * @returns {Object|null} Source entry
-     */
-function buildSource(imagePath, crop, sourceDimensions, quality, outputFileType, forceWidth, forceHeight) {
-    if (!crop || !crop.type) {
-        return null;
-    }
-
-    const transformationObject = {};
-    let croppedWidth = null;
-
-    if (crop.topLeft && crop.sizePercent && sourceDimensions) {
-        const cropX = (crop.topLeft.x / 100) * sourceDimensions.width;
-        const cropY = (crop.topLeft.y / 100) * sourceDimensions.height;
-        const croppedHeight = (crop.sizePercent.height / 100) * sourceDimensions.height;
-        croppedWidth = (crop.sizePercent.width / 100) * sourceDimensions.width;
-
-        transformationObject.cropX = cropX;
-        transformationObject.cropY = cropY;
-        transformationObject.cropWidth = croppedWidth;
-        transformationObject.cropHeight = croppedHeight;
-    }
-    transformationObject.format = outputFileType;
-
-    const targetWidth = getTargetWidthForCropType(crop.type);
-    const effectiveWidth = croppedWidth || (sourceDimensions && sourceDimensions.width);
-    if (targetWidth && effectiveWidth && effectiveWidth > targetWidth) {
-        transformationObject.scaleWidth = targetWidth;
-        transformationObject.scaleMode = 'fit';
-    } else {
-        transformationObject.scaleWidth = targetWidth;
-        transformationObject.scaleMode = 'fit';
-    }
-
-    if (forceWidth || forceHeight) {
-        transformationObject.scaleMode = 'fit';
-    }
-    if (forceWidth) {
-        transformationObject.scaleWidth = forceWidth;
-    }
-    if (forceHeight) {
-        transformationObject.scaleHeight = forceHeight;
-    }
-
-    if (quality) {
-        transformationObject.quality = quality;
-    }
-    const siteLibrary = ContentMgr.getSiteLibrary();
-
-    const url = URLUtils.httpsImage(
-        URLUtils.CONTEXT_LIBRARY,
-        siteLibrary.ID,
-        imagePath,
-        transformationObject,
-    );
-
-    return {
-        url,
-        transformationObject,
-        mediaQuery: getMediaQueryForCropType(crop.type),
-        aspectRatio: calculateAspectRatio(crop, sourceDimensions),
-        isFallback: crop.type === 'default' || crop.type === 'mobile',
-    };
-}
+const buildSource = require('*/cartridge/utils/image').buildSource;
 
 /**
  * Creates a model for the DIS image component
@@ -237,24 +83,13 @@ exports.createModel = function createModel(options) {
 };
 
 /**
- * Renders a source element
- * @param {Object} source - The source object with url and optional mediaQuery
- * @returns {string} The source element HTML
- */
-function renderSource(source) {
-    if (source.mediaQuery) {
-        return `<source srcset="${source.url}" media="${source.mediaQuery}"/>`;
-    }
-    return `<source srcset="${source.url}"/>`;
-}
-
-/**
  * Generates CSS media queries for aspect ratios based on sources
  * @param {Array} sources - Array of source objects with mediaQuery and aspectRatio
  * @param {string} fallbackAspectRatio - The fallback aspect ratio for mobile/default
  * @returns {string} CSS rules string with media queries for use in style tag
  */
 function generateAspectRatioStyles(sources, fallbackAspectRatio) {
+    // @todo inline to template function
     const rules = [];
 
     // Base style for fallback (mobile/default) - applied directly to img
@@ -273,6 +108,7 @@ function generateAspectRatioStyles(sources, fallbackAspectRatio) {
 }
 
 function generateImgStyle(cssWidth) {
+    // @todo inline to template function
     return `width: ${cssWidth}; height: auto; display: block;`;
 }
 
@@ -284,6 +120,7 @@ function generateImgStyle(cssWidth) {
  */
 exports.template = function template(model) {
     // Don't render anything if no sources are provided
+    // @todo harmonize with other template functions. I.e. more ternaries, less variables etc.
     if (!model.sources || model.sources.length === 0) {
         return '<!-- No image selected. Please select an image using the Image Manager -->';
     }
@@ -310,7 +147,7 @@ exports.template = function template(model) {
     ${styleTag}
     <div class="image-component" id="${imageId}">
         <picture>
-            ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
+            ${model.sources.filter((source) => source.mediaQuery).map((source) => (source.mediaQuery ? `<source srcset="${source.url}" media="${source.mediaQuery}"/>` : `<source srcset="${source.url}"/>`)).join('\n')}
             <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(model.cssWidth)}" loading="lazy" />
             </picture>
             ${model.overlayRegion.setTagName('figcaption').setClassName(`dis-image-overlay fg-bgcolor image-on valign-${model.valign}`).render()}
