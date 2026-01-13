@@ -21,6 +21,20 @@
                     "name": "Show Add to Cart",
                     "description": "Display add to cart button for individual items",
                     "type": "boolean"
+                },
+                {
+                    "id": "viewType",
+                    "name": "View Type",
+                    "description": "the product view type",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "disConfig",
+                    "name": "Dimensions",
+                    "description": "DIS parameters i.e. sw=300&sh=400",
+                    "type": "string",
+                    "required": false
                 }
             ]
         }

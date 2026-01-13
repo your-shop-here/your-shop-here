@@ -19,14 +19,21 @@ exports.createModel = function createModel(options) {
     const swatches = colorValues.map((color) => {
         // @todo make swatch viewtype configurable including fallbacks
         const image = color.getImage(config.swatchViewType, 0);
+
         if (image) {
+            let url = image.url.toString();
+            // local images, not handled by DIS yet
+            if (!url.startsWith('http')) {
+            // create dis base url, without transformation parameters
+                url = image.getImageURL({ scaleWidth: 999 }).toString().split('?')[0];
+            }
             const result = {
                 color: color.displayValue,
                 // ideally we shouldnt manually create the dwvar_ parameter, but the variation model apis require too much overhead for a tile
                 url: URLUtils.url('Product-Show', 'pid', hit.mainProductId, `dwvar_${hit.mainProductId}_${config.swatchAttribute}`, color.value),
                 alt: color.displayValue,
                 image: {
-                    url: `${image.url.toString()}?${config.swatchDISConfig}`,
+                    url: `${url}?${config.swatchDISConfig}`,
                 },
             };
             return result;
