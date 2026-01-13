@@ -1,0 +1,14 @@
+{
+    "name": "Rich Text Plus",
+    "description": "Customizable rich text editor with paragraph styles and text effects",
+    "resources": {
+        "scripts": [
+            "/experience/editors/richtextplus/quill.js",
+            "/experience/editors/richtextplus/richtextplus.js"
+        ],
+        "styles": [
+            "https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css",
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+}
