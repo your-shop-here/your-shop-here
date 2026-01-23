@@ -129,7 +129,6 @@ nav.mainmenu {
 
 
 #toggle-menu {
-    padding: .2em;
     font-size: 2.5em;
 }
 nav.mainmenu a {
@@ -218,7 +217,7 @@ nav.mainmenu label.drop-icon img,
 }
 
 .country-language-selector .btn:hover {
-    background-color: var(--skin-bg-secondary-1);
+    background-color: var(--skin-bg-secondary);
     border-color: var(--skin-border-color-hover-1);
 }
 
@@ -229,7 +228,7 @@ nav.mainmenu label.drop-icon img,
     min-width: 320px;
     margin-top: var(--skin-spacing-xs);
     padding: var(--skin-spacing-xs) 1em;
-    background-color: var(--skin-bg-primary-1);
+    background-color: var(--skin-bg-primary);
     border: 1px solid var(--skin-border-color-1);
     border-radius: var(--skin-border-radius-md);
     box-shadow: var(--skin-shadow-md);
@@ -296,11 +295,11 @@ nav.mainmenu label.drop-icon img,
 }
 
 .country-language-selector .dropdown-item:hover {
-    background-color: var(--skin-bg-secondary-1);
+    background-color: var(--skin-bg-secondary);
 }
 
 .country-language-selector .dropdown-item.active {
-    background-color: var(--skin-bg-secondary-1);
+    background-color: var(--skin-bg-secondary);
     color: var(--skin-primary-color-1);
     font-weight: 500;
 }
@@ -309,6 +308,8 @@ nav.mainmenu label.drop-icon img,
 @media (max-width: 1024px) {
     header {
         margin: 0 calc(var(--spacing)*-1);
+        display: flex;
+        flex-direction: row;
     }
     
     /* Hide menu by default and overlay page content */
@@ -363,7 +364,7 @@ nav.mainmenu label.drop-icon img,
         display: flex;
     }
 
-    .experience-menu {
+    .experience-theme-categorymenu {
         order: -1;
     }
 }

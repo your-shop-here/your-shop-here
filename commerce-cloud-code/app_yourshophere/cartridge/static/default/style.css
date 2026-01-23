@@ -13,9 +13,9 @@
     --skin-text-light-1: #ffffff;
 
     /* Background Colors */
-    --skin-bg-primary-1: #ffffff;
-    --skin-bg-secondary-1: #f8f9fa;
-    --skin-bg-tertiary-1: #e8eaed;
+    --skin-bg-primary: #ffffff;
+    --skin-bg-secondary: #f8f9fa;
+    --skin-bg-tertiary: #e8eaed;
     --skin-bg-dark-1: #202124;
 
     /* Border Colors */
@@ -184,7 +184,7 @@ input.search-field {
     padding: 0;
     margin: 0;
     max-height: 350px;
-    background-color: var(--skin-background-color-1, var(--skin-bg-primary-1, #ffffff));
+    background-color: var(--skin-background-color-1, var(--skin-bg-primary, #ffffff));
     overflow: hidden;   
     box-sizing: border-box;
 }
@@ -195,7 +195,7 @@ input.search-field {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--skin-text-muted) var(--skin-bg-secondary);
-    background-color: var(--skin-background-color-1, var(--skin-bg-primary-1, #ffffff));
+    background-color: var(--skin-background-color-1, var(--skin-bg-primary, #ffffff));
 }
 /* adds a gradient to the bottom of the refinebar to indicate scrollability (mac with a trackpad dont show scroll bars)*/
 .refinements .refinement-container::after {
@@ -207,7 +207,7 @@ input.search-field {
     height: 60px;
     
     background: linear-gradient(to top,
-        var(--skin-background-color-1, var(--skin-bg-primary-1, #ffffff)) 0%,        
+        var(--skin-background-color-1, var(--skin-bg-primary, #ffffff)) 0%,        
       rgba(248, 248, 248, 0) 80%
     );
     

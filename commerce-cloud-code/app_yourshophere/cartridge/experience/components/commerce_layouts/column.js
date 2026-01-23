@@ -11,22 +11,24 @@ const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHel
 function renderComponent(context, modelIn) {
     const model = modelIn || new HashMap();
     const component = context.component;
+    const columnConfiguration = context.content.columnConfiguration || {};
 
-    const desktopColumns = context.content.columnConfiguration.desktopColumns;
-    const columnWidths = context.content.columnConfiguration.columnWidths;
-    const mobileColumnWidths = context.content.columnConfiguration.mobileColumnWidths;
+    const desktopColumns = columnConfiguration.desktopColumns;
+    const columnWidths = columnConfiguration.columnWidths;
+    const mobileColumnWidths = columnConfiguration.mobileColumnWidths;
+    const columnClasses = columnConfiguration.columnClasses || [];
 
     model.regions = PageRenderHelper.getRegionModelRegistry(component);
     model.style = context.content.style;
     model.cssClass = `cmp_${component.ID}`;
-    model.desktopGap = context.content.columnConfiguration.desktopGap ? `gap: ${context.content.columnConfiguration.desktopGap}%` : '';
-    model.mobileGap = context.content.columnConfiguration.mobileGap ? `gap: ${context.content.columnConfiguration.mobileGap}%` : '';
+    model.desktopGap = columnConfiguration.desktopGap ? `gap: ${columnConfiguration.desktopGap}%` : '';
+    model.mobileGap = columnConfiguration.mobileGap ? `gap: ${columnConfiguration.mobileGap}%` : '';
     const regionNames = Array.from(Array(desktopColumns).keys()).map((index) => `column${index + 1}`);
 
     return /* html */`<style>.${model.cssClass} { grid-template-columns: ${columnWidths.join('% ')}%; ${model.desktopGap}; }
         @media (max-width: 768px) {.${model.cssClass} { grid-template-columns: ${mobileColumnWidths.join('% ')}%; ${model.mobileGap}; }}
     </style>
-    <div class="grid ${model.style} ${model.cssClass}">
+    <div class="grid ${model.style} ${model.cssClass} ${context.content.cssClass}">
         ${regionNames.map((regionName, index) => {
         let className;
         if (index === 0) {
@@ -36,7 +38,10 @@ function renderComponent(context, modelIn) {
         } else {
             className = 'center';
         }
-        return model.regions[regionName].setClassName(`div-${className}`).render();
+        // Add custom CSS class if provided
+        const customClass = columnClasses[index] && columnClasses[index].trim() ? columnClasses[index].trim() : '';
+        const finalClassName = customClass ? `div-${className} ${customClass}` : `div-${className}`;
+        return model.regions[regionName].setClassName(finalClassName).render();
     }).join('\n')}
 </div>`;
 }

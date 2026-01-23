@@ -7,6 +7,7 @@
         mobileColumnWidths: [100], // Default 100% for mobile
         desktopGap: 2, // Default 10px gap
         mobileGap: 2, // Default 10px gap
+        columnClasses: ['', '', '', ''], // CSS classes for each column (up to 4)
     };
 
     /**
@@ -232,17 +233,7 @@
         currentConfig.mobileColumnWidths = mobileValues.slice(0, mobileColumns);
 
         // Emit the updated value
-        emit({
-            type: 'sfcc:value',
-            payload: {
-                desktopColumns: currentConfig.desktopColumns,
-                mobileColumns: currentConfig.mobileColumns,
-                columnWidths: currentConfig.columnWidths,
-                mobileColumnWidths: currentConfig.mobileColumnWidths,
-                desktopGap: currentConfig.desktopGap,
-                mobileGap: currentConfig.mobileGap,
-            },
-        });
+        emitConfig();
     }
 
     /**
@@ -251,17 +242,7 @@
      */
     function handleDesktopGapChange(e) {
         currentConfig.desktopGap = parseInt(e.target.value, 10);
-        emit({
-            type: 'sfcc:value',
-            payload: {
-                desktopColumns: currentConfig.desktopColumns,
-                mobileColumns: currentConfig.mobileColumns,
-                columnWidths: currentConfig.columnWidths,
-                mobileColumnWidths: currentConfig.mobileColumnWidths,
-                desktopGap: currentConfig.desktopGap,
-                mobileGap: currentConfig.mobileGap,
-            },
-        });
+        emitConfig();
     }
 
     /**
@@ -270,6 +251,27 @@
      */
     function handleMobileGapChange(e) {
         currentConfig.mobileGap = parseInt(e.target.value, 10);
+        emitConfig();
+    }
+
+    /**
+     * Handles column CSS class input changes
+     * @param {Event} e - The change event
+     */
+    function handleColumnClassChange(e) {
+        const columnIndex = parseInt(e.target.dataset.columnIndex, 10);
+        if (!currentConfig.columnClasses) {
+            currentConfig.columnClasses = ['', '', '', ''];
+        }
+        currentConfig.columnClasses[columnIndex] = e.target.value || '';
+        updateAdvancedSettingsVisibility();
+        emitConfig();
+    }
+
+    /**
+     * Emits the current configuration
+     */
+    function emitConfig() {
         emit({
             type: 'sfcc:value',
             payload: {
@@ -279,8 +281,36 @@
                 mobileColumnWidths: currentConfig.mobileColumnWidths,
                 desktopGap: currentConfig.desktopGap,
                 mobileGap: currentConfig.mobileGap,
+                columnClasses: currentConfig.columnClasses || ['', '', '', ''],
             },
         });
+    }
+
+    /**
+     * Updates the visibility state of the Advanced Settings section
+     */
+    function updateAdvancedSettingsVisibility() {
+        const hasAdvancedSettings = currentConfig.columnClasses && 
+            currentConfig.columnClasses.some(cls => cls && cls.trim() !== '');
+        const advancedContent = rootEditorElement.querySelector('#advanced-settings-content');
+        const advancedToggle = rootEditorElement.querySelector('#advanced-settings-toggle');
+        const toggleIcon = advancedToggle ? advancedToggle.querySelector('#advanced-settings-icon') : null;
+        
+        if (advancedContent && advancedToggle) {
+            if (hasAdvancedSettings) {
+                advancedContent.style.display = 'block';
+                advancedToggle.setAttribute('aria-expanded', 'true');
+                if (toggleIcon) {
+                    toggleIcon.textContent = '▼';
+                }
+            } else {
+                advancedContent.style.display = 'none';
+                advancedToggle.setAttribute('aria-expanded', 'false');
+                if (toggleIcon) {
+                    toggleIcon.textContent = '▶';
+                }
+            }
+        }
     }
 
     /**
@@ -416,7 +446,62 @@
             mobileGapSliderElement.addEventListener('change', handleMobileGapChange);
         }
 
+        // Rebuild column CSS class inputs
+        rebuildColumnClassInputs();
+
         updateColumnWidths();
+    }
+
+    /**
+     * Rebuilds the column CSS class inputs based on desktop columns
+     */
+    function rebuildColumnClassInputs() {
+        const desktopColumns = parseInt(document.getElementById('desktop-columns').value);
+        const columnClassesContainer = rootEditorElement.querySelector('#column-classes-container');
+        
+        if (!columnClassesContainer) {
+            return;
+        }
+
+        // Initialize columnClasses if not set
+        if (!currentConfig.columnClasses) {
+            currentConfig.columnClasses = ['', '', '', ''];
+        }
+
+        // Clear existing inputs
+        columnClassesContainer.innerHTML = '';
+
+        // Create input for each column
+        for (let i = 0; i < desktopColumns; i++) {
+            const container = document.createElement('div');
+            container.className = 'slds-form-element slds-p-around_small';
+
+            const labelElement = document.createElement('label');
+            labelElement.className = 'slds-form-element__label';
+            labelElement.setAttribute('for', `column-class-${i}`);
+            labelElement.textContent = `Column ${i + 1} CSS Class`;
+
+            const controlContainer = document.createElement('div');
+            controlContainer.className = 'slds-form-element__control';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = `column-class-${i}`;
+            input.className = 'slds-input';
+            input.dataset.columnIndex = i;
+            input.value = currentConfig.columnClasses[i] || '';
+            input.placeholder = 'e.g., my-custom-class';
+
+            input.addEventListener('input', handleColumnClassChange);
+            input.addEventListener('blur', handleColumnClassChange);
+
+            controlContainer.appendChild(input);
+            container.appendChild(labelElement);
+            container.appendChild(controlContainer);
+            columnClassesContainer.appendChild(container);
+        }
+
+        updateAdvancedSettingsVisibility();
     }
 
     /**
@@ -462,6 +547,18 @@
                     <h4 class="slds-text-heading_small slds-p-top_small">Column Widths (Mobile)</h4>
                     <div id="mobile-widths-container"></div>
                 </div>
+                
+                <div class="slds-size_1-of-1 slds-p-top_medium" id="advanced-settings-wrapper">
+                    <div class="slds-divider slds-divider_vertical"></div>
+                    <button type="button" id="advanced-settings-toggle" class="slds-button slds-button_text slds-m-bottom_small" aria-expanded="false" aria-controls="advanced-settings-content" style="padding-left: 0;">
+                        <span id="advanced-settings-icon" style="display: inline-block; width: 0.75rem; margin-right: 0.5rem;">▶</span>
+                        <span>Advanced Settings</span>
+                    </button>
+                    <div id="advanced-settings-content" class="slds-p-around_small" style="display: none;">
+                        <h4 class="slds-text-heading_small slds-p-bottom_small">Column CSS Classes</h4>
+                        <div id="column-classes-container"></div>
+                    </div>
+                </div>
             </div>
         `;
 
@@ -489,7 +586,10 @@
                 mobileColumnWidths: value.mobileColumnWidths || [100],
                 desktopGap: value.desktopGap || 2,
                 mobileGap: value.mobileGap || 2,
+                columnClasses: value.columnClasses || ['', '', '', ''],
             };
+        } else {
+            currentConfig.columnClasses = currentConfig.columnClasses || ['', '', '', ''];
         }
 
         // Create desktop columns slider
@@ -509,18 +609,27 @@
         // Build initial column width sliders
         rebuildColumnWidthSliders();
 
+        // Setup Advanced Settings toggle
+        const advancedToggle = rootEditorElement.querySelector('#advanced-settings-toggle');
+        const advancedContent = rootEditorElement.querySelector('#advanced-settings-content');
+        if (advancedToggle && advancedContent) {
+            const toggleIcon = advancedToggle.querySelector('#advanced-settings-icon');
+            advancedToggle.addEventListener('click', () => {
+                const isExpanded = advancedToggle.getAttribute('aria-expanded') === 'true';
+                const newExpanded = !isExpanded;
+                advancedToggle.setAttribute('aria-expanded', newExpanded);
+                advancedContent.style.display = newExpanded ? 'block' : 'none';
+                if (toggleIcon) {
+                    toggleIcon.textContent = newExpanded ? '▼' : '▶';
+                }
+            });
+            
+            // Ensure initial visibility state is correct
+            updateAdvancedSettingsVisibility();
+        }
+
         // Emit initial value
-        emit({
-            type: 'sfcc:value',
-            payload: {
-                desktopColumns: currentConfig.desktopColumns,
-                mobileColumns: currentConfig.mobileColumns,
-                columnWidths: currentConfig.columnWidths,
-                mobileColumnWidths: currentConfig.mobileColumnWidths,
-                desktopGap: currentConfig.desktopGap,
-                mobileGap: currentConfig.mobileGap,
-            },
-        });
+        emitConfig();
     });
 
     // Handle value events
