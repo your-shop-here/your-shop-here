@@ -474,6 +474,48 @@
         </content-links>
     </content>
 
+    <content content-id="19636b97d59e54b8769f754c8c">
+        <type>component.commerce_layouts.column</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "columnConfiguration" : {
+    "desktopColumns" : 3,
+    "mobileColumns" : 3,
+    "columnWidths" : [ 32, 32, 32 ],
+    "mobileColumnWidths" : [ 32, 32, 32 ],
+    "desktopGap" : 2,
+    "mobileGap" : 2,
+    "columnClasses" : [ "left", "branding", "right", "" ]
+  },
+  "cssClass" : "take-row",
+  "style" : null
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="3c22a93491283db5f90f917c2a" type="component.commerce_layouts.column.column2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="7b351285d6866da36a49a10040" type="component.commerce_layouts.column.column3">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.commerce_layouts.column.column3">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.commerce_layouts.column.column3">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.commerce_layouts.column.column1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="2e03ffa57feffcba56982c7658" type="component.commerce_layouts.column.column1">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
     <content content-id="1a1d17c27eafbf4080c837ee13">
         <type>component.plp.refinements</type>
         <config>{
@@ -1150,7 +1192,12 @@
 }</config>
         <data xml:lang="x-default">{
   "imageCount" : 4,
-  "viewType" : "large"
+  "showDots" : false,
+  "thumbnailPosition" : "bottom",
+  "carouselOrientation" : "vertical",
+  "viewType" : "large",
+  "showThumbnails" : true,
+  "displayMode" : "carousel"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1568,12 +1615,18 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "warningColor" : {"value":"#fbbc05"},
-  "errorColor" : {"value":"#ea4335"},
+  "warningColor" : {
+    "value" : "#fbbc05"
+  },
+  "errorColor" : {
+    "value" : "#ea4335"
+  },
   "headingColor" : {
     "value" : "#FFFFFF"
   },
-  "headingColorInvert" : null,
+  "headingColorInvert" : {
+    "value" : "#444466"
+  },
   "menufont" : "Salesforce Sans",
   "secondaryAccentColor" : {
     "value" : "#f39c12"
@@ -1584,7 +1637,9 @@
   "selectBoxBackground" : {
     "value" : "#eeeeee"
   },
-  "infoColor" : {"value":"#4285f4"},
+  "infoColor" : {
+    "value" : "#4285f4"
+  },
   "primaryAccentColorInvert" : {
     "value" : "#FFFFFF"
   },
@@ -1595,10 +1650,10 @@
     "value" : "#00a1e0"
   },
   "bannerTextColor" : {
-    "value" : "#16325c"
+    "value" : "#c2dbf7"
   },
   "bannerBackground" : {
-    "value" : "#5ebbff"
+    "value" : "#FFFFFF"
   },
   "secondaryAccentColorInvert" : {
     "value" : "#ffffff"
@@ -1609,7 +1664,9 @@
   "menuTextColor" : {
     "value" : "#16325c"
   },
-  "successColor" : {"value":"#34a853"},
+  "successColor" : {
+    "value" : "#34a853"
+  },
   "bodyfont" : "Salesforce Sans",
   "priceTextColor" : {
     "value" : "#ea001e"
@@ -1619,7 +1676,7 @@
     "value" : "#16325c"
   },
   "mainTextColor" : {
-    "value" : "#16325c"
+    "value" : "#333333"
   }
 }</data>
         <online-flag>true</online-flag>
@@ -1718,9 +1775,6 @@
             <content-link content-id="9a8037c36b690794b0e70d9428" type="page.theme.skin">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="e6e71f3687038fcc2e95029acc" type="page.theme.header">
-                <position>0.0</position>
-            </content-link>
             <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
                 <position>0.0</position>
             </content-link>
@@ -1728,6 +1782,12 @@
                 <position>1.0</position>
             </content-link>
             <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="page.theme.header">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="19636b97d59e54b8769f754c8c" type="page.theme.header">
                 <position>0.0</position>
             </content-link>
         </content-links>
@@ -2782,39 +2842,6 @@
         </content-links>
     </content>
 
-    <content content-id="e6e71f3687038fcc2e95029acc">
-        <type>component.theme.yshHeader</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <data xml:lang="x-default">{ }</data>
-        <online-flag>true</online-flag>
-        <page-attributes/>
-        <content-links>
-            <content-link content-id="d4a67f4bbba836f33ebc995f17" type="component.theme.yshHeader.menu">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="2e03ffa57feffcba56982c7658" type="component.theme.yshHeader.left">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="f6ff9d26a14d5a7d12c00895fd" type="component.theme.yshHeader.left">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="99d5f1b4d46dfc0ec2b7e34a05" type="component.theme.yshHeader.right">
-                <position>0.0</position>
-            </content-link>
-            <content-link content-id="8b56cc5495cabf1dfe3c6f58b6" type="component.theme.yshHeader.right">
-                <position>2.0</position>
-            </content-link>
-            <content-link content-id="7b351285d6866da36a49a10040" type="component.theme.yshHeader.right">
-                <position>1.0</position>
-            </content-link>
-            <content-link content-id="3c22a93491283db5f90f917c2a" type="component.theme.yshHeader.branding">
-                <position>0.0</position>
-            </content-link>
-        </content-links>
-    </content>
-
     <content content-id="e6f035df0e9361a81e8fbc457a">
         <type>component.checkout.paymentMethods</type>
         <config>{
@@ -2968,11 +2995,11 @@
     "desktopColumns" : 2,
     "mobileColumns" : 1,
     "columnWidths" : [ 25, 75 ],
-    "mobileColumnWidths" : [ 100 ]
+    "mobileColumnWidths" : [ 100 ],
+
   },
-  "columns" : 2,
-  "style" : null,
-  "mobileColumns" : null
+  "cssClass" : null,
+  "style" : null
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>

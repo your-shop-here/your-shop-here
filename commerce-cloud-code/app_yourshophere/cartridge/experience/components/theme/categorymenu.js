@@ -41,5 +41,5 @@ function createViewModel(context) {
 }
 
 function template(model) {
-    return `<wainclude url="${model.menuUrl}"/>`;
+    return `<nav class="mainmenu"><wainclude url="${model.menuUrl}"/></nav>`;
 }
