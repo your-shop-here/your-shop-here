@@ -15,13 +15,10 @@ exports.createModel = (input) => {
     const columnClasses = columnConfiguration.columnClasses || [];
 
     const baseCssClass = `cmp_${component.ID}`;
-    const additionalCssClass = context.content.cssClass || '';
 
     const viewModel = {
         regions: PageRenderHelper.getRegionModelRegistry(component),
-        style: context.content.style || '',
         cssClass: baseCssClass,
-        additionalCssClass: additionalCssClass,
         desktopGap: columnConfiguration.desktopGap ? `gap: ${columnConfiguration.desktopGap}%` : '',
         mobileGap: columnConfiguration.mobileGap ? `gap: ${columnConfiguration.mobileGap}%` : '',
         columnWidths: columnWidths,
@@ -66,8 +63,8 @@ exports.template = (model) => {
         return model.regions[regionName].setClassName(finalClassName).render();
     }).join('\n');
 
-    const gridClasses = ['grid', model.style, model.cssClass, model.additionalCssClass]
-        .filter(cls => cls && cls.trim() !== '')
+    const gridClasses = ['grid', model.style, model.cssClass]
+        .filter((cls) => cls && cls.trim() !== '')
         .join(' ');
 
     return `${styleBlock}

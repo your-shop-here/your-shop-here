@@ -1,26 +1,36 @@
 /* Header link styling - applies to all header regions except main menu */
+header .grid {width: 100%;}
+
+a.header-link {white-space: nowrap;}
+
 .announcement a,
-.take-row  a {
+header a:not(.experience-theme-categorymenu a) {
     color: var(--skin-primary-color-1);
     text-decoration: none;
     transition: color var(--skin-transition-normal) ease;
 }
 
+/* Exclude links inside categorymenu */
+.experience-theme-categorymenu a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .announcement a:hover,
-.take-row a:hover {
+header a:not(.experience-theme-categorymenu a):hover {
     color: var(--skin-secondary-color-1);
     text-decoration: none;
 }
 
 /* Ensure SVG icons in header links also follow the color scheme */
 .announcement a svg,
-.take-row a svg {
+header a:not(.experience-theme-categorymenu a) svg {
     fill: currentColor;
     transition: fill var(--skin-transition-normal) ease;
 }
 
 .announcement a:hover svg,
-.take-row a:hover svg {
+header a:not(.experience-theme-categorymenu a):hover svg {
     fill: currentColor;
 }
 
@@ -47,19 +57,19 @@ a.pill[role="button"] svg {
     fill: var(--skin-link-color-1);
 }
 
-.take-row {
+header div:not(.experience-theme-categorymenu) {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.take-row > div, .take-row .experience-component {
+header div:not(.experience-theme-categorymenu) > div, header div.experience-component:not(div.experience-theme-categorymenu)  {
     display: flex;
     flex-direction: row;
     padding: 0 .3em;
 }
 
-.take-row form, .take-row input:not([type=checkbox],[type=radio]) {
+header div:not(.experience-theme-categorymenu) form, header div.experience-component:not(div.experience-theme-categorymenu) input:not([type=checkbox],[type=radio]) {
     margin: 0;
 }
 
@@ -371,7 +381,7 @@ nav.mainmenu label.drop-icon img,
 
 @media (max-width: 768px) {
     /* Hide text in miniaccount link on mobile, keep only icon */
-    .take-row a.header-link {
+    header a.header-link:not(.experience-theme-categorymenu a) {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -379,8 +389,8 @@ nav.mainmenu label.drop-icon img,
         line-height: 0;
     }
     
-    .take-row a.header-link svg,
-    .take-row a.header-link img {
+    header a.header-link:not(.experience-theme-categorymenu a) svg,
+    header a.header-link:not(.experience-theme-categorymenu a) img {
         font-size: 1rem;
         line-height: 1;
         margin: 0;
