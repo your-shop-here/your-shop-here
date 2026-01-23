@@ -104,6 +104,8 @@ body.flairstripes {
         right 0px bottom 20px;  /* Blue: Bottommost in the group, 20px clear from body bottom */
 }
 
+[role=link], a { color: var(--skin-link-color-1); }
+
 img {
     max-width: 100%;
     height: auto;
