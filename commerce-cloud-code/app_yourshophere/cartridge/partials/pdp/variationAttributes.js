@@ -22,6 +22,8 @@ exports.getVariationModel = function getVariationModel(product) {
  * @param {Object} params The parameters object
  * @param {Object} params.product The product object
  * @param {string} params.swatchDimension Comma-separated list of attribute IDs to display as swatches
+ * @param {string} params.swatchViewType View type for swatch images (e.g., 'swatch', 'small')
+ * @param {string} params.swatchDISConfig DIS parameters for swatch images (e.g., 'sw=300&sh=400')
  * @returns {Object} The model for the variation attributes
  */
 exports.createModel = function createModel(params) {
@@ -147,7 +149,10 @@ exports.createModel = function createModel(params) {
                             });
                             swatchUrl = swatchUrl.append(`dwvar_${masterId}_${attribute.ID}`, value.value);
                             valueObj.url = swatchUrl.toString();
-                            valueObj.hxAttributes = `hx-get="${valueObj.url}" hx-target="${hxTarget}" hx-include="form[name=pdp-actions]" hx-trigger="click" hx-indicator=".progress"`;
+                            // Include the variation attribute value in the request using hx-vals
+                            // This ensures the form always has the current selection when other attributes change
+                            const selectName = `dwvar_${masterId}_${attribute.ID}`;
+                            valueObj.hxAttributes = `hx-get="${valueObj.url}" hx-target="${hxTarget}" hx-include="form[name=pdp-actions]" hx-vals='{"${selectName}": "${value.value}"}' hx-trigger="click" hx-indicator=".progress"`;
                         } else {
                             valueObj.hxAttributes = '';
                         }
@@ -174,9 +179,12 @@ exports.createModel = function createModel(params) {
  */
 exports.template = (model) => `${model.variationAttributes.map((attribute) => {
     if (attribute.isSwatch) {
+        const selectedValue = attribute.values.find((v) => v.selected);
+        const hiddenInputValue = selectedValue ? selectedValue.value : '';
         return `
     <div>
         <label>${attribute.message}</label>
+        <input type="hidden" name="${attribute.selectName}" id="hidden-${attribute.id}" value="${hiddenInputValue}" />
         <div class="swatch-container" role="group" aria-label="${attribute.name}">
             ${attribute.values.map((value) => `
             <button type="button"
@@ -185,7 +193,8 @@ exports.template = (model) => `${model.variationAttributes.map((attribute) => {
                 ${value.orderable ? '' : 'disabled'}
                 aria-label="${value.displayValue}"
                 aria-pressed="${value.selected ? 'true' : 'false'}"
-                title="${value.displayValue}">
+                title="${value.displayValue}"
+                onclick="document.getElementById('hidden-${attribute.id}').value='${value.value}'">
                 ${value.swatchContent}
             </button>`).join('')}
         </div>
