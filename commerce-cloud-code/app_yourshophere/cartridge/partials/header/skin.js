@@ -66,9 +66,9 @@ const template = (model) => /* html */ `
             --skin-text-light-1: ${model.primaryAccentColorInvert || '#ffffff'};
             
             /* Background colors */
-            --skin-bg-primary-1: ${model.mainBackground || '#ffffff'};
-            --skin-bg-secondary-1: ${model.mainBackground ? colorMix(model.mainBackground, 0.97) : '#f8f9fa'};
-            --skin-bg-tertiary-1: ${model.mainBackground ? colorMix(model.mainBackground, 0.91) : '#e8eaed'};
+            --skin-bg-primary: ${model.mainBackground || '#ffffff'};
+            --skin-bg-secondary: ${model.mainBackground ? colorMix(model.mainBackground, 0.97) : '#f8f9fa'};
+            --skin-bg-tertiary: ${model.mainBackground ? colorMix(model.mainBackground, 0.91) : '#e8eaed'};
             
             /* Border colors */
             --skin-border-color-1: ${model.borderColorOne || '#dadce0'};

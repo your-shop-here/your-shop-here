@@ -15,13 +15,6 @@
                     "editor_definition": {
                         "type": "layout.columnConfigurator"
                     }
-                },
-                {
-                    "id": "style",
-                    "name": "Style",
-                    "description": "An additional style Class Name",
-                    "type": "string",
-                    "required": false
                 }
             ]
         }
