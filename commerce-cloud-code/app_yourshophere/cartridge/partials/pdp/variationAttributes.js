@@ -66,7 +66,8 @@ exports.createModel = function createModel(params) {
                 selectedValue = variationModel.getSelectedValue(attribute);
                 selectedAttributes[attribute.ID] = selectedValue.value;
             }
-            const isSwatch = swatchAttributeIds.indexOf(attribute.ID) !== -1;
+            // Only show as swatch when viewType is configured and attribute is in the list
+            const isSwatch = swatchViewType && swatchAttributeIds.indexOf(attribute.ID) !== -1;
             return {
                 id: attribute.ID,
                 name: attribute.displayName,
@@ -82,64 +83,22 @@ exports.createModel = function createModel(params) {
                         orderable,
                     };
 
-                    // Add CSS classes and image for swatch attributes
                     if (isSwatch) {
                         const sanitizedValueId = String(value.ID).replace(/[^a-zA-Z0-9-_]/g, '-');
-                        const baseCssClass = `swatch-${attribute.ID}-${sanitizedValueId}`;
-                        const disabledClass = orderable ? '' : ' disabled';
-                        const selectedClass = isSelected ? ' selected' : '';
-                        valueObj.cssClass = `swatch ${baseCssClass}${disabledClass}${selectedClass}`.trim();
+                        valueObj.cssClass = `swatch swatch-${attribute.ID}-${sanitizedValueId}${orderable ? '' : ' disabled'}${isSelected ? ' selected' : ''}`.trim();
 
-                        // Get swatch image - try from variation attribute value first, then from a variant with this value
-                        const viewTypesToTry = swatchViewType
-                            ? [swatchViewType, 'swatch', 'small']
-                            : ['swatch', 'small', 'thumbnail'];
-                        let image = null;
-                        let imageSource = null;
-
-                        // First try: get image directly from variation attribute value
-                        for (let i = 0; i < viewTypesToTry.length && !image; i++) {
-                            image = value.getImage(viewTypesToTry[i], 0);
-                            if (image) {
-                                imageSource = image;
-                            }
-                        }
-
-                        // Second try: get image from a variant product that has this attribute value
-                        if (!image) {
-                            const variantMap = new (require('dw/util/HashMap'))();
-                            variantMap.put(attribute.ID, value.value);
-                            Object.keys(selectedAttributes).forEach((attrId) => {
-                                if (attrId !== attribute.ID) {
-                                    variantMap.put(attrId, selectedAttributes[attrId]);
-                                }
-                            });
-                            const variants = variationModel.getVariants(variantMap).toArray();
-                            if (variants.length > 0) {
-                                const variant = variants[0];
-                                for (let i = 0; i < viewTypesToTry.length && !image; i++) {
-                                    image = variant.getImage(viewTypesToTry[i], 0);
-                                    if (image) {
-                                        imageSource = image;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (imageSource) {
-                            let imageUrl = imageSource.url.toString();
+                        const image = value.getImage(swatchViewType, 0);
+                        if (image) {
+                            let imageUrl = image.url.toString();
                             if (!imageUrl.startsWith('http')) {
-                                imageUrl = imageSource.getImageURL({ scaleWidth: 999 }).toString().split('?')[0];
+                                imageUrl = image.getImageURL({ scaleWidth: 999 }).toString().split('?')[0];
                             }
                             const disConfig = swatchDISConfig || 'sw=40&sh=40';
-                            valueObj.imageUrl = `${imageUrl}?${disConfig}`;
-                            valueObj.imageAlt = value.displayValue;
-                            valueObj.swatchContent = `<img src="${valueObj.imageUrl}" alt="${valueObj.imageAlt}" />`;
+                            valueObj.swatchContent = `<img src="${imageUrl}?${disConfig}" alt="${value.displayValue}" />`;
                         } else {
-                            valueObj.swatchContent = `<span class="swatch-fallback">${value.displayValue}</span>`;
+                            valueObj.swatchContent = value.displayValue;
                         }
 
-                        // Build URL for swatch values - preserve all other selected attributes
                         if (orderable) {
                             let swatchUrl = URLUtils.url('Product-Show', 'pid', masterId, 'hx', hxValue);
                             Object.keys(selectedAttributes).forEach((attrId) => {
@@ -149,8 +108,6 @@ exports.createModel = function createModel(params) {
                             });
                             swatchUrl = swatchUrl.append(`dwvar_${masterId}_${attribute.ID}`, value.value);
                             valueObj.url = swatchUrl.toString();
-                            // Include the variation attribute value in the request using hx-vals
-                            // This ensures the form always has the current selection when other attributes change
                             const selectName = `dwvar_${masterId}_${attribute.ID}`;
                             valueObj.hxAttributes = `hx-get="${valueObj.url}" hx-target="${hxTarget}" hx-include="form[name=pdp-actions]" hx-vals='{"${selectName}": "${value.value}"}' hx-trigger="click" hx-indicator=".progress"`;
                         } else {
