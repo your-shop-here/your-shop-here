@@ -10,17 +10,21 @@ exports.render = function render(context) {
     // Extract image URL from custom editor value object
     const disImageValue = context.content.disImage;
     const component = context.component;
+    const content = context.content;
+    const overlayPosition = content.overlayPosition || {};
     const crops = disImageValue.crops ? disImageValue.crops.toArray() : [];
     return require('*/api/partials').create('base/disImage').html({
         imagePath: disImageValue.imagePath,
         sourceDimensions: disImageValue.sourceDimensions,
         quality: disImageValue.quality,
         crops,
-        altText: context.content.altText || '',
-        link: context.content.link,
-        width: context.content.width || '100%',
+        altText: content.altText || '',
+        link: content.link,
+        width: content.width || '100%',
         regions: PageRenderHelper.getRegionModelRegistry(component),
-        valign: context.content.valign || 'top',
+        overlayPosition: {
+            position: overlayPosition.position, padding: overlayPosition.padding, paddingUnit: overlayPosition.unit, backgroundColor: overlayPosition.backgroundColor || 'none', transparency: overlayPosition.transparency || 100,
+        },
         outputFileType: disImageValue.outputFileType || 'jpg',
         forceWidth: disImageValue.forceWidth || null,
         forceHeight: disImageValue.forceHeight || null,

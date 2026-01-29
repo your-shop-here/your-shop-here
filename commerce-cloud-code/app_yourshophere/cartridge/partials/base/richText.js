@@ -18,7 +18,7 @@ exports.createModel = function createModel(options) {
             html = html.replace(/<p>/g, `<p style="text-align: ${content.align || 'left'};" class="${options.textContrast} ${options.horizontalAlign}">`);
         }
     }
-
+    html = `<div class="richtextplus">${html}</div>`;
     const model = {
         html,
     };

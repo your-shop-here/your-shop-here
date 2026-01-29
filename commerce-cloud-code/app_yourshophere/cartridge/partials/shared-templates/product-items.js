@@ -41,10 +41,20 @@ function createSelectSkuModal(containedProduct) {
     const HttpSearchParams = require('*/api/URLSearchParams');
     const Resource = require('dw/web/Resource');
     const model = {};
-    const httpParams = new HttpSearchParams({ pid: containedProduct.ID });
+
+    let httpParams = new HttpSearchParams({ pid: containedProduct.ID });
+    if (containedProduct.primaryCategory) {
+        httpParams = new HttpSearchParams({ pid: containedProduct.ID, cgid: containedProduct.primaryCategory.ID });
+    }
     model.searchParameters = httpParams;
     const componentSettings = require('*/cartridge/utils/ComponentSettings').get(httpParams.get('component'));
     const tileSearch = require('*/api/ProductSearchModel').get(httpParams, { swatchAttribute: componentSettings.swatchDimension });
+    const ProductSearchHit = require('dw/catalog/ProductSearchHit');
+    if (!containedProduct.productSet) {
+        tileSearch.object.excludeHitType(ProductSearchHit.HIT_TYPE_PRODUCT_SET);
+    } else {
+        tileSearch.object.addHitTypeRefinement(ProductSearchHit.HIT_TYPE_PRODUCT_SET);
+    }
     tileSearch.search();
     model.hit = tileSearch.foundProducts[0];
     model.label = Resource.msg('select_product', 'translations', null);

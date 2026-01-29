@@ -232,6 +232,7 @@ exports.createModel = function createModel(options) {
         width: options.width || '100%',
         overlayRegion: options.regions.overlay || null,
         valign: options.valign,
+        overlayPosition: options.overlayPosition || null,
         cssWidth: options.forceWidth ? 'auto' : '100%',
     };
 };
@@ -306,6 +307,58 @@ exports.template = function template(model) {
         </style>
     ` : '';
 
+    // Build overlay classes and styles
+    let overlayClasses = 'dis-image-overlay fg-bgcolor image-on';
+    let overlayStyles = '';
+
+    if (model.overlayPosition) {
+        const position = model.overlayPosition.position || 'middle-center';
+        const padding = model.overlayPosition.padding || 10;
+        const unit = model.overlayPosition.unit || model.overlayPosition.paddingUnit || 'percent';
+        const bgColor = model.overlayPosition.backgroundColor || 'none';
+        const transparency = model.overlayPosition.transparency !== undefined ? parseInt(model.overlayPosition.transparency, 10) : 100;
+
+        overlayClasses += ` overlay-position-${position}`;
+
+        // Apply padding based on position
+        const paddingValue = unit === 'percent' ? `${padding}%` : `${padding}px`;
+        overlayStyles = `padding: ${paddingValue};`;
+
+        // Apply background color and transparency
+        if (bgColor !== 'none') {
+            let bgColorVar = '';
+            const opacity = transparency / 100;
+
+            if (bgColor === 'page-background') {
+                bgColorVar = 'var(--skin-background-color-1, #ffffff)';
+            } else if (bgColor === 'primary-color') {
+                bgColorVar = 'var(--skin-primary-color-1, #1a73e8)';
+            } else if (bgColor === 'secondary-color') {
+                bgColorVar = 'var(--skin-secondary-color-1, #5f6368)';
+            } else if (bgColor === 'text-color') {
+                bgColorVar = 'var(--skin-main-text-color-1, #202124)';
+            }
+
+            // Use CSS custom properties and pseudo-element to isolate background transparency
+            // This ensures content remains fully opaque
+            overlayStyles += ` --overlay-bg-color: ${bgColorVar}; --overlay-bg-opacity: ${opacity};`;
+            overlayClasses += ' overlay-has-background';
+        }
+    } else if (model.valign) {
+        // Fallback to valign if overlayPosition is not set
+        overlayClasses += ` valign-${model.valign}`;
+    }
+
+    // Build overlay region HTML
+    let overlayHtml = '';
+    if (model.overlayRegion) {
+        const overlayRegion = model.overlayRegion.setTagName('figcaption').setClassName(overlayClasses);
+        if (overlayStyles) {
+            overlayRegion.setAttribute('style', overlayStyles);
+        }
+        overlayHtml = overlayRegion.render();
+    }
+
     const pictureHtml = `
     ${styleTag}
     <div class="image-component" id="${imageId}">
@@ -313,7 +366,7 @@ exports.template = function template(model) {
             ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
             <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(model.cssWidth)}" loading="lazy" />
             </picture>
-            ${model.overlayRegion.setTagName('figcaption').setClassName(`dis-image-overlay fg-bgcolor image-on valign-${model.valign}`).render()}
+            ${overlayHtml}
         </div>
         `;
 

@@ -17,13 +17,6 @@
           "editor_definition": {
             "type": "richtextplus.richtextplus"
           }
-        },
-        {
-          "id": "richText2",
-          "name": "content",
-          "description": "This is the rich text content area",
-          "type": "markup",
-          "required": true
         }
       ]
     }

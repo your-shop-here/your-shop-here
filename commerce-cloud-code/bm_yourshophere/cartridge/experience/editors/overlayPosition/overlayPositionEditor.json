@@ -1,0 +1,11 @@
+{
+  "name": "Overlay Position Editor",
+  "resources": {
+    "scripts": [
+      "/experience/editors/overlayPosition/overlayPositionEditor.js"
+    ],
+    "styles": [
+      "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+    ]
+  }
+}

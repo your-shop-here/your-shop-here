@@ -47,15 +47,14 @@
       "description": "Settings for the overlay region",
       "attribute_definitions": [
         {
-          "id": "valign",
-          "name": "Vertical alignment",
-          "type": "enum",
-          "values": [
-              "top",
-              "middle",
-              "bottom"
-          ],
-          "required": false
+          "id": "overlayPosition",
+          "name": "Overlay Position & Padding",
+          "description": "Select overlay position and adjust padding",
+          "type": "custom",
+          "required": false,
+          "editor_definition": {
+            "type": "overlayPosition.overlayPositionEditor"
+          }
         }
       ]
     }

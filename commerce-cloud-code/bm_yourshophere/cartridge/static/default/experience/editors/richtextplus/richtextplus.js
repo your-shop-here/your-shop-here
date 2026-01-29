@@ -5,7 +5,7 @@
  */
 
 /* global Quill */
-
+// eslint-disable-next-line max-classes-per-file
 (function () {
     const EDITOR_VERSION = '0.2.1';
     const DEFAULT_PARAGRAPH_TYPES = [
@@ -37,7 +37,6 @@
     let rootEditorElement;
     let quillInstance;
     let symbolsUrl;
-    let initialValue;
 
     function parseConfigArray(value, fallback) {
         if (!value) {
@@ -68,17 +67,14 @@
     }
 
     function buildParagraphOptions(options) {
-        return options.map((opt) => `<option value="${opt.value}">${opt.label}</option>`).join('');
+        return options.map((opt) => `<option value="${opt.value || ''}" data-format-name="${opt.className || ''}">${opt.label}</option>`).join('');
     }
 
     function buildSpanOptions(options) {
-        const html = `<style>
-            ${options.map((opt) => opt.previewCss).join('')}
-        </style>`;
-        return `${html}<ul class="slds-button-group-list">${options.map((opt) => `
+        return `<ul class="slds-button-group-list">${options.map((opt) => `
         <li>
             <button class="ql-${opt.className} slds-button slds-button_icon slds-button_icon-border-filled" aria-label="${opt.label}" data-tag-name="${opt.tagName}" data-class-name="${opt.className}">
-                <svg base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                <svg style="${opt.iconStyle || ''}" base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
                     <use href="${symbolsUrl}#${opt.iconAnchor}"></use>
                 </svg>
             </button>
@@ -88,10 +84,14 @@
 
     function buildToolbar(paragraphTypes, spanTypes, toolbarId) {
         return `
+            <style>
+                ${paragraphTypes.map((opt) => opt.previewCss).join('\n')}
+                ${spanTypes.map((opt) => opt.previewCss).join('\n')}
+            </style>
             <div id="${toolbarId}" class="slds-rich-text-editor__toolbar rte-plus__toolbar ql-toolbar">
                 <ul class="slds-button-group-list">
                     <li>
-                        <select class="slds-select" aria-label="Paragraph type">
+                        <select class="slds-select rtplus-paratype" aria-label="Paragraph type">
                             ${buildParagraphOptions(paragraphTypes)}
                         </select>
                     </li>
@@ -206,10 +206,77 @@
         `;
     }
 
-    function registerCustomFormats(spanTypes) {
+    function registerCustomFormats(spanTypes, paragraphTypes) {
         try {
             // eslint-disable-next-line no-undef
             const Inline = Quill.import('blots/inline');
+            // eslint-disable-next-line no-undef
+            const Block = Quill.import('blots/block');
+
+            // Register paragraph type formats - one Block blot per paragraph type (like span types)
+            if (paragraphTypes && Array.isArray(paragraphTypes)) {
+                paragraphTypes.forEach((paragraphType) => {
+                    if (paragraphType.className && paragraphType.tagName) {
+                        // eslint-disable-next-line max-classes-per-file
+                        const formatName = paragraphType.className;
+                        const className = paragraphType.className;
+                        const tagName = paragraphType.tagName || 'p';
+
+                        // Create a custom block blot for this paragraph type
+                        class ParagraphTypeBlot extends Block {
+                            static create(value) {
+                                const node = super.create();
+                                if (value) {
+                                    node.classList.add(className);
+                                }
+                                return node;
+                            }
+
+                            static formats(node) {
+                                // Check if node has our class and matches our tagName
+                                if (node.tagName.toLowerCase() === tagName.toLowerCase() && node.classList && node.classList.contains(className)) {
+                                    return className;
+                                }
+                                return undefined;
+                            }
+
+                            format(name, value) {
+                                if (name === formatName && this.domNode.classList) {
+                                    const currentTagName = this.domNode.tagName.toLowerCase();
+
+                                    // If applying this format and tagName doesn't match, we need to replace the blot
+                                    if (value && (value === className || value === true)) {
+                                        if (currentTagName !== tagName.toLowerCase()) {
+                                            // Tag needs to change - replace this blot with the correct one
+                                            const content = this.domNode.innerHTML;
+                                            const newBlot = this.scroll.create(formatName, className);
+                                            newBlot.domNode.innerHTML = content;
+                                            // Copy attributes
+                                            Array.from(this.domNode.attributes).forEach((attr) => {
+                                                if (attr.name !== 'class') {
+                                                    newBlot.domNode.setAttribute(attr.name, attr.value);
+                                                }
+                                            });
+                                            newBlot.domNode.classList.add(className);
+                                            this.replaceWith(newBlot);
+                                            return;
+                                        }
+                                        this.domNode.classList.add(className);
+                                    } else {
+                                        this.domNode.classList.remove(className);
+                                    }
+                                } else {
+                                    super.format(name, value);
+                                }
+                            }
+                        }
+                        ParagraphTypeBlot.blotName = formatName;
+                        ParagraphTypeBlot.tagName = tagName;
+                        ParagraphTypeBlot.className = className;
+                        Quill.register(ParagraphTypeBlot, true);
+                    }
+                });
+            }
 
             // Register span type formats - using className as format name everywhere
             if (spanTypes && Array.isArray(spanTypes)) {
@@ -260,16 +327,6 @@
         } catch (e) {
             console.error(`[RTE+ ${EDITOR_VERSION}] registerCustomFormats failed`, e);
         }
-    }
-
-    function getInitialValue(value) {
-        if (typeof value === 'string') {
-            return value;
-        }
-        if (value && typeof value === 'object' && typeof value.value === 'string') {
-            return value.value;
-        }
-        return '';
     }
 
     function emitValue() {
@@ -339,8 +396,8 @@
         return handlers;
     }
 
-    function setupQuill(ids, placeholder, spanTypes) {
-        registerCustomFormats(spanTypes);
+    function setupQuill(ids, placeholder, spanTypes, paragraphTypes) {
+        registerCustomFormats(spanTypes, paragraphTypes);
         const container = document.getElementById(ids.editor);
         // eslint-disable-next-line no-console
         console.debug(`[RTE+ ${EDITOR_VERSION}] setupQuill`, ids, { containerExists: !!container });
@@ -352,7 +409,7 @@
         // Create handlers for span types
         const spanTypeHandlers = createSpanTypeHandlers(spanTypes);
 
-        // Build formats array including span type formats
+        // Build formats array including span type formats and paragraph type formats
         const baseFormats = [
             'header',
             'bold',
@@ -367,7 +424,10 @@
         const spanTypeFormats = spanTypes && Array.isArray(spanTypes)
             ? spanTypes.map((st) => st.className).filter(Boolean)
             : [];
-        const formats = [...baseFormats, ...spanTypeFormats];
+        const paragraphTypeFormats = paragraphTypes && Array.isArray(paragraphTypes)
+            ? paragraphTypes.map((pt) => pt.className).filter(Boolean)
+            : [];
+        const formats = [...baseFormats, ...spanTypeFormats, ...paragraphTypeFormats];
         try {
             quillInstance = new window.Quill(`#${ids.editor}`, {
                 // theme: 'snow',
@@ -377,9 +437,6 @@
                     toolbar: {
                         container: `#${ids.toolbar}`,
                         handlers: {
-                            paratype(value) {
-                                this.quill.format('paratype', value || false);
-                            },
                             undo() {
                                 this.quill.history.undo();
                             },
@@ -491,6 +548,68 @@
         quillInstance.on('text-change', () => {
             emitValue();
         });
+
+        // Update paragraph type select when selection changes
+        quillInstance.on('selection-change', (range) => {
+            if (!range) {
+                return;
+            }
+            // Get the current line to check which paragraph type is applied
+            const [line] = quillInstance.getLine(range.index);
+            let currentParaType = '';
+
+            if (line && line.domNode && paragraphTypes) {
+                const node = line.domNode;
+                // Check which paragraph type class is applied
+                paragraphTypes.forEach((pt) => {
+                    if (pt.className && node.classList && node.classList.contains(pt.className)) {
+                        currentParaType = pt.value || '';
+                    }
+                });
+            }
+
+            const selectEl = document.querySelector(`#${ids.toolbar} .rtplus-paratype`);
+            if (selectEl) {
+                selectEl.value = currentParaType;
+            }
+        });
+
+        // Manually attach event listener to paragraph type select
+        const paraTypeSelect = document.querySelector(`#${ids.toolbar} .rtplus-paratype`);
+        if (paraTypeSelect && paragraphTypes) {
+            paraTypeSelect.addEventListener('change', (e) => {
+                const selectedValue = e.target.value;
+                const selectedElement = e.target.options[e.target.selectedIndex];
+                const formatName = selectedElement.dataset.formatName;
+                const range = quillInstance.getSelection(true);
+
+                if (range && formatName) {
+                    // Find the paragraph type to get its tagName
+                    const selectedParaType = paragraphTypes.find((pt) => pt.value === selectedValue);
+
+                    if (selectedParaType && selectedParaType.className) {
+                        // Remove all paragraph type formats from current line first
+                        paragraphTypes.forEach((pt) => {
+                            if (pt.className) {
+                                quillInstance.formatLine(range.index, range.length, pt.className, false, 'user');
+                            }
+                        });
+
+                        // Apply the selected paragraph type format
+                        // Pass the className as the value so the format method recognizes it
+                        quillInstance.formatLine(range.index, range.length, formatName, formatName, 'user');
+                    } else if (!selectedValue) {
+                        // Empty value - remove all paragraph type formats
+                        paragraphTypes.forEach((pt) => {
+                            if (pt.className) {
+                                quillInstance.formatLine(range.index, range.length, pt.className, false, 'user');
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
         return true;
     }
 
@@ -501,9 +620,6 @@
     }
 
     listen('sfcc:ready', async (payload) => {
-        if (payload.value) {
-            initialValue = payload.value;
-        }
         // eslint-disable-next-line no-console
         console.debug(`[RTE+ ${EDITOR_VERSION}] ready`, { payloadConfig: !!payload.config, hasValue: !!payload.value });
         symbolsUrl = payload.config && payload.config.symbolsUrl;
@@ -523,7 +639,7 @@
 
         document.body.appendChild(rootEditorElement);
 
-        setupQuill(ids, payload.config && payload.config.placeholder, spanTypes);
+        setupQuill(ids, payload.config && payload.config.placeholder, spanTypes, paragraphTypes);
 
         if (payload.value) {
             hydrateInitialValue(payload.value);
