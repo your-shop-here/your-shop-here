@@ -499,6 +499,14 @@ article.product-tile button {
     z-index: 1;
 }
 
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+
 /* Overlay Position Classes - Flexbox Alignment */
 .image-component figcaption.overlay-position-top-left {
     justify-content: flex-start;

@@ -138,6 +138,29 @@
                 </span>
                 <ul class="slds-button-group-list">
                     <li>
+                        <button class="slds-button slds-button_icon slds-button_icon-border-filled ql-align" value="" aria-label="Left align text">
+                            <svg base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                                <use href="${symbolsUrl}#left_align_text"></use>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="slds-button slds-button_icon slds-button_icon-border-filled ql-align" value="center" aria-label="Center align text">
+                            <svg base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                                <use href="${symbolsUrl}#center_align_text"></use>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="slds-button slds-button_icon slds-button_icon-border-filled ql-align" value="right" aria-label="Right align text">
+                            <svg base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                                <use href="${symbolsUrl}#right_align_text"></use>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+                <ul class="slds-button-group-list">
+                    <li>
                         <button class="ql-list slds-button slds-button_icon slds-button_icon-border-filled" value="bullet" aria-label="Bulleted list">
                             <svg base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
                                 <use href="${symbolsUrl}#richtextbulletedlist"></use>
@@ -417,6 +440,7 @@
             'underline',
             'strike',
             'blockquote',
+            'align',
             'list',
             'link',
             'image',
