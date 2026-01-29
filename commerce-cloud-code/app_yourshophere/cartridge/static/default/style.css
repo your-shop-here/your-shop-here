@@ -442,6 +442,61 @@ article.product-tile button {
 
 /** PDP **/
 
+/* Variation Attribute Swatches */
+.swatch-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.swatch-container button.swatch {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid var(--skin-border-color, #ccc);
+    background-color: var(--skin-background-color-1, #fff) !important;
+    color: var(--skin-text-primary) !important;
+    cursor: pointer;
+    transition: all var(--skin-transition-normal) ease;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.swatch-container button.swatch img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.swatch-container button.swatch .swatch-fallback {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+    text-align: center;
+    line-height: 1;
+}
+
+.swatch-container button.swatch:hover:not(:disabled):not(.selected) {
+    border-color: var(--skin-primary-color-1);
+    transform: scale(1.1);
+}
+
+.swatch-container button.swatch.selected {
+    border-color: var(--skin-primary-color-1) !important;
+    box-shadow: 0 0 0 2px var(--skin-primary-color-1);
+}
+
+.swatch-container button.swatch:disabled,
+.swatch-container button.swatch.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Enhanced Image Component Styles */
 .image-container {
     width: 100%;
