@@ -1254,7 +1254,6 @@ input[aria-invalid="true"] {
 
 .richtextplus span.secondary-color {
     color: var(--skin-secondary-color-1);
-    background-color: var(--skin-secondary-color-invert-1);
 }
 
 .error-container p {

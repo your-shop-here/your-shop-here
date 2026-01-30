@@ -230,10 +230,11 @@ exports.createModel = function createModel(options) {
         altText: options.altText || '',
         link: options.link || null,
         width: options.width || '100%',
-        overlayRegion: options.regions.overlay || null,
+        regions: options.regions || null,
         valign: options.valign,
         overlayPosition: options.overlayPosition || null,
         cssWidth: options.forceWidth ? 'auto' : '100%',
+        imageId: `dis-image-${Math.random().toString(36).substr(2, 9)}`,
     };
 };
 
@@ -278,6 +279,55 @@ function generateImgStyle(cssWidth) {
 }
 
 /**
+ * Generates shared CSS classes and image specific styles for the overlay on top of the image
+ * @param {Object} overlayConfig - The overlay configuration object
+ * @returns {Object} An object containing the classes and style string
+ */
+function generateOverlayCss(overlayConfig) {
+    const classes = [];
+    let style = '';
+    const position = overlayConfig.position || 'middle-center';
+    const padding = overlayConfig.padding || 10;
+    const unit = overlayConfig.unit || overlayConfig.paddingUnit || 'percent';
+    const bgColor = overlayConfig.backgroundColor || 'none';
+    const transparency = overlayConfig.transparency !== undefined ? parseInt(overlayConfig.transparency, 10) : 100;
+
+    classes.push('dis-image-overlay');
+    classes.push('fg-bgcolor');
+    classes.push('image-on');
+    classes.push(`overlay-position-${position}`);
+
+    // Apply padding based on position
+    const paddingValue = unit === 'percent' ? `${padding}%` : `${padding}px`;
+    style += `padding: ${paddingValue};`;
+
+    // Apply background color and transparency
+    if (bgColor !== 'none') {
+        let bgColorVar = '';
+        const opacity = transparency / 100;
+
+        if (bgColor === 'page-background') {
+            bgColorVar = 'var(--skin-background-color-1, #ffffff)';
+        } else if (bgColor === 'primary-color') {
+            bgColorVar = 'var(--skin-primary-color-1, #1a73e8)';
+        } else if (bgColor === 'secondary-color') {
+            bgColorVar = 'var(--skin-secondary-color-1, #5f6368)';
+        } else if (bgColor === 'text-color') {
+            bgColorVar = 'var(--skin-main-text-color-1, #202124)';
+        }
+
+        // Use CSS custom properties and pseudo-element to isolate background transparency
+        // This ensures content remains fully opaque
+
+        // @todo check if this can be done without custom properties / what happens with multiple images on the page.
+        style += ` --overlay-bg-color: ${bgColorVar}; --overlay-bg-opacity: ${opacity};`;
+        classes.push(' overlay-has-background');
+    }
+
+    return { classes, style };
+}
+
+/**
  * Renders the DIS image component as a responsive image
  *
  * @param {Object} model - The model object
@@ -295,78 +345,22 @@ exports.template = function template(model) {
     // Generate aspect ratio styles for the img element
     const aspectRatioStyles = generateAspectRatioStyles(model.sources, fallback.aspectRatio);
 
-    // Create a unique ID for this image component to scope the styles
-    const imageId = `dis-image-${Math.random().toString(36).substr(2, 9)}`;
-
-    // Generate style tag with media queries for aspect ratios
-    const styleTag = aspectRatioStyles ? `
-        <style>
-            #${imageId} img {
-                ${aspectRatioStyles}
-            }
-        </style>
-    ` : '';
-
-    // Build overlay classes and styles
-    let overlayClasses = 'dis-image-overlay fg-bgcolor image-on';
-    let overlayStyles = '';
-
-    if (model.overlayPosition) {
-        const position = model.overlayPosition.position || 'middle-center';
-        const padding = model.overlayPosition.padding || 10;
-        const unit = model.overlayPosition.unit || model.overlayPosition.paddingUnit || 'percent';
-        const bgColor = model.overlayPosition.backgroundColor || 'none';
-        const transparency = model.overlayPosition.transparency !== undefined ? parseInt(model.overlayPosition.transparency, 10) : 100;
-
-        overlayClasses += ` overlay-position-${position}`;
-
-        // Apply padding based on position
-        const paddingValue = unit === 'percent' ? `${padding}%` : `${padding}px`;
-        overlayStyles = `padding: ${paddingValue};`;
-
-        // Apply background color and transparency
-        if (bgColor !== 'none') {
-            let bgColorVar = '';
-            const opacity = transparency / 100;
-
-            if (bgColor === 'page-background') {
-                bgColorVar = 'var(--skin-background-color-1, #ffffff)';
-            } else if (bgColor === 'primary-color') {
-                bgColorVar = 'var(--skin-primary-color-1, #1a73e8)';
-            } else if (bgColor === 'secondary-color') {
-                bgColorVar = 'var(--skin-secondary-color-1, #5f6368)';
-            } else if (bgColor === 'text-color') {
-                bgColorVar = 'var(--skin-main-text-color-1, #202124)';
-            }
-
-            // Use CSS custom properties and pseudo-element to isolate background transparency
-            // This ensures content remains fully opaque
-            overlayStyles += ` --overlay-bg-color: ${bgColorVar}; --overlay-bg-opacity: ${opacity};`;
-            overlayClasses += ' overlay-has-background';
-        }
-    } else if (model.valign) {
-        // Fallback to valign if overlayPosition is not set
-        overlayClasses += ` valign-${model.valign}`;
-    }
-
-    // Build overlay region HTML
-    let overlayHtml = '';
-    if (model.overlayRegion) {
-        const overlayRegion = model.overlayRegion.setTagName('figcaption').setClassName(overlayClasses);
-        if (overlayStyles) {
-            overlayRegion.setAttribute('style', overlayStyles);
-        }
-        overlayHtml = overlayRegion.render();
-    }
+    const cssConfig = generateOverlayCss(model.overlayPosition);
 
     const pictureHtml = `
-    ${styleTag}
-    <div class="image-component" id="${imageId}">
-        <picture>
-            ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
-            <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(model.cssWidth)}" loading="lazy" />
+        ${aspectRatioStyles ? `
+            <style>
+                #${model.imageId} img {
+                    ${aspectRatioStyles}
+                }
+            </style>
+        ` : ''}
+        <div class="image-component" id="${model.imageId}">
+            <picture>
+                ${model.sources.filter((source) => source.mediaQuery).map((source) => renderSource(source)).join('\n')}
+                <img src="${fallback.url}" alt="${model.altText}" style="${generateImgStyle(model.cssWidth)}" loading="lazy" />
             </picture>
-            ${overlayHtml}
+            ${model.regions.overlay.setTagName('figcaption').setClassName(cssConfig.classes.join(' ')).setAttribute('style', cssConfig.style).render()}
         </div>
         `;
 
