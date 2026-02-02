@@ -10,7 +10,10 @@
 exports.createModel = function createModel(options) {
     const { renderPrice, getImageUrl, renderAddToCartButton } = require('*/cartridge/partials/shared-templates/product-items');
     const product = options.product;
-    const recommendations = product.getRecommendations().toArray();
+    let recommendations = product.getRecommendations().toArray();
+    if (recommendations.length === 0 && product.variant) {
+        recommendations = product.variationModel.master.getRecommendations().toArray();
+    }
     const model = {
         recommendationTypes: {},
     };
