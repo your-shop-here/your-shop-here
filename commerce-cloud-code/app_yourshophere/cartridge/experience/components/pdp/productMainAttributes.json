@@ -9,10 +9,23 @@
             "description": "Display settings",
             "attribute_definitions": [
                 {
-                
                     "id": "swatchDimension",
                     "name": "Swatch Atttribute",
                     "description": "A comma-separated list of attribute IDs to be displayed as swatches",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "swatchViewType",
+                    "name": "Swatch View Type",
+                    "description": "The view type for swatch images (e.g., 'swatch', 'small')",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "swatchDISConfig",
+                    "name": "Swatch DIS Config",
+                    "description": "DIS parameters for swatch images (e.g., 'sw=300&sh=400')",
                     "type": "string",
                     "required": false
                 }
