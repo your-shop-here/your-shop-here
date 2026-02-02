@@ -1757,7 +1757,7 @@
     </content>
 
     <content content-id="_main-theme">
-        <display-name xml:lang="x-default">_main-theme</display-name>
+        <display-name xml:lang="x-default">Site Theme</display-name>
         <description xml:lang="x-default">The page decorator shared accross all pages but checkout. It carries the theme settings such as font and color, the header and the footer. The ID must be unchanged for your-shop-here to work</description>
         <type>page.theme</type>
         <config>{
@@ -1971,7 +1971,7 @@
     </content>
 
     <content content-id="account">
-        <display-name xml:lang="x-default">Account</display-name>
+        <display-name xml:lang="x-default">My Account Landing Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -2000,7 +2000,7 @@
     </content>
 
     <content content-id="account-addressbook">
-        <display-name xml:lang="x-default">Address Book</display-name>
+        <display-name xml:lang="x-default">Address Book Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -2014,7 +2014,7 @@
     </content>
 
     <content content-id="account-preferences">
-        <display-name xml:lang="x-default">Preferences</display-name>
+        <display-name xml:lang="x-default">Preferences Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -2028,7 +2028,7 @@
     </content>
 
     <content content-id="account-profile">
-        <display-name xml:lang="x-default">Profile</display-name>
+        <display-name xml:lang="x-default">Profile Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -2258,7 +2258,7 @@
     </content>
 
     <content content-id="cart">
-        <display-name xml:lang="x-default">Cart</display-name>
+        <display-name xml:lang="x-default">Cart Page</display-name>
         <type>page.cartPage</type>
         <config>{
   "visibility" : [ ]
@@ -2289,7 +2289,7 @@
     </content>
 
     <content content-id="cat-root-pdp">
-        <display-name xml:lang="x-default">cat-root-pdp</display-name>
+        <display-name xml:lang="x-default">Default Product Detail Page</display-name>
         <type>page.productPage</type>
         <config>{
   "visibility" : [ ]
@@ -2320,25 +2320,8 @@
         <sitemap-priority>0.0</sitemap-priority>
     </content>
 
-    <content content-id="cat-root-plp">
-        <display-name xml:lang="x-default">cat-root-plp</display-name>
-        <type>page.categoryPage</type>
-        <config>{
-  "visibility" : [ ]
-}</config>
-        <visibility-mode xml:lang="x-default">visible</visibility-mode>
-        <data xml:lang="x-default">{
-  "category" : null
-}</data>
-        <aspect-type>category</aspect-type>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <sitemap-included-flag>false</sitemap-included-flag>
-    </content>
-
     <content content-id="catalog-root-plp">
-        <display-name xml:lang="x-default">cat-root-plp</display-name>
+        <display-name xml:lang="x-default">Default Product Listing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -2367,7 +2350,7 @@
     </content>
 
     <content content-id="catalog-sets-pdp">
-        <display-name xml:lang="x-default">cat-sets-pdp</display-name>
+        <display-name xml:lang="x-default">Product Detail Page for Product Sets</display-name>
         <type>page.productPage</type>
         <config>{
   "visibility" : [ ]
@@ -2461,7 +2444,7 @@
     </content>
 
     <content content-id="checkout">
-        <display-name xml:lang="x-default">checkout</display-name>
+        <display-name xml:lang="x-default">Checkout Page</display-name>
         <type>page.checkoutPage</type>
         <config>{
   "visibility" : [ ]
@@ -2954,7 +2937,7 @@
     </content>
 
     <content content-id="electronics-landing">
-        <display-name xml:lang="x-default">electronics-landing</display-name>
+        <display-name xml:lang="x-default">Electronics Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -2995,8 +2978,7 @@
     "desktopColumns" : 2,
     "mobileColumns" : 1,
     "columnWidths" : [ 25, 75 ],
-    "mobileColumnWidths" : [ 100 ],
-
+    "mobileColumnWidths" : [ 100 ]
   },
   "cssClass" : null,
   "style" : null
@@ -3147,7 +3129,7 @@
     </content>
 
     <content content-id="faq">
-        <display-name xml:lang="x-default">FAQ</display-name>
+        <display-name xml:lang="x-default">FAQ Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -3260,7 +3242,7 @@
     </content>
 
     <content content-id="footwear-landing">
-        <display-name xml:lang="x-default">footwear-landing</display-name>
+        <display-name xml:lang="x-default">Footwear Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -3292,7 +3274,7 @@
     </content>
 
     <content content-id="gear-landing">
-        <display-name xml:lang="x-default">gear-landing</display-name>
+        <display-name xml:lang="x-default">Gear Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -3324,7 +3306,7 @@
     </content>
 
     <content content-id="homepage">
-        <display-name xml:lang="x-default">homepage</display-name>
+        <display-name xml:lang="x-default">Homepage</display-name>
         <description xml:lang="x-default">This is the homepage of your-shop-here. Its ID is required to be unchanges, so the shop can pick it up on the homepage</description>
         <type>page.contentPage</type>
         <config>{
@@ -3389,7 +3371,7 @@
     </content>
 
     <content content-id="kids-landing">
-        <display-name xml:lang="x-default">kids-landing</display-name>
+        <display-name xml:lang="x-default">Kids Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -3421,7 +3403,7 @@
     </content>
 
     <content content-id="login">
-        <display-name xml:lang="x-default">Login</display-name>
+        <display-name xml:lang="x-default">Login Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -3444,7 +3426,7 @@
     </content>
 
     <content content-id="men-landing">
-        <display-name xml:lang="x-default">men-landing</display-name>
+        <display-name xml:lang="x-default">Men Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -3476,7 +3458,7 @@
     </content>
 
     <content content-id="nutrition-landing">
-        <display-name xml:lang="x-default">nutrition-landing</display-name>
+        <display-name xml:lang="x-default">Nutrition Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
@@ -3508,7 +3490,7 @@
     </content>
 
     <content content-id="order-thank-you">
-        <display-name xml:lang="x-default">order-thank-you</display-name>
+        <display-name xml:lang="x-default">Order Thank You Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -3534,7 +3516,7 @@
     </content>
 
     <content content-id="orderdetails">
-        <display-name xml:lang="x-default">Order Details</display-name>
+        <display-name xml:lang="x-default">Order Details Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -3556,7 +3538,7 @@
     </content>
 
     <content content-id="orderhistory">
-        <display-name xml:lang="x-default">Order History</display-name>
+        <display-name xml:lang="x-default">Order History Page</display-name>
         <type>page.contentPage</type>
         <config>{
   "visibility" : [ ]
@@ -3578,7 +3560,7 @@
     </content>
 
     <content content-id="product-tile">
-        <display-name xml:lang="x-default">product-tile</display-name>
+        <display-name xml:lang="x-default">Product Tile Layout</display-name>
         <type>page.productTile</type>
         <config>{
   "visibility" : [ ]
@@ -3640,7 +3622,7 @@
     </content>
 
     <content content-id="women-landing">
-        <display-name xml:lang="x-default">women-landing</display-name>
+        <display-name xml:lang="x-default">Women Landing Page</display-name>
         <type>page.categoryPage</type>
         <config>{
   "visibility" : [ ]
