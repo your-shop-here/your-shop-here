@@ -1,0 +1,35 @@
+{
+    "name": "Static Recommendations",
+    "description": "Displays the static recommendations for a product",
+    "group": "pdp",
+    "attribute_definition_groups": [
+        {
+            "id": "staticRecommendationsSettings",
+            "name": "Settings",
+            "description": "Display settings for static recommendations",
+            "attribute_definitions": [
+                {
+                    "id": "showAddToCart",
+                    "name": "Show Add to Cart",
+                    "description": "Display add to cart button for individual items",
+                    "type": "boolean"
+                },
+                {
+                    "id": "viewType",
+                    "name": "View Type",
+                    "description": "the product view type",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "disConfig",
+                    "name": "Dimensions",
+                    "description": "DIS parameters i.e. sw=300&sh=400",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+} 
