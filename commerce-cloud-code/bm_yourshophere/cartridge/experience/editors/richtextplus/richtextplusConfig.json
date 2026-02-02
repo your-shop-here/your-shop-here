@@ -46,14 +46,14 @@
   "spanTypes": [
     {
       "label": "Drop Shadow",
-      "iconAnchor": "drop_shadow",
+      "icon": "icons/drop-shadow.svg",
       "className": "drop-shadow",
       "tagName": "span",
       "previewCss": "span.drop-shadow { text-shadow: 1px 1px 4px #449; }"
     },
     {
       "label": "Primary Background",
-      "iconAnchor": "primary_background",
+      "icon": "icons/richtext-icons.svg#primary_background",
       "className": "primary-background",
       "tagName": "span",
       "previewCss": "span.primary-background { background-color: #00a1e0; color: #fff; }",
@@ -61,7 +61,7 @@
     },
     {
       "label": "Primary Color",
-      "iconAnchor": "primary_color",
+      "icon": "icons/richtext-icons.svg#primary_color",
       "className": "primary-color",
       "tagName": "span",
       "previewCss": "span.primary-color { color: #00a1e0; background-color: #fff; }",
@@ -69,7 +69,7 @@
     },
     {
       "label": "Primary Outline",
-      "iconAnchor": "primary_outline",
+      "icon": "icons/richtext-icons.svg#primary_outline",
       "className": "primary-outline",
       "tagName": "span",
       "previewCss": "span.primary-outline { color: #00a1e0; text-shadow: 1px 1px 0 #00a1e0, -1px 1px 0 #00a1e0, 1px -1px 0 #00a1e0, -1px -1px 0 #00a1e0; }",
@@ -77,7 +77,7 @@
     },
     {
       "label": "Secondary background",
-      "iconAnchor": "secondary_background",
+      "icon": "icons/richtext-icons.svg#secondary_background",
       "className": "secondary-background",
       "tagName": "span",
       "previewCss": "span.secondary-background { background-color: #f39c12; color: #fff; }",
@@ -85,7 +85,7 @@
     },
     {
       "label": "Secondary-Color",
-      "iconAnchor": "secondary_color",
+      "icon": "icons/richtext-icons.svg#secondary_color",
       "className": "secondary-color",
       "tagName": "span",
       "previewCss": "span.secondary-color { color: #f39c12; background-color: #fff; }",
@@ -93,7 +93,7 @@
     },
     {
       "label": "Secondary Outline",
-      "iconAnchor": "secondary_outline",
+      "icon": "icons/richtext-icons.svg#secondary_outline",
       "className": "secondary-outline",
       "tagName": "span",
       "previewCss": "span.secondary-outline { color: #f39c12; text-shadow: 1px 1px 0 #f39c12, -1px 1px 0 #f39c12, 1px -1px 0 #f39c12, -1px -1px 0 #f39c12; }",

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" display="none">
+  <!-- Sprited SVG example: Multiple icons in one file -->
+  <!-- This demonstrates how to use SVG sprites with <use> elements -->
+  
+  <!-- Primary Background Icon -->
+  <symbol viewBox="0 0 520 520" id="primary_background" xmlns="http://www.w3.org/2000/svg">
+    <rect x="22.342" y="35.517" width="477.658" height="464.483" style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(0, 161, 224);"/>
+    <text style="font-family: &quot;Arial&quot;, sans-serif; font-size: 28px; paint-order: stroke; stroke-linecap: round; stroke-miterlimit: 11.25; stroke-width: 1.54267px; white-space: pre;" transform="matrix(17.269411, 0, 0, 16.438408, -2962.959229, -2034.363159)" x="176.984" y="149.823">P</text>	
+  </symbol>
+  
+  <!-- Primary Color Icon -->
+  <symbol viewBox="0 0 520 520" id="primary_color" xmlns="http://www.w3.org/2000/svg">
+    <text style="fill: rgb(0, 161, 224); font-family: &quot;Arial&quot;, sans-serif; font-size: 28px; paint-order: fill; white-space: pre;" transform="matrix(17.269411, 0, 0, 16.438408, -2983.768311, -2044.001099)" x="176.984" y="149.823">P</text>	
+  </symbol>
+  
+  <!-- Primary Outline Icon -->
+  <symbol viewBox="0 0 520 520" id="primary_outline" xmlns="http://www.w3.org/2000/svg">
+    <text style="font-family: &quot;Arial&quot;, sans-serif; font-size: 28px; paint-order: stroke; stroke: rgb(0, 161, 224); stroke-linecap: round; stroke-miterlimit: 11.25; stroke-width: 2.54267px; white-space: pre;" transform="matrix(17.269411, 0, 0, 16.438408, -2968.873291, -2044.000854)" x="176.984" y="149.823">P</text>
+  </symbol>
+  
+  <!-- Secondary Background Icon -->
+  <symbol viewBox="0 0 520 520" id="secondary_background" xmlns="http://www.w3.org/2000/svg">
+    <rect x="22.342" y="35.517" width="477.658" height="464.483" style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(221, 122, 1);"/>
+    <text style="font-family: &quot;Arial&quot;, sans-serif; font-size: 28px; paint-order: stroke; stroke-linecap: round; stroke-miterlimit: 11.25; stroke-width: 1.54267px; white-space: pre;" transform="matrix(17.269411, 0, 0, 16.438408, -2962.959229, -2034.363159)" x="176.984" y="149.823">S</text>	
+  </symbol>
+  
+  <!-- Secondary Color Icon -->
+  <symbol viewBox="0 0 520 520" id="secondary_color" xmlns="http://www.w3.org/2000/svg">
+    <text style="fill: rgb(221, 122, 1); font-family: &quot;Arial&quot;, sans-serif; font-size: 28px; paint-order: stroke; stroke-linecap: round; stroke-miterlimit: 11.25; stroke-width: 0.54267px; white-space: pre;" transform="matrix(17.269411, 0, 0, 16.438408, -2962.959229, -2034.363159)" x="176.984" y="149.823">S</text>	
+  </symbol>
+  
+  <!-- Secondary Outline Icon -->
+  <symbol viewBox="0 0 520 520" id="secondary_outline" xmlns="http://www.w3.org/2000/svg">
+    <text style="font-family: &quot;Arial&quot;, sans-serif; font-size: 28px; paint-order: stroke; stroke: rgb(221, 122, 1); stroke-linecap: round; stroke-miterlimit: 11.25; stroke-width: 2.54267px; white-space: pre;" transform="matrix(17.269411, 0, 0, 16.438408, -2962.959229, -2034.363159)" x="176.984" y="149.823">S</text>	
+  </symbol>
+</svg>

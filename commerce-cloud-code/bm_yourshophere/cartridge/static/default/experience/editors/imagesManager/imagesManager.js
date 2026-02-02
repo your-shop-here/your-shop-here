@@ -26,6 +26,7 @@
         forceHeight: null, // Force height in pixels
         outputFileType: null, // Output file type (jpg, png, etc.)
         advancedSectionOpen: false, // Whether advanced section is expanded
+        searchQuery: '', // Current search query
     };
     let config = {};
     let disOptions = {};
@@ -505,6 +506,13 @@
     function selectFolder(folderId) {
         state.currentFolder = folderId;
 
+        // Clear search when selecting a folder
+        state.searchQuery = '';
+        const searchInput = rootEditorElement.querySelector('.search-input');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
         // Keep ancestors expanded so the selection stays visible
         ensureAncestorsOpen(folderId);
 
@@ -524,7 +532,12 @@
         const imagesContainer = rootEditorElement.querySelector('.images-list-container');
         imagesContainer.innerHTML = '<div class="slds-spinner_container"><div class="slds-spinner slds-spinner_medium" role="status"><span class="slds-assistive-text">Loading</span><div class="slds-spinner__dot-a"></div><div class="slds-spinner__dot-b"></div></div></div>';
 
-        const url = `${config.getFolderImagesURL}&folderPath=${encodeURIComponent(folderPath)}&locale=${encodeURIComponent(config.locale || 'default')}`;
+        let url = `${config.getFolderImagesURL}&folderPath=${encodeURIComponent(folderPath)}&locale=${encodeURIComponent(config.locale || 'default')}`;
+        
+        // If there's a search query, add search mode and query parameters
+        if (state.searchQuery && state.searchQuery.trim()) {
+            url += `&mode=search&query=${encodeURIComponent(state.searchQuery.trim())}`;
+        }
 
         fetch(url)
             .then((response) => response.json())
@@ -1895,6 +1908,12 @@
 
                 <!-- Right Panel -->
                 <div class="right-panel" style="flex: 1; display: flex; flex-direction: column; min-width: 0; background-color: #ffffff;">
+                    <div style="padding: 1rem 1rem 0.5rem 1rem; display: flex; justify-content: flex-end;">
+                        <div class="search-container" style="position: relative;">
+                            <input type="text" class="slds-input search-input" placeholder="Search..." style="width: 250px; padding-right: 2rem;" />
+                            <i class="fas fa-search" style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); color: #706e6b; pointer-events: none;"></i>
+                        </div>
+                    </div>
                     <div class="images-list-container" style="flex: 1; display: flex; flex-direction: column; padding: 1rem; overflow-y: auto; min-height: 0;">
                         <div class="slds-text-body_small slds-text-color_weak" style="text-align: center; padding: 2rem;">
                             Select a folder from the left to view images
@@ -1979,6 +1998,38 @@
         const advancedSectionHeader = rootEditorElement.querySelector('.advanced-section-header');
         if (advancedSectionHeader) {
             advancedSectionHeader.addEventListener('click', toggleAdvancedSection);
+        }
+
+        // Search input handler
+        const searchInput = rootEditorElement.querySelector('.search-input');
+        if (searchInput) {
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                state.searchQuery = query;
+                
+                // Clear existing timeout
+                clearTimeout(searchTimeout);
+                
+                // Debounce search - wait 300ms after user stops typing
+                searchTimeout = setTimeout(() => {
+                    if (state.currentFolder) {
+                        // Reload images with search query
+                        loadFolderImages(state.currentFolder);
+                    }
+                }, 300);
+            });
+            
+            // Also trigger search on Enter key
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    clearTimeout(searchTimeout);
+                    if (state.currentFolder) {
+                        loadFolderImages(state.currentFolder);
+                    }
+                }
+            });
         }
 
         // Keep overlays in sync with preview position on viewport resize

@@ -71,15 +71,34 @@
     }
 
     function buildSpanOptions(options) {
-        return `<ul class="slds-button-group-list">${options.map((opt) => `
+        // Extract base URL from symbolsUrl (e.g., "experience/editors/richtextplus/" from "experience/editors/richtextplus/symbols.svg")
+        const baseUrl = symbolsUrl ? symbolsUrl.substring(0, symbolsUrl.lastIndexOf('/') + 1) : '';
+
+        return `<ul class="slds-button-group-list">${options.map((opt) => {
+            const iconPath = opt.icon || '';
+            const isSprited = iconPath.includes('#');
+            let iconMarkup = '';
+
+            if (isSprited) {
+                // Sprited SVG: Use <use> element with sprite reference
+                // iconPath format: "icons/richtext-icons.svg#primary_background"
+                iconMarkup = `<use href="${baseUrl}${iconPath}"></use>`;
+            } else if (iconPath) {
+                // Simple SVG file: Use <image> element to embed the SVG
+                // iconPath format: "icons/drop-shadow.svg"
+                iconMarkup = `<image href="${baseUrl}${iconPath}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"></image>`;
+            }
+
+            return `
         <li>
             <button class="ql-${opt.className} slds-button slds-button_icon slds-button_icon-border-filled" aria-label="${opt.label}" data-tag-name="${opt.tagName}" data-class-name="${opt.className}">
-                <svg style="${opt.iconStyle || ''}" base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
-                    <use href="${symbolsUrl}#${opt.iconAnchor}"></use>
+                <svg style="${opt.iconStyle || ''}" base-icon--prefix="slds-button__icon" class="slds-button__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" viewBox="0 0 24 24">
+                    ${iconMarkup}
                 </svg>
             </button>
         </li>
-        `).join('')}</ul>`;
+        `;
+        }).join('')}</ul>`;
     }
 
     function buildToolbar(paragraphTypes, spanTypes, toolbarId) {

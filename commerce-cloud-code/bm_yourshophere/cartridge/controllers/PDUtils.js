@@ -115,6 +115,35 @@ function getLibraryFolders() {
 }
 getLibraryFolders.public = true;
 exports.GetLibraryFolders = getLibraryFolders;
+
+function recursiveSearch(folder, files, searchQuery, currentCount) {
+    const folders = [];
+    const filteredFiles = folder.listFiles((file) => {
+        // eslint-disable-next-line no-param-reassign
+        currentCount++;
+        if (currentCount > 2000) {
+            return false;
+        }
+        if (file.isDirectory()) {
+            folders.push(file);
+        }
+
+        if (file.name.toLowerCase().includes(searchQuery)) {
+            return true;
+        }
+        return false;
+    });
+
+    folders.forEach((subFolder) => {
+        recursiveSearch(subFolder, files, searchQuery, currentCount);
+    });
+
+    if (filteredFiles.size() > 0) {
+        files.addAll(filteredFiles);
+    }
+    return files;
+}
+
 // This code is based on: https://github.com/sfccplus/super-page-designer
 function getFolderImages() {
     const File = require('dw/io/File');
@@ -123,13 +152,19 @@ function getFolderImages() {
 
     const folderId = params.folderId.value;
     const folderPath = params.folderPath.value;
+    const mode = params.mode.value;
 
     const folderAbsolutePath = [File.LIBRARIES, folderId, folderPath].join('/');
 
     const folder = new File(folderAbsolutePath);
-    const files = folder
-        .listFiles((file) => !file.isDirectory())
-        .toArray();
+    let files = [];
+    if (mode === 'search') {
+        const ArrayList = require('dw/util/ArrayList');
+        const searchQuery = params.query.stringValue.toLowerCase();
+        files = recursiveSearch(folder, new ArrayList(), searchQuery, 0).toArray();
+    } else {
+        files = folder.listFiles((file) => !file.isDirectory()).toArray();
+    }
 
     const ContentMgr = require('dw/content/ContentMgr');
     const siteLibrary = ContentMgr.getSiteLibrary();
@@ -223,3 +258,4 @@ function getDisUrl() {
 }
 getDisUrl.public = true;
 exports.GetDisUrl = getDisUrl;
+
