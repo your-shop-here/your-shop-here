@@ -28,7 +28,7 @@ exports.template = (model) => `
         data-pid="${model.id}"
         ${model.disabled ? 'disabled' : ''}
         hx-get="${model.url}"
-        hx-target="this"
+        hx-target="body"
         hx-swap="afterend"
         hx-trigger="click"
         hx-indicator=".progress">

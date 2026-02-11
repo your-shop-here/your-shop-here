@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" width="52" height="52">
+  <!-- Simple SVG example: Drop Shadow Icon -->
+  <!-- This demonstrates how to use a standalone SVG file -->
+  <g fill-rule="evenodd">
+    <path d="M14 12h12.5C35.9 12 42 18.1 42 26.5S35.9 41 26.5 41H14c-1.1 0-2-.9-2-2V14c0-1.1.9-2 2-2zm5.5 9v12h7c4.6 0 7.5-2.5 7.5-6.5S32.1 20 26.5 20h-7z" transform="translate(4 4)" />
+    <path stroke="#fff" stroke-width="3" d="M12 10h12.5C34.9 10 41 16.1 41 24.5S34.9 39 24.5 39H12c-1.1 0-2-.9-2-2V12c0-1.1.9-2 2-2zm5.5 9v12h7c4.6 0 7.5-2.5 7.5-6.5S29.1 19 23.5 19h-7z" />
+  </g>
+</svg>

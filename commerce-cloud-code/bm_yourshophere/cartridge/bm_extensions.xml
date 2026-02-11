@@ -11,6 +11,10 @@
       <exec pipeline="YSHBackOffice" node="Start"/>
       <sub-pipelines>
          <pipeline name="PDUtils-Store" />
+         <pipeline name="PDUtils-ImageUpload" />
+         <pipeline name="PDUtils-GetFolderImages" />
+         <pipeline name="PDUtils-GetLibraryFolders" />
+         <pipeline name="PDUtils-GetDisUrl" />
       </sub-pipelines>
       <parameters>
         <parameter name="menuname" value="Your Shop Here Settings"/>
@@ -19,4 +23,5 @@
       <permissions />
       <icon>icons/ysh_settings_ico.gif</icon>
     </menuaction>
+    
 </extensions>

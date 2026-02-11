@@ -308,13 +308,27 @@ input.search-field {
     gap: 10px;
 }
 
-.add-to-cart ~ dialog article {
+@media (min-width: 768px) {
+    dialog article {
+        max-width: 960px;
+    }
+}
+
+dialog a.close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+dialog article {
     padding: 50px 10px;
 }
 
-.add-to-cart ~ dialog article a.close{
-    position: absolute;
-    right: 10px;
+@media (min-width: 768px) {
+    dialog a.close{
+        position: absolute;
+        top: 10px;
+        right: 30%;
+    }
 }
 
 .grid.desktop-cols-3 {
@@ -502,6 +516,96 @@ article.product-tile button {
     width: 100%;
     position: relative;
     margin-bottom: 20px;
+}
+
+/* DIS Image Component Styles */
+.image-component {
+    position: relative;
+}
+
+.image-component figcaption.dis-image-overlay.image-on {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* Use pseudo-element for transparent background so content stays opaque */
+.image-component figcaption.dis-image-overlay.image-on.overlay-has-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg-color);
+    opacity: var(--overlay-bg-opacity, 1);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Ensure all children of the overlay are fully opaque and above the background */
+.image-component figcaption.dis-image-overlay.image-on > * {
+    position: relative;
+    opacity: 1 !important;
+    z-index: 1;
+}
+
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+
+/* Overlay Position Classes - Flexbox Alignment */
+.image-component figcaption.overlay-position-top-left {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.image-component figcaption.overlay-position-top-center {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.image-component figcaption.overlay-position-top-right {
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.image-component figcaption.overlay-position-middle-left {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.image-component figcaption.overlay-position-middle-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.image-component figcaption.overlay-position-middle-right {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.image-component figcaption.overlay-position-bottom-left {
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.image-component figcaption.overlay-position-bottom-center {
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.image-component figcaption.overlay-position-bottom-right {
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* Grid Layout */
@@ -1165,6 +1269,46 @@ input[aria-invalid="true"] {
 .error-container h1 {
     color: var(--skin-error);
     margin-bottom: var(--skin-spacing-md);
+}
+
+.richtextplus h1.content-manager-h1, 
+.richtextplus h2.content-manager-h2,
+.richtextplus h3.content-manager-h3,
+.richtextplus h4.content-manager-h4 {
+    background-color: transparent;
+    color: var(--skin-heading-color-1-invert);
+}
+
+.richtextplus span.drop-shadow {
+    text-shadow: 1px 2px 3px #000;
+}
+
+.richtextplus span.primary-outline {
+    color: var(--skin-primary-color-invert-1);
+    text-shadow: 1px 1px 0 var(--skin-primary-color-1), -1px 1px 0 var(--skin-primary-color-1), 1px -1px 0 var(--skin-primary-color-1), -1px -1px 0 var(--skin-primary-color-1);
+}
+
+.richtextplus span.primary-background {
+    background-color: var(--skin-primary-color-1);
+    color: var(--skin-primary-color-invert-1);
+}
+
+.richtextplus span.primary-color {
+    color: var(--skin-primary-color-1);
+}
+
+.richtextplus span.secondary-outline {
+    color: var(--skin-secondary-color-invert-1);
+    text-shadow: 1px 1px 0 var(--skin-secondary-color-1), -1px 1px 0 var(--skin-secondary-color-1), 1px -1px 0 var(--skin-secondary-color-1), -1px -1px 0 var(--skin-secondary-color-1);
+}
+
+.richtextplus span.secondary-background {
+    background-color: var(--skin-secondary-color-1);
+    color: var(--skin-text-light-1);
+}
+
+.richtextplus span.secondary-color {
+    color: var(--skin-secondary-color-1);
 }
 
 .error-container p {

@@ -1,0 +1,11 @@
+{
+  "padding": {
+    "min": 0,
+    "max": 50,
+    "maxPx": 200,
+    "default": 10,
+    "unit": "percent",
+    "step": 1,
+    "stepPx": 1
+  }
+}

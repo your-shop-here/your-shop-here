@@ -15,10 +15,10 @@ exports.createModel = function createModel(options) {
             html = html.replace('<p>', '');
             html = html.replace(/<\/p>$/, '');
         } else {
-            html = html.replace(/<p>/g, `<p style="text-align: ${content.align || 'left'};">`);
+            html = html.replace(/<p>/g, `<p style="text-align: ${content.align || 'left'};" class="${options.textContrast} ${options.horizontalAlign}">`);
         }
     }
-
+    html = `<div class="richtextplus">${html}</div>`;
     const model = {
         html,
     };

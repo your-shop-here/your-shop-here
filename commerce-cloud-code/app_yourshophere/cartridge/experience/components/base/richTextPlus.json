@@ -1,0 +1,25 @@
+{
+  "name": "Textbox Plus",
+  "description": "This is the Textbox Plus Component, can be used as Help or FAQ pages or on smaller areas such as image overlays",
+  "group": "base",
+  "attribute_definition_groups": [
+    {
+      "id": "textContent",
+      "name": "Text Content",
+      "description": "The content to show in this component",
+      "attribute_definitions": [
+        {
+          "id": "richText",
+          "name": "content",
+          "description": "This is the rich text content area",
+          "type": "custom",
+          "required": true,
+          "editor_definition": {
+            "type": "richtextplus.richtextplus"
+          }
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}

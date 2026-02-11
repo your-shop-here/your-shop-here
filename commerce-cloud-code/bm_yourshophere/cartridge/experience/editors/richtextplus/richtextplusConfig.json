@@ -1,0 +1,103 @@
+{
+  "paragraphTypes": [
+    {
+      "label": "Paragraph",
+      "value": "",
+      "className": "",
+      "tagName": "p",
+      "previewCss": ""
+    },
+    {
+      "label": "Small print",
+      "value": "small",
+      "className": "para-small",
+      "tagName": "p",
+      "previewCss": "p.para-small { font-size: 0.9rem; line-height: 1.4; }"
+    },
+    {
+      "label": "Heading 1",
+      "value": "h1",
+      "className": "content-manager-h1",
+      "tagName": "h1",
+      "previewCss": "h1.content-manager-h1 { font-size: 2.5rem; line-height: 1.2; }"
+    },
+    {
+      "label": "Heading 2",
+      "value": "h2",
+      "className": "content-manager-h2",
+      "tagName": "h2",
+      "previewCss": "h2.content-manager-h2 { font-size: 2rem; line-height: 1.3; }"
+    },
+    {
+      "label": "Heading 3",
+      "value": "h3",
+      "className": "content-manager-h3",
+      "tagName": "h3",
+      "previewCss": "h3.content-manager-h3 { font-size: 1.75rem; line-height: 1.4; }"
+    },
+    {
+      "label": "Heading 4",
+      "value": "h4",
+      "className": "content-manager-h4",
+      "tagName": "h4",
+      "previewCss": "h4.content-manager-h4 { font-size: 1.5rem; line-height: 1.5; }"
+    }
+  ],
+  "spanTypes": [
+    {
+      "label": "Drop Shadow",
+      "icon": "icons/drop-shadow.svg",
+      "className": "drop-shadow",
+      "tagName": "span",
+      "previewCss": "span.drop-shadow { text-shadow: 1px 1px 4px #449; }"
+    },
+    {
+      "label": "Primary Background",
+      "icon": "icons/richtext-icons.svg#primary_background",
+      "className": "primary-background",
+      "tagName": "span",
+      "previewCss": "span.primary-background { background-color: #00a1e0; color: #fff; }",
+      "iconStyle": "color: #FFFFFF;"
+    },
+    {
+      "label": "Primary Color",
+      "icon": "icons/richtext-icons.svg#primary_color",
+      "className": "primary-color",
+      "tagName": "span",
+      "previewCss": "span.primary-color { color: #00a1e0; background-color: #fff; }",
+      "iconStyle": "color: #FFFFFF;"
+    },
+    {
+      "label": "Primary Outline",
+      "icon": "icons/richtext-icons.svg#primary_outline",
+      "className": "primary-outline",
+      "tagName": "span",
+      "previewCss": "span.primary-outline { color: #00a1e0; text-shadow: 1px 1px 0 #00a1e0, -1px 1px 0 #00a1e0, 1px -1px 0 #00a1e0, -1px -1px 0 #00a1e0; }",
+      "iconStyle": "color: #FFFFFF;"
+    },
+    {
+      "label": "Secondary background",
+      "icon": "icons/richtext-icons.svg#secondary_background",
+      "className": "secondary-background",
+      "tagName": "span",
+      "previewCss": "span.secondary-background { background-color: #f39c12; color: #fff; }",
+      "iconStyle": "color: #FFFFFF;"
+    },
+    {
+      "label": "Secondary-Color",
+      "icon": "icons/richtext-icons.svg#secondary_color",
+      "className": "secondary-color",
+      "tagName": "span",
+      "previewCss": "span.secondary-color { color: #f39c12; background-color: #fff; }",
+      "iconStyle": "color: #FFFFFF;"
+    },
+    {
+      "label": "Secondary Outline",
+      "icon": "icons/richtext-icons.svg#secondary_outline",
+      "className": "secondary-outline",
+      "tagName": "span",
+      "previewCss": "span.secondary-outline { color: #f39c12; text-shadow: 1px 1px 0 #f39c12, -1px 1px 0 #f39c12, 1px -1px 0 #f39c12, -1px -1px 0 #f39c12; }",
+      "iconStyle": "color: #FFFFFF;"
+    }
+  ]
+}
