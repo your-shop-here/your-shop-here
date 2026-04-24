@@ -1,21 +1,25 @@
-/* Sticky header — always sticky, compact animation on desktop only */
+/* Base header styles */
 header.experience-header {
-    position: sticky;
-    top: 0;
     z-index: 9001;
     isolation: isolate;
     background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
 }
 
-/* Scroll-driven compact animation — desktop only */
+/* Sticky positioning */
+header.experience-header.header-position-sticky {
+    position: sticky;
+    top: 0;
+}
+
+/* Scroll-driven shrink animation — desktop only, sticky headers only */
 @media (min-width: 1024px) {
-    header.experience-header {
-        animation: header-compact linear both;
+    header.experience-header.header-position-sticky {
+        animation: header-shrink linear both;
         animation-timeline: scroll(root);
         animation-range: 0px 120px;
     }
 
-    @keyframes header-compact {
+    @keyframes header-shrink {
         from {
             box-shadow: none;
             padding-top: 0.4rem;
@@ -28,14 +32,14 @@ header.experience-header {
         }
     }
 
-    header.experience-header .branding img,
-    header.experience-header .branding svg {
-        animation: branding-compact linear both;
+    header.experience-header.header-position-sticky.header-logo-shrink .branding img,
+    header.experience-header.header-position-sticky.header-logo-shrink .branding svg {
+        animation: branding-shrink linear both;
         animation-timeline: scroll(root);
         animation-range: 0px 80px;
     }
 
-    @keyframes branding-compact {
+    @keyframes branding-shrink {
         from { max-height: 3.5rem; }
         to   { max-height: 2rem; }
     }
