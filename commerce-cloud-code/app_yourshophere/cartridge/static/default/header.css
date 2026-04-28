@@ -123,12 +123,35 @@ header.experience-header div:not(.experience-theme-categorymenu) form, header.ex
 nav.mainmenu ul {
     margin: 0;
     padding: 0;
-
 }
 
 nav.mainmenu a {
     color: var(--skin-menu-color-1-invert);
     font-weight: 700;
+}
+
+/* Menu style variants */
+@media only screen and (min-width: 1024px) {
+    nav.mainmenu #menu-root.menu-style-medium li {
+        border-width: 0;
+    }
+    nav.mainmenu #menu-root.menu-style-medium a {
+        font-size: 0.875rem;
+        padding: 0.6em 0.9em;
+    }
+
+    nav.mainmenu #menu-root.menu-style-compact li {
+        border-width: 0;
+    }
+    nav.mainmenu #menu-root.menu-style-compact a {
+        font-size: 0.75rem;
+        padding: 0.4em 0.6em;
+    }
+
+    nav.mainmenu #menu-root.menu-style-medium label.drop-icon,
+    nav.mainmenu #menu-root.menu-style-compact label.drop-icon {
+        display: none;
+    }
 }
 
 nav.mainmenu .sub-menu a {
@@ -182,6 +205,8 @@ nav.mainmenu a {
 
 nav.mainmenu {
     background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
+    display: flex;
+    align-items: center;
 }
 
 
@@ -468,6 +493,8 @@ nav.mainmenu label.drop-icon img,
 
     nav.mainmenu li {
         padding: 0 1rem;
+        display: flex;
+        align-items: center;
     }
 
     nav.mainmenu #menu-root label.drop-icon {

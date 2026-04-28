@@ -2557,7 +2557,8 @@
 }</config>
         <data xml:lang="x-default">{
   "align" : "center",
-  "applyFilter" : "false"
+  "applyFilter" : "false",
+  "menuStyle" : "large"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
