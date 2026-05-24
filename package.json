@@ -42,6 +42,7 @@
     "data:testdata-rebuilddata": "b2c job run AfterDeploy --wait --poll-interval 15",
     "code:deploy": "b2c code deploy commerce-cloud-code/",
     "code:reload": "b2c code activate version1 --reload",
+    "code:watch": "b2c code watch commerce-cloud-code/",
     "develop:switchcode": "b2c code activate version2 && b2c code activate version1",
     "cleanup": "rm -f your-shop-here-data.zip site_template.zip test-site.zip",
     "bootstrap": "bash scripts/bootstrap.sh",
