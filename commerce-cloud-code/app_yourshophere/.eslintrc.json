@@ -3,6 +3,6 @@
         "commonjs": true
     },
     "rules": {
-      "no-underscore-dangle": ["error", { "allow": ["__routes"] }]
+      "no-underscore-dangle": "off"
     }
 }

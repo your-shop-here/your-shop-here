@@ -1,4 +1,3 @@
-/* global window, document, MutationObserver */
 
 (function () {
     // Create the data layer array if it doesn't exist. This array is used to
@@ -151,14 +150,12 @@
                                     contribution[property] = [];
                                 }
                                 contribution[property].push(contributionValue);
-                            }
-
+                            } else if (mode === 'object-assign') {
                             // If the mode is 'object-assign', merge the contribution value
                             // (which should be an object) into the specified property
                             // of the dataLayer entry. The spread syntax creates a new
                             // object with the existing properties and overwrites/adds
                             // properties from the contribution value.
-                            else if (mode === 'object-assign') {
                                 contribution[property] = { ...contribution[property], ...contributionValue };
                             }
                         });

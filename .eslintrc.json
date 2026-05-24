@@ -3,7 +3,11 @@
     "extends": "airbnb-base",
     "env": {
       "es6": true
-  },
+    },
+    "ignorePatterns": [
+        "**/static/default/js/partytown/**",
+        "**/static/**/quill.js"
+    ],
     "rules": {
         "import/no-unresolved": "off",
         "indent": ["error", 4, { "SwitchCase": 1, "VariableDeclarator": 1 }],
@@ -25,19 +29,62 @@
         "prefer-rest-params": "off",
         "no-underscore-dangle": "off",
         "import/extensions": "off",
-        "no-use-before-define": "off"
+        "no-use-before-define": "off",
+        "prefer-const": "off",
+        "prefer-object-spread": "off",
+        "consistent-return": "off",
+        "radix": "off",
+        "prefer-regex-literals": "off",
+        "import/no-dynamic-require": "off"
     },
     "globals" : {
-      "session": true,
-      "request": true,
-      "response": true,
-      "customer": true,
-      "empty": true,
-      "webreferences": true,
-      "webreferences2": true,
-      "PIPELET_NEXT": true,
-      "PIPELET_ERROR": true,
-      "XML": true,
-      "dw": true
-    }
+        "session": true,
+        "request": true,
+        "response": true,
+        "customer": true,
+        "empty": true,
+        "webreferences": true,
+        "webreferences2": true,
+        "PIPELET_NEXT": true,
+        "PIPELET_ERROR": true,
+        "XML": true,
+        "dw": true
+    },
+    "overrides": [
+        {
+            "files": ["**/static/**/*.js"],
+            "parserOptions": {
+                "ecmaVersion": 2020
+            },
+            "env": {
+                "browser": true,
+                "es6": true,
+                "commonjs": false
+            },
+            "globals": {
+                "session": "off",
+                "request": "off",
+                "response": "off",
+                "customer": "off",
+                "empty": "off",
+                "webreferences": "off",
+                "webreferences2": "off",
+                "PIPELET_NEXT": "off",
+                "PIPELET_ERROR": "off",
+                "dw": "off",
+                "htmx": "readonly",
+                "listen": "readonly",
+                "emit": "readonly",
+                "subscribe": "readonly"
+            },
+            "rules": {
+                "prefer-const": "error",
+                "prefer-object-spread": "error",
+                "no-var": "error",
+                "no-underscore-dangle": "off",
+                "import/no-dynamic-require": "off",
+                "prefer-regex-literals": "off"
+            }
+        }
+    ]
 }

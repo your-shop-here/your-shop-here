@@ -24,7 +24,7 @@ exports.minutes = function (minutes) {
  */
 exports.days = function (days) {
     const now = new Date();
-    const expires = new Date(now.getTime() + (days * 24 * 60 * 60 * 1000)); 
+    const expires = new Date(now.getTime() + (days * 24 * 60 * 60 * 1000));
     response.setExpires(expires);
 };
 

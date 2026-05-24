@@ -82,11 +82,14 @@ function createModel() {
 
     // Get suggested terms from any suggestion type
     if (productSuggestions) {
-        model.suggestedTerms = productSuggestions.getSearchPhraseSuggestions().getSuggestedPhrases().asList().toArray().map((phrase) => phrase.phrase);
+        model.suggestedTerms = productSuggestions.getSearchPhraseSuggestions().getSuggestedPhrases().asList().toArray()
+            .map((phrase) => phrase.phrase);
     } else if (categorySuggestions) {
-        model.suggestedTerms = categorySuggestions.getSearchPhraseSuggestions().getSuggestedPhrases().asList().toArray().map((phrase) => phrase.phrase);
+        model.suggestedTerms = categorySuggestions.getSearchPhraseSuggestions().getSuggestedPhrases().asList().toArray()
+            .map((phrase) => phrase.phrase);
     } else if (brandSuggestions) {
-        model.suggestedTerms = brandSuggestions.getSearchPhraseSuggestions().getSuggestedPhrases().asList().toArray().map((phrase) => phrase.phrase);
+        model.suggestedTerms = brandSuggestions.getSearchPhraseSuggestions().getSuggestedPhrases().asList().toArray()
+            .map((phrase) => phrase.phrase);
     }
 
     return model;
@@ -184,4 +187,4 @@ function template(model) {
 module.exports = {
     createModel,
     template,
-}; 
+};

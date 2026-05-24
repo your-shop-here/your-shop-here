@@ -23,7 +23,7 @@ server.get('Show', cache.applyDefaultCache, (req, res, next) => {
         pageMetaData.setPageMetaTags(req.pageMetaData, page);
         res.page('homepage');
     } else {
-        Logger.error('Page with ID "homepage" not found')
+        Logger.error('Page with ID "homepage" not found');
         res.renderPartial('error/notfound', { object: { reason: 'page "homepage" not found' }, decorator: 'decorator/ssr' });
     }
     next();

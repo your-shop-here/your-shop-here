@@ -1,4 +1,4 @@
-var PageMgr = require('dw/experience/PageMgr');
+const PageMgr = require('dw/experience/PageMgr');
 
 exports.renderSkin = function renderSkin() {
     return PageMgr.renderPage('_main-theme', JSON.stringify({ skin: true }));

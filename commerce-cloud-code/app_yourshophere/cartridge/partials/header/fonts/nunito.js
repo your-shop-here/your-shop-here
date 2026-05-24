@@ -8,4 +8,4 @@ function getFont() {
 
 module.exports = {
     getFont,
-}; 
+};

@@ -137,6 +137,7 @@ server.post(
         if (registrationFormObj.validForm) {
             res.setViewData(registrationFormObj);
 
+            // eslint-disable-next-line no-shadow
             this.on('route:BeforeComplete', (req, res) => {
                 const Transaction = require('dw/system/Transaction');
                 let authenticatedCustomer;

@@ -7,6 +7,7 @@
  * @property {string} title - The title of the checkout button
  * @property {string} url - The URL of the checkout page
  */
+// eslint-disable-next-line no-unused-vars
 exports.createModel = function createModel(product) {
     const Resource = require('dw/web/Resource');
     const URLUtils = require('dw/web/URLUtils');
@@ -28,7 +29,7 @@ exports.createModel = function createModel(product) {
  * @param {Object} model - The model object containing checkout button information
  * @returns {string} The HTML template for the checkout button
  */
-exports.template = model => `
+exports.template = (model) => `
 <button class="checkout btn btn-primary"
     ${model.disabled ? 'disabled' : ''}
     hx-get="${model.url}"

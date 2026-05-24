@@ -7,4 +7,4 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
-exports.template = model => (model.hasOptions ? 'Wow, this product has options' : '');
+exports.template = (model) => (model.hasOptions ? 'Wow, this product has options' : '');

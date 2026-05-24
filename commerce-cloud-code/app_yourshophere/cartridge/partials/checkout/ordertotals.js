@@ -43,7 +43,7 @@ exports.createModel = function createModel() {
  * @param {Object} model - The model object containing order total information
  * @returns {string} The HTML template for the Order Totals Component
  */
-exports.template = model => `
+exports.template = (model) => `
     <div class="order-totals">
         <div class="order-totals__row">
             <span class="order-totals__label">${model.labels.subtotal}:</span>

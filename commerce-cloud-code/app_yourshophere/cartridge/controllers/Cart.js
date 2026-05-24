@@ -1,6 +1,6 @@
 
-const server = require('*/server');
 const Logger = require('dw/system/Logger').getLogger('Cart');
+const server = require('*/server');
 
 server.use('Show', (req, res, next) => {
     const BasketMgr = require('dw/order/BasketMgr');

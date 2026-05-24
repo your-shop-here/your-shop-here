@@ -8,7 +8,7 @@ const start = function start() {
             <a href="#" onclick="history.go(-1)" role="button">Go Back</a>
         </body>
     </html>
-    `)
+    `);
 };
 start.public = true;
 

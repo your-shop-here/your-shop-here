@@ -1,4 +1,4 @@
-/* global window, document, navigator */
+
 /**
  * SFCC Analytics implementation for tracking events to Einstein Activities API
  */

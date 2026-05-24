@@ -1,35 +1,34 @@
-'use strict';
 
-var Template = require('dw/util/Template');
-var HashMap = require('dw/util/HashMap');
-var ProductViewModel = require('*/cartridge/experience/viewmodels/ProductViewModel');
+const Template = require('dw/util/Template');
+const HashMap = require('dw/util/HashMap');
+const ProductViewModel = require('*/cartridge/experience/viewmodels/ProductViewModel');
 
 // eslint-disable-next-line valid-jsdoc
 /**
  * Render logic for the assets.categorytile.
  */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
-        return renderComponent (context)
+        return renderComponent(context);
     } catch (e) {
         const Logger = require('*/api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
-}
+};
 
-function renderComponent (context) {
-    var model = new HashMap();
-    var content = context.content;
-    var searchterm = content.searchterm;
-    var searchDetailsParam = content.searchdetails;
-    var searchDetails = JSON.parse(searchDetailsParam.value);
-    var searchModel = (new dw.catalog.ProductSearchModel());
+function renderComponent(context) {
+    const model = new HashMap();
+    const content = context.content;
+    const searchterm = content.searchterm;
+    const searchDetailsParam = content.searchdetails;
+    const searchDetails = JSON.parse(searchDetailsParam.value);
+    const searchModel = (new dw.catalog.ProductSearchModel());
     searchModel.setCategoryID('root');
     searchModel.setSearchPhrase(searchterm);
 
     if (searchDetails.srule) {
-        var sortingRules = dw.catalog.CatalogMgr.getSortingRules().toArray();
-        var sortingRule = sortingRules.filter(function (apiSortingRule) {
+        const sortingRules = dw.catalog.CatalogMgr.getSortingRules().toArray();
+        const sortingRule = sortingRules.filter((apiSortingRule) => {
             if (searchDetails.srule === apiSortingRule.ID) {
                 return true;
             }
@@ -43,16 +42,16 @@ function renderComponent (context) {
     }
 
     searchModel.search();
-    var searchIterator = searchModel.productSearchHits;
-    var markup = '';
-    for (var i = 0; i < 10; i++) {
+    const searchIterator = searchModel.productSearchHits;
+    let markup = '';
+    for (let i = 0; i < 10; i++) {
         if (searchIterator.hasNext()) {
-            let product = searchIterator.next().firstRepresentedProduct;
-            let pModel = ProductViewModel.get(product);
+            const product = searchIterator.next().firstRepresentedProduct;
+            const pModel = ProductViewModel.get(product);
             markup += new Template('experience/components/assets/productstriptile').render(pModel).text;
         }
     }
     model.markup = markup;
 
     return new Template('experience/components/assets/searchstrip').render(model).text;
-};
+}

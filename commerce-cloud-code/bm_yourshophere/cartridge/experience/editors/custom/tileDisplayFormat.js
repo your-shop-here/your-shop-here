@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * Init for the displayFormat radio button custom editor

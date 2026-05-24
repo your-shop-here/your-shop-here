@@ -1,4 +1,4 @@
-/* global listen, emit, document, window */
+
 /**
  * Rich Text Plus Editor - Quill based Page Designer custom editor
  * Provides configurable paragraph styles and text-shadow presets.

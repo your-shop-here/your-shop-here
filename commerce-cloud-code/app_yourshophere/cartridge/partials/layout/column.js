@@ -21,10 +21,10 @@ exports.createModel = (input) => {
         cssClass: baseCssClass,
         desktopGap: columnConfiguration.desktopGap ? `gap: ${columnConfiguration.desktopGap}%` : '',
         mobileGap: columnConfiguration.mobileGap ? `gap: ${columnConfiguration.mobileGap}%` : '',
-        columnWidths: columnWidths,
-        mobileColumnWidths: mobileColumnWidths,
-        desktopColumns: desktopColumns,
-        columnClasses: columnClasses,
+        columnWidths,
+        mobileColumnWidths,
+        desktopColumns,
+        columnClasses,
         regionNames: Array.from(Array(desktopColumns).keys()).map((index) => `column${index + 1}`),
     };
 

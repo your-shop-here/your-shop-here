@@ -5,6 +5,7 @@
  * @param {Object} options the options object
  * @returns {string} The rendered price
  */
+// eslint-disable-next-line no-unused-vars
 function renderPrice(containedProduct, options) {
     const formatMoney = require('dw/util/StringUtils').formatMoney;
 

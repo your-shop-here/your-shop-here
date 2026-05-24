@@ -13,9 +13,9 @@ exports.render = function render(context, modelIn) {
         const component = context.component;
 
         return require('*/api/partials').create('layout/column').html({
-            context: context,
-            component: component,
-            model: model,
+            context,
+            component,
+            model,
         });
     } catch (e) {
         const Logger = require('*/api/Logger');

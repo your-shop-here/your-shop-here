@@ -11,7 +11,7 @@ const partials = require('*/api/partials');
  * @param {Object} args - The arguments passed to the controller
  * @returns {void}
  */
-exports.Start = (args) => {
+exports.Start = () => {
     const URLUtils = require('dw/web/URLUtils');
     const cacheTime = new Date();
     cacheTime.setHours(cacheTime.getHours() + 24);
