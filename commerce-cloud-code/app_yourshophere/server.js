@@ -639,10 +639,12 @@ function applyRenderings(res) {
                 switch (element.subType) {
                     case 'partial':
                         partial = require('*/api/partials').create(element.view);
-                        if (res.viewData.decorator) {
-                            partial.decorateWith(res.viewData.decorator);
+                        var viewData = res.viewData[element.view];
+                        var decorator = (viewData && viewData.decorator) || res.viewData.decorator;
+                        if (decorator) {
+                            partial = partial.decorateWith(decorator);
                         }
-                        partial.render(res.viewData[element.view] ? res.viewData[element.view].object : {});
+                        partial.render(viewData ? viewData.object : {});
                         break;
                     case 'isml':
                         template(element.view, res.viewData);

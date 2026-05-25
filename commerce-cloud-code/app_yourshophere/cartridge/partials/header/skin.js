@@ -1,4 +1,29 @@
 /**
+ * CSS ARCHITECTURE — three layers, applied in this order:
+ *
+ * 1. pico.min.css  — Pico CSS framework (static file). Provides the browser
+ *    reset, base element styles, and defines Pico's own CSS custom properties
+ *    (--primary, --color, --background-color, --font-size, etc.).
+ *
+ * 2. style.css  — Design token bridge (static file). Defines the --skin-*
+ *    custom properties (--skin-primary-color-1, --skin-spacing-md, etc.) used
+ *    by every component, and maps them to Pico's variables so the skin layer
+ *    below can override both at once via a single set of values.
+ *
+ * 3. Skin <style> block (this file, rendered inline by Page Designer at
+ *    runtime via the _main-theme page). Reads the colour and font choices
+ *    entered in the Page Designer skin component, then overwrites:
+ *      a) the --skin-* tokens  → consumed by component CSS
+ *      b) Pico's own variables → consumed by Pico's built-in element styles
+ *    Because style.css already maps --skin-* → Pico vars, one merchant colour
+ *    change propagates through both layers automatically.
+ *
+ * Result: Pico handles the baseline browser normalisation; style.css owns
+ * the token vocabulary; the PD skin component provides merchant-controlled
+ * theming without touching any static files.
+ */
+
+/**
  * Creates the model for the skin
  * @param {Object} params - The parameters for the model
  * @returns {Object} The model for the skin
