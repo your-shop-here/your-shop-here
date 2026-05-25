@@ -1,0 +1,228 @@
+/* ── Backwards-compat aliases for former Pico variables ─────────────── */
+:root {
+    --line-height: var(--skin-line-height);
+    --form-element-spacing-vertical: 0.5rem;
+    --border-width: 1px;
+    --grid-spacing-horizontal: var(--skin-spacing-md);
+    --spacing: var(--skin-spacing-md);
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    font-size: var(--skin-font-size-base);
+    line-height: var(--skin-line-height);
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Block elements: remove browser default margins that Pico normalises */
+article, aside, details, dialog, figure, footer, header,
+hgroup, main, nav, section, summary {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Pico sets article padding — header.css and product tiles depend on it */
+article { padding: var(--skin-spacing-md); }
+
+/* ── Typography ──────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 var(--skin-spacing-sm);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--skin-main-text-color-1);
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p { margin: 0 0 var(--skin-spacing-md); }
+
+a { color: var(--skin-primary-color-1); text-decoration: none; }
+a:hover { color: var(--skin-primary-color-hover-1); text-decoration: underline; }
+
+small { font-size: 0.875em; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+ul, ol { padding-left: var(--skin-spacing-lg); margin: 0 0 var(--skin-spacing-md); }
+li { margin-bottom: var(--skin-spacing-xs); }
+nav ul, nav ol { padding: 0; margin: 0; list-style: none; }
+nav li { margin: 0; }
+nav a { white-space: nowrap; }
+/* Float-based nav children won't give the nav height without this clearfix */
+nav::after { content: ''; display: table; clear: both; }
+
+/* ── Layout ──────────────────────────────────────────────────────────── */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--skin-spacing-sm);
+}
+
+/* Default grid — matches Pico's two-phase behaviour exactly.
+   Below 992px: single column. At 992px+: equal auto-fit columns.
+   Explicit column classes in style.css (.desktop-cols-3 etc.) override the desktop rule. */
+.grid {
+    grid-template-columns: 1fr;
+    margin: 0;
+}
+.grid > * { min-width: 0; }
+@media (min-width: 992px) {
+    .grid { grid-template-columns: repeat(auto-fit, minmax(0%, 1fr)); }
+}
+
+/* ── Forms ───────────────────────────────────────────────────────────── */
+label {
+    display: block;
+    margin-bottom: var(--skin-spacing-xs);
+    font-size: var(--skin-font-size-sm);
+    font-weight: 500;
+    color: var(--skin-main-text-color-1);
+}
+
+input:not([type=checkbox],[type=radio],[type=button],[type=submit],[type=reset]),
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: var(--form-element-spacing-vertical) var(--skin-spacing-sm);
+    font-family: inherit;
+    font-size: var(--skin-font-size-base);
+    line-height: var(--skin-line-height);
+    color: var(--skin-main-text-color-1);
+    background-color: var(--skin-bg-primary);
+    border: var(--border-width) solid var(--skin-border-color-1);
+    border-radius: var(--skin-border-radius-md);
+    outline: none;
+    transition: border-color var(--skin-transition-fast) ease,
+                box-shadow var(--skin-transition-fast) ease;
+    margin-bottom: var(--skin-spacing-md);
+    appearance: none;
+}
+
+input:not([type=checkbox],[type=radio],[type=button],[type=submit],[type=reset]):focus,
+select:focus,
+textarea:focus {
+    border-color: var(--skin-primary-color-1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--skin-primary-color-1) 20%, transparent);
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--skin-spacing-sm) center;
+    padding-right: var(--skin-spacing-xl);
+}
+
+textarea { resize: vertical; min-height: 6rem; }
+
+input[type=checkbox],
+input[type=radio] {
+    width: 1rem;
+    height: 1rem;
+    margin-right: var(--skin-spacing-xs);
+    accent-color: var(--skin-primary-color-1);
+    cursor: pointer;
+}
+
+fieldset {
+    border: var(--border-width) solid var(--skin-border-color-1);
+    border-radius: var(--skin-border-radius-md);
+    padding: var(--skin-spacing-md);
+    margin-bottom: var(--skin-spacing-md);
+}
+
+legend {
+    padding: 0 var(--skin-spacing-xs);
+    font-weight: 600;
+    font-size: var(--skin-font-size-sm);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
+button,
+[role=button],
+input[type=button],
+input[type=submit],
+input[type=reset] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--skin-spacing-sm) var(--skin-spacing-lg);
+    font-family: inherit;
+    font-size: var(--skin-font-size-base);
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    border: var(--border-width) solid transparent;
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────── */
+table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+th, td {
+    padding: var(--skin-spacing-sm) var(--skin-spacing-md);
+    text-align: left;
+    border-bottom: var(--border-width) solid var(--skin-border-color-1);
+}
+th { font-weight: 600; }
+
+/* ── Dialog ──────────────────────────────────────────────────────────── */
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--skin-bg-primary);
+    border: var(--border-width) solid var(--skin-border-color-1);
+    border-radius: var(--skin-border-radius-lg);
+    padding: 0;
+    max-width: min(90vw, 640px);
+    width: 100%;
+    box-shadow: var(--skin-shadow-lg);
+}
+dialog::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); }
+
+/* ── Misc elements ───────────────────────────────────────────────────── */
+hr {
+    border: none;
+    border-top: var(--border-width) solid var(--skin-border-color-1);
+    margin: var(--skin-spacing-lg) 0;
+}
+figure { margin: 0; }
+img, svg { display: block; max-width: 100%; }
+
+code, kbd { font-family: 'Courier New', Courier, monospace; font-size: 0.9em;
+    background: var(--skin-bg-secondary); padding: 0.1em 0.3em;
+    border-radius: var(--skin-border-radius-sm); }
+pre { font-family: 'Courier New', Courier, monospace; font-size: 0.9em;
+    background: var(--skin-bg-secondary); padding: var(--skin-spacing-md);
+    border-radius: var(--skin-border-radius-md); overflow-x: auto; margin-bottom: var(--skin-spacing-md); }
+pre code { background: none; padding: 0; }
+
+details summary {
+    cursor: pointer;
+    font-weight: 500;
+    padding: var(--skin-spacing-sm) 0;
+    list-style: none;
+}
+details summary::-webkit-details-marker { display: none; }
+
+[hidden] { display: none !important; }
