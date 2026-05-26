@@ -59,4 +59,6 @@ exports.template = (model) => /* html */ `
     `).join('')}
 
     <link rel="manifest" href="${model.manifestUrl}" />
-    ${model.stylesheetUrls.map((url) => `<link rel="stylesheet" href="${url}" />`).join('\n    ')}`;
+    <style>
+        ${model.stylesheetUrls.map((url) => `<wainclude url="${url}" />`).join('')}
+    </style>`;
