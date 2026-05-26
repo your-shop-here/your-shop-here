@@ -1,6 +1,31 @@
 {
     "name":"Main Theme",
     "description":"The main theme - including the skin of the page and decorating items",
+    "attribute_definition_groups": [
+        {
+            "id": "header_config",
+            "name": "Header Configuration",
+            "attribute_definitions": [
+                {
+                    "id": "headerPosition",
+                    "name": "Header Position",
+                    "description": "sticky: header stays fixed at the top as the user scrolls. scroll: header scrolls away with the page.",
+                    "type": "enum",
+                    "values": ["sticky", "scroll"],
+                    "default_value": "sticky",
+                    "required": true
+                },
+                {
+                    "id": "logoShrink",
+                    "name": "Shrink Logo on Scroll",
+                    "description": "When enabled, the logo shrinks smoothly as the user scrolls. Only applies when Header Position is sticky.",
+                    "type": "boolean",
+                    "default_value": true,
+                    "required": false
+                }
+            ]
+        }
+    ],
     "region_definitions":[
       {
         "id":"skin",

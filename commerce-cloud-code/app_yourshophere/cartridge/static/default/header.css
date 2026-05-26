@@ -1,10 +1,57 @@
+/* Base header styles */
+header.experience-header {
+    z-index: 9001;
+    isolation: isolate;
+    background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
+}
+
+/* Sticky positioning */
+header.experience-header.header-position-sticky {
+    position: sticky;
+    top: 0;
+}
+
+/* Scroll-driven shrink animation — desktop only, sticky headers only */
+@media (min-width: 1024px) {
+    header.experience-header.header-position-sticky {
+        animation: header-shrink linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0px 120px;
+    }
+
+    @keyframes header-shrink {
+        from {
+            box-shadow: none;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+        }
+        to {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    header.experience-header.header-position-sticky.header-logo-shrink .branding img,
+    header.experience-header.header-position-sticky.header-logo-shrink .branding svg {
+        animation: branding-shrink linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0px 80px;
+    }
+
+    @keyframes branding-shrink {
+        from { max-height: 3.5rem; }
+        to   { max-height: 2rem; }
+    }
+}
+
 /* Header link styling - applies to all header regions except main menu */
-header .grid {width: 100%;}
+header.experience-header .grid {width: 100%;}
 
 a.header-link {white-space: nowrap;}
 
 .announcement a,
-header a:not(.experience-theme-categorymenu a) {
+header.experience-header a:not(.experience-theme-categorymenu a) {
     color: var(--skin-primary-color-1);
     text-decoration: none;
     transition: color var(--skin-transition-normal) ease;
@@ -17,20 +64,20 @@ header a:not(.experience-theme-categorymenu a) {
 }
 
 .announcement a:hover,
-header a:not(.experience-theme-categorymenu a):hover {
+header.experience-header a:not(.experience-theme-categorymenu a):hover {
     color: var(--skin-secondary-color-1);
     text-decoration: none;
 }
 
 /* Ensure SVG icons in header links also follow the color scheme */
 .announcement a svg,
-header a:not(.experience-theme-categorymenu a) svg {
+header.experience-header a:not(.experience-theme-categorymenu a) svg {
     fill: currentColor;
     transition: fill var(--skin-transition-normal) ease;
 }
 
 .announcement a:hover svg,
-header a:not(.experience-theme-categorymenu a):hover svg {
+header.experience-header a:not(.experience-theme-categorymenu a):hover svg {
     fill: currentColor;
 }
 
@@ -57,31 +104,54 @@ a.pill[role="button"] svg {
     fill: var(--skin-link-color-1);
 }
 
-header div:not(.experience-theme-categorymenu) {
+header.experience-header div:not(.experience-theme-categorymenu) {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header div:not(.experience-theme-categorymenu) > div, header div.experience-component:not(div.experience-theme-categorymenu)  {
+header.experience-header div:not(.experience-theme-categorymenu) > div, header.experience-header div.experience-component:not(div.experience-theme-categorymenu)  {
     display: flex;
     flex-direction: row;
     padding: 0 .3em;
 }
 
-header div:not(.experience-theme-categorymenu) form, header div.experience-component:not(div.experience-theme-categorymenu) input:not([type=checkbox],[type=radio]) {
+header.experience-header div:not(.experience-theme-categorymenu) form, header.experience-header div.experience-component:not(div.experience-theme-categorymenu) input:not([type=checkbox],[type=radio]) {
     margin: 0;
 }
 
 nav.mainmenu ul {
     margin: 0;
     padding: 0;
-
 }
 
 nav.mainmenu a {
     color: var(--skin-menu-color-1-invert);
     font-weight: 700;
+}
+
+/* Menu style variants */
+@media only screen and (min-width: 1024px) {
+    nav.mainmenu #menu-root.menu-style-medium li {
+        border-width: 0;
+    }
+    nav.mainmenu #menu-root.menu-style-medium a {
+        font-size: 0.875rem;
+        padding: 0.6em 0.9em;
+    }
+
+    nav.mainmenu #menu-root.menu-style-compact li {
+        border-width: 0;
+    }
+    nav.mainmenu #menu-root.menu-style-compact a {
+        font-size: 0.75rem;
+        padding: 0.4em 0.6em;
+    }
+
+    nav.mainmenu #menu-root.menu-style-medium label.drop-icon,
+    nav.mainmenu #menu-root.menu-style-compact label.drop-icon {
+        display: none;
+    }
 }
 
 nav.mainmenu .sub-menu a {
@@ -135,6 +205,8 @@ nav.mainmenu a {
 
 nav.mainmenu {
     background-color: var(--skin-banner-background-color-1, var(--skin-background-color-1, white));
+    display: flex;
+    align-items: center;
 }
 
 
@@ -316,12 +388,12 @@ nav.mainmenu label.drop-icon img,
 
 /* Mobile styles */
 @media (max-width: 1024px) {
-    header {
+    header.experience-header {
         margin: 0 calc(var(--spacing)*-1);
         display: flex;
         flex-direction: row;
     }
-    
+
     /* Hide menu by default and overlay page content */
     #menu-root {
         display: none;
@@ -381,16 +453,16 @@ nav.mainmenu label.drop-icon img,
 
 @media (max-width: 768px) {
     /* Hide text in miniaccount link on mobile, keep only icon */
-    header a.header-link:not(.experience-theme-categorymenu a) {
+    header.experience-header a.header-link:not(.experience-theme-categorymenu a) {
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 0;
         line-height: 0;
     }
-    
-    header a.header-link:not(.experience-theme-categorymenu a) svg,
-    header a.header-link:not(.experience-theme-categorymenu a) img {
+
+    header.experience-header a.header-link:not(.experience-theme-categorymenu a) svg,
+    header.experience-header a.header-link:not(.experience-theme-categorymenu a) img {
         font-size: 1rem;
         line-height: 1;
         margin: 0;
@@ -421,6 +493,8 @@ nav.mainmenu label.drop-icon img,
 
     nav.mainmenu li {
         padding: 0 1rem;
+        display: flex;
+        align-items: center;
     }
 
     nav.mainmenu #menu-root label.drop-icon {

@@ -21,6 +21,19 @@
                     "required": true
                 },
                 {
+                    "id": "menuStyle",
+                    "name": "Menu Style",
+                    "description": "large: full size with dropdown arrows and dividers. medium: smaller font, no arrows. compact: smallest font, no arrows, no dividers, reduced spacing.",
+                    "type": "enum",
+                    "values": [
+                        "large",
+                        "medium",
+                        "compact"
+                    ],
+                    "default_value": "large",
+                    "required": true
+                },
+                {
                     "id": "applyFilter",
                     "name": "Apply Show in Menu Filter",
                     "type": "enum",

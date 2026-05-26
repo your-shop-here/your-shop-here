@@ -35,8 +35,9 @@ function createViewModel(context) {
     } else {
         applyFilter = false;
     }
+    const menuStyle = content.menuStyle || 'large';
 
-    model.menuUrl = URLUtils.url('Components-CategoryMenu', 'align', align, 'applyFilter', applyFilter);
+    model.menuUrl = URLUtils.url('Components-CategoryMenu', 'align', align, 'applyFilter', applyFilter, 'menuStyle', menuStyle);
     return model;
 }
 
