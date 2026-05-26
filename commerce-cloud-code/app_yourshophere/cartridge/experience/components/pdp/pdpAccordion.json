@@ -1,0 +1,13 @@
+{
+    "name": "PDP Accordion",
+    "description": "Groups multiple accordion items. Each child item renders one product attribute as a collapsible panel.",
+    "group": "pdp",
+    "attribute_definition_groups": [],
+    "region_definitions": [
+        {
+            "id": "items",
+            "name": "Accordion Items",
+            "component_type_exclusions": []
+        }
+    ]
+}

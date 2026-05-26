@@ -1,0 +1,35 @@
+{
+    "name": "PDP Accordion Item",
+    "description": "A single collapsible panel within a PDP Accordion. Reads its content from a product attribute.",
+    "group": "pdp",
+    "attribute_definition_groups": [
+        {
+            "id": "settings",
+            "name": "Settings",
+            "attribute_definitions": [
+                {
+                    "id": "label",
+                    "name": "Label",
+                    "description": "The heading shown in the collapsed state.",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "productAttribute",
+                    "name": "Product Attribute",
+                    "description": "Dot-notation path to the product attribute. Use 'longDescription', 'shortDescription', or 'custom.{attributeName}' for custom attributes.",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "openByDefault",
+                    "name": "Open by default",
+                    "description": "When enabled, this panel starts expanded.",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}
