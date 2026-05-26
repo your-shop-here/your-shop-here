@@ -207,6 +207,36 @@
                     "editor_definition": {
                         "type": "themer.colorpicker"
                     }
+                },
+                {
+                    "id": "footerBackgroundColor",
+                    "name": "Footer Background Color",
+                    "description": "Background color of the footer (--skin-footer-bg-color)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
+                    "id": "footerTextColor",
+                    "name": "Footer Text Color",
+                    "description": "Color for footer body text and links (--skin-footer-text-color)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
+                },
+                {
+                    "id": "footerHeadingColor",
+                    "name": "Footer Heading Color",
+                    "description": "Color for the newsletter heading and link column headings in the footer (--skin-footer-heading-color)",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "themer.colorpicker"
+                    }
                 }
             ]
         },
