@@ -10,4 +10,4 @@ exports.createModel = function createModel(product) {
  * @param {dw.experience.ComponentScriptContext} context The component context
  * @returns {string} The template to be displayed
  */
-exports.template = model => `<h1 class="product-name">${model.name}</h1>`;
+exports.template = (model) => `<h1 class="product-name">${model.name}</h1>`;

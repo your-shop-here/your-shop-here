@@ -11,4 +11,4 @@ exports.createModel = function createModel(options) {
     return model;
 };
 
-exports.template = model => `${model.title} <input type="number" name="qty" value="${model.quantity}" />`;
+exports.template = (model) => `${model.title} <input type="number" name="qty" value="${model.quantity}" />`;

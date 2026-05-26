@@ -15,7 +15,7 @@ exports.createModel = function createModel() {
     };
 };
 
-exports.template = model => `
+exports.template = (model) => `
     <div class="estimated-total">
         Estimated Total: ${model.estimatedTotal}
     </div>

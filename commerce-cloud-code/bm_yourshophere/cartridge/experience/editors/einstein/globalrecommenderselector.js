@@ -1,7 +1,5 @@
 
-'use strict';
-
-var Site = require('dw/system/Site');
+const Site = require('dw/system/Site');
 /**
  * Init for the recommender selector custom editor
  *

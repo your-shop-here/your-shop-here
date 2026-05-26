@@ -1,9 +1,9 @@
-var ImageTransformation = {};
-var BREAKPOINTS = require('*/cartridge/experience/breakpoints.json');
-var Image = require('dw/experience/image/Image');
-var MediaFile = require('dw/content/MediaFile');
+const ImageTransformation = {};
+const Image = require('dw/experience/image/Image');
+const MediaFile = require('dw/content/MediaFile');
+const BREAKPOINTS = require('*/cartridge/experience/breakpoints.json');
 
-var transformationCapabilities = [
+const transformationCapabilities = [
     'scaleWidth',
     'scaleHeight',
     'scaleMode',
@@ -16,7 +16,7 @@ var transformationCapabilities = [
     'cropHeight',
     'format',
     'quality',
-    'strip'
+    'strip',
 ];
 
 /**
@@ -28,15 +28,15 @@ var transformationCapabilities = [
  * @return {Object} The scaled object
  */
 ImageTransformation.scale = function (metaData, device) {
-    var transformObj = null;
+    let transformObj = null;
     if (metaData && device) {
-        var targetWidth = BREAKPOINTS[device];
+        const targetWidth = BREAKPOINTS[device];
         // only downscale if image is larger than desired width
         if (targetWidth && targetWidth < metaData.width) {
             transformObj = {
                 scaleWidth: targetWidth,
                 format: 'jpg',
-                scaleMode: 'fit'
+                scaleMode: 'fit',
             };
         }
     }
@@ -50,8 +50,8 @@ ImageTransformation.scale = function (metaData, device) {
  * @return {Object} The transformed object.
  */
 function constructTransformationObject(options, transform) {
-    var result = transform || {};
-    Object.keys(options).forEach(function (element) {
+    const result = transform || {};
+    Object.keys(options).forEach((element) => {
         if (transformationCapabilities.indexOf(element)) {
             result[element] = options[element];
         }
@@ -68,8 +68,8 @@ function constructTransformationObject(options, transform) {
  * @return {string} The Absolute url
  */
 ImageTransformation.url = function (image, options) {
-    var transform = {};
-    var mediaFile = image instanceof MediaFile ? image : image.file;
+    let transform = {};
+    const mediaFile = image instanceof MediaFile ? image : image.file;
 
     if (image instanceof Image && options.device) {
         transform = ImageTransformation.scale(image.metaData, options.device);
@@ -97,11 +97,11 @@ ImageTransformation.getScaledImage = function (image) {
         src: {
             mobile: ImageTransformation.url(image.file, { device: 'mobile' }),
             tablet: ImageTransformation.url(image.file, { device: 'tablet' }),
-            desktop: ImageTransformation.url(image.file, { device: 'desktop' })
+            desktop: ImageTransformation.url(image.file, { device: 'desktop' }),
         },
         alt: image.file.getAlt(),
-        focalPointX: (image.focalPoint.x * 100) + '%',
-        focalPointY: (image.focalPoint.y * 100) + '%'
+        focalPointX: `${image.focalPoint.x * 100}%`,
+        focalPointY: `${image.focalPoint.y * 100}%`,
     };
 };
 

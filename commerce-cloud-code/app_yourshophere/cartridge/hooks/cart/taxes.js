@@ -28,7 +28,7 @@ function calculateTaxes(basket) {
         let taxJurisdictionId = null;
 
         if (shipment.shippingAddress) {
-            let location = new ShippingLocation(shipment.shippingAddress);
+            const location = new ShippingLocation(shipment.shippingAddress);
             taxJurisdictionId = TaxMgr.getTaxJurisdictionID(location);
         }
 

@@ -290,12 +290,12 @@
      * Updates the visibility state of the Advanced Settings section
      */
     function updateAdvancedSettingsVisibility() {
-        const hasAdvancedSettings = currentConfig.columnClasses && 
-            currentConfig.columnClasses.some(cls => cls && cls.trim() !== '');
+        const hasAdvancedSettings = currentConfig.columnClasses
+            && currentConfig.columnClasses.some((cls) => cls && cls.trim() !== '');
         const advancedContent = rootEditorElement.querySelector('#advanced-settings-content');
         const advancedToggle = rootEditorElement.querySelector('#advanced-settings-toggle');
         const toggleIcon = advancedToggle ? advancedToggle.querySelector('#advanced-settings-icon') : null;
-        
+
         if (advancedContent && advancedToggle) {
             if (hasAdvancedSettings) {
                 advancedContent.style.display = 'block';
@@ -408,38 +408,38 @@
         const gapSettingsContainer = rootEditorElement.querySelector('#gap-settings-container');
         const desktopGapContainer = rootEditorElement.querySelector('#desktop-gap-container');
         const mobileGapContainer = rootEditorElement.querySelector('#mobile-gap-container');
-        
+
         // Clear existing gap sliders
         desktopGapContainer.innerHTML = '';
         mobileGapContainer.innerHTML = '';
-        
+
         // Always create desktop gap slider, but disable if only 1 column
         const desktopGapSlider = createSlider('desktop-gap', 'Desktop Gap (%)', 0, 50, currentConfig.desktopGap || 2);
         desktopGapContainer.appendChild(desktopGapSlider);
         if (desktopColumns <= 1) {
             desktopGapSlider.querySelector('input').disabled = true;
         }
-        
+
         // Always create mobile gap slider, but disable if only 1 column
         const mobileGapSlider = createSlider('mobile-gap', 'Mobile Gap (%)', 0, 50, currentConfig.mobileGap || 2);
         mobileGapContainer.appendChild(mobileGapSlider);
         if (mobileColumns <= 1) {
             mobileGapSlider.querySelector('input').disabled = true;
         }
-        
+
         // Always show gap settings container
         gapSettingsContainer.style.display = 'block';
 
         // Add event listeners for gap sliders (they are recreated each time, so we need to add listeners)
         const desktopGapSliderElement = rootEditorElement.querySelector('#desktop-gap');
         const mobileGapSliderElement = rootEditorElement.querySelector('#mobile-gap');
-        
+
         if (desktopGapSliderElement) {
             // Remove existing listener to prevent duplicates
             desktopGapSliderElement.removeEventListener('change', handleDesktopGapChange);
             desktopGapSliderElement.addEventListener('change', handleDesktopGapChange);
         }
-        
+
         if (mobileGapSliderElement) {
             // Remove existing listener to prevent duplicates
             mobileGapSliderElement.removeEventListener('change', handleMobileGapChange);
@@ -458,7 +458,7 @@
     function rebuildColumnClassInputs() {
         const desktopColumns = parseInt(document.getElementById('desktop-columns').value);
         const columnClassesContainer = rootEditorElement.querySelector('#column-classes-container');
-        
+
         if (!columnClassesContainer) {
             return;
         }
@@ -574,9 +574,11 @@
      * @param {string} dataLocale - The data locale
      * @param {string} displayLocale - The display locale
      */
+    /* eslint-disable no-unused-vars */
     listen('sfcc:ready', async ({
         value, config, isDisabled, isRequired, dataLocale, displayLocale,
     }) => {
+    /* eslint-enable no-unused-vars */
         // Parse existing value if available
         if (value && typeof value === 'object') {
             currentConfig = {
@@ -623,7 +625,7 @@
                     toggleIcon.textContent = newExpanded ? '▼' : '▶';
                 }
             });
-            
+
             // Ensure initial visibility state is correct
             updateAdvancedSettingsVisibility();
         }
@@ -633,12 +635,12 @@
     });
 
     // Handle value events
-    listen('sfcc:value', (value) => {
+    listen('sfcc:value', () => {
         // Handle incoming value updates if needed
     });
 
     // Handle required events
-    listen('sfcc:required', (value) => {
+    listen('sfcc:required', () => {
         // Handle required state if needed
     });
 

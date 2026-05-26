@@ -1,11 +1,11 @@
 (() => {
-  var rootEditorElement;
-  /**
+    let rootEditorElement;
+    /**
    * initializes the base markup before page is ready. This is not part of the API, and called explicitely at the end of this module.
    */
-  function init() {
-    rootEditorElement = document.createElement('div');
-    rootEditorElement.innerHTML = `
+    function init() {
+        rootEditorElement = document.createElement('div');
+        rootEditorElement.innerHTML = `
     <div class="slds-radio_button-group">
       <span class="slds-button slds-radio_button">
         <input type="radio" name="displayFormat" id="tile" value="tile" checked />
@@ -21,40 +21,43 @@
       </span>
     </div>
       `;
-    document.body.appendChild(rootEditorElement);
-  };
-
-  /** the page designer signals readiness to show this editor and provides an optionally pre selected value */
-  listen('sfcc:ready', async ({ value, config, isDisabled, isRequired, dataLocale, displayLocale }) => {
-    const selectedValue = typeof value === 'object' && value !== null && typeof value.value === 'string' ? value.value : null;
-    // if nothing was preselected we ask the user to select 
-    if (selectedValue === "row") {
-      rootEditorElement.querySelector('#row').checked = true;
+        document.body.appendChild(rootEditorElement);
     }
 
-    // Change listener will inform page designer about currently selected value
-    const inputs = rootEditorElement.querySelectorAll('input[name="displayFormat"]');
-    Array.from(inputs).forEach(input => input.addEventListener('change', event => {
-      const selectedValue = event.target.value;
-      console.log("selectedValue:", selectedValue);
-      emit({
-        type: 'sfcc:value',
-        payload: selectedValue ? { value: selectedValue } : null
-      });
-    }));
-  });
+    /** the page designer signals readiness to show this editor and provides an optionally pre selected value */
+    /* eslint-disable no-unused-vars */
+    listen('sfcc:ready', async ({
+        value, config, isDisabled, isRequired, dataLocale, displayLocale,
+    }) => {
+    /* eslint-enable no-unused-vars */
+        const selectedValue = typeof value === 'object' && value !== null && typeof value.value === 'string' ? value.value : null;
+        // if nothing was preselected we ask the user to select
+        if (selectedValue === 'row') {
+            rootEditorElement.querySelector('#row').checked = true;
+        }
 
-  // When a value was selected
-  listen('sfcc:value', value => { });
-  // When the editor must require the user to select something
-  listen('sfcc:required', value => { });
-  // When the editor is asked to disable its controls
-  listen('sfcc:disabled', value => {
-    if (rootEditorElement) {
-      rootEditorElement.querySelector('.btn-group').disabled = true;
-    }
-  });
+        // Change listener will inform page designer about currently selected value
+        const inputs = rootEditorElement.querySelectorAll('input[name="displayFormat"]');
+        Array.from(inputs).forEach((input) => input.addEventListener('change', (event) => {
+            const newValue = event.target.value;
+            console.log('selectedValue:', newValue);
+            emit({
+                type: 'sfcc:value',
+                payload: newValue ? { value: newValue } : null,
+            });
+        }));
+    });
 
-  init();
+    // When a value was selected
+    listen('sfcc:value', () => { });
+    // When the editor must require the user to select something
+    listen('sfcc:required', () => { });
+    // When the editor is asked to disable its controls
+    listen('sfcc:disabled', () => {
+        if (rootEditorElement) {
+            rootEditorElement.querySelector('.btn-group').disabled = true;
+        }
+    });
 
+    init();
 })();

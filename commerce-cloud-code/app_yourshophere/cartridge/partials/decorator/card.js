@@ -3,8 +3,8 @@
  */
 
 exports.createModel = function createDecoratorModel(params) {
-    const { model, content, originalParams } = params;
-    
+    const { model, content } = params;
+
     // Create the decorator model
     // Use Object.assign instead of spread operator for Rhino compatibility
     const decoratorModel = Object.assign({
@@ -14,9 +14,9 @@ exports.createModel = function createDecoratorModel(params) {
         showHeader: model ? model.showHeader !== false : true, // Default to true
         showFooter: model ? model.showFooter !== false : true, // Default to true
         // Pass through other data
-        ...(model || {})
+        ...(model || {}),
     }, model || {});
-    
+
     return decoratorModel;
 };
 
@@ -38,4 +38,4 @@ exports.template = (model) => `
     </div>
     ` : ''}
 </div>
-`; 
+`;

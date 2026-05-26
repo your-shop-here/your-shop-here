@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line no-unused-vars
 exports.createModel = function createModel(input) {
     const BasketMgr = require('dw/order/BasketMgr');
     const basket = BasketMgr.getCurrentOrNewBasket();
@@ -16,7 +17,7 @@ exports.createModel = function createModel(input) {
     return model;
 };
 
-function input(shippingMethod, model) {
+function renderShippingInput(shippingMethod, model) {
     return `
     <label for="${shippingMethod.ID}">
     <input type="radio" name="shippingmethod" id="${shippingMethod.ID}" placeholder=""${shippingMethod.displayName}" value="${shippingMethod.ID}" ${(model.selectedMethodId === shippingMethod.ID) ? 'checked' : ''} />
@@ -27,6 +28,6 @@ function input(shippingMethod, model) {
 
 exports.template = function (model) {
     return `<form hx-post="${model.hxActionUrl}" hx-trigger="change" hx-target="this" hx-swap="outerHTML" method="post" action="${model.actionUrl}">
-        ${model.applicableShippingMethods.map((shippingMethod) => input(shippingMethod, model)).join('')}
+        ${model.applicableShippingMethods.map((shippingMethod) => renderShippingInput(shippingMethod, model)).join('')}
     </form>`;
 };

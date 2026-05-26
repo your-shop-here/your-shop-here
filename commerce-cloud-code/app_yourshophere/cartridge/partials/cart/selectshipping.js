@@ -14,7 +14,7 @@ exports.createModel = () => {
     let selectedShippingMethodID = '';
 
     if (basket && basket.shipments && basket.shipments[0]) {
-        shippingMethods =ShippingMgr.getAllShippingMethods().toArray().map((method) => ({
+        shippingMethods = ShippingMgr.getAllShippingMethods().toArray().map((method) => ({
             ID: method.ID,
             displayName: method.displayName,
             shippingCost: StringUtils.formatMoney(ShippingMgr.getShippingCost(method, basket.getMerchandizeTotalPrice())),

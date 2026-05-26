@@ -62,7 +62,7 @@
     /**
      * Handle image selection from breakout editor
      */
-    function handleBreakoutClose({ type, value }, event) {
+    function handleBreakoutClose({ type, value }) {
         if (type === 'sfcc:breakoutApply' && value) {
             const previewUrl = value.previewUrl || '';
             currentValue = previewUrl;

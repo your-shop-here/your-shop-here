@@ -102,7 +102,7 @@ function getLibraryFolders() {
 
     // Create folders in path if they don't exist
     if (!subfolders.length) {
-        const defaultPath = [File.LIBRARIES, libraryId, 'default'].join('/');
+        const defaultPath = [File.LIBRARIES, libraryId, 'default'].join('/'); // eslint-disable-line no-undef
         const rootFolder = new File(defaultPath);
         if (!rootFolder.exists()) {
             rootFolder.mkdirs();

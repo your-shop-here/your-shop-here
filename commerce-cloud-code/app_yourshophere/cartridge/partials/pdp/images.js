@@ -27,7 +27,7 @@ exports.createModel = function createModel(options) {
         thumbnailPosition: options.settings.thumbnailPosition || 'bottom',
         showDots: options.settings.showDots !== false, // Default to true
         viewType: options.settings.viewType,
-        imageCount: options.settings.imageCount
+        imageCount: options.settings.imageCount,
     };
 
     const images = imageSource.getImages(settings.viewType).toArray()
@@ -60,12 +60,12 @@ exports.createModel = function createModel(options) {
  * @param {Object} model - The model object
  * @returns {string} The rendered HTML
  */
-exports.template = model => {
+exports.template = (model) => {
     if (model.settings.displayMode === 'grid') {
         return `
             <div class="${model.containerClasses}">
                 <div class="image-grid">
-                    ${model.images.map(image => `
+                    ${model.images.map((image) => `
                         <div class="grid-item">
                             <img src="${image.url}" alt="${image.alt}" loading="lazy" />
                         </div>
@@ -78,7 +78,7 @@ exports.template = model => {
     // Carousel mode
     const thumbnailsHtml = model.settings.showThumbnails ? `
         <div class="thumbnail-nav ${model.settings.thumbnailPosition}">
-            ${model.images.map(image => `
+            ${model.images.map((image) => `
                 <label for="${image.id}-radio" class="thumbnail-item">
                     <img src="${image.thumbnailUrl}" alt="${image.alt}" loading="lazy" />
                 </label>
@@ -88,7 +88,7 @@ exports.template = model => {
 
     const dotsHtml = model.settings.showDots ? `
         <div class="slider-nav dots">
-            ${model.images.map(image => `
+            ${model.images.map((image) => `
                 <label for="${image.id}-radio" class="nav-dot"></label>
             `).join('')}
         </div>
@@ -99,7 +99,7 @@ exports.template = model => {
     const viewportHtml = `
         <div class="slider-viewport" id="${carouselId}">
             <ul class="slider-track">
-                ${model.images.map((image, index) => `
+                ${model.images.map((image) => `
                     <li class="slide" id="${image.id}">
                         <input type="radio" name="slider-${carouselId}" id="${image.id}-radio" ${image.id === 'slide-1' ? 'checked' : ''}>
                         <img src="${image.url}" alt="${image.alt}" loading="lazy" />

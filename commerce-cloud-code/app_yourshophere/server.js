@@ -238,7 +238,7 @@ Response.prototype = {
      * @param {Object} data - Data to be rendered as json
      * @returns {void}
      */
-    json: function json(data) {
+    json: function json(data) { // eslint-disable-line no-shadow
         this.isJson = true;
         this.viewData = Object.assign(this.viewData, data);
 
@@ -262,7 +262,7 @@ Response.prototype = {
      * @param {dw.util.HashMap} aspectAttributes - (optional) aspect attributes to be passed to the PageMgr
      * @returns {void}
      */
-    page(page, data, aspectAttributes) {
+    page(page, data, aspectAttributes) { // eslint-disable-line no-shadow
         this.viewData = Object.assign(this.viewData, data);
         appendRenderings(this.renderings, {
             type: 'render', subType: 'page', page, aspectAttributes,
@@ -490,7 +490,7 @@ function get(req, res, next) {
         res.setHttpHeader('Access-Control-Allow-Headers', 'x-requested-with');
         next();
     } else if (request.httpMethod === 'OPTIONS') {
-        const Response = require('dw/system/Response');
+        const Response = require('dw/system/Response'); // eslint-disable-line no-shadow
 
         res.setStatusCode(204);
         res.setHttpHeader(Response.ALLOW, 'OPTIONS,GET');
@@ -651,13 +651,12 @@ function applyRenderings(res) {
                         json(res.viewData, res);
                         break;
                     case 'xml':
-                        xml(res.viewData, res);
+                        xml(res.viewData, res); // eslint-disable-line no-undef
                         break;
                     case 'page':
                         page(element.page, element.aspectAttributes, res.viewData, res);
                         break;
                     default:
-                        break;
                         throw new Error('Cannot render template without name or data');
                 }
             } else if (element.type === 'print') {

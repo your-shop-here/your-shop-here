@@ -1,6 +1,4 @@
 
-let subDecorator;
-
 exports.createModel = function createDecoratorModel(input) {
     const model = input.model;
     const httpParams = model.httpParameter || model.renderParameters;

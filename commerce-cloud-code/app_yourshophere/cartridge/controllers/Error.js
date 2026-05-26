@@ -11,7 +11,7 @@ const partials = require('*/api/partials');
 /**
  * This endpoint is called when an error occurs
  * @name controller/Error-Start
- * @param {object} args - The arguments passed to the controller
+ * @param {Object} args - The arguments passed to the controller
  * @param {string} args.ErrorText - The error text
  * @param {string} args.ControllerName - The name of the controller
  * @param {string} args.CurrentStartNodeName - The name of the current start node

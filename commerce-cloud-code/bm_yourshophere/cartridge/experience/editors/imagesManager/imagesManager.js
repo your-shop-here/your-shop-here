@@ -1,7 +1,7 @@
 // This code is based on: https://github.com/sfccplus/super-page-designer
 
 const ContentMgr = require('dw/content/ContentMgr');
-const Site = require('dw/system/Site');
+
 const URLUtils = require('dw/web/URLUtils');
 
 /**

@@ -9,7 +9,6 @@ const RegionModel = require('*/cartridge/experience/utilities/RegionModel.js');
 const RegionModelRegistry = function (container, metaDataDefinition) {
     this.container = container;
     this.addRegions(metaDataDefinition);
-    
 };
 
 /**
@@ -22,7 +21,7 @@ const RegionModelRegistry = function (container, metaDataDefinition) {
 RegionModelRegistry.prototype.addRegions = function (metadef) {
     if (metadef && metadef.region_definitions) {
         metadef.region_definitions.forEach(function (regionDefinition) {
-            var name = regionDefinition.id;
+            const name = regionDefinition.id;
             if (!this[name]) {
                 this[name] = new RegionModel(this.container, name);
             }

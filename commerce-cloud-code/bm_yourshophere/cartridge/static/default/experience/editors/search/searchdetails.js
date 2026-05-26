@@ -1,7 +1,6 @@
 (() => {
     /** The main Editor element to be tinkered with */
     let rootEditorElement;
-    let loadingPlaceHolder;
 
     /**
       * Create an option element to shorten the api-calls, as this is called twice.
@@ -57,9 +56,11 @@
     }
 
     /** the page designer signals readiness to show this editor and provides an optionally pre selected value */
+    /* eslint-disable no-unused-vars */
     listen('sfcc:ready', async ({
         value, config, isDisabled, isRequired, dataLocale, displayLocale,
     }) => {
+    /* eslint-enable no-unused-vars */
         const selectedValue = typeof value === 'object' && value !== null && typeof value.value === 'string' ? value.value : null;
         const srules = config.srules;
         const selection = JSON.parse(selectedValue);
@@ -106,6 +107,8 @@
                     valueOption.value = innerElement;
                     valueOption.innerHTML = innerElement;
                     if (innerElement.description) {
+                        // TODO: verify intent — reassigning const to a plain object then calling appendChild likely breaks at runtime
+                        // eslint-disable-next-line no-const-assign
                         valueOption = innerElement;
                     }
                     rootEditorElement.querySelector('.value-selection').appendChild(valueOption);
@@ -114,6 +117,8 @@
             filterOption.value = element;
             filterOption.innerHTML = element;
             if (element.description) {
+                // TODO: verify intent — reassigning const to a plain object then calling appendChild likely breaks at runtime
+                // eslint-disable-next-line no-const-assign
                 filterOption = element;
             }
             rootEditorElement.querySelector('.attribute-selection').appendChild(filterOption);
@@ -129,6 +134,8 @@
                 valueOption.value = element;
                 valueOption.innerHTML = element;
                 if (element.description) {
+                    // TODO: verify intent — reassigning const to a plain object then calling appendChild likely breaks at runtime
+                    // eslint-disable-next-line no-const-assign
                     valueOption = element;
                 }
                 rootEditorElement.querySelector('.value-selection').appendChild(valueOption);
@@ -136,7 +143,7 @@
         });
         // Change listener will inform page designer about currently selected value
         rootEditorElement.querySelectorAll('select').forEach((element) => {
-            element.addEventListener('change', (event) => {
+            element.addEventListener('change', () => {
                 emit({
                     type: 'sfcc:interacted',
                 });
@@ -145,21 +152,21 @@
                     filterattribute: rootEditorElement.querySelector('.attribute-selection').value,
                     filtervalue: rootEditorElement.querySelector('.value-selection').value,
                 };
-                const selectedValue = JSON.stringify(valueObject);
+                const newValue = JSON.stringify(valueObject);
                 emit({
                     type: 'sfcc:value',
-                    payload: selectedValue ? { value: selectedValue } : null,
+                    payload: newValue ? { value: newValue } : null,
                 });
             });
         });
     });
 
     // When a value was selected
-    listen('sfcc:value', (value) => {});
+    listen('sfcc:value', () => {});
     // When the editor must require the user to select something
-    listen('sfcc:required', (value) => {});
+    listen('sfcc:required', () => {});
     // When the editor is asked to disable its controls
-    listen('sfcc:disabled', (value) => {
+    listen('sfcc:disabled', () => {
         if (rootEditorElement) {
             rootEditorElement.querySelector('.srule-selection').disabled = true;
         }

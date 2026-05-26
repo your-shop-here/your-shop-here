@@ -3,22 +3,22 @@
  */
 (() => {
     /** The main Editor element to be tinkered with */
-    var rootEditorElement;
+    let rootEditorElement;
     /** The main Editor element to be tinkered with */
-    var currentHSV;
+    let currentHSV;
     /** the list of colors */
     const colorsArray = [
         '#e3abec', '#c2dbf7', '#9fd6ff', '#9de7da', '#9df0c0', '#fff099', '#fed49a',
         '#d073e0', '#86baf3', '#5ebbff', '#44d8be', '#3be282', '#ffe654', '#ffb758',
         '#bd35bd', '#5779c1', '#00a1e0', '#00aea9', '#3cba4c', '#f5bc25', '#f99221',
         '#580d8c', '#001970', '#0a2399', '#0b7477', '#41693d', '#b67e11', '#b85d0d',
-        '#FFFFFF', '#DDDDDD', '#BBBBBB', '#999999', '#666666', '#333333', '#000000']
+        '#FFFFFF', '#DDDDDD', '#BBBBBB', '#999999', '#666666', '#333333', '#000000'];
 
     /**
      * Generates the selection of colors privided by the color picker
      */
     function generateColorsHTML(list) {
-        var markup = list.reduce((soFar, element) => soFar + `
+        const markup = list.reduce((soFar, element) => `${soFar}
             <li class="slds-color-picker__swatch" role="presentation">
                 <a class="slds-color-picker__swatch-trigger" href="#" role="option" tabindex="-1">
                     <span class="slds-swatch" style="background:${element}">
@@ -26,7 +26,7 @@
                     </span>
                 </a>
             </li>        
-        `, '')
+        `, '');
 
         return markup;
     }
@@ -132,12 +132,13 @@
         // show "Loading.. "
         document.body.appendChild(rootEditorElement);
 
-        var r = rootEditorElement.querySelector('#color-picker-input-r-9').value;
-        var g = rootEditorElement.querySelector('#color-picker-input-g-9').value;
-        var b = rootEditorElement.querySelector('#color-picker-input-b-9').value;
-        currentHSV = ColorUtils.rgbToHsv({ r, g, b })
-    };
+        const r = rootEditorElement.querySelector('#color-picker-input-r-9').value;
+        const g = rootEditorElement.querySelector('#color-picker-input-g-9').value;
+        const b = rootEditorElement.querySelector('#color-picker-input-b-9').value;
+        currentHSV = ColorUtils.rgbToHsv({ r, g, b });
+    }
 
+    // eslint-disable-next-line no-var
     var ColorUtils = {
         /**
          * Converts an RGB color value to HSV. Conversion formula
@@ -154,17 +155,20 @@
             let r = rgb.r;
             let g = rgb.g;
             let b = rgb.b;
-            r /= 255, g /= 255, b /= 255;
+            r /= 255; g /= 255; b /= 255;
 
-            var max = Math.max(r, g, b), min = Math.min(r, g, b);
-            var h, s, v = max;
+            const max = Math.max(r, g, b); const
+                min = Math.min(r, g, b);
+            let h; let s; const
+                v = max;
 
-            var d = max - min;
-            s = max == 0 ? 0 : d / max;
+            const d = max - min;
+            s = max === 0 ? 0 : d / max; // eslint-disable-line prefer-const
 
-            if (max == min) {
+            if (max === min) {
                 h = 0; // achromatic
             } else {
+                // eslint-disable-next-line default-case
                 switch (max) {
                     case r: h = (g - b) / d + (g < b ? 6 : 0); break;
                     case g: h = (b - r) / d + 2; break;
@@ -176,8 +180,6 @@
 
             return { h, s, v };
         },
-
-
 
         /**
          * Converts an HSV color value to RGB. Conversion formula
@@ -191,92 +193,98 @@
          * @return  Array           The RGB representation
          */
         hsvToRgb: function hsvToRgb(hsv) {
-            let h = hsv.h;
-            let s = hsv.s;
-            let v = hsv.v;
-            var r, g, b;
+            const h = hsv.h;
+            const s = hsv.s;
+            const v = hsv.v;
+            let r; let g; let
+                b;
 
-            var i = Math.floor(h * 6);
-            var f = h * 6 - i;
-            var p = v * (1 - s);
-            var q = v * (1 - f * s);
-            var t = v * (1 - (1 - f) * s);
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
 
+            // eslint-disable-next-line default-case
             switch (i % 6) {
-                case 0: r = v, g = t, b = p; break;
-                case 1: r = q, g = v, b = p; break;
-                case 2: r = p, g = v, b = t; break;
-                case 3: r = p, g = q, b = v; break;
-                case 4: r = t, g = p, b = v; break;
-                case 5: r = v, g = p, b = q; break;
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
             }
 
-            return {r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255)};
+            return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
         },
         componentToHex: function componentToHex(c) {
-            var hex = c.toString(16);
-            return hex.length == 1 ? "0" + hex : hex;
+            const hex = c.toString(16);
+            return hex.length === 1 ? `0${hex}` : hex;
         },
 
         rgbToHex: function rgbToHex(rgb) {
-            return "#" + this.componentToHex(rgb.r) + this.componentToHex(rgb.g) + this.componentToHex(rgb.b);
-        }
+            return `#${this.componentToHex(rgb.r)}${this.componentToHex(rgb.g)}${this.componentToHex(rgb.b)}`;
+        },
     };
 
     function toggleColorPanelVisibility() {
-        rootEditorElement.querySelector('.slds-color-picker__selector').classList.toggle("slds-hide");
-        rootEditorElement.querySelector('.slds-color-picker__selector').classList.toggle("slds-show");
+        rootEditorElement.querySelector('.slds-color-picker__selector').classList.toggle('slds-hide');
+        rootEditorElement.querySelector('.slds-color-picker__selector').classList.toggle('slds-show');
     }
 
     function switchElementsVisibility(selectorToHide, selectorToShow) {
-        rootEditorElement.querySelector(selectorToHide).classList.add("slds-hide");
-        rootEditorElement.querySelector(selectorToHide).classList.remove("slds-show");
+        rootEditorElement.querySelector(selectorToHide).classList.add('slds-hide');
+        rootEditorElement.querySelector(selectorToHide).classList.remove('slds-show');
 
-        rootEditorElement.querySelector(selectorToShow).classList.add("slds-show");
-        rootEditorElement.querySelector(selectorToShow).classList.remove("slds-hide");
+        rootEditorElement.querySelector(selectorToShow).classList.add('slds-show');
+        rootEditorElement.querySelector(selectorToShow).classList.remove('slds-hide');
     }
 
     function satLumHandler(event) {
         event.preventDefault();
-        var saturation = event.layerX / event.currentTarget.offsetWidth;
-        var value = 1 - (event.layerY / event.currentTarget.offsetHeight);
-        rootEditorElement.querySelector('.slds-color-picker__range-indicator').style.left = saturation * 100 + '%';
-        rootEditorElement.querySelector('.slds-color-picker__range-indicator').style.bottom = (value * 100) + '%';
-        updateCustomUI({ s: saturation, v: value })
+        const saturation = event.layerX / event.currentTarget.offsetWidth;
+        const value = 1 - (event.layerY / event.currentTarget.offsetHeight);
+        rootEditorElement.querySelector('.slds-color-picker__range-indicator').style.left = `${saturation * 100}%`;
+        rootEditorElement.querySelector('.slds-color-picker__range-indicator').style.bottom = `${value * 100}%`;
+        updateCustomUI({ s: saturation, v: value });
     }
 
     function hueHandler(event) {
         event.preventDefault();
         rootEditorElement.querySelector('.slds-color-picker__custom-range').style.background = `hsl(${event.currentTarget.value}, 100%, 50%)`;
-        updateCustomUI({ h: event.currentTarget.value / 360 })
+        updateCustomUI({ h: event.currentTarget.value / 360 });
     }
 
     function updateCustomUI(updatedObject) {
         currentHSV = Object.assign(currentHSV, updatedObject);
-        var rgb = ColorUtils.hsvToRgb(currentHSV);
+        const rgb = ColorUtils.hsvToRgb(currentHSV);
 
         rootEditorElement.querySelector('#color-picker-input-r-9').value = rgb.r;
         rootEditorElement.querySelector('#color-picker-input-g-9').value = rgb.g;
         rootEditorElement.querySelector('#color-picker-input-b-9').value = rgb.b;
-        var hex = ColorUtils.rgbToHex(rgb);
+        const hex = ColorUtils.rgbToHex(rgb);
         rootEditorElement.querySelector('#color-picker-input-hex-9').value = hex;
         rootEditorElement.querySelector('#color-picker-custom .slds-swatch').style.backgroundColor = hex;
     }
 
     /** the page designer signals readiness to show this editor and provides an optionally pre selected value */
-    listen('sfcc:ready', async ({ value, config, isDisabled, isRequired, dataLocale, displayLocale }) => {
+    /* eslint-disable no-unused-vars */
+    listen('sfcc:ready', async ({
+        value, config, isDisabled, isRequired, dataLocale, displayLocale,
+    }) => {
+    /* eslint-enable no-unused-vars */
         const selectedValue = typeof value === 'object' && value !== null && typeof value.value === 'string' ? value.value : null;
 
         rootEditorElement.querySelector('.slds-color-picker__summary-button').addEventListener('click', toggleColorPanelVisibility);
         rootEditorElement.querySelector('.colorpicker-custom-tab').addEventListener('click', () => switchElementsVisibility('#color-picker-default', '#color-picker-custom'));
         rootEditorElement.querySelector('.colorpicker-default-tab').addEventListener('click', () => switchElementsVisibility('#color-picker-custom', '#color-picker-default'));
-        rootEditorElement.querySelectorAll('.slds-tabs_default__item').forEach(tab => tab.addEventListener('click', (event) => {
+        rootEditorElement.querySelectorAll('.slds-tabs_default__item').forEach((tab) => tab.addEventListener('click', (event) => {
             rootEditorElement.querySelectorAll('.slds-tabs_default__item').forEach((element) => element.classList.remove('slds-is-active'));
             event.currentTarget.classList.add('slds-is-active');
         }));
         rootEditorElement.querySelector('#cancel-button').addEventListener('click', toggleColorPanelVisibility);
         rootEditorElement.querySelector('#confirm-button').addEventListener('click', () => {
-            var selectedColor = rootEditorElement.querySelector('#color-picker-input-hex-9').value
+            const selectedColor = rootEditorElement.querySelector('#color-picker-input-hex-9').value;
             rootEditorElement.querySelector('#color-picker-summary-input').value = selectedColor;
             rootEditorElement.querySelector('#color-picker-summary-input').dispatchEvent(new Event('change'));
             toggleColorPanelVisibility();
@@ -288,26 +296,27 @@
         rootEditorElement.querySelector('#color-picker-input-range-9').addEventListener('input', hueHandler);
 
         rootEditorElement.querySelectorAll('.slds-color-picker__swatch-trigger').forEach(
-            function (element) {
-                element.addEventListener('click', function (event) {
+            (element) => {
+                element.addEventListener('click', (event) => {
                     event.preventDefault();
-                    var selectedColor = event.target.querySelector('.slds-assistive-text').innerHTML;
+                    const selectedColor = event.target.querySelector('.slds-assistive-text').innerHTML;
                     rootEditorElement.querySelector('#color-picker-summary-input').value = selectedColor;
                     rootEditorElement.querySelector('#color-picker-summary-input').dispatchEvent(new Event('change'));
                     toggleColorPanelVisibility();
                 });
-            });
+            },
+        );
 
-        rootEditorElement.querySelector('#color-picker-summary-input').addEventListener('change', function (event) {
-            const selectedValue = event.target.value;
-            rootEditorElement.querySelector('.slds-color-picker__summary-button .slds-swatch').style.backgroundColor = selectedValue;
+        rootEditorElement.querySelector('#color-picker-summary-input').addEventListener('change', (event) => {
+            const newValue = event.target.value;
+            rootEditorElement.querySelector('.slds-color-picker__summary-button .slds-swatch').style.backgroundColor = newValue;
 
             emit({
-                type: 'sfcc:interacted'
+                type: 'sfcc:interacted',
             });
             emit({
                 type: 'sfcc:value',
-                payload: selectedValue ? { value: selectedValue } : null
+                payload: newValue ? { value: newValue } : null,
             });
         });
 
@@ -315,19 +324,17 @@
             rootEditorElement.querySelector('#color-picker-summary-input').value = selectedValue;
             rootEditorElement.querySelector('#color-picker-summary-input').dispatchEvent(new Event('change'));
         }
-
     });
     // When a value was selected
-    listen('sfcc:value', value => { });
+    listen('sfcc:value', () => { });
     // When the editor must require the user to select something
-    listen('sfcc:required', value => { });
+    listen('sfcc:required', () => { });
     // When the editor is asked to disable its controls
-    listen('sfcc:disabled', value => {
+    listen('sfcc:disabled', () => {
         if (rootEditorElement) {
             rootEditorElement.querySelector('.recommendation-selection').disabled = true;
         }
     });
 
     init();
-
 })();

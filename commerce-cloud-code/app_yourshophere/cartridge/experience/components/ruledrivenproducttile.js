@@ -1,44 +1,43 @@
-'use strict';
 
-var Template = require('dw/util/Template');
-var HashMap = require('dw/util/HashMap');
-var URLUtils = require('dw/web/URLUtils');
-var CatalogMgr = require('dw/catalog/CatalogMgr');
-var ProductSearchModel = require('dw/catalog/ProductSearchModel');
-var ProductViewModel = require('*/cartridge/experience/viewmodels/ProductViewModel');
+const Template = require('dw/util/Template');
+const HashMap = require('dw/util/HashMap');
+const URLUtils = require('dw/web/URLUtils');
+const CatalogMgr = require('dw/catalog/CatalogMgr');
+const ProductSearchModel = require('dw/catalog/ProductSearchModel');
+const ProductViewModel = require('*/cartridge/experience/viewmodels/ProductViewModel');
 
 /**
  * Render logic for rule driven product tile.
  */
-exports.render = function render (context) {
+exports.render = function render(context) {
     try {
-        return renderComponent (context)
+        return renderComponent(context);
     } catch (e) {
         const Logger = require('*/api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
-}
+};
 
-function renderComponent (context) {
-    var model = new HashMap();
+function renderComponent(context) {
+    let model = new HashMap();
 
-    var content = context.content;
+    const content = context.content;
 
-    var sortingRuleID = content.sorting_rule;
-    var sortingRule = sortingRuleID ? CatalogMgr.getSortingRule(sortingRuleID) : null;
+    const sortingRuleID = content.sorting_rule;
+    const sortingRule = sortingRuleID ? CatalogMgr.getSortingRule(sortingRuleID) : null;
 
     model.url = URLUtils.url('Home-Show');
 
     if (sortingRule) {
-        var searchModel = new ProductSearchModel();
+        const searchModel = new ProductSearchModel();
         searchModel.setCategoryID('root');
         if (content.category) {
             searchModel.setCategoryID(content.category.ID);
         }
         searchModel.setSortingRule(sortingRule);
         searchModel.search();
-        var hits = searchModel.getProductSearchHits();
-        var product = hits ? searchModel.getProductSearchHits().next().product : null;
+        const hits = searchModel.getProductSearchHits();
+        const product = hits ? searchModel.getProductSearchHits().next().product : null;
         if (product) {
             model = ProductViewModel.get(product);
 
@@ -55,4 +54,4 @@ function renderComponent (context) {
     model.text_headline = content.text_headline;
 
     return new Template('experience/components/assets/producttile').render(model).text;
-};
+}

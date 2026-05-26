@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line no-unused-vars
 exports.createModel = function createModel(input) {
     const BasketMgr = require('dw/order/BasketMgr');
     const PaymentMgr = require('dw/order/PaymentMgr');
@@ -18,7 +19,7 @@ exports.createModel = function createModel(input) {
     return model;
 };
 
-function input(paymentMethod, model) {
+function renderPaymentInput(paymentMethod, model) {
     return `
     <label for="${paymentMethod.ID}">
     <input type="radio" name="paymentmethod" id="${paymentMethod.ID}" placeholder=""${paymentMethod.name}" value="${paymentMethod.ID}" ${(model.selectedMethodId === paymentMethod.ID) ? 'checked' : ''} />
@@ -29,7 +30,7 @@ function input(paymentMethod, model) {
 
 exports.template = function (model) {
     return `<form hx-post="${model.hxActionUrl}" hx-trigger="change" hx-target="this" hx-swap="outerHTML" method="post" action="${model.actionUrl}">
-        ${model.applicablePaymentMethods.map((paymentMethod) => input(paymentMethod, model)).join('')}
+        ${model.applicablePaymentMethods.map((paymentMethod) => renderPaymentInput(paymentMethod, model)).join('')}
 
     </form>`;
 };

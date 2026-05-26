@@ -1,16 +1,15 @@
-'use strict';
 
 // This code is based on: https://github.com/sfccplus/super-page-designer
 
-var HashMap = require('dw/util/HashMap');
-var PageMgr = require('dw/experience/PageMgr');
+const HashMap = require('dw/util/HashMap');
+const PageMgr = require('dw/experience/PageMgr');
 
 module.exports.init = function (editor) {
     // Add Images Manager as Dependency
-    var breakoutEditorConfig = new HashMap();
-    var breakoutEditor = PageMgr.getCustomEditor(
+    const breakoutEditorConfig = new HashMap();
+    const breakoutEditor = PageMgr.getCustomEditor(
         'imagesManager.imagesManager',
-        breakoutEditorConfig
+        breakoutEditorConfig,
     );
     editor.dependencies.put('imagesManager', breakoutEditor);
 };

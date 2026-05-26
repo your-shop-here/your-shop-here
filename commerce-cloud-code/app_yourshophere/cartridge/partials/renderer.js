@@ -24,7 +24,7 @@ exports.create = (id) => {
             if (this.originalInstance) {
                 return this.renderDecoratedContent(params);
             }
-            
+
             // Original partial rendering logic
             // eslint-disable-next-line import/no-dynamic-require
             const partial = require(`*/cartridge/partials/${this.id}`);
@@ -70,25 +70,25 @@ exports.create = (id) => {
                     // Include decorator-specific model if it was set
                     const decoratorParams = Object.assign({}, params, {
                         content: originalContent, // Pass the rendered content to the decorator
-                        originalParams: params    // Keep reference to original params
+                        originalParams: params, // Keep reference to original params
                     });
-                    
+
                     // Add decorator-specific model if it exists
                     if (this.decoratorModel) {
                         decoratorParams.decoratorModel = this.decoratorModel;
                     }
-                    
+
                     decoratorModel = decorator.createModel(decoratorParams);
                 } else {
                     // Fallback: just pass the content if no createModel function
                     const fallbackParams = Object.assign({}, params, {
-                        content: originalContent
+                        content: originalContent,
                     });
-                    
+
                     if (this.decoratorModel) {
                         fallbackParams.decoratorModel = this.decoratorModel;
                     }
-                    
+
                     decoratorModel = fallbackParams;
                 }
 
@@ -99,7 +99,6 @@ exports.create = (id) => {
                     Logger.error(`Decorator '${this.id}' is missing template function`);
                     return originalContent; // Fallback to original content
                 }
-
             } catch (e) {
                 Logger.error(`Decoration failed for '${this.id}': ${e.message} at '${e.fileName}:${e.lineNumber}'`);
                 // Fallback: return original content if decoration fails
@@ -119,7 +118,7 @@ exports.create = (id) => {
             decoratedInstance.originalInstance = this;
             return decoratedInstance;
         },
-        
+
         /**
          * Optional: Sets decorator-specific model data
          * This provides a more explicit API for decorator models

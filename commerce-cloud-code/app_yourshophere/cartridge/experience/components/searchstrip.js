@@ -1,4 +1,3 @@
-const HashMap = require('dw/util/HashMap');
 
 // eslint-disable-next-line valid-jsdoc
 /**

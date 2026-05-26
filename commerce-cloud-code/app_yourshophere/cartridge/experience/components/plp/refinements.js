@@ -4,6 +4,7 @@
  * @param {dw.experience.ComponentScriptContext} context The component context
  * @returns {string} The template to be displayed
  */
+// eslint-disable-next-line no-unused-vars
 exports.render = function render(context) {
     try {
         const URLUtils = require('dw/web/URLUtils');
@@ -20,7 +21,7 @@ exports.render = function render(context) {
         return `<wainclude url="${urlString}">`;
     } catch (e) {
         const Logger = require('*/api/Logger');
-        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`)
+        Logger.error(`Exception on rendering page designer component: ${e.message} at '${e.fileName}:${e.lineNumber}'`);
     }
     return '';
 };

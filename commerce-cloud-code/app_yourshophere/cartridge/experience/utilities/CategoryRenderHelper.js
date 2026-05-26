@@ -1,7 +1,6 @@
-'use strict';
 
-var PD_CATEGORY_LANDING_PAGE = 'clp-';
-var PD_CATEGORY_LISTING_PAGE = 'plp-';
+const PD_CATEGORY_LANDING_PAGE = 'clp-';
+const PD_CATEGORY_LISTING_PAGE = 'plp-';
 
 module.exports = {
     /**
@@ -9,11 +8,11 @@ module.exports = {
      * @param {string} cgid - Category ID
      * @returns {dw.experience.Page} page The page object
      */
-    getCategoryRelatedPage: function (cgid) {
-        var PageMgr = require('dw/experience/PageMgr');
-        var CatalogMgr = require('dw/catalog/CatalogMgr');
-        var page = PageMgr.getPage(PD_CATEGORY_LANDING_PAGE + cgid);
-        var category;
+    getCategoryRelatedPage(cgid) {
+        const PageMgr = require('dw/experience/PageMgr');
+        const CatalogMgr = require('dw/catalog/CatalogMgr');
+        let page = PageMgr.getPage(PD_CATEGORY_LANDING_PAGE + cgid);
+        let category;
 
         // Get a category landing page from PD
         if (page && page.isVisible()) {
@@ -39,10 +38,10 @@ module.exports = {
      * @param {dw.web.HttpParameterMap} httpParameterMap - Request HttpParameterMap;
      * @returns {string} categoryId
      */
-    getCategoryFromPageId: function (httpParameterMap) {
-        var params;
-        var componentConfig;
-        var PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
+    getCategoryFromPageId(httpParameterMap) {
+        let params;
+        let componentConfig;
+        const PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelper.js');
         if (PageRenderHelper.isInEditMode()) {
             return httpParameterMap.cid.value.split(PD_CATEGORY_LISTING_PAGE)[1];
         }
@@ -51,10 +50,10 @@ module.exports = {
             componentConfig = JSON.parse(params.custom);
             return componentConfig.cgid;
         } catch (e) {
-            var Logger = require('*/api/Logger');
-            Logger.error('Unable to parse parameters: ' + httpParameterMap.params);
+            const Logger = require('*/api/Logger');
+            Logger.error(`Unable to parse parameters: ${httpParameterMap.params}`);
         }
         return null;
-    }
+    },
 
 };

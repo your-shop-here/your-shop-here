@@ -1,8 +1,7 @@
-'use strict';
 
-var csrfProtection = require('dw/web/CSRFProtection');
-var CustomerMgr = require('dw/customer/CustomerMgr');
-var URLUtils = require('dw/web/URLUtils');
+const csrfProtection = require('dw/web/CSRFProtection');
+const CustomerMgr = require('dw/customer/CustomerMgr');
+const URLUtils = require('dw/web/URLUtils');
 
 /**
  * Middleware validating CSRF token
@@ -44,14 +43,15 @@ function validateAjaxRequest(req, res, next) {
  * @returns {void}
  */
 function generateToken(req, res, next) {
-    res.setViewData({ csrf: {
-        tokenName: csrfProtection.getTokenName(), token: csrfProtection.generateToken() } });
+    res.setViewData({
+        csrf: { tokenName: csrfProtection.getTokenName(), token: csrfProtection.generateToken() },
+    });
 
     next();
 }
 
 module.exports = {
-    validateRequest: validateRequest,
-    validateAjaxRequest: validateAjaxRequest,
-    generateToken: generateToken
+    validateRequest,
+    validateAjaxRequest,
+    generateToken,
 };

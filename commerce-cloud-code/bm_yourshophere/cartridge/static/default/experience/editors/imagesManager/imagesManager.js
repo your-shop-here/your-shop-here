@@ -533,7 +533,7 @@
         imagesContainer.innerHTML = '<div class="slds-spinner_container"><div class="slds-spinner slds-spinner_medium" role="status"><span class="slds-assistive-text">Loading</span><div class="slds-spinner__dot-a"></div><div class="slds-spinner__dot-b"></div></div></div>';
 
         let url = `${config.getFolderImagesURL}&folderPath=${encodeURIComponent(folderPath)}&locale=${encodeURIComponent(config.locale || 'default')}`;
-        
+
         // If there's a search query, add search mode and query parameters
         if (state.searchQuery && state.searchQuery.trim()) {
             url += `&mode=search&query=${encodeURIComponent(state.searchQuery.trim())}`;
@@ -2007,10 +2007,10 @@
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.trim();
                 state.searchQuery = query;
-                
+
                 // Clear existing timeout
                 clearTimeout(searchTimeout);
-                
+
                 // Debounce search - wait 300ms after user stops typing
                 searchTimeout = setTimeout(() => {
                     if (state.currentFolder) {
@@ -2019,7 +2019,7 @@
                     }
                 }, 300);
             });
-            
+
             // Also trigger search on Enter key
             searchInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
