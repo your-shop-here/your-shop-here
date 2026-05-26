@@ -1,0 +1,55 @@
+{
+    "name": "PDP Spec Table",
+    "description": "Renders a two-column specification table from product attributes. Define rows as 'Label | attributePath' (one per line) in the Rows config field.",
+    "group": "pdp",
+    "attribute_definition_groups": [
+        {
+            "id": "content",
+            "name": "Content",
+            "attribute_definitions": [
+                {
+                    "id": "title",
+                    "name": "Table Title",
+                    "description": "Optional heading above the table (e.g. 'Specifications').",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "productAttribute",
+                    "name": "Product Attribute",
+                    "description": "Custom attribute holding a JSON array of spec rows. Format: [{\"label\":\"...\",\"value\":\"...\"}]. Defaults to 'yshSpecsJson' if left empty.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "design",
+            "name": "Design",
+            "attribute_definitions": [
+                {
+                    "id": "showBorder",
+                    "name": "Show borders",
+                    "description": "Draws borders around cells.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "labelAlign",
+                    "name": "Label column alignment",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "required": false
+                },
+                {
+                    "id": "valueAlign",
+                    "name": "Value column alignment",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

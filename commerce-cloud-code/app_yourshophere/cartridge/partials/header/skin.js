@@ -1,4 +1,29 @@
 /**
+ * CSS ARCHITECTURE — three layers, applied in this order:
+ *
+ * 1. pico.min.css  — Pico CSS framework (static file). Provides the browser
+ *    reset, base element styles, and defines Pico's own CSS custom properties
+ *    (--primary, --color, --background-color, --font-size, etc.).
+ *
+ * 2. style.css  — Design token bridge (static file). Defines the --skin-*
+ *    custom properties (--skin-primary-color-1, --skin-spacing-md, etc.) used
+ *    by every component, and maps them to Pico's variables so the skin layer
+ *    below can override both at once via a single set of values.
+ *
+ * 3. Skin <style> block (this file, rendered inline by Page Designer at
+ *    runtime via the _main-theme page). Reads the colour and font choices
+ *    entered in the Page Designer skin component, then overwrites:
+ *      a) the --skin-* tokens  → consumed by component CSS
+ *      b) Pico's own variables → consumed by Pico's built-in element styles
+ *    Because style.css already maps --skin-* → Pico vars, one merchant colour
+ *    change propagates through both layers automatically.
+ *
+ * Result: Pico handles the baseline browser normalisation; style.css owns
+ * the token vocabulary; the PD skin component provides merchant-controlled
+ * theming without touching any static files.
+ */
+
+/**
  * Creates the model for the skin
  * @param {Object} params - The parameters for the model
  * @returns {Object} The model for the skin
@@ -26,6 +51,9 @@ function createModel(params) {
         successColor: (params.successColor && params.successColor.value) || '',
         warningColor: (params.warningColor && params.warningColor.value) || '',
         infoColor: (params.infoColor && params.infoColor.value) || '',
+        footerBackgroundColor: (params.footerBackgroundColor && params.footerBackgroundColor.value) || '',
+        footerTextColor: (params.footerTextColor && params.footerTextColor.value) || '',
+        footerHeadingColor: (params.footerHeadingColor && params.footerHeadingColor.value) || '',
         headerfont: params.headerfont || '',
         bodyfont: params.bodyfont || '',
         menufont: params.menufont || '',
@@ -85,6 +113,11 @@ const template = (model) => /* html */ `
             --skin-heading-color-1-invert: ${model.headingColorInvert};
             --skin-price-1: ${model.priceTextColor};
             
+            /* Footer colors */
+            --skin-footer-bg-color: ${model.footerBackgroundColor};
+            --skin-footer-text-color: ${model.footerTextColor};
+            --skin-footer-heading-color: ${model.footerHeadingColor};
+
             /* Status colors */
             --skin-error-color-1: ${model.errorColor || model.priceTextColor || '#ea4335'};
             --skin-success-color-1: ${model.successColor || model.secondaryAccentColor || '#34a853'};

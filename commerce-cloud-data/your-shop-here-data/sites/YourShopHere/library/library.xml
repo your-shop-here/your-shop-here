@@ -151,7 +151,7 @@
   "columnConfiguration" : {
     "desktopColumns" : 2,
     "mobileColumns" : 1,
-    "columnWidths" : [ 49, 49 ],
+    "columnWidths" : [ 64, 34 ],
     "mobileColumnWidths" : [ 100 ],
     "desktopGap" : 2,
     "mobileGap" : 2
@@ -934,7 +934,7 @@
         <page-attributes/>
     </content>
 
-    <content content-id="427ef5a3fdda636b8707dbc2cc">
+    <content content-id="427ef5a3fdda636b8707dbc2cc" mode="delete">
         <type>component.privacy.cookieConsent</type>
         <config>{
   "visibility" : [ ]
@@ -1194,7 +1194,7 @@
   "imageCount" : 4,
   "showDots" : false,
   "thumbnailPosition" : "bottom",
-  "carouselOrientation" : "vertical",
+  "carouselOrientation" : "horizontal",
   "viewType" : "large",
   "showThumbnails" : true,
   "displayMode" : "carousel"
@@ -1565,7 +1565,9 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "swatchDimension" : "yshColor"
+  "swatchDimension" : "yshColor,yshSize",
+  "swatchViewType" : "swatch",
+  "swatchDISConfig" : "sw=40&amp;sh=40"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -1677,6 +1679,15 @@
   },
   "mainTextColor" : {
     "value" : "#333333"
+  },
+  "footerBackgroundColor" : {
+    "value" : "#DDDDDD"
+  },
+  "footerHeadingColor" : {
+    "value" : "#001970"
+  },
+  "footerTextColor" : {
+    "value" : "#5779c1"
   }
 }</data>
         <online-flag>true</online-flag>
@@ -1778,11 +1789,8 @@
             <content-link content-id="9a8037c36b690794b0e70d9428" type="page.theme.skin">
                 <position>1.0</position>
             </content-link>
-            <content-link content-id="f9de31eac675334d689e9e3522" type="page.theme.footer">
+            <content-link content-id="ysh-footer-main" type="page.theme.footer">
                 <position>0.0</position>
-            </content-link>
-            <content-link content-id="427ef5a3fdda636b8707dbc2cc" type="page.theme.footer">
-                <position>1.0</position>
             </content-link>
             <content-link content-id="85361ceb117a996df9f4f04b21" type="page.theme.skin">
                 <position>0.0</position>
@@ -2315,12 +2323,80 @@
             <content-link content-id="83341c8cae6800b9a3b9628697" type="page.productPage.main">
                 <position>2.0</position>
             </content-link>
+            <content-link content-id="ysh001pdpaccordion0001" type="page.productPage.main">
+                <position>3.0</position>
+            </content-link>
+            <content-link content-id="ysh001pdpspectable0001" type="page.productPage.main">
+                <position>4.0</position>
+            </content-link>
         </content-links>
         <content-object-assignments>
             <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="ysh001pdpaccordionitem001">
+        <type>component.pdp.pdpAccordionItem</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "label" : "Product Details",
+  "productAttribute" : "custom.yshAccordionPanel1",
+  "openByDefault" : true
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh001pdpaccordionitem002">
+        <type>component.pdp.pdpAccordionItem</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "label" : "Technology &amp; Comfort",
+  "productAttribute" : "custom.yshAccordionPanel2",
+  "openByDefault" : false
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh001pdpaccordion0001">
+        <type>component.pdp.pdpAccordion</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh001pdpaccordionitem001" type="component.pdp.pdpAccordion.items">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh001pdpaccordionitem002" type="component.pdp.pdpAccordion.items">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="ysh001pdpspectable0001">
+        <type>component.pdp.pdpSpecTable</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "title" : "Specifications",
+  "productAttribute" : "yshSpecsJson",
+  "showBorder" : false,
+  "labelAlign" : "left",
+  "valueAlign" : "right"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="catalog-root-plp">
@@ -3118,7 +3194,7 @@
         <page-attributes/>
     </content>
 
-    <content content-id="f9de31eac675334d689e9e3522">
+    <content content-id="f9de31eac675334d689e9e3522" mode="delete">
         <type>component.base.richText</type>
         <config>{
   "visibility" : [ ]
@@ -3655,6 +3731,349 @@
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- YSH Footer – main component                                  -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-main">
+        <type>component.theme.yshFooter</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{
+  "copyrightText" : "© 2025 Your Shop Here. All rights reserved.\nThis is a demo store, no orders will be processed.",
+  "newsletterHeading" : "Stay in the Know",
+  "newsletterSubtext" : "Sign up for exclusive deals, new arrivals, and more.",
+  "facebookUrl" : "#",
+  "instagramUrl" : "#",
+  "twitterUrl" : "#",
+  "pinterestUrl" : "#",
+  "youtubeUrl" : "#"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh-footer-col1" type="component.theme.yshFooter.col1">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-col2" type="component.theme.yshFooter.col2">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-col3" type="component.theme.yshFooter.col3">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-col4" type="component.theme.yshFooter.col4">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-legal" type="component.theme.yshFooter.legal">
+                <position>0.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- Footer link columns                                          -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-col1">
+        <type>component.theme.footerLinkColumn</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "heading" : "Shop" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh-footer-link-women" type="component.theme.footerLinkColumn.links">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-men" type="component.theme.footerLinkColumn.links">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-kids" type="component.theme.footerLinkColumn.links">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-sale" type="component.theme.footerLinkColumn.links">
+                <position>3.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-new-arrivals" type="component.theme.footerLinkColumn.links">
+                <position>4.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="ysh-footer-col2">
+        <type>component.theme.footerLinkColumn</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "heading" : "Help" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh-footer-link-contact" type="component.theme.footerLinkColumn.links">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-faq" type="component.theme.footerLinkColumn.links">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-returns" type="component.theme.footerLinkColumn.links">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-shipping" type="component.theme.footerLinkColumn.links">
+                <position>3.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-order-status" type="component.theme.footerLinkColumn.links">
+                <position>4.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="ysh-footer-col3">
+        <type>component.theme.footerLinkColumn</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "heading" : "Account" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh-footer-link-login" type="component.theme.footerLinkColumn.links">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-register" type="component.theme.footerLinkColumn.links">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-orders" type="component.theme.footerLinkColumn.links">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-wishlist" type="component.theme.footerLinkColumn.links">
+                <position>3.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="ysh-footer-col4">
+        <type>component.theme.footerLinkColumn</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "heading" : "About" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh-footer-link-about-us" type="component.theme.footerLinkColumn.links">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-careers" type="component.theme.footerLinkColumn.links">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-sustainability" type="component.theme.footerLinkColumn.links">
+                <position>2.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-press" type="component.theme.footerLinkColumn.links">
+                <position>3.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="ysh-footer-legal">
+        <type>component.theme.footerLinkColumn</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "heading" : "" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh-footer-link-privacy" type="component.theme.footerLinkColumn.links">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-terms" type="component.theme.footerLinkColumn.links">
+                <position>1.0</position>
+            </content-link>
+            <content-link content-id="ysh-footer-link-cookies" type="component.theme.footerLinkColumn.links">
+                <position>2.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- Shop links                                                    -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-link-women">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Women", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-men">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Men", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-kids">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Kids", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-sale">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Sale", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-new-arrivals">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "New Arrivals", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- Help links                                                    -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-link-contact">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Contact Us", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-faq">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "FAQ", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-returns">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Returns &amp; Exchanges", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-shipping">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Shipping Info", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-order-status">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Order Status", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- Account links                                                 -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-link-login">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Sign In", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-register">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Create Account", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-orders">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "My Orders", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-wishlist">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Wish List", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- About links                                                   -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-link-about-us">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "About Us", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-careers">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Careers", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-sustainability">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Sustainability", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-press">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Press", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <!-- ============================================================ -->
+    <!-- Legal links                                                   -->
+    <!-- ============================================================ -->
+
+    <content content-id="ysh-footer-link-privacy">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Privacy Policy", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-terms">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Terms of Service", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh-footer-link-cookies">
+        <type>component.theme.footerLink</type>
+        <config>{ "visibility" : [ ] }</config>
+        <data xml:lang="x-default">{ "title" : "Cookie Preferences", "url" : "#" }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
 </library>

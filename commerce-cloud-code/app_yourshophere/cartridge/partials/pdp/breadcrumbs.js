@@ -35,7 +35,10 @@ function buildCategoryTree(category) {
 }
 
 exports.template = (model) => `
-    <a href="${URLUtils.httpHome().toString()}">Home</a> >
-    ${model.categoryTree.map((cat) => `<a href="${cat.url}">${cat.name}</a> >`).join(' ')}
-    <a href="${model.productUrl}">${model.name}</a>
+    <nav aria-label="Breadcrumb" class="pdp-breadcrumbs">
+        <ol>
+            <li><a href="${URLUtils.httpHome().toString()}">Home</a></li>
+            ${model.categoryTree.map((cat) => `<li><a href="${cat.url}">${cat.name}</a></li>`).join('')}
+        </ol>
+    </nav>
 `;

@@ -1,6 +1,11 @@
 
 /**
- * Generates HTML head content for stylesheets
+ * Generates HTML head content for stylesheets.
+ *
+ * LAYER 1 of 3 — loads the static CSS files (pico.min.css → style.css →
+ * component styles). The Page Designer skin component (layer 3, see
+ * header/skin.js) injects its <style> block after this in the <head>.
+ *
  * @module htmlhead
  */
 

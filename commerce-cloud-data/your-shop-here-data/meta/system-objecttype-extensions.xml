@@ -3431,6 +3431,42 @@
                 <externally-defined-flag>false</externally-defined-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="yshAccordionPanel1">
+                <display-name xml:lang="x-default">Accordion Panel 1</display-name>
+                <description xml:lang="x-default">Content for the first accordion panel on the PDP. Plain text or HTML.</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="yshAccordionPanel2">
+                <display-name xml:lang="x-default">Accordion Panel 2</display-name>
+                <description xml:lang="x-default">Content for the second accordion panel on the PDP. Plain text or HTML.</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="yshSpecsJson">
+                <display-name xml:lang="x-default">Specifications JSON</display-name>
+                <description xml:lang="x-default">JSON array of spec rows for the PDP spec table. Format: [{"label":"...","value":"..."}]</description>
+                <type>text</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="ExternalSearch">
