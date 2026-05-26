@@ -51,7 +51,14 @@ function renderComponent(context) {
             // i.e. PageMgr.renderPage('_main-theme', JSON.stringify({ skin: true }));
             if (model.regions[name]) {
                 if (name === 'header') {
-                    markup = model.regions.header.setTagName('header', false).render();
+                    let headerPosition = page.getAttribute('headerPosition') || 'sticky';
+                    let logoShrink = page.getAttribute('logoShrink') !== false;
+                    let headerClasses = ['experience-header', `header-position-${headerPosition}`];
+                    if (logoShrink) { headerClasses.push('header-logo-shrink'); }
+                    markup = model.regions.header
+                        .setTagName('header', false)
+                        .setClassName(headerClasses.join(' '))
+                        .render();
                 } else if (name === 'footer') {
                     markup = model.regions.footer.setTagName('footer', false).render();
                 } else {
@@ -75,7 +82,7 @@ function renderComponent(context) {
                 ${dw.system.HookMgr.callHook('app.template.beforeHeader', 'beforeHeader') || ''}
                 <div class="container">
                     <header>
-                        ${model.regions.header.setTagName('header', false).render()}
+                        ${model.regions.header.setTagName('header', false).setClassName('experience-header header-position-sticky header-logo-shrink').render()}
                     </header>
                     <main>
                         <style>

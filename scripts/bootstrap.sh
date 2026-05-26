@@ -52,13 +52,9 @@ b2c auth client
 ok "Authenticated"
 
 # ─── data ───────────────────────────────────────────────────────────────────
-step "Packaging site data archive"
-(cd commerce-cloud-data/ && cross-zip -r -q your-shop-here-data.zip your-shop-here-data && mv your-shop-here-data.zip ../your-shop-here-data.zip)
-ok "Archive created → your-shop-here-data.zip"
-
 step "Uploading and importing site data"
 info "This runs the sfcc-site-archive-import job and waits for it to finish…"
-b2c job import your-shop-here-data.zip --wait --poll-interval 15
+b2c job import commerce-cloud-data/your-shop-here-data --wait --poll-interval 15
 ok "Site data imported"
 
 step "Running AfterDeploy job"
@@ -80,11 +76,6 @@ b2c code deploy "$TEMP_DIR/" -v "$TEMP_VERSION"
 b2c code activate "$VERSION" --reload
 rm -rf "$TEMP_DIR"
 ok "Code version $VERSION is active"
-
-# ─── cleanup ────────────────────────────────────────────────────────────────
-step "Cleaning up temporary files"
-rm -f your-shop-here-data.zip site_template.zip test-site.zip
-ok "Cleanup done"
 
 # ─── done ───────────────────────────────────────────────────────────────────
 echo -e "\n${GREEN}${BOLD}  ✔ Bootstrap complete — $HOSTNAME is ready.${RESET}\n"

@@ -13,7 +13,7 @@ function template(model) {
             ${model.regions.right.setTagName('div', true).setClassName('right').render()}
         </div>
         ${model.regions.menu.setTagName('div', true).setComponentTagName('nav').setComponentClassName('mainmenu').render()}
-       
+
     `;
 }
 exports.createModel = createModel;

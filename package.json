@@ -24,7 +24,6 @@
     "@salesforce/b2c-cli": "^1.4.0",
     "chai": "^4.2.0",
     "chai-subset": "^1.5.0",
-    "cross-zip-cli": "^1.0.0",
     "mocha": "^10.2.0",
     "mocha-junit-reporter": "^2.0.0",
     "npm-run-all": "^4.1.5"
@@ -37,18 +36,16 @@
   "scripts": {
     "auth": "b2c auth login",
     "auth:unattended": "b2c auth client",
-    "data:main-zip": "cd commerce-cloud-data/ && cross-zip -r -q your-shop-here-data.zip your-shop-here-data && mv your-shop-here-data.zip ../your-shop-here-data.zip",
-    "data:main-import": "b2c job import your-shop-here-data.zip --wait --poll-interval 15",
+    "data:main-import": "b2c job import commerce-cloud-data/your-shop-here-data --wait --poll-interval 15",
     "data:testdata-rebuilddata": "b2c job run AfterDeploy --wait --poll-interval 15",
     "code:deploy": "b2c code deploy commerce-cloud-code/",
     "code:reload": "b2c code activate version1 --reload",
     "code:watch": "b2c code watch commerce-cloud-code/",
     "develop:switchcode": "b2c code activate version2 && b2c code activate version1",
-    "cleanup": "rm -f your-shop-here-data.zip site_template.zip test-site.zip",
     "bootstrap": "bash scripts/bootstrap.sh",
     "lint:js": "eslint .",
-    "import-data": "npm-run-all auth data:main-zip data:main-import data:testdata-rebuilddata cleanup",
-    "all": "npm-run-all auth data:main-zip data:main-import data:testdata-rebuilddata code:deploy code:reload cleanup",
-    "unattended": "npm-run-all auth:unattended data:main-zip data:main-import data:testdata-rebuilddata code:deploy code:reload cleanup"
+    "import-data": "npm-run-all auth data:main-import data:testdata-rebuilddata",
+    "all": "npm-run-all auth data:main-import data:testdata-rebuilddata code:deploy code:reload",
+    "unattended": "npm-run-all auth:unattended data:main-import data:testdata-rebuilddata code:deploy code:reload"
   }
 }
