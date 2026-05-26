@@ -473,6 +473,152 @@ article.product-tile button {
 
 /** PDP **/
 
+/* Breadcrumbs */
+.pdp-breadcrumbs {
+    margin-bottom: var(--skin-spacing-sm);
+}
+
+.pdp-breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    font-size: var(--skin-font-size-sm);
+    color: var(--skin-text-muted-1);
+}
+
+.pdp-breadcrumbs li + li::before {
+    content: '/';
+    margin: 0 0.4em;
+    opacity: 0.4;
+}
+
+.pdp-breadcrumbs a {
+    color: var(--skin-text-muted-1);
+    text-decoration: none;
+}
+
+.pdp-breadcrumbs a:hover {
+    color: var(--skin-primary-color-1);
+    text-decoration: underline;
+}
+
+.pdp-breadcrumbs li[aria-current="page"] {
+    color: var(--skin-main-text-color-1);
+    font-weight: 500;
+}
+
+/* Product name — tighter than Pico's default h1 */
+.page-pdp .product-name {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin: 0 0 var(--skin-spacing-sm);
+    font-weight: 600;
+}
+
+/* Price block */
+.page-pdp .experience-pdp-productPrices {
+    display: flex;
+    align-items: baseline;
+    gap: var(--skin-spacing-sm);
+    margin-bottom: var(--skin-spacing-sm);
+}
+
+.page-pdp .price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--skin-main-text-color-1);
+}
+
+.page-pdp .strike {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+/* Promotion callout badges */
+.page-pdp .experience-pdp-productPromotions ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--skin-spacing-xs);
+    list-style: none;
+    margin: 0 0 var(--skin-spacing-sm);
+    padding: 0;
+}
+
+.page-pdp .experience-pdp-productPromotions li {
+    color: var(--skin-error);
+    background-color: color-mix(in srgb, var(--skin-error) 8%, white);
+    border: 1px solid color-mix(in srgb, var(--skin-error) 20%, white);
+    border-radius: var(--skin-border-radius-full);
+    padding: 0.2em 0.7em;
+    font-size: var(--skin-font-size-sm);
+    font-weight: 500;
+    list-style-type: none;
+}
+
+/* Add-to-cart — full-width, tall, prominent */
+.page-pdp .add-to-cart {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Wishlist button — full-width secondary */
+.page-pdp .add-to-wishlist {
+    width: 100%;
+    margin-top: var(--skin-spacing-sm);
+}
+
+/* Quantity row — keep it compact */
+.page-pdp .experience-pdp-productQuantity {
+    display: flex;
+    align-items: center;
+    gap: var(--skin-spacing-sm);
+    margin-bottom: var(--skin-spacing-sm);
+    font-size: var(--skin-font-size-sm);
+}
+
+.page-pdp .experience-pdp-productQuantity input[type="number"] {
+    width: 72px;
+    margin: 0;
+    padding: 0.35rem 0.5rem;
+}
+
+/* Reduce vertical gap between all PDP right-column components */
+.page-pdp .experience-pdp-productBreadcrumbs,
+.page-pdp .experience-pdp-productName,
+.page-pdp .experience-pdp-productPrices,
+.page-pdp .experience-pdp-productPromotions,
+.page-pdp .experience-pdp-productMainAttributes,
+.page-pdp .experience-pdp-productQuantity,
+.page-pdp .experience-pdp-productAddToCart,
+.page-pdp .experience-pdp-addtowishlistbutton,
+.page-pdp .experience-pdp-productOptions {
+    margin-bottom: var(--skin-spacing-sm);
+}
+
+/* Description section below the columns */
+.page-pdp .experience-pdp-productDescription {
+    margin-top: var(--skin-spacing-lg);
+    padding-top: var(--skin-spacing-lg);
+    border-top: 1px solid var(--skin-border-color-1);
+}
+
+.page-pdp .experience-pdp-productDescription h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--skin-spacing-sm);
+}
+
 /* Variation Attribute Swatches */
 .swatch-container {
     display: flex;
@@ -482,9 +628,13 @@ article.product-tile button {
 }
 
 .swatch-container button.swatch {
-    width: 40px;
+    /* Pico sets button { display:block; width:100% } — override both */
+    display: flex;
+    width: auto;
+    min-width: 40px;
     height: 40px;
-    padding: 0;
+    padding: 0 0.6rem;
+    margin-bottom: 0;
     border: 2px solid var(--skin-border-color, #ccc);
     background-color: var(--skin-background-color-1, #fff) !important;
     color: var(--skin-text-primary) !important;
@@ -492,10 +642,18 @@ article.product-tile button {
     transition: all var(--skin-transition-normal) ease;
     border-radius: 8px;
     overflow: hidden;
-    display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    font-size: var(--skin-font-size-sm);
+    font-weight: 500;
+}
+
+/* Image swatches (color): exact square, no padding so image fills fully */
+.swatch-container button.swatch:has(img) {
+    width: 40px;
+    min-width: 40px;
+    padding: 0;
 }
 
 .swatch-container button.swatch img {
@@ -985,6 +1143,103 @@ article.product-tile button {
     }
 }
 
+/** PDP Accordion **/
+
+.pdp-accordion {
+    border-top: 1px solid var(--skin-border-color-1);
+}
+
+.pdp-accordion-item {
+    border-bottom: 1px solid var(--skin-border-color-1);
+    margin: 0;
+}
+
+.pdp-accordion-item > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--skin-spacing-md) 0;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.pdp-accordion-item > summary::-webkit-details-marker {
+    display: none;
+}
+
+.pdp-accordion-item > summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1;
+    flex-shrink: 0;
+    float: none;
+    background-image: none;
+    transform: none;
+    width: auto;
+    height: auto;
+    margin-inline-start: 0;
+}
+
+.pdp-accordion-item[open] > summary::after {
+    content: '−';
+    transform: none;
+}
+
+.pdp-accordion-item__body {
+    padding: 0 0 var(--skin-spacing-md);
+    color: var(--skin-main-text-color-1);
+    line-height: var(--skin-line-height);
+}
+
+/** PDP Spec Table **/
+
+.pdp-spec-table {
+    margin: var(--skin-spacing-md) 0;
+}
+
+.pdp-spec-table__title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--skin-spacing-sm);
+}
+
+.pdp-spec-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pdp-spec-table td {
+    padding: var(--skin-spacing-sm) var(--skin-spacing-sm);
+    vertical-align: top;
+    font-size: var(--skin-font-size-sm);
+}
+
+.pdp-spec-table td:first-child {
+    font-weight: 600;
+    width: 40%;
+    color: var(--skin-main-text-color-1);
+}
+
+.pdp-spec-table td:last-child {
+    color: var(--skin-text-secondary-1);
+}
+
+.pdp-spec-table--bordered td {
+    border: 1px solid var(--skin-border-color-1);
+}
+
+.pdp-spec-table tr:nth-child(even) td {
+    background-color: var(--skin-bg-secondary);
+}
+
 /** Footer **/
 
 .ysh-footer {
@@ -1167,7 +1422,7 @@ article.product-tile button {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--skin-spacing-xs);
+    gap: 0.2rem;
 }
 
 .ysh-footer__link-list li {
@@ -1178,7 +1433,7 @@ article.product-tile button {
 
 .ysh-footer__link-list li a {
     display: block;
-    padding: 0.15rem 0;
+    padding: 0;
 }
 
 .ysh-footer__link-list li a:hover {

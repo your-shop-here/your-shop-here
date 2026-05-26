@@ -140,7 +140,7 @@ exports.template = (model) => `${model.variationAttributes.map((attribute) => {
         const hiddenInputValue = selectedValue ? selectedValue.value : '';
         return `
     <div>
-        <label>${attribute.message}</label>
+        <label>${attribute.name}: <strong>${selectedValue ? selectedValue.displayValue : ''}</strong></label>
         <input type="hidden" name="${attribute.selectName}" id="hidden-${attribute.id}" value="${hiddenInputValue}" />
         <div class="swatch-container" role="group" aria-label="${attribute.name}">
             ${attribute.values.map((value) => `

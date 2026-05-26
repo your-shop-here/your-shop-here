@@ -151,7 +151,7 @@
   "columnConfiguration" : {
     "desktopColumns" : 2,
     "mobileColumns" : 1,
-    "columnWidths" : [ 49, 49 ],
+    "columnWidths" : [ 64, 34 ],
     "mobileColumnWidths" : [ 100 ],
     "desktopGap" : 2,
     "mobileGap" : 2
@@ -1193,8 +1193,8 @@
         <data xml:lang="x-default">{
   "imageCount" : 4,
   "showDots" : false,
-  "thumbnailPosition" : "bottom",
-  "carouselOrientation" : "vertical",
+  "thumbnailPosition" : "left",
+  "carouselOrientation" : "horizontal",
   "viewType" : "large",
   "showThumbnails" : true,
   "displayMode" : "carousel"
@@ -1565,7 +1565,9 @@
   "visibility" : [ ]
 }</config>
         <data xml:lang="x-default">{
-  "swatchDimension" : "yshColor"
+  "swatchDimension" : "yshColor,yshSize",
+  "swatchViewType" : "swatch",
+  "swatchDISConfig" : "sw=40&amp;sh=40"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
@@ -2321,12 +2323,80 @@
             <content-link content-id="83341c8cae6800b9a3b9628697" type="page.productPage.main">
                 <position>2.0</position>
             </content-link>
+            <content-link content-id="ysh001pdpaccordion0001" type="page.productPage.main">
+                <position>3.0</position>
+            </content-link>
+            <content-link content-id="ysh001pdpspectable0001" type="page.productPage.main">
+                <position>4.0</position>
+            </content-link>
         </content-links>
         <content-object-assignments>
             <content-object-assignment object-id="root" lookup-mode="category-implicit" object-type="category"/>
         </content-object-assignments>
         <sitemap-included-flag>false</sitemap-included-flag>
         <sitemap-priority>0.0</sitemap-priority>
+    </content>
+
+    <content content-id="ysh001pdpaccordionitem001">
+        <type>component.pdp.pdpAccordionItem</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "label" : "Product Details",
+  "productAttribute" : "custom.yshAccordionPanel1",
+  "openByDefault" : true
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh001pdpaccordionitem002">
+        <type>component.pdp.pdpAccordionItem</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "label" : "Technology &amp; Comfort",
+  "productAttribute" : "custom.yshAccordionPanel2",
+  "openByDefault" : false
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+    </content>
+
+    <content content-id="ysh001pdpaccordion0001">
+        <type>component.pdp.pdpAccordion</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{ }</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
+        <content-links>
+            <content-link content-id="ysh001pdpaccordionitem001" type="component.pdp.pdpAccordion.items">
+                <position>0.0</position>
+            </content-link>
+            <content-link content-id="ysh001pdpaccordionitem002" type="component.pdp.pdpAccordion.items">
+                <position>1.0</position>
+            </content-link>
+        </content-links>
+    </content>
+
+    <content content-id="ysh001pdpspectable0001">
+        <type>component.pdp.pdpSpecTable</type>
+        <config>{
+  "visibility" : [ ]
+}</config>
+        <data xml:lang="x-default">{
+  "title" : "Specifications",
+  "productAttribute" : "yshSpecsJson",
+  "showBorder" : false,
+  "labelAlign" : "left",
+  "valueAlign" : "right"
+}</data>
+        <online-flag>true</online-flag>
+        <page-attributes/>
     </content>
 
     <content content-id="catalog-root-plp">
