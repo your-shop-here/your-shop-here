@@ -1193,7 +1193,7 @@
         <data xml:lang="x-default">{
   "imageCount" : 4,
   "showDots" : false,
-  "thumbnailPosition" : "left",
+  "thumbnailPosition" : "bottom",
   "carouselOrientation" : "horizontal",
   "viewType" : "large",
   "showThumbnails" : true,
