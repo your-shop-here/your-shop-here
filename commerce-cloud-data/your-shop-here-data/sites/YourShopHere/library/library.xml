@@ -1764,7 +1764,10 @@
   "visibility" : [ ]
 }</config>
         <visibility-mode xml:lang="x-default">visible</visibility-mode>
-        <data xml:lang="x-default">{ }</data>
+        <data xml:lang="x-default">{
+  "headerPosition" : "sticky",
+  "logoShrink" : true
+}</data>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
@@ -2554,7 +2557,8 @@
 }</config>
         <data xml:lang="x-default">{
   "align" : "center",
-  "applyFilter" : "false"
+  "applyFilter" : "false",
+  "menuStyle" : "large"
 }</data>
         <online-flag>true</online-flag>
         <page-attributes/>
