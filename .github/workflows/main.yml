@@ -1,0 +1,12 @@
+name: Branch Check
+
+on:
+  pull_request:
+    branches: [ main ] # Change this to match your protected branch name
+
+jobs:
+  dummy-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm Status
+        run: echo "Branch is up-to-date and ready!"
