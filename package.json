@@ -21,19 +21,12 @@
   "dependencies": {
     "@builder.io/partytown": "^0.10.3",
     "@qwik.dev/partytown": "^0.11.0",
+    "@salesforce/b2c-cli": "^1.4.0",
     "chai": "^4.2.0",
     "chai-subset": "^1.5.0",
-    "cross-zip-cli": "^1.0.0",
     "mocha": "^10.2.0",
     "mocha-junit-reporter": "^2.0.0",
-    "node-fetch": "^2.6.1",
-    "npm-run-all": "^4.1.5",
-    "replace-in-files": "^3.0.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6",
-    "sfcc-ci": "^2.11.0",
-    "shelljs": "^0.8.4",
-    "shx": "^0.3.3"
+    "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
@@ -41,23 +34,18 @@
     "eslint-plugin-import": "^2.29.1"
   },
   "scripts": {
-    "reset-context": "sfcc-ci instance:clear",
-    "auth": "sfcc-ci auth:login -D",
-    "auth:unattended": "sfcc-ci client:auth",
-    "data:main-zip": "cd commerce-cloud-data/ && cross-zip -r -q your-shop-here-data.zip your-shop-here-data && shx mv your-shop-here-data.zip ../your-shop-here-data.zip",
-    "data:main-upload": "sfcc-ci instance:upload your-shop-here-data.zip",
-    "data:main-import": "sfcc-ci instance:import your-shop-here-data.zip -s",
-    "data:testdata-rebuilddata": "sfcc-ci job:run AfterDeploy",
-    "code:zip": "shx mkdir -p version1 && shx cp -R commerce-cloud-code/* version1 && cross-zip -r -q version1.zip version1 && shx rm -r version1",
-    "code:upload": "sfcc-ci code:deploy ./version1.zip ",
-    "code:activate": "sfcc-ci code:activate version1",
-    "develop:switchcode": "sfcc-ci code:activate version2 && sfcc-ci code:activate version1",
-    "test:integration": "mocha test/integration/scapi/07*.js",
-    "cleanup": "shx rm -f site_template.zip && shx rm -f test-site.zip && shx rm -f version1.zip",
+    "auth": "b2c auth login",
+    "auth:unattended": "b2c auth client",
+    "data:main-import": "b2c job import commerce-cloud-data/your-shop-here-data --wait --poll-interval 15",
+    "data:testdata-rebuilddata": "b2c job run AfterDeploy --wait --poll-interval 15",
+    "code:deploy": "b2c code deploy commerce-cloud-code/",
+    "code:reload": "b2c code activate version1 --reload",
+    "code:watch": "b2c code watch commerce-cloud-code/",
+    "develop:switchcode": "b2c code activate version2 && b2c code activate version1",
+    "bootstrap": "bash scripts/bootstrap.sh",
     "lint:js": "eslint .",
-    "config:generate:environment": "node build/generateDWJson.js",
-    "import-data": "npm-run-all reset-context auth data:* cleanup",
-    "all": "npm-run-all reset-context auth data:* code:* cleanup",
-    "unattended": "npm-run-all reset-context code:* data:* cleanup"
+    "import-data": "npm-run-all auth data:main-import data:testdata-rebuilddata",
+    "all": "npm-run-all auth data:main-import data:testdata-rebuilddata code:deploy code:reload",
+    "unattended": "npm-run-all auth:unattended data:main-import data:testdata-rebuilddata code:deploy code:reload"
   }
 }
