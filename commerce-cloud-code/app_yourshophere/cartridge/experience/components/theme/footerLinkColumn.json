@@ -1,0 +1,26 @@
+{
+    "name": "Footer Link Column",
+    "description": "A labelled list of links for use in the footer navigation columns",
+    "group": "theming",
+    "attribute_definition_groups": [
+        {
+            "id": "column",
+            "name": "Column",
+            "attribute_definitions": [
+                {
+                    "id": "heading",
+                    "name": "Column Heading",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id": "links",
+            "name": "Links",
+            "component_type_exclusions": []
+        }
+    ]
+}

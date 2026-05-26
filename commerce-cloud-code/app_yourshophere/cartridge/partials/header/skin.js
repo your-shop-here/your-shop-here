@@ -51,6 +51,9 @@ function createModel(params) {
         successColor: (params.successColor && params.successColor.value) || '',
         warningColor: (params.warningColor && params.warningColor.value) || '',
         infoColor: (params.infoColor && params.infoColor.value) || '',
+        footerBackgroundColor: (params.footerBackgroundColor && params.footerBackgroundColor.value) || '',
+        footerTextColor: (params.footerTextColor && params.footerTextColor.value) || '',
+        footerHeadingColor: (params.footerHeadingColor && params.footerHeadingColor.value) || '',
         headerfont: params.headerfont || '',
         bodyfont: params.bodyfont || '',
         menufont: params.menufont || '',
@@ -110,6 +113,11 @@ const template = (model) => /* html */ `
             --skin-heading-color-1-invert: ${model.headingColorInvert};
             --skin-price-1: ${model.priceTextColor};
             
+            /* Footer colors */
+            --skin-footer-bg-color: ${model.footerBackgroundColor};
+            --skin-footer-text-color: ${model.footerTextColor};
+            --skin-footer-heading-color: ${model.footerHeadingColor};
+
             /* Status colors */
             --skin-error-color-1: ${model.errorColor || model.priceTextColor || '#ea4335'};
             --skin-success-color-1: ${model.successColor || model.secondaryAccentColor || '#34a853'};

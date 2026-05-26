@@ -1,0 +1,113 @@
+{
+    "name": "Your Shop Here Footer (Main Theme)",
+    "description": "Site footer with navigation columns, newsletter signup, social links, and legal bar",
+    "group": "theming",
+    "attribute_definition_groups": [
+        {
+            "id": "branding",
+            "name": "Branding",
+            "attribute_definitions": [
+                {
+                    "id": "copyrightText",
+                    "name": "Copyright Text",
+                    "type": "string",
+                    "default_value": "© 2025 Your Shop Here. All rights reserved.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "newsletter",
+            "name": "Newsletter",
+            "attribute_definitions": [
+                {
+                    "id": "newsletterHeading",
+                    "name": "Newsletter Heading",
+                    "type": "string",
+                    "default_value": "Stay in the Know",
+                    "required": false
+                },
+                {
+                    "id": "newsletterSubtext",
+                    "name": "Newsletter Subtext",
+                    "type": "string",
+                    "default_value": "Sign up for exclusive deals, new arrivals, and more.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "social",
+            "name": "Social Media",
+            "attribute_definitions": [
+                {
+                    "id": "facebookUrl",
+                    "name": "Facebook URL",
+                    "type": "string",
+                    "default_value": "#",
+                    "required": false
+                },
+                {
+                    "id": "instagramUrl",
+                    "name": "Instagram URL",
+                    "type": "string",
+                    "default_value": "#",
+                    "required": false
+                },
+                {
+                    "id": "twitterUrl",
+                    "name": "Twitter / X URL",
+                    "type": "string",
+                    "default_value": "#",
+                    "required": false
+                },
+                {
+                    "id": "pinterestUrl",
+                    "name": "Pinterest URL",
+                    "type": "string",
+                    "default_value": "#",
+                    "required": false
+                },
+                {
+                    "id": "youtubeUrl",
+                    "name": "YouTube URL",
+                    "type": "string",
+                    "default_value": "#",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id": "col1",
+            "name": "Link Column 1",
+            "max_components": 1,
+            "component_type_exclusions": []
+        },
+        {
+            "id": "col2",
+            "name": "Link Column 2",
+            "max_components": 1,
+            "component_type_exclusions": []
+        },
+        {
+            "id": "col3",
+            "name": "Link Column 3",
+            "max_components": 1,
+            "component_type_exclusions": []
+        },
+        {
+            "id": "col4",
+            "name": "Link Column 4",
+            "max_components": 1,
+            "component_type_exclusions": []
+        },
+        {
+            "id": "legal",
+            "name": "Legal Links Bar",
+            "max_components": 1,
+            "component_type_exclusions": []
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "Footer Link",
+    "description": "A single link item for use inside a Footer Link Column",
+    "group": "theming",
+    "attribute_definition_groups": [
+        {
+            "id": "link",
+            "name": "Link",
+            "attribute_definitions": [
+                {
+                    "id": "title",
+                    "name": "Link Text",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "url",
+                    "name": "URL",
+                    "type": "url",
+                    "required": true
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}
